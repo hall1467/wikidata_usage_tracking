@@ -9,7 +9,7 @@ import ast
 import operator
 
 # Read in SQL for client wiki.
-wiki_sql = open(sys.argv[1]).read()
+wiki_sql = open(sys.argv[1])
 
 # Global dictionaries to store aspect and page usage
 wikidata_object_aspect_usage = {}
@@ -17,41 +17,41 @@ wikidata_object_page_usage = {}
 wikidata_object_page_usage_count = {}
 
 
-def extractObjectUsagesFromParsedSql(parser_output):
-	for parsed_sql_statement in parser_output:
-		if parsed_sql_statement.get_type() == "INSERT":
-			for component in parsed_sql_statement:
-				component = component.value
+def extractObjectUsagesFromParsedSql(input_sql_entry):
+		if re.match(r"INSERT INTO `wbc_entity_usage` VALUES ", input_sql_entry):
 
-				# Remove a component that is not a tuple
-				if re.match(r"^\(.*\)$", component):
+			# Remove "INSERT INTO `wbc_entity_usage` VALUES "
+			input_sql_entry = input_sql_entry.strip("INSERT INTO `wbc_entity_usage` VALUES ").rstrip().rstrip(";")
 
-					# Cast component to tuple
-					converted = ast.literal_eval(component)
+			# Split tuples
+			records = re.findall("\([^)]*\)", input_sql_entry)
+			for record in records:
+				# Cast component to tuple
+				converted = ast.literal_eval(record)
 
-					# Extract object, wiki page, and usage information from tuple
-					wikidata_object = converted[1]
-					wikidata_aspect = converted[2]
-					wiki_page = converted[3]
+				# Extract object, wiki page, and usage information from tuple
+				wikidata_object = converted[1]
+				wikidata_aspect = converted[2]
+				wiki_page = converted[3]
 
-					# Initialize aspect usage storage dictionary for object if not already done
-					if wikidata_object not in wikidata_object_aspect_usage:
-						wikidata_object_aspect_usage[wikidata_object] = {}
+				# Initialize aspect usage storage dictionary for object if not already done
+				if wikidata_object not in wikidata_object_aspect_usage:
+					wikidata_object_aspect_usage[wikidata_object] = {}
 
-					# Initialize nested aspect usage storage dictionary for object if not already done
-					if wikidata_aspect not in wikidata_object_aspect_usage[wikidata_object]:
-						wikidata_object_aspect_usage[wikidata_object][wikidata_aspect] = 0
+				# Initialize nested aspect usage storage dictionary for object if not already done
+				if wikidata_aspect not in wikidata_object_aspect_usage[wikidata_object]:
+					wikidata_object_aspect_usage[wikidata_object][wikidata_aspect] = 0
 
-					# Initialize page usage storage dictionary for object if not already done
-					if wikidata_object not in wikidata_object_page_usage_count:
-						wikidata_object_page_usage_count[wikidata_object] = 0
-						wikidata_object_page_usage[wikidata_object] = {}
+				# Initialize page usage storage dictionary for object if not already done
+				if wikidata_object not in wikidata_object_page_usage_count:
+					wikidata_object_page_usage_count[wikidata_object] = 0
+					wikidata_object_page_usage[wikidata_object] = {}
 
-					# Update object usage storage dictionaries
-					wikidata_object_aspect_usage[wikidata_object][wikidata_aspect] += 1
-					if wiki_page not in wikidata_object_page_usage[wikidata_object]:
-						wikidata_object_page_usage_count[wikidata_object] += 1
-						wikidata_object_page_usage[wikidata_object][wiki_page] = True
+				# Update object usage storage dictionaries
+				wikidata_object_aspect_usage[wikidata_object][wikidata_aspect] += 1
+				if wiki_page not in wikidata_object_page_usage[wikidata_object]:
+					wikidata_object_page_usage_count[wikidata_object] += 1
+					wikidata_object_page_usage[wikidata_object][wiki_page] = True
 
 
 # Print top n objects by page usages with aspect usage information
@@ -69,11 +69,9 @@ def printTopNObjectsByPageUsages(n):
 		# print (wikidata_object[0] + "\n\tWiki Pages Used: " + str(wikidata_object[1]) + "\n\tAspects Used: " + str(wikidata_object_aspect_usage[wikidata_object[0]])+ "\n\tPages Using: " + str(wikidata_object_page_usage[wikidata_object[0]].keys()))
 
 
-# Parses input sql file for client wiki
-sql_parser_output = sqlparse.parse(wiki_sql)
-
-# Extract object usages after parsing
-extractObjectUsagesFromParsedSql(sql_parser_output)
+for entry in wiki_sql:
+	# Parse sql
+	extractObjectUsagesFromParsedSql(entry)
 
 # Print ten most used objects
 printTopNObjectsByPageUsages(10)

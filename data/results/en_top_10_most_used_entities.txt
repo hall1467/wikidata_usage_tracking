@@ -1,0 +1,30 @@
+Q6581097
+	Wiki Pages Used: 36871
+	Aspects Used: {'L.en': 36871, 'T': 36869}
+P846
+	Wiki Pages Used: 20468
+	Aspects Used: {'O': 20468}
+P830
+	Wiki Pages Used: 18143
+	Aspects Used: {'L.en': 5, 'O': 18138}
+Q34442
+	Wiki Pages Used: 18009
+	Aspects Used: {'L.en': 18008, 'T': 18009, 'S': 1, 'X': 1}
+Q6581072
+	Wiki Pages Used: 15494
+	Aspects Used: {'L.en': 15494, 'T': 15494}
+P569
+	Wiki Pages Used: 15030
+	Aspects Used: {'L.en': 15030}
+P570
+	Wiki Pages Used: 14954
+	Aspects Used: {'L.en': 14954}
+P685
+	Wiki Pages Used: 13495
+	Aspects Used: {'O': 13495}
+Q30
+	Wiki Pages Used: 11837
+	Aspects Used: {'L.en': 11833, 'O': 1, 'T': 11833, 'S': 1, 'X': 4}
+P351
+	Wiki Pages Used: 11515
+	Aspects Used: {'L.en': 11515}
