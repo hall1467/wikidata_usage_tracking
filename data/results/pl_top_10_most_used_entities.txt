@@ -1,0 +1,30 @@
+P18
+	Wiki Pages Used: 71608
+	Aspects Used: {'L.en': 71608, 'L.pl': 71608, 'X': 2}
+Q5
+	Wiki Pages Used: 69902
+	Aspects Used: {'L.en': 69901, 'L.pl': 69901, 'X': 1, 'S': 1, 'T': 69902}
+Q36
+	Wiki Pages Used: 10543
+	Aspects Used: {'L.en': 10542, 'L.pl': 10542, 'X': 3, 'S': 1, 'T': 10543}
+P1559
+	Wiki Pages Used: 5262
+	Aspects Used: {'X': 5262}
+P6
+	Wiki Pages Used: 4225
+	Aspects Used: {'X': 4225}
+P19
+	Wiki Pages Used: 2975
+	Aspects Used: {'L.en': 2, 'L.pl': 2, 'X': 2975}
+Q30
+	Wiki Pages Used: 2678
+	Aspects Used: {'L.en': 2677, 'L.pl': 2677, 'X': 1, 'T': 2678, 'S': 1}
+P131
+	Wiki Pages Used: 1669
+	Aspects Used: {'L.en': 1, 'L.pl': 1, 'X': 1668}
+Q515
+	Wiki Pages Used: 925
+	Aspects Used: {'L.en': 924, 'L.pl': 924, 'T': 925, 'S': 1, 'X': 3}
+Q183
+	Wiki Pages Used: 691
+	Aspects Used: {'L.en': 689, 'L.pl': 689, 'X': 2, 'T': 690, 'S': 1}
