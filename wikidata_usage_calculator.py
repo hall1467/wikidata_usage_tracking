@@ -1,4 +1,9 @@
-# For each wiki, calculates Wikidata usage. Also can aggregated across Wikis
+# For each wiki, calculates Wikidata usage and returns a csv containing its usage information. Also returns csv with aggrgated results across wikis
+#
+# Takes three arguments:
+# 	1. Directory to write results
+# 	2. File name scheme for result files. Use this to specify the type of wikidata. For example: "item"
+# 	3. Date of dumps in format: yyyymmdd
 #
 # Author Andrew Hall
 
@@ -43,17 +48,18 @@ print("found " + str(len(list_of_wikis)) + " wikis")
 
 wikis_completed_count = 0
 wikis_not_processed = []
-wikis_processed = []
+wikis_successfully_processed = []
 aggregated_aspect_usages = {}
 aggregated_page_usage_counts = {}
 
 # 
-list_of_wikis = ["azwiki", "viwiki", "klwiki", "plwiki"]
+list_of_wikis = ["viwiki", "klwiki", "plwiki"]
+#"azwiki", "viwiki", "klwiki", 
 for wiki in list_of_wikis:
 	print("Getting object usages for " + wiki + "...", end="")
 	try:	
 		wikidata_usages = wikidata_object_usage.getSortedObjectUsages(wiki, sys.argv[3])
-		wikis_processed.append(wiki)
+		wikis_successfully_processed.append(wiki)
 		add_to_aggregation(wikidata_usages)
 
 		write_wiki_stats_to_file(sys.argv[1], sys.argv[2], wiki, wikidata_usages)
@@ -72,4 +78,14 @@ for wikidata_object in sorted_aggregated_page_usage_counts:
 	aggregated_wikidata_usages.append({'wikidata_object' : wikidata_object[0], 'wiki_pages_used_by' : wikidata_object[1], 'aspects_used_by_pages' : aggregated_aspect_usages[wikidata_object[0]]})
 
 write_wiki_stats_to_file(sys.argv[1], sys.argv[2], "all_wikis", aggregated_wikidata_usages)
+
+def wiki_success_failure_writing(wiki_list, name_of_file_to_create, description):
+	wikis_file = open(sys.argv[1] + "/" + name_of_file_to_create + ".txt", "w")
+	wikis_file.write(description)
+for wiki in wiki_list:
+	wiki_file.write(wiki)
+wiki_file.close()
+
+wiki_success_failure_writing(wikis_not_processed, "wikis_not_processed", "Wikis not processed")
+wiki_success_failure_writing(wikis_successfully_processed, "wikis_successfully_processed", "Wikis successfully processed")
 

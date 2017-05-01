@@ -2,7 +2,6 @@
 # 
 # Author: Andrew Hall
 
-import sqlparse
 import sys
 import re
 import ast
@@ -70,5 +69,5 @@ def getSortedObjectUsages(wiki, date):
 
 	return wikidata_usages
 
-# print(getSortedObjectUsages("enwiki", 20170420))
+# print(getSortedObjectUsages("plwiki", 20170420))
 
