@@ -48,10 +48,11 @@ aggregated_aspect_usages = {}
 aggregated_page_usage_counts = {}
 
 # 
+list_of_wikis = ["azwiki", "viwiki", "klwiki", "plwiki"]
 for wiki in list_of_wikis:
 	print("Getting object usages for " + wiki + "...", end="")
 	try:	
-		wikidata_usages = wikidata_object_usage.getSortedObjectUsages(-1, wiki, "20170420")
+		wikidata_usages = wikidata_object_usage.getSortedObjectUsages(wiki, sys.argv[3])
 		wikis_processed.append(wiki)
 		add_to_aggregation(wikidata_usages)
 

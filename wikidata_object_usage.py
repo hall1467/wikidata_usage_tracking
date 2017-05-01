@@ -55,8 +55,8 @@ def extractObjectUsages(input_sql_entry):
 
 # Return wikidata object page usages with aspect usage information
 def getSortedObjectUsages(wiki, date):
-	# dump = subprocess.check_output("wget https://dumps.wikimedia.org/" + wiki + "/" + str(date) + "/" + wiki + "-" + str(date) + "-wbc_entity_usage.sql.gz -qO- | zcat 2>&1", shell=True )
-	dump = subprocess.check_output("cat data/twenty_insert_enwiki-20170420-wbc_entity_usage.sql", shell=True )
+	dump = subprocess.check_output("wget https://dumps.wikimedia.org/" + wiki + "/" + str(date) + "/" + wiki + "-" + str(date) + "-wbc_entity_usage.sql.gz -qO- | zcat 2>&1", shell=True )
+	# dump = subprocess.check_output("cat data/first_insert_enwiki-20170420-wbc_entity_usage.sql", shell=True )
 	for entry in dump.decode().splitlines():
 		extractObjectUsages(entry)
 
@@ -66,10 +66,9 @@ def getSortedObjectUsages(wiki, date):
 
 	wikidata_usages = []
 	for wikidata_object in sorted_wikidata_object_page_usage_count:
-		wikidata_usages.append({'wikidata_object' : wikidata_object[0], 'wikidata_pages_used_by' : wikidata_object[1], 'aspects_used_by_pages' : wikidata_object_aspect_usage[wikidata_object[0]]})
-	for entry in wikidata_usages:
-		print(entry)
+		wikidata_usages.append({'wikidata_object' : wikidata_object[0], 'wiki_pages_used_by' : wikidata_object[1], 'aspects_used_by_pages' : wikidata_object_aspect_usage[wikidata_object[0]]})
 
+	return wikidata_usages
 
-print(getSortedObjectUsages("enwiki", 20170420))
+# print(getSortedObjectUsages("enwiki", 20170420))
 
