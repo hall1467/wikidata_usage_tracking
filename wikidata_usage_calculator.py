@@ -71,6 +71,8 @@ for wiki in list_of_wikis:
 
 sorted_aggregated_page_usage_counts = sorted(aggregated_page_usage_counts.items(), key=operator.itemgetter(1), reverse=True)
 aggregated_wikidata_usages = []
+
+##NOTE: consider moving this sorting stuff to the module
 for wikidata_object in sorted_aggregated_page_usage_counts:
 	aggregated_wikidata_usages.append({'wikidata_object' : wikidata_object[0], 'wiki_pages_used_by' : wikidata_object[1], 'aspects_used_by_pages' : aggregated_aspect_usages[wikidata_object[0]]})
 
