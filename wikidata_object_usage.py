@@ -7,6 +7,8 @@ import re
 import ast
 import operator
 import subprocess
+import requests
+import gzip
 
 
 # Global dictionaries to store aspect and page usage
@@ -54,10 +56,21 @@ def extractObjectUsages(input_sql_entry):
 
 # Return wikidata object page usages with aspect usage information
 def getSortedObjectUsages(wiki, date):
-	dump = subprocess.check_output("wget https://dumps.wikimedia.org/" + wiki + "/" + str(date) + "/" + wiki + "-" + str(date) + "-wbc_entity_usage.sql.gz -qO- | zcat 2>&1", shell=True )
-	# dump = subprocess.check_output("cat data/first_insert_enwiki-20170420-wbc_entity_usage.sql", shell=True )
-	for entry in dump.decode().splitlines():
-		extractObjectUsages(entry)
+
+	global wikidata_object_aspect_usage
+	wikidata_object_aspect_usage = {}
+
+	global wikidata_object_page_usage
+	wikidata_object_page_usage = {}
+
+	global wikidata_object_page_usage_count
+	wikidata_object_page_usage_count = {}
+	
+	dump = requests.get("https://dumps.wikimedia.org/" + wiki + "/" + str(date) + "/" + wiki + "-" + str(date) + "-wbc_entity_usage.sql.gz", stream=True)
+	dump_file = gzip.open(dump.raw)
+
+	for entry in dump_file:
+		extractObjectUsages(entry.decode())
 
 
 	# Sort object page usage storage dictionary
@@ -69,5 +82,5 @@ def getSortedObjectUsages(wiki, date):
 
 	return wikidata_usages
 
-# print(getSortedObjectUsages("plwiki", 20170420))
+# print(getSortedObjectUsages("plwiktionary", 20170420))
 
