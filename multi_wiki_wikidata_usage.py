@@ -66,7 +66,7 @@ def calculateWikidataUsages(list_of_wikis):
 
 def main():
 	list_of_wikis = calculateListOfWikis()
-	calculate_wikidata_usages(list_of_wikis)
+	calculateWikidataUsages(list_of_wikis)
 
 
 main()
