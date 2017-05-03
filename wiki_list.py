@@ -8,16 +8,14 @@ import mwapi
 import time
 import sys
 
-# # List of wiki names which is filled in when get_wiki_information is called
-# wiki_names_list = []
 
-
-def get_wiki_information():
+# Contacts API to return list of wikis
+def getWikiNamesList():
     wiki_names_lists = {}
     i = 0
     while True:
         try:
-            wiki_names_list = _try_get_wiki_information()
+            wiki_names_list = tryGetWikiNames()
             break
         except mwapi.errors.ConnectionError as e:
             if i > 5:
@@ -26,10 +24,12 @@ def get_wiki_information():
                 i += 1
                 time.sleep(5*i)
                 continue
+
     return wiki_names_list
 
 
-def _try_get_wiki_information():
+# Creates API request
+def tryGetWikiNames():
     session = mwapi.Session(
         'https://en.wikipedia.org',
         user_agent='hall1467'
@@ -38,10 +38,11 @@ def _try_get_wiki_information():
         action='sitematrix',
         smsiteprop='dbname'
     )
-    return _pull_text_from_query_results(results)
 
+    return pullTextFromQueryResults(results)
 
-def _pull_text_from_query_results(results):
+# Formats results from API query
+def pullTextFromQueryResults(results):
     wiki_names_list = []
     results = results['sitematrix']
     for entry in results:
