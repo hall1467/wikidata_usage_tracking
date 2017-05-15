@@ -28,8 +28,8 @@ import csv
 
 
 # Used to write out which wikis had Wikidata usages
-def writeToFileWhichWikisHadUsages(directory, wiki_list, name_of_file_to_create,
-                                   description, date):
+def write_to_file_which_wikis_had_usages(directory, wiki_list, name_of_file_to_create,
+                                         description, date):
     wikis_file = open(directory + "/" + name_of_file_to_create + "_" + date + 
                       ".txt", "w")
     wikis_file.write(description + ":\n")
@@ -39,7 +39,7 @@ def writeToFileWhichWikisHadUsages(directory, wiki_list, name_of_file_to_create,
 
 
 # Calculates list of all wikis from MediaWiki API
-def calculateListOfWikis():
+def calculate_list_of_wikis():
     print("Getting list of wikis from MediaWiki API...", end="")
     list_of_wikis = wiki_list.getWikiNamesList()
     print("found " + str(len(list_of_wikis)) + " wikis")
@@ -50,7 +50,7 @@ def calculateListOfWikis():
 # Iterate through list of all wikis and calculate individual and aggregate
 # Wikidata usage.
 # Writes both individual and aggregate wiki usage to file
-def calculateWikidataUsages(list_of_wikis):
+def calculate_wikidata_usages(list_of_wikis, results_directory, naming_scheme, dump_date):
     wikis_completed_count = 0
     wikis_not_processed = []
     wikis_successfully_processed = []
@@ -85,12 +85,12 @@ def calculateWikidataUsages(list_of_wikis):
                                                     dump_date)
 
     # Finish by writing to file which wikis successfully processed or not
-    writeToFileWhichWikisHadUsages(results_directory,
+    write_to_file_which_wikis_had_usages(results_directory,
                                    wikis_not_processed,
                                    "wikis_not_processed",
                                    "Wikis not processed",
                                    dump_date)
-    writeToFileWhichWikisHadUsages(results_directory,
+    write_to_file_which_wikis_had_usages(results_directory,
                                    wikis_successfully_processed,
                                    "wikis_successfully_processed",
                                    "Wikis successfully processed",
@@ -99,14 +99,11 @@ def calculateWikidataUsages(list_of_wikis):
 
 def main():
     args = docopt.docopt(__doc__)
-    global results_directory
     results_directory = args['--results-directory']
-    global naming_scheme
     naming_scheme = args['--naming-scheme']
-    global dump_date
     dump_date = args['--dump-date']
-    list_of_wikis = calculateListOfWikis()
-    calculateWikidataUsages(list_of_wikis)
+    list_of_wikis = calculate_list_of_wikis()
+    calculate_wikidata_usages(list_of_wikis, results_directory, naming_scheme, dump_date)
 
 
 main()
