@@ -24,6 +24,10 @@ aggregated_page_usage_counts = {}
 
 # Extract Wikidata object usages in wiki for given SQL entry
 def extractObjectUsages(input_sql_entry):
+		dbname= None
+		if re.match(r"^-- Host:.*Database: ", input_sql_entry):
+			dbname = re.sub(".*Database: ","", input_sql_entry).rstrip()
+			print(dbname)
 		if re.match(r"INSERT INTO `wbc_entity_usage` VALUES ", input_sql_entry):
 
 			# Remove "INSERT INTO `wbc_entity_usage` VALUES " and trailing semi-colon/space
@@ -138,5 +142,5 @@ def returnWikidataUsageAggregation():
 	return sortUsages(aggregated_page_usage_counts, aggregated_aspect_usages)
 
 
-# print(getSortedObjectUsagesFromDump("plwiki", 20170420))
+print(getSortedObjectUsagesFromDump("klwiki", 20170420))
 
