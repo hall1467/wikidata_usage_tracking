@@ -1,9 +1,10 @@
-# Queries MediaWiki API for wikis
-#
-# Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
-#
-# Author Andrew Hall 
+"""
 
+Queries MediaWiki API for wikis
+
+Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
+
+"""
 import mwapi
 import time
 import sys
