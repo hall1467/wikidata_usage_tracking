@@ -38,7 +38,7 @@ class WikibaseClientUsage:
                            page_id=self.page_id)
 
     @classmethod
-    def from_record_string(cls, record, wikidb=None):
+    def from_record_string(cls, record, dbname=None):
         converted = ast.literal_eval(record)
         return cls(wikidb, converted[1], converted[2], converted[3])
 
