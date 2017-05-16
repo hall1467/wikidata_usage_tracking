@@ -5,7 +5,8 @@ router = mwcli.Router(
     "This script provides access to a set of utilities for tracking wikibase" +
     "client usage.",
     {'extract_usage': "Extract Wikibase client usage information from an " +
-                      "(gross, icky) SQL file."}
+                      "(gross, icky) SQL file.",
+	"aggregate_usage": "Aggregates usage information from json file."}
 )
 
 main = router.main
