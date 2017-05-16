@@ -59,12 +59,20 @@ def run(sql_files, processes, verbose):
 
     def extract_from_sql_file(path):
         if isinstance(path, str):
+            logger.debug("Opening {0}".format(path))
             f = gzip.open(path, 'rt')
         else:
+            logger.debug("Reading from {0}".format(path))
             f = path
-        dump = WikibaseClientDump.from_file(f)
+        dump = WikibaseClientDump.from_sql_file(f)
         for wbcu in dump.usages:
             yield wbcu
 
-    for wbcu in para.map(sql_files, sql_files, mappers=processes):
-        json.dump(wbcu.to_json())
+    usages = para.map(extract_from_sql_file, sql_files, mappers=processes)
+    for i, wbcu in enumerate(usages):
+        json.dump(wbcu.to_json(), sys.stdout)
+        sys.stdout.write("\n")
+
+        if verbose and i % 1000 == 0:
+            sys.stderr.write(".")
+            sys.stderr.flush()
