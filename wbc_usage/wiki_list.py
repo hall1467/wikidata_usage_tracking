@@ -1,22 +1,23 @@
 """
+Queries Mediawiki API for list of wikidbs.
 
-Queries MediaWiki API for wikis
 
-Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
 
 """
+# Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
+
 import mwapi
 import time
 import sys
 
 
 # Contacts API to return list of wikis
-def getWikiNamesList():
+def get_wiki_names_list():
     wiki_names_lists = {}
     i = 0
     while True:
         try:
-            wiki_names_list = tryGetWikiNames()
+            wiki_names_list = try_get_wiki_names()
             break
         except mwapi.errors.ConnectionError as e:
             if i > 5:
@@ -30,7 +31,7 @@ def getWikiNamesList():
 
 
 # Creates API request
-def tryGetWikiNames():
+def try_get_wiki_names():
     session = mwapi.Session(
         'https://en.wikipedia.org',
         user_agent='hall1467'
@@ -40,10 +41,10 @@ def tryGetWikiNames():
         smsiteprop='dbname'
     )
 
-    return pullTextFromQueryResults(results)
+    return pull_text_from_query_results(results)
 
 # Formats results from API query
-def pullTextFromQueryResults(results):
+def pull_text_from_query_results(results):
     wiki_names_list = []
     results = results['sitematrix']
     for entry in results:

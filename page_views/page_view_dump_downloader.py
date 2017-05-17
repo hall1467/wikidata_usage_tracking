@@ -18,7 +18,7 @@ Options:
 
 import docopt
 import subprocess
-import shlex
+import requests
 import sys
 
 def main():
@@ -37,30 +37,40 @@ def main():
        int(end_year + end_month + end_day + end_hour)):
         raise RuntimeError("Please specify a start date before the end date")
 
-    directories_to_include = ""
-    start_year_incrementor = int(start_year)
-    start_month_incrementor = int(start_month)
-    end_year_month = int(str(end_year) + str(end_month))
+ 
+
+    pageview_root_file = requests.get("https://dumps.wikimedia.org/other/pageviews/")
+    print(pageview_root_file.text)
+    # with pageview_root_file as f:
+    #     # for entry in f:
+    #         print(pageview_root_file.text)
+
+    # print()
+
+    # directories_to_include = ""
+    # start_year_incrementor = int(start_year)
+    # start_month_incrementor = int(start_month)
+    # end_year_month = int(str(end_year) + str(end_month))
 
 
-    while int(str(start_year_incrementor) + str(start_month_incrementor)) <= end_year_month:
-        print(int(str(start_year_incrementor) + str(start_month_incrementor)), flush=True)
-        print(end_year_month, flush=True)
-        directories_to_include += str(start_year_incrementor) + "/" + str(start_month_incrementor) + ","
-        if start_month_incrementor == 12:
-            start_month_incrementor = 1
-            start_year_incrementor += 1
-        else:
-            start_month_incrementor += 1
+    # while int(str(start_year_incrementor) + str(start_month_incrementor)) <= end_year_month:
+    #     print(int(str(start_year_incrementor) + str(start_month_incrementor)), flush=True)
+    #     print(end_year_month, flush=True)
+    #     directories_to_include += str(start_year_incrementor) + "/" + str(start_month_incrementor) + ","
+    #     if start_month_incrementor == 12:
+    #         start_month_incrementor = 1
+    #         start_year_incrementor += 1
+    #     else:
+    #         start_month_incrementor += 1
 
 
-    sys.exit(directories_to_include)
+    # sys.exit(directories_to_include)
 
-    subprocess.check_output(shlex.split("wget -r --no-parent --reject html --include-directories= -nd \
-                                        -P " + results_directory +
-                                        " https://dumps.wikimedia.org/other/pageviews/"
-                                        + start_year + "/" + start_year + "-" +
-                                        start_month + "/"))
+    # subprocess.check_output(shlex.split("wget -r --no-parent --reject html --include-directories= -nd \
+    #                                     -P " + results_directory +
+    #                                     " https://dumps.wikimedia.org/other/pageviews/"
+    #                                     + start_year + "/" + start_year + "-" +
+    #                                     start_month + "/"))
     #want to only get project views
     #want to write to a log
     #do wget -r with --accept-regex > <
