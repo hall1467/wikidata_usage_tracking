@@ -3,7 +3,7 @@ Aggregates usage information from json file and prints it to stdout. Aggregates
 page_ids for a given entity_id, aspect, and wikidb. Additionally,
 produces:
 
-    1. "entity_aspect_wikidb_page_count.json", 
+    1. "entity_aspect_wikidb_page_count.json" 
     2. "entity_aspect_page_count.json"
     3. "entity_page_count.json"
 
@@ -15,7 +15,6 @@ Usage:
     aggregate_usage (-h|--help)
     aggregate_usage [<json-file>]...
                     [--file-output-prefix=<file>]
-                    [--s]
                     [--debug]
                     [--verbose]
 
@@ -29,6 +28,7 @@ Options:
     --debug                        Print debug logging to stderr
     --verbose                      Print dots and stuff to stderr      
 """
+
 import logging
 import json
 import sys
