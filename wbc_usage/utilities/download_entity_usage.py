@@ -2,10 +2,6 @@
 Given json containing wiki(s), downloads corresponding Wikibase entity usage 
 dump sql files.
 
-These 3 additional files provide page counts at varying levels of granularity. 
-Can use the [file-output-prefix=<file>] for these three last files to specify a 
-path and file prefix for them.
-
 Usage:
     usage_downloader (-h|--help)
     usage_downloader [<json-file>] --download-directory=<file> --date=<yyyymmdd>
