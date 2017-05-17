@@ -9,6 +9,33 @@ Queries Mediawiki API for list of wikidbs.
 import mwapi
 import time
 import sys
+import logging
+
+import docopt
+
+logger = logging.getLogger(__name__)
+
+
+def main(argv=None):
+    args = docopt.docopt(__doc__, argv=argv)
+    logging.basicConfig(
+        level=logging.WARNING if not args['--debug'] else logging.DEBUG,
+        format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
+    )
+
+    run(verbose)
+
+
+def run(verbose):
+    wiki_names_list = get_wiki_names_list()
+    # dump = requests.get("https://dumps.wikimedia.org/" + wiki + "/" + str(date) 
+    #        + "/" + wiki + "-" + str(date) + "-wbc_entity_usage.sql.gz", 
+    #        stream=True)
+    # dump_file = gzip.open(dump.raw)
+
+    # for entry in dump_file:
+    #     extractObjectUsages(entry.decode())    
+
 
 
 # Contacts API to return list of wikis
