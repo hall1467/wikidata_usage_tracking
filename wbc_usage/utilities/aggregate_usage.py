@@ -75,7 +75,8 @@ def run(json_files, verbose):
     entity_aspect_page_count_f = open("entity_aspect_page_count.json", "w")
     entity_page_count_f = open("entity_page_count.json", "w")
 
-    sys.stdout.write(json.dumps(str("entity_id, aspect, wikidb, page_id")) + "\n")
+    # Write out aggregations to files
+    # Maybe write headers too?
     for i, entity_dictionary in enumerate(entity_counts.items()):
         entity_page_count = 0
         for aspect_dictionary in entity_dictionary[1].items():
@@ -97,6 +98,7 @@ def run(json_files, verbose):
                                     str(entity_aspect_wikidb_count_json)) 
                                     + "\n")
 
+                # Update counters entity and entity_aspect page counters
                 entity_page_count += len(wikidb_dictionary[1])
                 entity_aspect_page_count += len(wikidb_dictionary[1])
 
