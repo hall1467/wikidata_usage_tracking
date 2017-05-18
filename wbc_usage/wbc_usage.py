@@ -7,6 +7,7 @@ router = mwcli.Router(
     {'extract_usage': "Extract Wikibase client usage information from an " +
                       "(gross, icky) SQL file.",
 	"aggregate_usage": "Aggregates usage information from json file.",
+	"determine_wikis": "Print all wikis to stdout.",
 	"download_entity_usage": "Given json containing wiki(s), downloads corresponding\
 	 Wikibase entity usage sql files."}
 )
