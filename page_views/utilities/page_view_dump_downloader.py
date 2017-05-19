@@ -10,6 +10,7 @@ Usage:
                               [--end-month=<mm>]
                               [--end-day=<dd>]
                               [--end-hour=<hh>]
+                              [--dump-host=<url>]
                               [--debug]
                               [--verbose]
 
@@ -26,6 +27,8 @@ Options:
     --end-month=<mm>      End month of range in form: mm
     --end-day=<dd>        End day of range in form: dd
     --end-hour=<hh>       End hour of range in form: hh
+    --dump-host=<url>     If the host is different than the default 
+                          Wikimedia host
     --debug               Print debug logging to stderr
     --verbose             Print dots and stuff to stderr  
 """
@@ -58,6 +61,7 @@ def main(argv=None):
     end_month = int(args['--end-month']) if args['--end-month'] else 12
     end_day = int(args['--end-day']) if args['--end-day'] else 31
     end_hour = int(args['--end-hour']) if args['--end-hour'] else 23
+    custom_dump_host = args['--dump-host']
     verbose=args['--verbose']
 
     if int(str(start_year) + str(start_month).zfill(2) + str(start_day).zfill(2)
@@ -69,10 +73,10 @@ def main(argv=None):
 
  
     run(download_directory, start_year, start_month, start_day, start_hour,
-        end_year, end_month, end_day, end_hour, verbose)
+        end_year, end_month, end_day, end_hour, custom_dump_host, verbose)
 
 def run(download_directory, start_year, start_month, start_day, start_hour,
-    end_year, end_month, end_day, end_hour, verbose):
+    end_year, end_month, end_day, end_hour, custom_dump_host, verbose):
 
     current_year = start_year
     current_month = start_month
@@ -82,7 +86,12 @@ def run(download_directory, start_year, start_month, start_day, start_hour,
 
     while int(str(current_year)+str(current_month).zfill(2)) <=\
         int(str(end_year)+str(end_month).zfill(2)):
-        dump_host = "https://dumps.wikimedia.org/other/pageviews/"
+
+        if custom_dump_host:
+            dump_host = custom_dump_host
+        else:
+            dump_host = "https://dumps.wikimedia.org/other/pageviews/"
+
         sub_directory = str(current_year) + "/" + str(current_year) +\
                         "-" + str(current_month).zfill(2) + "/"
 
