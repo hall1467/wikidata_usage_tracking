@@ -4,7 +4,7 @@ dump sql files.
 
 Usage:
     download_entity_usage (-h|--help)
-    download_entity_usage [<json-file>] <date> <download-directory>
+    download_entity_usage <date> <download-directory> [<json-file>]
                           [--dump-host=<url>]
                           [--not-gzip-compressed]
                           [--debug]
@@ -14,11 +14,11 @@ Usage:
 
 Options:
     -h, --help             This help message is printed
-    <json-file>            Path to json file to process. If no file is 
-                           provided, uses stdin
     <date>                 Date when the sql were files were produced. 
                            Format: yyyymmdd
     <download-directory>   Directory where downloads are placed
+    <json-file>            Path to json file to process. If no file is 
+                           provided, uses stdin
     --dump-host=<url>      If the host is different than the default 
                            Wikimedia host
     --not-gzip-compressed  Set this flag if files at dump host are not 
