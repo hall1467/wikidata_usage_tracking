@@ -4,7 +4,7 @@ dump sql files.
 
 Usage:
     download_entity_usage (-h|--help)
-    download_entity_usage <date> <download-directory> [<json-file>]
+    download_entity_usage <date> <download-directory> [<db-name-file>]
                           [--dump-host=<url>]
                           [--not-gzip-compressed]
                           [--debug]
@@ -17,10 +17,11 @@ Options:
     <date>                 Date when the sql were files were produced. 
                            Format: yyyymmdd
     <download-directory>   Directory where downloads are placed
-    <json-file>            Path to json file to process. If no file is 
+    <db-name-file>         Path to json file to process. If no file is 
                            provided, uses stdin
     --dump-host=<url>      If the host is different than the default 
-                           Wikimedia host
+                           Wikimedia host:
+                           [default: https://dumps.wikimedia.org]
     --not-gzip-compressed  Set this flag if files at dump host are not 
                            compressed
     --debug                Print debug logging to stderr
@@ -46,8 +47,8 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    if args['<json-file>']:
-        json_file = args['<json-file>']
+    if args['<db-name-file>']:
+        json_file = args['<db-name-file>']
     else:
         logger.info("Reading from <stdin>")
         json_file = sys.stdin
@@ -59,7 +60,7 @@ def main(argv=None):
         raise RuntimeError("Please provide a data in the format: yyyymmdd")
 
     download_directory = args['<download-directory>']
-    custom_dump_host = args['--dump-host']
+    dump_host = args['--dump-host']
 
     if args['--not-gzip-compressed']:
         gzip_compression_extension = ""
@@ -68,11 +69,11 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(json_file, download_directory, date, custom_dump_host, 
+    run(json_file, download_directory, date, dump_host, 
         gzip_compression_extension, verbose)
 
 
-def run(json_file, download_directory, date, custom_dump_host,
+def run(json_file, download_directory, date, dump_host,
     gzip_compression_extension, verbose):
 
     if isinstance(json_file, str):
@@ -89,18 +90,15 @@ def run(json_file, download_directory, date, custom_dump_host,
         sql_file_name = wikidb_dictionary['dbname'] + "-" + date + \
             "-wbc_entity_usage.sql"
 
-        if custom_dump_host:
-            dump_host = custom_dump_host
-        else:
-            dump_host = "https://dumps.wikimedia.org/" + \
-                wikidb_dictionary['dbname'] + "/" + date
+        dump_host_and_directory =\
+            dump_host + "/" + wikidb_dictionary['dbname'] + "/" + date
 
         if verbose:
             sys.stderr.write("Downloading data for: " + 
                 wikidb_dictionary['dbname'] + "\n")
             sys.stderr.flush()
 
-        dump = requests.get(dump_host + "/" + sql_file_name + 
+        dump = requests.get(dump_host_and_directory + "/" + sql_file_name + 
             gzip_compression_extension, stream=True)
 
         if dump.status_code != 200:
