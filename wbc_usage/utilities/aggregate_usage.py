@@ -98,57 +98,41 @@ def run(json_files, verbose, file_output_prefix):
             entity_aspect_page_count = 0
             for (wikidb, page_set) in aspect_dictionary.items():
 
-                entity_aspect_wikidb_pages_list = []
-                entity_aspect_wikidb_pages_list.append(
-                    {'entity_id' : entity_id})
-                entity_aspect_wikidb_pages_list.append(
-                    {'aspect' : aspect})
-                entity_aspect_wikidb_pages_list.append(
-                    {'wikidb' : wikidb})
-                entity_aspect_wikidb_pages_list.append(
-                    {'unique_page_list' : list(page_set)})
+                sys.stdout.write(json.dumps(
+                    {
+                        'entity_id' : entity_id, 
+                        'aspect' : aspect, 
+                        'wikidb' : wikidb, 
+                        'unique_page_list' : list(page_set)
+                    }) + "\n")
 
-                sys.stdout.write(json.dumps(entity_aspect_wikidb_pages_list) + 
-                    "\n")
-
-
-                entity_aspect_wikidb_page_count_list = []
-                entity_aspect_wikidb_page_count_list.append(
-                    {'entity_id' : entity_id})
-                entity_aspect_wikidb_page_count_list.append(
-                    {'aspect' : aspect})
-                entity_aspect_wikidb_page_count_list.append(
-                    {'wikidb' : wikidb})
-                entity_aspect_wikidb_page_count_list.append(
-                    {'unique_page_count' : len(page_set)})
 
                 entity_aspect_wikidb_page_count_f.write(json.dumps(
-                    entity_aspect_wikidb_page_count_list) + "\n")
+                    {
+                        'entity_id' : entity_id,
+                        'aspect' : aspect,
+                        'wikidb' : wikidb,
+                        'unique_page_count' : len(page_set)
+                    }) + "\n")
 
                 # Update counters entity and entity_aspect page counters
                 entity_page_count += len(page_set)
                 entity_aspect_page_count += len(page_set)
 
 
-            entity_aspect_page_count_list = []
-            entity_aspect_page_count_list.append(
-                {'entity_id' : entity_id})
-            entity_aspect_page_count_list.append(
-                {'aspect' : aspect})
-            entity_aspect_page_count_list.append(
-                {'unique_page_count' : entity_aspect_page_count})
-
             entity_aspect_page_count_f.write(json.dumps(
-                entity_aspect_page_count_list) + "\n")
+                {
+                    'entity_id' : entity_id,
+                    'aspect' : aspect,
+                    'unique_page_count' : entity_aspect_page_count
+                }) + "\n")
 
 
-        entity_page_count_list = []
-        entity_page_count_list.append(
-            {'entity_id' : entity_id})
-        entity_page_count_list.append(
-            {'unique_page_count' : entity_page_count})
-
-        entity_page_count_f.write(json.dumps(entity_page_count_list) + "\n")
+        entity_page_count_f.write(json.dumps(
+            {
+                'entity_id' : entity_id,
+                'unique_page_count' : entity_page_count
+            }) + "\n")
 
 
         if verbose and i % 1000 == 0:
