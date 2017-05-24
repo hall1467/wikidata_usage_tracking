@@ -46,8 +46,7 @@ def run(verbose):
         user_agent='hall1467'
     )
     results = session.get(
-        action='sitematrix',
-        smsiteprop='dbname'
+        action='sitematrix'
     )
 
     for database_dictionary in extract_query_results(results):
@@ -62,6 +61,7 @@ def run(verbose):
 
 # Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
 def extract_query_results(results):
+    print(results)
     results = results['sitematrix']
     for entry in results:
         if entry == 'count':
@@ -70,12 +70,12 @@ def extract_query_results(results):
             for special_entry in results[entry]:
                 yield ({
                             "dbname" : special_entry['dbname'],
-                            # "wikiurl" : special_entry['url']
+                            "wikiurl" : special_entry['url']
                        })
             continue
         for wiki in results[entry]['site']:
             yield {
                       "dbname" : wiki['dbname'],
-                      # "wikiurl" : wiki['url']
+                      "wikiurl" : wiki['url']
                   }
 
