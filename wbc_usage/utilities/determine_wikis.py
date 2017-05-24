@@ -61,7 +61,6 @@ def run(verbose):
 
 # Code credit: https://github.com/WikiEducationFoundation/academic_classification/blob/master/pageclassifier/revgather.py
 def extract_query_results(results):
-    print(results)
     results = results['sitematrix']
     for entry in results:
         if entry == 'count':
