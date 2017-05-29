@@ -92,7 +92,7 @@ def run(dbname_file, date, dump_host, verbose):
             namespace_names[namespace.id] = namespace.name
 
         for i, stub_file_page in enumerate(stub_file_dump_object):
-            sys.stderr.write("Page number " + str(i))
+            sys.stderr.write("Page number " + str(i)  + "\n")
             namespace_and_title_string =\
                 create_namespace_and_title_string(namespace_names, 
                                                   stub_file_page.namespace, 
@@ -106,9 +106,9 @@ def run(dbname_file, date, dump_host, verbose):
             else:
                 redirects[namespace_and_title_string] = stub_file_page.redirect
 
-        sys.stderr.write("Redirect count: " + str(len(redirects)))
+        sys.stderr.write("Redirect count: " + str(len(redirects)) + "\n")
         for namespace_and_title in redirects:
-            sys.stderr.write("ANALYZING REDIRECT: " + namespace_and_title)
+            sys.stderr.write("ANALYZING REDIRECT: " + namespace_and_title +"\n")
             if redirects[namespace_and_title] in non_redirects:
                 print_linking(wikidb_dictionary['dbname'], 
                               namespace_and_title, 
