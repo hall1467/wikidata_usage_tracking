@@ -64,28 +64,25 @@ def main(argv=None):
     dump_host = args['--dump-host']
     verbose=args['--verbose']
 
-    if int(str(start_year) + str(start_month).zfill(2) + str(start_day).zfill(2)
-        + str(start_hour).zfill(2)) >\
-        int(str(end_year) + str(end_month).zfill(2) + str(end_day).zfill(2) + 
-        str(end_hour).zfill(2)):
-        raise RuntimeError("The start date should occur before the end date"
-            )
+    start_time = int(str(start_year) + str(start_month).zfill(2) +
+        str(start_day).zfill(2) + str(start_hour).zfill(2))
+    end_time = int(str(end_year) + str(end_month).zfill(2) +
+        str(end_day).zfill(2) + str(end_hour).zfill(2))  
+
+    if start_time > end_time:
+        raise RuntimeError("The start date should occur before the end date")
 
  
-    run(download_directory, start_year, start_month, start_day, start_hour,
-        end_year, end_month, end_day, end_hour, dump_host, verbose)
+    run(download_directory, start_time, end_time, dump_host, verbose)
 
-def run(download_directory, start_year, start_month, start_day, start_hour,
-    end_year, end_month, end_day, end_hour, dump_host, verbose):
+def run(download_directory, start_time, end_time, dump_host, verbose):
 
-    current_year = start_year
-    current_month = start_month
-    current_day = start_day
-    current_hour = start_hour
+    current_year = int(str(start_time)[0:4])
+    current_month = int(str(start_time)[4:6])
     list_of_file_url_information = []
 
     while int(str(current_year)+str(current_month).zfill(2)) <=\
-        int(str(end_year)+str(end_month).zfill(2)):
+        int(str(end_time)[0:4]+str(end_time)[4:6]):
 
         sub_directory = "/other/pageviews/" + str(current_year) + "/" +\
             str(current_year) + "-" + str(current_month).zfill(2) + "/"
@@ -110,8 +107,10 @@ def run(download_directory, start_year, start_month, start_day, start_hour,
                         r"pageviews-(\d\d\d\d)(\d\d)(\d\d)-(\d\d)\d\d\d\d\.gz",
                         file_name)[0]
                 
-                if int(str(current_day)+str(current_hour).zfill(2)) <=\
-                    int(str(end_day)+str(end_hour).zfill(2)):
+                file_time = int(str(file_year) + str(file_month).zfill(2) + 
+                    str(file_day).zfill(2) + str(file_hour).zfill(2))  
+                
+                if file_time >= start_time and file_time <= end_time:
                     list_of_file_url_information.append(
                         {"file_name" : file_name,
                          "file_url" : dump_host + sub_directory + file_name}) 
