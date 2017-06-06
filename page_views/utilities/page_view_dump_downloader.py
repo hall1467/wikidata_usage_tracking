@@ -18,7 +18,7 @@ Usage:
 
 Options:
     -h, --help            This help message is printed
-    <download-directory>  Directory where results will go.
+    <download-directory>  Directory where data will go.
     --start-year=<yyyy>   Start year of range in form: yyyy
     --start-month=<mm>    Start month of range in form: mm
     --start-day=<dd>      Start day of range in form: dd
