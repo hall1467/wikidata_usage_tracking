@@ -15,18 +15,21 @@ Usage:
     aggregate_usage (-h|--help)
     aggregate_usage [<json-file>]...
                     [--file-output-prefix=<file>]
+                    [--output=<location>]
                     [--debug]
                     [--verbose]
 
 
 Options:
-    -h, --help                     This help message is printed
-    <json-file>                    Path to json file to process. If no file is 
-                                   provided, use stdin.
-    [--file-output-prefix=<file>]  Prefix for page count output files. Can also
-                                   be used to specify a directory for the files.
-    --debug                        Print debug logging to stderr
-    --verbose                      Print dots and stuff to stderr      
+    -h, --help                   This help message is printed
+    <json-file>                  Path to json file to process. If no file is 
+                                 provided, use stdin.
+    --file-output-prefix=<file>  Prefix for page count output files. Can also
+                                 be used to specify a directory for the files.
+    --output=<location>          Where results will be written.
+                                 [default: <stdout>]
+    --debug                      Print debug logging to stderr
+    --verbose                    Print dots and stuff to stderr      
 """
 
 import logging
@@ -58,22 +61,17 @@ def main(argv=None):
     else:
         file_output_prefix = ""
 
+    if args['--output'] == '<stdout>':
+        output = sys.stdout
+    else:
+        output = open(args['--output'], "w")
+
     verbose = args['--verbose']
 
-    run(json_files, verbose, file_output_prefix)
+    run(json_files, file_output_prefix, output, verbose)
 
 
-def run(json_files, verbose, file_output_prefix):
-
-    def extract_from_json_file(path):
-        if isinstance(path, str):
-            logger.debug("Opening {0}".format(path))
-            f = open(path, 'rt')
-        else:
-            logger.debug("Reading from {0}".format(path))
-            f = path
-        for line in f:
-            yield json.loads(line)
+def run(json_files, file_output_prefix, output, verbose):
 
     usages = chain(extract_from_json_file(*json_files)) 
     
@@ -98,7 +96,7 @@ def run(json_files, verbose, file_output_prefix):
             entity_aspect_page_count = 0
             for (wikidb, page_set) in aspect_dictionary.items():
 
-                sys.stdout.write(json.dumps(
+                output.write(json.dumps(
                     {
                         'entity_id' : entity_id, 
                         'aspect' : aspect, 
@@ -138,4 +136,15 @@ def run(json_files, verbose, file_output_prefix):
         if verbose and i % 1000 == 0:
             sys.stderr.write(".")
             sys.stderr.flush()
+
+
+def extract_from_json_file(path):
+    if isinstance(path, str):
+        logger.debug("Opening {0}".format(path))
+        f = open(path, 'rt')
+    else:
+        logger.debug("Reading from {0}".format(path))
+        f = path
+    for line in f:
+        yield json.loads(line)
 
