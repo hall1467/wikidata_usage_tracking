@@ -107,9 +107,9 @@ def run(json_file, download_directory, date, dump_host,
                 str(dump.status_code)))
             continue
 
-        output_f = open(download_directory + "/" + sql_file_name, "w")
-        for entry in gzip.open(dump.raw):
-            output_f.write(entry.decode())
+        output_f = open(download_directory + "/" + sql_file_name + ".gz", "wb")
+        for entry in dump.iter_content(1000):
+            output_f.write(entry)
         output_f.close()
 
 
