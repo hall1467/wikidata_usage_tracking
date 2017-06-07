@@ -48,10 +48,10 @@ def main(argv=None):
     )
 
     if args['<db-name-file>']:
-        json_file = args['<db-name-file>']
+        db_name_file = args['<db-name-file>']
     else:
         logger.info("Reading from <stdin>")
-        json_file = sys.stdin
+        db_name_file = sys.stdin
 
     
     if re.match(r"^\d\d\d\d\d\d\d\d$",args['<date>']):
@@ -69,19 +69,19 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(json_file, download_directory, date, dump_host, 
+    run(db_name_file, download_directory, date, dump_host, 
         gzip_compression_extension, verbose)
 
 
-def run(json_file, download_directory, date, dump_host,
+def run(db_name_file, download_directory, date, dump_host,
     gzip_compression_extension, verbose):
 
-    if isinstance(json_file, str):
-        logger.debug("Opening {0}".format(json_file))
-        f = open(json_file, 'rt')
+    if isinstance(db_name_file, str):
+        logger.debug("Opening {0}".format(db_name_file))
+        f = open(db_name_file, 'rt')
     else:
-        logger.debug("Reading from {0}".format(json_file))
-        f = json_file
+        logger.debug("Reading from {0}".format(db_name_file))
+        f = db_name_file
 
     for line in f:
 
