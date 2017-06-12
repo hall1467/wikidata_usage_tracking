@@ -8,8 +8,9 @@ router = mwcli.Router(
                       "(gross, icky) SQL file.",
 	"aggregate_usage": "Aggregates usage information from json file.",
 	"determine_wikis": "Print all wikis to stdout.",
-	"download_entity_usage": "Given json containing wiki(s), downloads corresponding\
-	 Wikibase entity usage sql files."}
+	"download_entity_usage": "Given json containing wiki(s), downloads " +
+	"corresponding Wikibase entity usage sql files.",
+	 "entity_page_views": "Prints page views for entities."}
 )
 
 main = router.main
