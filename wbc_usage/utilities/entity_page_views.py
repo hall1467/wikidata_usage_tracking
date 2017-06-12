@@ -102,8 +102,6 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, dump_host,
         if verbose and i % 1000000 == 0:
             sys.stderr.write(".")
             sys.stderr.flush()
-        if i > 10000000:
-            break
 
 
     if verbose:
