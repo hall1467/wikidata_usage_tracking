@@ -84,7 +84,7 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, dump_host,
             .format(dump_host + page_view_file, "HTTP code: " + 
             str(page_view_dump_file.status_code)))
     
-    f = bz2.BZ2File(page_view_dump_file.raw)
+    f = bz2.open(page_view_dump_file.raw)
 
 
     if verbose:
