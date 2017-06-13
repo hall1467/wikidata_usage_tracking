@@ -65,7 +65,6 @@ def main(argv=None):
 
 
 def run(page_view_directory, page_view_file, dump_host, output_file, verbose):
-    print(page_view_directory, page_view_file, dump_host, output_file, verbose)
 
     if verbose:
         sys.stderr.write("Downloading page views from: " + dump_host +   
