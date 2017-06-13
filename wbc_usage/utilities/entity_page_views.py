@@ -78,7 +78,7 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, dump_host,
         sys.stderr.flush()
 
     page_view_dump_file = requests.get(dump_host + page_view_file, 
-        stream=True)
+        stream=True, timeout=1000)
     if page_view_dump_file.status_code != 200:
         raise RuntimeError("Couldn't download: {0}. {1}"
             .format(dump_host + page_view_file, "HTTP code: " + 
