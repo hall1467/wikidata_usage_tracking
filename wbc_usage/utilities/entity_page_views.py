@@ -3,10 +3,8 @@ Prints page views for entities.
 
 Usage:
     entity_page_views (-h|--help)
-    entity_page_views <aggregated-entity-usage-file>
+    entity_page_views <aggregated-entity-usage-file> --page-view-file=<location>
                       [<dbname-file>]
-                      [--page-view-file=<location>]
-                      [--dump-host=<url>]
                       [--output=<location>]
                       [--debug] 
                       [--verbose]
@@ -14,15 +12,10 @@ Usage:
 
 Options:
     -h, --help                      This help message is printed
-    <aggregated-entity-usage-file>  Aggregated entity usage file.
+    <aggregated-entity-usage-file>  Path to aggregated entity usage file.
+    --page-view-file=<location>     Path to tsv file to process.
     <dbname-file>                   Path to json file to process. If no file is 
                                     provided, uses stdin
-    --page-view-file=<location>     Path to tsv file to process. If 
-                                    no file is provided, uses stdin
-                                    [default: /datasets/one-off/pageview_rate/20170607/pageview_rate.20170607.tsv.bz2]
-    --dump-host=<url>               If the host is different than the
-                                    default Wikimedia host:
-                                    [default: https://analytics.wikimedia.org]
     --output=<location>             Where results will be writen.
                                     [default: <stdout>]
     --debug                         Print debug logging to stderr
@@ -47,44 +40,33 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
     aggregated_entity_usage_file = open(args['<aggregated-entity-usage-file>'])
+    page_view_file = args['--page-view-file']
+
     if args['<dbname-file>']:
         dbname_file = args['<dbname-file>']
     else:
         logger.info("Reading from <stdin>")
         dbname_file = sys.stdin
-    page_view_file = args['--page-view-file']
 
     if args['--output'] == '<stdout>':
         output = sys.stdout
     else:
         output = open(args['--output'], "w")
 
-    dump_host = args['--dump-host']
     verbose = args['--verbose']
 
-    run(aggregated_entity_usage_file, dbname_file, page_view_file, dump_host, 
-        output, verbose)
+    run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
+        verbose)
 
 
-def run(aggregated_entity_usage_file, dbname_file, page_view_file, dump_host, 
-    output, verbose):
+def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
+    verbose):
+
     view_dict = defaultdict(lambda: defaultdict(dict))
     wikidb_dict = {}
     entity_values = {}
 
-    if verbose:
-        sys.stderr.write("Downloading page views from: " + dump_host +  
-            page_view_file + "\n")
-        sys.stderr.flush()
-
-    page_view_dump_file = requests.get(dump_host + page_view_file, 
-        stream=True, timeout=1000)
-    if page_view_dump_file.status_code != 200:
-        raise RuntimeError("Couldn't download: {0}. {1}"
-            .format(dump_host + page_view_file, "HTTP code: " + 
-            str(page_view_dump_file.status_code)))
-    
-    f = bz2.open(page_view_dump_file.raw)
+    f = bz2.open(page_view_file)
 
 
     if verbose:
