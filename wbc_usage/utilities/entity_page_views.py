@@ -75,7 +75,7 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
 
 
     for i, entry in enumerate(f):
-        sys.stderr.write(entry)
+        sys.stderr.write(entry.decode().strip().split("\t"))
         sys.stderr.flush()
         project, page, views = entry.decode().strip().split("\t")
         if i == 0:
