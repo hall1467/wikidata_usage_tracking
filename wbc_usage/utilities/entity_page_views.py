@@ -75,11 +75,17 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
 
 
     for i, entry in enumerate(f):
-        sys.stderr.write(entry.decode().strip())
-        sys.stderr.flush()
-        project, page, views = entry.decode().strip().split("\t")
+
         if i == 0:
             continue
+
+        entry_list = entry.decode().strip().split("\t")
+        if len(entry_list) != 3:
+            logger.warn(" Page view entry \"{0}\" improperly formatted"
+            .format(entry.decode().strip()))
+            continue
+
+        project, page, views = entry_list
         view_dict[project][page] = int(views)
 
 
@@ -119,11 +125,11 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
             page_id = str(page_id)
 
             if wikidb_dict[json_line["wikidb"]] not in view_dict:
-                logger.warn(" Project \"{0}\" does not have a page view entry"
+                logger.warn("Project \"{0}\" does not have a page view entry"
                 .format(wikidb_dict[json_line["wikidb"]]))
                 break
             elif page_id not in view_dict[wikidb_dict[json_line["wikidb"]]]:
-                logger.warn(" Page id \"{0}\" for project \"{1}\" does not have"
+                logger.warn("Page id \"{0}\" for project \"{1}\" does not have"
                 .format(page_id, wikidb_dict[json_line["wikidb"]]) 
                 + " a page view entry")
             else:
