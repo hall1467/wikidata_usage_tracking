@@ -102,8 +102,7 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
     for line in dbname_file:
         json_line = json.loads(line)
         wikidb_dict[json_line['dbname']] =\
-            re.findall(r"https://(.*)\.org",json_line['wikiurl'])[0]
-
+            re.findall(r"https://(www\.)?(.*)\.org",json_line['wikiurl'])[0][1]
 
     if verbose:
         sys.stderr.write("Checking each line in aggregated entity usage file " +
