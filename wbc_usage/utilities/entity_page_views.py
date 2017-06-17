@@ -1,5 +1,6 @@
 """
-Prints page views for entities.
+Prints page views for each entity_aspect_wikidb. Merges page view and entity 
+usage data.
 
 Usage:
     entity_page_views (-h|--help)
