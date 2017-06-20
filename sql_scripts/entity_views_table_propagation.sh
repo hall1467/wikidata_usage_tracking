@@ -1,0 +1,1 @@
+mysqlimport --defaults-file=$HOME/replica.my.cnf -h c1.labsdb s53311__wikidata_usage_and_views entity_views
