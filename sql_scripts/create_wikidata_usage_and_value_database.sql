@@ -1,0 +1,1 @@
+CREATE DATABASE s53311__wikidata_usage_and_value;
