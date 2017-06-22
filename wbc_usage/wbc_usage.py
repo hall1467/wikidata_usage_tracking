@@ -15,7 +15,8 @@ router = mwcli.Router(
 	"download_page_views": "Downloads page views zipped file.",
 	"entity_page_view_aggregator" : "Aggregates entity_aspect_wikidb_page_views"
 									" returned from \"entity_page_views\".",
-	"convert_json_to_tsv" : "Converts json resulting from utilities to TSV."},
+	"convert_json_to_tsv" : "Converts json resulting from entity_page_views to"
+									" TSV."},
 )
 
 main = router.main

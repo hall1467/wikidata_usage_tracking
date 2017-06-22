@@ -1,5 +1,5 @@
 """
-Converts json resulting from utilities to TSV.
+Converts json resulting from entity_page_views to TSV.
 
 Usage:
     convert_json_to_tsv (-h|--help)
@@ -54,7 +54,7 @@ def main(argv=None):
 def run(input_file, output_file, verbose):
 
     tsv_object = mysqltsv.Writer(output_file, headers=['project', 'aspect', 
-        'entity_id', 'page_views'])
+        'entity_id', 'page_id', 'page_views'])
 
     for i, line in enumerate(input_file):
         json_line = json.loads(line)
