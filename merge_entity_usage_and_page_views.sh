@@ -1,0 +1,1 @@
+python utility determine_wikis | python utility entity_page_views ../../wbc_entity_usage/usage_results/aggregated_usages.json --verbose --output=../../wbc_entity_usage/usage_results/entity_proj_aspect_views.json --page-view-file=../../wbc_entity_usage/page_views/pageview_rate.20170607.tsv.bz2 > & ../../wbc_entity_usage/usage_results/stderr_log_entity_proj_aspect_views.txt
