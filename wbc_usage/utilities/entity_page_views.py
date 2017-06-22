@@ -14,7 +14,7 @@ Usage:
 Options:
     -h, --help                      This help message is printed
     <aggregated-entity-usage-file>  Path to aggregated entity usage file.
-    --page-view-file=<location>     Path to tsv file to process.
+    --page-view-file=<location>     Path to bzip tsv file to process.
     <dbname-file>                   Path to json file to process. If no file is 
                                     provided, uses stdin
     --output=<location>             Where results will be writen.
@@ -115,6 +115,10 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
         json_line = json.loads(line)
         entity_page_view_count = 0
 
+        proj = json_line["wikidb"]
+        entity = json_line["entity_id"]
+        aspect = json_line["aspect"]
+
 
         if verbose and i % 1000000 == 0:
             sys.stderr.write(".")
@@ -124,25 +128,28 @@ def run(aggregated_entity_usage_file, dbname_file, page_view_file, output,
         for page_id in json_line['unique_page_list']:
             page_id = str(page_id)
 
-            if wikidb_dict[json_line["wikidb"]] not in view_dict:
+            page_views = 0
+
+            if wikidb_dict[proj] not in view_dict:
                 logger.warn("Project \"{0}\" does not have a page view entry"
-                .format(wikidb_dict[json_line["wikidb"]]))
+                .format(wikidb_dict[proj]))
                 break
-            elif page_id not in view_dict[wikidb_dict[json_line["wikidb"]]]:
+            elif page_id not in view_dict[wikidb_dict[proj]]:
                 logger.warn("Page id \"{0}\" for project \"{1}\" does not have"
-                .format(page_id, wikidb_dict[json_line["wikidb"]]) 
+                .format(page_id, wikidb_dict[proj]) 
                 + " a page view entry")
             else:
-                entity_page_view_count +=\
-                    view_dict[wikidb_dict[json_line["wikidb"]]][page_id]
+                page_views = view_dict[wikidb_dict[proj]][page_id]
 
-        output.write(json.dumps({
-            'project' : json_line["wikidb"],
-            'entity_id': json_line["entity_id"],
-            'page_views': entity_page_view_count,
-            'aspect': json_line["aspect"]
-        }) + "\n")
 
+            output.write(json.dumps({
+                'project' : proj,
+                'entity_id': entity,
+                'page_views': page_views,
+                'page_id': page_id,
+                'aspect': aspect
+            }) + "\n")
+ 
 
     if verbose:
         sys.stderr.write("checking complete\n")
