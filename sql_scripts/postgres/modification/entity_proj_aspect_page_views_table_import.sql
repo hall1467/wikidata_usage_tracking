@@ -1,0 +1,1 @@
+\COPY entity_proj_aspect_page_views FROM '../../../../../wbc_entity_usage/usage_results/entity_proj_aspect_views.tsv';
