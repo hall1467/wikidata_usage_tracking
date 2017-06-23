@@ -1,0 +1,2 @@
+psql wikidata_entities < proj_aspect_entity_page_views_table_creation.sql
+psql wikidata_entities < proj_aspect_entity_page_views_table_import.sql

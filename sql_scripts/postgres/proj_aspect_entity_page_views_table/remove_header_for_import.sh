@@ -1,0 +1,1 @@
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/usage_results/entity_proj_aspect_views.tsv > /export/scratch2/wmf/wbc_entity_usage/usage_results/entity_proj_aspect_views_no_header.tsv
