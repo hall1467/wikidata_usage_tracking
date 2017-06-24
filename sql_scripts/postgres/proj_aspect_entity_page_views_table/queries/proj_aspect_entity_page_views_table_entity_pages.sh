@@ -1,1 +1,0 @@
-psql wikidata_entities < proj_aspect_entity_page_views_table_entity_pages.sql -o /export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_pages.tsv -F="\t"
