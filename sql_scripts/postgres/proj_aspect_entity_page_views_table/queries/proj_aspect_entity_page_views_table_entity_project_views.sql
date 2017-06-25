@@ -1,0 +1,1 @@
+\copy (SELECT entity_id, project, SUM(page_views) FROM (SELECT DISTINCT project, entity_id, page_id, page_views FROM proj_aspect_entity_page_views) AS entity_project_page_views GROUP BY entity_id, project) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_project_views.tsv';

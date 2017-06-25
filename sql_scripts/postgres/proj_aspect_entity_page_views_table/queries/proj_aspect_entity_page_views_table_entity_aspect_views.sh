@@ -1,0 +1,1 @@
+psql wikidata_entities < proj_aspect_entity_page_views_table_entity_aspect_views.sql

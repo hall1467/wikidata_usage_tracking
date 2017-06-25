@@ -1,0 +1,1 @@
+\copy (SELECT entity_id, aspect, SUM(page_views) FROM proj_aspect_entity_page_views GROUP BY entity_id, aspect) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_aspect_views.tsv';
