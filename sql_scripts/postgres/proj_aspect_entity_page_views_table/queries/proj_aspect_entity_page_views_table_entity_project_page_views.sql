@@ -1,0 +1,1 @@
+\copy (SELECT DISTINCT entity_id, project, page_id FROM proj_aspect_entity_page_views) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_project_page_views.tsv';
