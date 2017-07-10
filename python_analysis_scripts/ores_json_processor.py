@@ -17,7 +17,7 @@ Options:
 
 import docopt
 import json
-
+import sys
 
 def main(argv=None):
     args = docopt.docopt(__doc__)
@@ -40,8 +40,23 @@ def run(input_file, output_file):
 
         for entry_key in json_line:
             if entry_key == 'score':
-                output_line[entry_key] =\
+                score =\
                     json_line[entry_key]['item_quality']['score']['prediction']
+                output_line[entry_key] = score
+
+                if score == 'A':
+                    output_line['ordinal_score'] = 5
+                elif score == 'B':
+                    output_line['ordinal_score'] = 4
+                elif score == 'C':
+                    output_line['ordinal_score'] = 3
+                elif score == 'D':
+                    output_line['ordinal_score'] = 2
+                elif score == 'E':
+                    output_line['ordinal_score'] = 1
+                else:
+                    raise RuntimeError("Unknown score")
+
             else:
                 output_line[entry_key] = json_line[entry_key]
 
