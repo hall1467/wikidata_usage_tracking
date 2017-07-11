@@ -61,10 +61,15 @@ def run(input_file, revisions_output_file, verbose):
             sys.stderr.flush()
 
         for stub_file_page_revision in stub_file_page:
-            revisions_output[stub_file_page_revision.page.title]\
-                            [stub_file_page_revision.id] =\
-                                stub_file_page_revision.user.id
-
+            if stub_file_page_revision.user is None:
+                logger.warning("No user id. Listing id as -1. Revision: {0}"
+                    .format(stub_file_page_revision))
+                revisions_output[stub_file_page_revision.page.title]\
+                                [stub_file_page_revision.id] = -1
+            else:
+                revisions_output[stub_file_page_revision.page.title]\
+                [stub_file_page_revision.id] =\
+                    stub_file_page_revision.user.id
 
     if verbose:
         sys.stderr.write("completed processing dump file\n")
