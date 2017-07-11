@@ -54,7 +54,6 @@ def run(input_file, revisions_output_file, verbose):
         sys.stderr.write("Processing dump file")  
         sys.stderr.flush()
 
-    j =0 
     for i, stub_file_page in enumerate(stub_file_dump_object):
 
         if verbose and i % 1000:
@@ -62,15 +61,10 @@ def run(input_file, revisions_output_file, verbose):
             sys.stderr.flush()
 
         for stub_file_page_revision in stub_file_page:
-            j +=1
-            print(j)
             revisions_output[stub_file_page_revision.page.title]\
                             [stub_file_page_revision.id] =\
                                 stub_file_page_revision.user.id
 
-            
-        if i == 350:
-            break
 
     if verbose:
         sys.stderr.write("completed processing dump file\n")
