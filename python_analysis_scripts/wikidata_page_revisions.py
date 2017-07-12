@@ -4,17 +4,17 @@ created the revision.
 
 Usage:
     entity_page_views (-h|--help)
-    entity_page_views --input=<location> --revisions-output=<location>
+    entity_page_views <input>... --revisions-output=<location>
                       [--debug]
                       [--verbose]
 
 Options:
-    -h, --help                             This help message is printed
-    --input=<location>                     Path to json file to process.
-    --revisions-output=<location>          Where revisions results
-                                           will be written
-    --debug                                Print debug logging to stderr
-    --verbose                              Print dots and stuff to stderr  
+    -h, --help                     This help message is printed
+    <input>                        Path to file(s) to process.
+    --revisions-output=<location>  Where revisions results
+                                   will be written
+    --debug                        Print debug logging to stderr
+    --verbose                      Print dots and stuff to stderr  
 """
 
 
@@ -35,61 +35,46 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = gzip.open(args['--input'],"rb")
+    input_files = args['<input>']
 
     revisions_output_file =\
         csv.writer(open(args['--revisions-output'], "w"), delimiter="\t")
 
     verbose = args['--verbose']
 
-    run(input_file, revisions_output_file, verbose)
+    run(input_files, revisions_output_file, verbose)
 
 
-def run(input_file, revisions_output_file, verbose):
+def run(input_files, revisions_output_file, verbose):
 
-    revisions_output = defaultdict(lambda: defaultdict(dict))
-    stub_file_dump_object = mwxml.Dump.from_file(input_file)
+    def process_pages(stub_file_dump_object, file_url):
+        for stub_file_page in stub_file_dump_object:
 
-    if verbose:
-        sys.stderr.write("Processing dump file")  
-        sys.stderr.flush()
+            for stub_file_page_revision in stub_file_page:
 
-    for i, stub_file_page in enumerate(stub_file_dump_object):
+                if stub_file_page_revision.user is None:
+                    logger.warning("No user id. id will be NULL. Revision: {0}"
+                        .format(stub_file_page_revision))
+                    yield stub_file_page_revision.page.title,\
+                          stub_file_page_revision.id,\
+                          "NULL"
+                else:
+                    yield stub_file_page_revision.page.title,\
+                          stub_file_page_revision.id,\
+                          stub_file_page_revision.user.id
 
-        if verbose and i % 1000:
-            sys.stderr.write(".")  
+    i = 0
+    revisions_output_file.writerow(["page_title", "revision_id", "user_id"])
+    for title, revision_id, user_id in mwxml.map(process_pages, input_files):
+        i += 1
+        revisions_output_file.writerow([title, revision_id, user_id])
+
+        if verbose and i % 10000 == 0:
+            sys.stderr.write("Revisions processed: {0}\n".format(i))  
             sys.stderr.flush()
 
-        for stub_file_page_revision in stub_file_page:
-            if stub_file_page_revision.user is None:
-                logger.warning("No user id. Listing id as -1. Revision: {0}"
-                    .format(stub_file_page_revision))
-                revisions_output[stub_file_page_revision.page.title]\
-                                [stub_file_page_revision.id] = -1
-            else:
-                revisions_output[stub_file_page_revision.page.title]\
-                [stub_file_page_revision.id] =\
-                    stub_file_page_revision.user.id
-
     if verbose:
-        sys.stderr.write("completed processing dump file\n")
-        sys.stderr.write("Writing out result file")  
-        sys.stderr.flush()
-
-
-    revisions_output_file.writerow(["page_title", "revision_id", "user_id"])
-    for title in revisions_output:
-        for revision_id in revisions_output[title]:
-           
-            revisions_output_file.writerow([title, revision_id, 
-                revisions_output[title][revision_id]])
-            
-            if verbose and i % 1000000:
-                sys.stderr.write(".")  
-                sys.stderr.flush()
-
-    if verbose:
-        sys.stderr.write("completed writing out result file\n")
+        sys.stderr.write("Completed writing out result file\n")
         sys.stderr.flush()
 
 
