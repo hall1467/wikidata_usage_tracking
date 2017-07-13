@@ -52,22 +52,29 @@ def run(input_files, revisions_output_file, verbose):
 
             for stub_file_page_revision in stub_file_page:
 
-                if stub_file_page_revision.user is None:
+                revision_comment = stub_file_page_revision.comment
+                revision_user = ""
+                if revision_comment is None:
+                    revision_comment = "NULL"
+
+                if stub_file_page_revision.user is None:       
                     logger.warning("No user id. id will be NULL. Revision: {0}"
                         .format(stub_file_page_revision))
-                    yield stub_file_page_revision.page.title,\
-                          stub_file_page_revision.id,\
-                          "NULL"
+                    revision_user = "NULL"
                 else:
-                    yield stub_file_page_revision.page.title,\
-                          stub_file_page_revision.id,\
-                          stub_file_page_revision.user.id
+                    revision_user = stub_file_page_revision.user.id
+                    
+                yield stub_file_page_revision.page.title,\
+                      stub_file_page_revision.id,\
+                      revision_user,\
+                      revision_comment
 
     i = 0
     revisions_output_file.writerow(["page_title", "revision_id", "user_id"])
-    for title, revision_id, user_id in mwxml.map(process_pages, input_files):
+    for title, revision_id, user_id, comment in mwxml.map(process_pages, 
+        input_files):
         i += 1
-        revisions_output_file.writerow([title, revision_id, user_id])
+        revisions_output_file.writerow([title, revision_id, user_id, comment])
 
         if verbose and i % 10000 == 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
