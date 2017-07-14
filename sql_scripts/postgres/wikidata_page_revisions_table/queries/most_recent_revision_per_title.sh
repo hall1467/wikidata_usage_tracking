@@ -1,0 +1,1 @@
+psql wikidata_entities < most_recent_revision_per_title.sql

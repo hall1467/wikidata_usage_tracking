@@ -1,0 +1,1 @@
+\copy (SELECT page_title, MAX(revision_id) FROM wikidata_page_revisions GROUP BY page_title) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_page_revisions/sql_queries/most_recent_revision_per_title.tsv';
