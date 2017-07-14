@@ -1,0 +1,1 @@
+\copy (SELECT page_title, COUNT(revision_id) FROM wikidata_page_revisions GROUP BY page_title) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_page_revisions/sql_queries/number_of_revisions_per_title.tsv';
