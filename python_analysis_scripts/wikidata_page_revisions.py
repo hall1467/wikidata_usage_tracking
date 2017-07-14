@@ -24,7 +24,7 @@ import logging
 import mwxml
 import gzip
 from collections import defaultdict
-import csv
+import mysqltsv
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +38,7 @@ def main(argv=None):
     input_files = args['<input>']
 
     revisions_output_file =\
-        csv.writer(open(args['--revisions-output'], "w"), delimiter="\t")
+        mysqltsv.Writer(open(args['--revisions-output'], "w"))
 
     verbose = args['--verbose']
 
@@ -53,27 +53,33 @@ def run(input_files, revisions_output_file, verbose):
             for stub_file_page_revision in stub_file_page:
 
                 revision_comment = stub_file_page_revision.comment
-                revision_user = stub_file_page_revision.user
+                revision_user_id_or_ip = ""
                 if revision_comment is None:
                     revision_comment = "NULL"
 
-                if revision_user is None:       
-                    logger.warning("No user id. id will be NULL. Revision: {0}"
+                if stub_file_page_revision.user is None:       
+                    logger.warning("No user. Field will be NULL. Revision: {0}"
                         .format(stub_file_page_revision))
-                    revision_user = "NULL"
-                    
+                    revision_user_id_or_ip = "NULL"
+                elif stub_file_page_revision.user.id is None:
+                    revision_user_id_or_ip = stub_file_page_revision.user.text
+                else:
+                    revision_user_id_or_ip = stub_file_page_revision.user.id
+
                     
                 yield stub_file_page_revision.page.title,\
                       stub_file_page_revision.id,\
-                      revision_user,\
+                      revision_user_id_or_ip,\
                       revision_comment
 
     i = 0
-    revisions_output_file.writerow(["page_title", "revision_id", "user", "comment"])
-    for title, revision_id, user, comment in mwxml.map(process_pages, 
+    revisions_output_file.write(["page_title", "revision_id", "user_id_or_ip", 
+        "comment"])
+    for title, revision_id, user_id_or_ip, comment in mwxml.map(process_pages, 
         input_files):
         i += 1
-        revisions_output_file.writerow([title, revision_id, user, comment])
+        revisions_output_file.write([title, revision_id, user_id_or_ip, 
+            comment])
 
         if verbose and i % 10000 == 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
