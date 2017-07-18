@@ -1,1 +1,1 @@
-\COPY wikidata_page_revisions FROM '../../../../../wbc_entity_usage/usage_results/wikidata_page_revisions/wikidata_page_revisions_20170501_no_header.tsv';
+\COPY wikidata_page_revisions FROM '../../../../../wbc_entity_usage/usage_results/wikidata_page_revisions/wikidata_page_revisions_20170501_escaped_backslashes_no_header.tsv';
