@@ -1,1 +1,0 @@
-psql wikidata_entities < number_of_revisions_per_title.sql
