@@ -1,0 +1,1 @@
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_bots/wikidata_bots.tsv > /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_bots/wikidata_bots_no_header.tsv
