@@ -1,1 +1,1 @@
-\COPY wikidata_page_revisions FROM '../../../../../wbc_entity_usage/usage_results/wikidata_bots/wikidata_bots_no_header.tsv';
+\COPY wikidata_bots FROM '../../../../../wbc_entity_usage/usage_results/wikidata_bots/wikidata_bots_no_header.tsv';
