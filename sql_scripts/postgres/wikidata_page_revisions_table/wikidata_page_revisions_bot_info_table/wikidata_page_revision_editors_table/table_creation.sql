@@ -6,14 +6,14 @@ CREATE TABLE wikidata_page_revision_editors AS(
 		FROM 
 		(
 			SELECT page_title AS bot_edit_title, count(*) as bot_edits
-			FROM (SELECT * FROM wikidata_page_revisions_bot_info) as nested_query2
+			FROM wikidata_page_revisions_bot_info
 			WHERE bot_user_id IS NOT NULL
 			GROUP BY page_title
 		) AS bot_edits_query
 		FULL OUTER JOIN
 		(
 			SELECT page_title AS non_bot_edit_title, count(*) as non_bot_edits
-			FROM (SELECT * FROM wikidata_page_revisions_bot_info) as nested_query
+			FROM wikidata_page_revisions_bot_info
 			WHERE bot_user_id IS NULL AND revision_user NOT LIKE '%.%'
 			GROUP BY page_title
 		) AS non_bot_edits_query
@@ -25,14 +25,14 @@ CREATE TABLE wikidata_page_revision_editors AS(
 		FROM
 		(
 			SELECT page_title AS anon_edit_title, count(*) as anon_edits
-			FROM (SELECT * FROM wikidata_page_revisions_bot_info) as nested_query3
+			FROM wikidata_page_revisions_bot_info
 			WHERE bot_user_id IS NULL AND revision_user LIKE '%.%'
 			GROUP BY page_title
 		) AS anons
 		FULL OUTER JOIN
 		(
 			SELECT page_title, count(*) as all_edits
-			FROM (SELECT * FROM wikidata_page_revisions_bot_info) as nested_query4
+			FROM wikidata_page_revisions_bot_info
 			GROUP BY page_title
 		) AS all_revisions
 		ON page_title = anon_edit_title
