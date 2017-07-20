@@ -1,0 +1,1 @@
+psql wikidata_entities < entity_views_and_aggregated_revisions.sql
