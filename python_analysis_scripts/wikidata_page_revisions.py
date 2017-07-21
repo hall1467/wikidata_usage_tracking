@@ -49,8 +49,9 @@ def run(input_files, revisions_output_file, verbose):
 
     def process_pages(stub_file_dump_object, file_url):
         for stub_file_page in stub_file_dump_object:
+            
             if stub_file_page.namespace == 0 or stub_file_page.namespace == 120:
-                # print(stub_file_page.namespace)
+
                 for stub_file_page_revision in stub_file_page:
 
                     revision_comment = stub_file_page_revision.comment
@@ -59,28 +60,32 @@ def run(input_files, revisions_output_file, verbose):
                         revision_comment = "NULL"
 
                     if stub_file_page_revision.user is None:       
-                        logger.warning("No user. Field will be NULL. Revision: {0}"
+                        logger.warning(
+                            "No user. Field will be NULL. Revision: {0}"
                             .format(stub_file_page_revision))
                         revision_user_id_or_ip = "NULL"
                     elif stub_file_page_revision.user.id is None:
-                        revision_user_id_or_ip = stub_file_page_revision.user.text
+                        revision_user_id_or_ip =\
+                            stub_file_page_revision.user.text
                     else:
-                        revision_user_id_or_ip = stub_file_page_revision.user.id
+                        revision_user_id_or_ip =\
+                            stub_file_page_revision.user.id
 
                         
                     yield stub_file_page_revision.page.title,\
                           stub_file_page_revision.id,\
                           revision_user_id_or_ip,\
-                          revision_comment
+                          revision_comment,
+                          stub_file_page.namespace
 
     i = 0
     revisions_output_file.write(["page_title", "revision_id", "user_id_or_ip", 
-        "comment"])
-    for title, revision_id, user_id_or_ip, comment in mwxml.map(process_pages, 
-        input_files):
+        "comment", "namespace"])
+    for title, revision_id, user_id_or_ip, comment, namespace in mwxml.map(
+        process_pages, input_files):
         i += 1
         revisions_output_file.write([title, revision_id, user_id_or_ip, 
-            comment])
+            comment, namespace])
 
         if verbose and i % 10000 == 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
