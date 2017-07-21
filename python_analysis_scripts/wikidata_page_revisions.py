@@ -75,7 +75,7 @@ def run(input_files, revisions_output_file, verbose):
                     yield stub_file_page_revision.page.title,\
                           stub_file_page_revision.id,\
                           revision_user_id_or_ip,\
-                          revision_comment,
+                          revision_comment,\
                           stub_file_page.namespace
 
     i = 0
