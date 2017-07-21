@@ -38,8 +38,9 @@ def run(input_files):
 
     def process_pages(stub_file_dump_object, file_url):
         for stub_file_page in stub_file_dump_object:
-            for stub_file_page_revision in stub_file_page:     
-                yield True
+            if stub_file_page.namespace == 0 or stub_file_page.namespace == 120:
+                for stub_file_page_revision in stub_file_page:     
+                    yield True
 
     i = 0
     for boolean_value in mwxml.map(process_pages, input_files):
