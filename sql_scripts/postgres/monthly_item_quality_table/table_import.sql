@@ -1,0 +1,1 @@
+\COPY monthly_item_quality FROM '../../../../../wbc_entity_usage/usage_results/monthly_item_quality/wikidatawiki-20170701.monthly_scores.tsv.bz2';
