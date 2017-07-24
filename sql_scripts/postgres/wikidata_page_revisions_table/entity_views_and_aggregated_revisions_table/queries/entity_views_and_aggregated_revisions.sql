@@ -1,1 +1,0 @@
-\copy (SELECT entity_id, rev_id, number_of_revisions, page_views FROM entity_views_and_aggregated_revisions) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_views_and_aggregated_revisions/entity_views_and_aggregated_revisions.tsv';
