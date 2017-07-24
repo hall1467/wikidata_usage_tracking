@@ -1,1 +1,1 @@
-tail -n +2 /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_page_revisions/wikidata_page_revisions_20170501_escaped_backslashes.tsv > /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_page_revisions/wikidata_page_revisions_20170501_escaped_backslashes_no_header.tsv
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/monthly_item_quality/wikidatawiki-20170701.monthly_scores.tsv > /export/scratch2/wmf/wbc_entity_usage/monthly_item_quality/wikidatawiki-20170701.monthly_scores_no_header.tsv
