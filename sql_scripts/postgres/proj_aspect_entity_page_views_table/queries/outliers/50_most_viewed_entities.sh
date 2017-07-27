@@ -1,1 +1,0 @@
-psql wikidata_entities < 50_most_viewed_entities.sql

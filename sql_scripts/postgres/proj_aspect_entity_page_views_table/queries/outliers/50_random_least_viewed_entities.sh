@@ -1,1 +1,0 @@
-psql wikidata_entities < 50_random_least_viewed_entities.sql
