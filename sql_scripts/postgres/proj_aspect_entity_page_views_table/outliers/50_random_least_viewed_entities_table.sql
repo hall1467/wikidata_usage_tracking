@@ -1,4 +1,4 @@
-CREATE TABLE outliers.50_random_least_viewed_entities AS (
+CREATE TABLE outliers.fifty_random_least_viewed_entities AS (
 	SELECT * 
 	FROM (
 		SELECT entity_id, SUM(page_views) AS total_entity_page_views 
