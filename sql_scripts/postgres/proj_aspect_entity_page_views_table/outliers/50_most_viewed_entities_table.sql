@@ -1,5 +1,5 @@
 CREATE TABLE outliers.fifty_most_viewed_entities AS (
-	SELECT proj_aspect_entity.project, proj_aspect_entity.entity_id, proj_aspect_entity.aspect, proj_aspect_entity.page_id, proj_aspect_entity.page_id, total_entity_page_views 
+	SELECT proj_aspect_entity.project, proj_aspect_entity.entity_id, proj_aspect_entity.aspect, proj_aspect_entity.page_id, total_entity_page_views 
 	FROM 
 		(
 		  SELECT entity_id, SUM(page_views) AS total_entity_page_views 
