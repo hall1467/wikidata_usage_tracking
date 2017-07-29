@@ -14,7 +14,7 @@ CREATE TABLE outliers.fifty_most_viewed_entities AS (
 		 SELECT * 
 		 FROM 
 			 (
-			  SELECT *, COUNT(*) OVER ( PARTITION BY project, entity_id 
+			  SELECT *, COUNT(*) OVER ( PARTITION BY entity_id 
 			 					        ORDER BY random()
 			 						  ) AS count 
 			  FROM proj_aspect_entity_page_views
