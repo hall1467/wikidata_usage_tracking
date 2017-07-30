@@ -7,7 +7,8 @@ CREATE TABLE outliers.fifty_most_used_entities AS (
 			  FROM proj_aspect_entity_page_views
 			) AS distinct_entity_project_page
 		GROUP BY entity_id
-		DESC limit 50
+		ORDER BY count(*) DESC
+		limit 50
 	)  AS entity_page_usages
 	INNER JOIN (
 		SELECT * 
