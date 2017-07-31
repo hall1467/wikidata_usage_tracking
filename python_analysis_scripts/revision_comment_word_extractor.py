@@ -20,13 +20,12 @@ Options:
 import docopt
 import sys
 import logging
-# import gzip
 import operator
 from collections import defaultdict
 import re
 import mysqltsv
 
-REMOVED_COMMENT_RE = re.compile(r'\/\*.*.\*\/')
+REMOVED_COMMENT_RE = re.compile(r'^\/\*.*.\*\/')
 
 logger = logging.getLogger(__name__)
 
@@ -65,9 +64,14 @@ def run(input_file, output_file, verbose):
     sorted_word_count = sorted(word_count.items(), key=operator.itemgetter(1), 
         reverse=True)
     sum_of_word_counts = 0
-    for entry in sorted_word_count:
+    for i, entry in enumerate(sorted_word_count):
         output_file.write([entry[0], entry[1]])
         sum_of_word_counts += entry[1]
+
+        if verbose and i % 10000 == 0 and i != 0:
+            sys.stderr.write("Words written: {0}\n".format(i))  
+            sys.stderr.flush()
+
 
     print("Total word count: {0}".format(sum_of_word_counts))
     
