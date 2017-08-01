@@ -26,6 +26,7 @@ import re
 import mysqltsv
 
 REMOVED_COMMENT_RE = re.compile(r'^\/\*.*.\*\/')
+PUNCTUATION_RE = re.compile(r'\:|\(|\)|\.|\,|\-')
 
 logger = logging.getLogger(__name__)
 
@@ -37,7 +38,7 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = mysqltsv.Reader(open(args['<input>'], "r"), headers=True,
+    input_file = mysqltsv.Reader(open(args['<input>'], "r"), headers=False,
         types=[str, int, str, str, int])
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"))
@@ -51,11 +52,12 @@ def run(input_file, output_file, verbose):
 
     word_count = defaultdict(int)
     for i, line in enumerate(input_file):
-        comment = line['comment']
+        comment = line[3]
         if comment != None:
             comment = re.sub(REMOVED_COMMENT_RE, "", comment)
             for word in comment.split(" "):
-                word_count[word] += 1
+                normalized_word = re.sub(PUNCTUATION_RE, "", word)
+                word_count[normalized_word] += 1
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
