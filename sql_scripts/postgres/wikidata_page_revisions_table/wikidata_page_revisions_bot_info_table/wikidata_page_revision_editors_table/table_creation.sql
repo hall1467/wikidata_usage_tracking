@@ -1,5 +1,5 @@
 CREATE TABLE wikidata_page_revision_editors AS(
-	SELECT page_title, bot_edits, semi_automated_edits, non_bot_edits, anon_edits
+	SELECT page_title, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
 	FROM 
 	(
 		SELECT *
