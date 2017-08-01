@@ -1,0 +1,1 @@
+\copy (SELECT page_title, revision_id, revision_user, comment, namespace from non_bot_wikidata_page_revisions) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/non_bot_wikidata_page_revisions/all_rows_and_columns.tsv'; 
