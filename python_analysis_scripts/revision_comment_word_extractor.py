@@ -56,7 +56,7 @@ def run(input_file, output_file, verbose):
         if comment != None:
             comment = re.sub(REMOVED_COMMENT_RE, "", comment)
             for word in comment.split(" "):
-                normalized_word = re.sub(PUNCTUATION_RE, "", word)
+                normalized_word = re.sub(PUNCTUATION_RE, "", word).lower()
                 word_count[normalized_word] += 1
 
         if verbose and i % 10000 == 0 and i != 0:
