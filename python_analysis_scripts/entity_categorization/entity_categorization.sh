@@ -1,1 +1,1 @@
-python entity_categorization.py ../../../wikidata-20170807-all.json.bz2 ../../../entity_categorization.tsv > & ../../../entity_categorization_error_log.txt
+python entity_categorization.py ../../../wikidata-20170807-all.json.bz2 ../../../entity_categorization.tsv --verbose > & ../../../entity_categorization_error_log.txt
