@@ -49,7 +49,7 @@ def run(input_file, output_file, verbose):
                 try:
                     output_file.write([entry['id'], 'P31',
                         statement['claim']['datavalue']['id']])
-                except as type_related_error:
+                except TypeError as type_related_error:
                     sys.warning(statement)
 
         if 'P279' in mwbase_entry.properties:
@@ -57,7 +57,7 @@ def run(input_file, output_file, verbose):
                 try:
                     output_file.write([entry['id'], 'P279',
                         statement['claim']['datavalue']['id']])
-                except as type_related_error:
+                except TypeError as type_related_error:
                     sys.warning(statement)
 
         if verbose and i % 100 == 0 and i != 0:
