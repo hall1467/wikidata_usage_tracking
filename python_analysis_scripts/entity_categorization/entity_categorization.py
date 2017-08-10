@@ -23,6 +23,8 @@ import bz2
 import ijson
 import mwbase
 
+import logging
+
 logger = logging.getLogger(__name__)
 
 def main(argv=None):
