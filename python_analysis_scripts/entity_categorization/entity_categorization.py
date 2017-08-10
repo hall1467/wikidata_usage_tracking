@@ -52,7 +52,7 @@ def run(input_file, output_file, verbose):
                     output_file.write([entry['id'], 'P31',
                         statement['claim']['datavalue']['id']])
                 except TypeError as type_related_error:
-                    sys.warning(statement)
+                    logger.warn(statement)
 
         if 'P279' in mwbase_entry.properties:
             for statement in mwbase_entry.properties['P279']:
@@ -60,7 +60,7 @@ def run(input_file, output_file, verbose):
                     output_file.write([entry['id'], 'P279',
                         statement['claim']['datavalue']['id']])
                 except TypeError as type_related_error:
-                    sys.warning(statement)
+                    logger.warn(statement)
 
         if verbose and i % 100 == 0 and i != 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
