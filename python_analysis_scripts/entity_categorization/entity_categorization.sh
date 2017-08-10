@@ -1,1 +1,1 @@
-python entity_categorization.py ../../../../wbc_entity_usage/wikidata-20170807-all.json.bz2 ../../../../wbc_entity_usage/usage_results/entity_categorization/entity_categorization.tsv > & ../../../../wbc_entity_usage/usage_results/entity_categorization/entity_categorization_error_log.txt
+python entity_categorization.py ../../../wikidata-20170807-all.json.bz2 ../../../entity_categorization.tsv > & ../../../entity_categorization_error_log.txt
