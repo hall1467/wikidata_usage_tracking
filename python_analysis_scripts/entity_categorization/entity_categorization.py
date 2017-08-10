@@ -23,6 +23,8 @@ import bz2
 import ijson
 import mwbase
 
+logger = logging.getLogger(__name__)
+
 def main(argv=None):
     args = docopt.docopt(__doc__)
 
@@ -44,12 +46,19 @@ def run(input_file, output_file, verbose):
         mwbase_entry = mwbase.Entity.from_json(entry)
         if 'P31' in mwbase_entry.properties:
             for statement in mwbase_entry.properties['P31']:
-                output_file.write([entry['id'], 'P31',
-                    statement['claim']['datavalue']['id']])
+                try:
+                    output_file.write([entry['id'], 'P31',
+                        statement['claim']['datavalue']['id']])
+                except as type_related_error:
+                    sys.warning(statement)
+
         if 'P279' in mwbase_entry.properties:
             for statement in mwbase_entry.properties['P279']:
-                output_file.write([entry['id'], 'P279',
-                    statement['claim']['datavalue']['id']])
+                try:
+                    output_file.write([entry['id'], 'P279',
+                        statement['claim']['datavalue']['id']])
+                except as type_related_error:
+                    sys.warning(statement)
 
         if verbose and i % 100 == 0 and i != 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
