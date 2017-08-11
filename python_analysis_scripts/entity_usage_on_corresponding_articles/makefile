@@ -10,7 +10,7 @@ run:
 	mkdir -p $(results)
 	mkdir -p $(entity_usage_on_corresponding_articles_storage)
 	python ../../utility determine_wikis |\
-	python page_props $(date_for_dumps) \
+	python download_page_props $(date_for_dumps) \
 		$(entity_usage_on_corresponding_articles_storage) 2> $(stderr_log)
 	python extract_page_properties $(entity_usage_on_corresponding_articles_storage)/* > $(entity_usage_on_corresponding_articles) \
 		2>> $(stderr_log)
