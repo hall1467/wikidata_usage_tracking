@@ -58,7 +58,6 @@ class PagePropDump:
 def extract_usages(f, dbname):
     """ Extract sitelink usages in wiki for given SQL entry"""
     for line in f:
-        print(line)
         if INSERT_LINE_RE.match(line):
             # Remove "INSERT INTO `page_props` VALUES " and
             # trailing semi-colon/space

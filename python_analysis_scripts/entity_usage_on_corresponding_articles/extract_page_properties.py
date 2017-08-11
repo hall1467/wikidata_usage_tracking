@@ -60,7 +60,7 @@ def run(sql_files, processes, verbose):
     def extract_from_sql_file(path):
         if isinstance(path, str):
             logger.debug("Opening {0}".format(path))
-            f = gzip.open(path, 'rt')
+            f = gzip.open(path, 'rt', errors='replace')
         else:
             logger.debug("Reading from {0}".format(path))
             f = path
