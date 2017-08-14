@@ -16,7 +16,7 @@ run:
 	python ../../utility determine_wikis |\
 	python download_page_tables.py $(date_for_dumps) \
 		$(page_storage) 2> $(stderr_log)
-	python extract_page_information.py $(page_storage)/* > $(entity_usage_on_corresponding_articles) \
+	python extract_page_information.py $(page_storage)/* > $(pages) \
 		2>> $(stderr_log)
 	python extract_site_usage_information.py $(entity_usage_on_corresponding_articles_sql)/* > $(entity_usage_on_corresponding_articles) \
 		2>> $(stderr_log)
