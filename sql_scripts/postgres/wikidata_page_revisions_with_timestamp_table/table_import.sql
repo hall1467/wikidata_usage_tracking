@@ -1,0 +1,1 @@
+\COPY wikidata_page_revisions_with_timestamp FROM '../../../../../wbc_entity_usage/usage_results/wikidata_page_revisions/wikidata_page_revisions_with_timestamp_20170501_escaped_backslashes_time_converted.tsv';
