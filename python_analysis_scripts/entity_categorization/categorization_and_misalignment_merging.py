@@ -22,6 +22,7 @@ import sys
 import mysqltsv
 from collections import defaultdict
 import operator
+import json
 
 import logging
 
@@ -41,7 +42,7 @@ def main(argv=None):
     number_of_instances = int(args['<number_of_instances>'])
     verbose = args['--verbose']
 
-    output_file = mysqltsv.Writer(open(args['<output>'], "w"))
+    output_file = open(args['<output>'], "w")
 
     run(input_file_categorization, input_file_misalignment, output_file, 
         number_of_instances, verbose)
@@ -52,6 +53,7 @@ def run(input_file_categorization, input_file_misalignment, output_file,
     
     category_count = defaultdict(int)
     entity_category = defaultdict(lambda: defaultdict(dict))
+    misalignment_category_entity = defaultdict(list)
     misalignment_category_count = defaultdict(int)
     misalignment_over_category = defaultdict(float)
 
@@ -76,7 +78,7 @@ def run(input_file_categorization, input_file_misalignment, output_file,
 
         for category in entity_category[entry[0]]:
             misalignment_category_count[category] += 1
-
+            misalignment_category_entity[category].append(entry[0])
 
 
     for entry in misalignment_category_count:
@@ -90,7 +92,14 @@ def run(input_file_categorization, input_file_misalignment, output_file,
         reverse=True)
    
     for entry in sorted_misalignment_over_category:
-        output_file.write([entry[0], entry[1], misalignment_category_count[entry[0]]])
+        output_file.write(json.dumps({'category' : entry[0],
+                                     'misalignment_over_category' : entry[1],
+                                     'number_of_instances' : misalignment_category_count[entry[0]],
+                                     'instances' : misalignment_category_entity[entry[0]]
+                                     }) + "\n")
+
+          
+
 
 main()
 
