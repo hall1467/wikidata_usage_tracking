@@ -65,8 +65,8 @@ def run(input_file_sitelinks, input_file_id, output_file, verbose):
     for i, line in enumerate(input_file_id):
 
         json_line = json.loads(line)
-        print(line)
-        print(json_line)
+        sys.stderr.write(line)
+        sys.stderr("\n" + json_line)
 
         page_usages[json_line['wikidb']][json_line['page_title']] =\
             json_line
