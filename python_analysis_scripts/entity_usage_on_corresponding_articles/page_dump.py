@@ -58,7 +58,6 @@ class PageDump:
 def extract_usages(f, dbname):
     """ Extract sitelink usages in wiki for given SQL entry"""
     for line in f:
-        print("here")
         if INSERT_LINE_RE.match(line):
             # Remove "INSERT INTO `page` VALUES " and
             # trailing semi-colon/space
