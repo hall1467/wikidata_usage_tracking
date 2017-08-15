@@ -59,8 +59,8 @@ def run(input_file, revisions_output_file, verbose):
         new_revision_timestamp = re.sub(r'[^0-9]','',line['timestamp'])
         revisions_output_file.write([line['page_title'], line['revision_id'], 
             line['user_id_or_ip'], line['comment'], line['namespace'],
-            new_revision_timestamp, new_revision_timestamp[0:3], 
-            new_revision_timestamp[4:5]])
+            new_revision_timestamp, new_revision_timestamp[0:4], 
+            new_revision_timestamp[5:7]])
 
 
     if verbose:
