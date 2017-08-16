@@ -46,7 +46,7 @@ def main(argv=None):
 def run(input_file_sitelinks, input_file_id, output_file, verbose):
 
     sitelink_usages = defaultdict(lambda: defaultdict(dict))
-    page_usages = defaultdict(lambda: defaultdict(dict))
+    found_sitelink_usages = defaultdict(lambda: defaultdict(dict))
 
     for i, line in enumerate(input_file_sitelinks):
 
@@ -65,20 +65,29 @@ def run(input_file_sitelinks, input_file_id, output_file, verbose):
     for i, line in enumerate(input_file_id):
 
         json_line = json.loads(line)
-        sys.stderr.write(line)
-        sys.stderr.write("\n" + str(json_line))
+        # sys.stderr.write(line)
+        # sys.stderr.write("\n" + str(json_line))
 
-        page_usages[json_line['wikidb']][json_line['page_title']] =\
-            json_line
+        wikidb = json_line['wikidb']
+        page_title = json_line['page_title']
+
+
+        if wikidb in sitelink_usages and page_title in sitelink_usages[wikidb]:
+            found_sitelink_usages[wikidb][page_title] = 1
+            print("in both!")
+
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Pages processed: {0}\n".format(i))  
             sys.stderr.flush()
 
+
     for wikidb in sitelink_usages:
         for page_title in sitelink_usages[wikidb]:
-            if wikidb in page_usages and page_title in page_usages[wikidb]:
-                print("in both!")
+            if wikidb not in found_sitelink_usages or\
+                page_title not in found_sitelink_usages[wikidb]:
+                    print("Couldn't find page '{0}','{1}'".format(wikidb,
+                        page_title))
 
 
 
