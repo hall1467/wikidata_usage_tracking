@@ -33,7 +33,7 @@ class SiteUsage:
 
     @classmethod
     def from_match(cls, match, dbname=None):
-        return cls(dbname, match.group(2), match.group(4))
+        return cls(match.group(2), match.group(2), match.group(4))
 
 
 class SiteDump:

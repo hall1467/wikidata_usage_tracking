@@ -1,0 +1,2 @@
+# The makefile in this directory works just fine. Used this to run extract_site_usage_information seperately.
+python extract_site_usage_information.py ../../../../wbc_entity_usage/entity_usage_on_corresponding_articles_storage/wikidatawiki-20170801-wb_items_per_site.sql.gz > ../../../../wbc_entity_usage/usage_results/entity_usage_on_corresponding_articles/entity_usage_on_corresponding_articles.json
