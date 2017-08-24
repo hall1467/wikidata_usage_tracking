@@ -28,8 +28,8 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					comment LIKE '%[[useryms/lc|lcjs]]%' OR 
 																					comment LIKE '%#wikidatagame%' OR 
 																					comment LIKE '%[[wikidataprimary%' OR
-																					comment LIKE '%#mix\'n\'match%' OR 
-																					comment LIKE '%mix\'n\'match%' OR
+																					comment LIKE '%#mix''n''match%' OR 
+																					comment LIKE '%mix''n''match%' OR
 																					comment LIKE '%#distributedgame%' OR  
 																					comment LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%')
 				GROUP BY page_title
@@ -51,8 +51,8 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					comment LIKE '%[[useryms/lc|lcjs]]%' OR 
 																					comment LIKE '%#wikidatagame%' OR 
 																					comment LIKE '%[[wikidataprimary%' OR
-																					comment LIKE '%#mix\'n\'match%' OR 
-																					comment LIKE '%mix\'n\'match%' OR
+																					comment LIKE '%#mix''n''match%' OR 
+																					comment LIKE '%mix''n''match%' OR
 																					comment LIKE '%#distributedgame%' OR  
 																					comment LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%')
 			GROUP BY page_title
