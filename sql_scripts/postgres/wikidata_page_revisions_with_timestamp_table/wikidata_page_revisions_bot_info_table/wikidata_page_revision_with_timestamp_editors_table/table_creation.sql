@@ -66,7 +66,21 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 		(
 			SELECT page_title AS semi_automated_title, count(*) as semi_automated_edits
 			FROM wikidata_page_revisions_with_timestamp_bot_info
-			WHERE bot_user_id IS NULL AND (comment LIKE '%quickstatements%' OR comment LIKE '%petscan%' OR comment LIKE '%autolist2%')
+			WHERE bot_user_id IS NULL AND (comment LIKE '%quickstatements%' OR 
+										   comment LIKE '%petscan%' OR 
+										   comment LIKE '%autolist2%' OR
+										   comment LIKE '%autoedit%' OR
+										   comment LIKE '%nameguzzler%' OR 
+										   comment LIKE '%labellister%' OR
+										   comment LIKE '%#itemcreator%' OR 
+										   comment LIKE '%#dragrefjs%' OR 
+										   comment LIKE '%[[useryms/lc|lcjs]]%' OR 
+										   comment LIKE '%#wikidatagame%' OR 
+										   comment LIKE '%[[wikidataprimary%' OR
+										   comment LIKE '%#mix''n''match%' OR 
+										   comment LIKE '%mix''n''match%' OR
+										   comment LIKE '%#distributedgame%' OR  
+										   comment LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%')
 			GROUP BY page_title
 		) AS semi_automated_revisions
 		FULL OUTER JOIN
