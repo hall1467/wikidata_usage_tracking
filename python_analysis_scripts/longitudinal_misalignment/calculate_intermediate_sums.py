@@ -44,7 +44,7 @@ def main(argv=None):
         'bot_edits', 'semi_automated_edits', 'non_bot_edits', 'anon_edits',
         'all_edits', 'current_bot_edits_count', 
         'current_semi_automated_edits_count', 'current_non_bot_edits_count',
-        'all_bot_edits_count', 'current_all_edits_count'])
+        'current_anon_edits_count', 'current_all_edits_count'])
 
     verbose = args['--verbose']
 
