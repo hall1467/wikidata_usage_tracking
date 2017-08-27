@@ -1,1 +1,1 @@
-\copy (select year, month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits from monthly_wikidata_editors order by year, month) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/monthly_wikidata_editors/all_months_sorted.tsv'; 
+\copy (select year, month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits from monthly_wikidata_editors order by year, month) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/monthly_wikidata_editors/all_months_sorted.tsv' WITH HEADER CSV; 
