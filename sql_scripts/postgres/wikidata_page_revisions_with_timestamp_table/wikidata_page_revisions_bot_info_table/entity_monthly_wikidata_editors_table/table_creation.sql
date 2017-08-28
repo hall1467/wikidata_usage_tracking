@@ -34,7 +34,7 @@ CREATE TABLE entity_monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%')
 				GROUP BY page_title, year, month
 			) AS non_bot_edits_query
-			ON bot_edit_page_title = non_bot_page_title AND bot_edit_year = non_bot_edit_year AND bot_edit_month = non_bot_edit_month
+			ON bot_edit_page_title = non_bot_edit_page_title AND bot_edit_year = non_bot_edit_year AND bot_edit_month = non_bot_edit_month
 		) AS bots_and_non_bots
 		FULL OUTER JOIN
 		(
