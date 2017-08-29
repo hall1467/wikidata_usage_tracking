@@ -1,5 +1,5 @@
 CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
-	SELECT semi_automated_and_all.page_title, semi_automated_and_all.year, semi_automated_and_all.month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
+	SELECT semi_automated_and_all.page_title, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
 	FROM 
 	(
 		SELECT (case when page_title IS NOT NULL THEN page_title else anon_edit_page_title end) as page_title, bot_edits, non_bot_edits, anon_edits
