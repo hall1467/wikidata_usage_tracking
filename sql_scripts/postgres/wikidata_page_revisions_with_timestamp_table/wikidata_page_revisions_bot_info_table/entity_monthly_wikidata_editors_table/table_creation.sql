@@ -1,4 +1,4 @@
-CREATE TABLE entity_monthly_wikidata_editors AS(
+CREATE TABLE temp_entity_monthly_wikidata_editors AS(
 	SELECT page_title, year, month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
 	FROM 
 	(
