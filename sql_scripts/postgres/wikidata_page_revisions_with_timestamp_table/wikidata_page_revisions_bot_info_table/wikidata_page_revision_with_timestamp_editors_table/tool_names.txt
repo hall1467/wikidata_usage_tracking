@@ -5,7 +5,6 @@ autoedit
 nameguzzler
 labellister
 #itemcreator
-dragrefjs
 #dragrefjs
 [[useryms/lc|lcjs]]
 #wikidatagame

@@ -1,4 +1,4 @@
-CREATE TABLE temp_entity_monthly_wikidata_editors AS(
+CREATE TABLE entity_monthly_wikidata_editors AS(
 	SELECT semi_automated_and_all.page_title, semi_automated_and_all.year, semi_automated_and_all.month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
 	FROM 
 	(
@@ -9,14 +9,14 @@ CREATE TABLE temp_entity_monthly_wikidata_editors AS(
 			FROM 
 			(
 				SELECT page_title AS bot_edit_page_title, year AS bot_edit_year, month AS bot_edit_month, count(*) as bot_edits
-				FROM temp_wikidata_page_revisions_with_timestamp_bot_info
+				FROM wikidata_page_revisions_with_timestamp_bot_info
 				WHERE bot_user_id IS NOT NULL
 				GROUP BY page_title, year, month
 			) AS bot_edits_query
 			FULL OUTER JOIN
 			(
 				SELECT page_title AS non_bot_edit_page_title, year AS non_bot_edit_year, month AS non_bot_edit_month, count(*) as non_bot_edits
-				FROM temp_wikidata_page_revisions_with_timestamp_bot_info
+				FROM wikidata_page_revisions_with_timestamp_bot_info
 				WHERE bot_user_id IS NULL AND revision_user NOT LIKE '%.%' AND NOT (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -39,7 +39,7 @@ CREATE TABLE temp_entity_monthly_wikidata_editors AS(
 		FULL OUTER JOIN
 		(
 			SELECT page_title AS anon_edit_page_title, year AS anon_edit_year, month AS anon_edit_month, count(*) as anon_edits
-			FROM temp_wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_info
 			WHERE bot_user_id IS NULL AND revision_user LIKE '%.%' AND NOT (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -65,7 +65,7 @@ CREATE TABLE temp_entity_monthly_wikidata_editors AS(
 		FROM
 		(
 			SELECT page_title AS semi_automated_edit_page_title, year AS semi_automated_edit_year, month AS semi_automated_edit_month, count(*) as semi_automated_edits
-			FROM temp_wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_info
 			WHERE bot_user_id IS NULL AND (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 										   lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 										   lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -86,7 +86,7 @@ CREATE TABLE temp_entity_monthly_wikidata_editors AS(
 		FULL OUTER JOIN
 		(
 			SELECT page_title, year, month, count(*) as all_edits
-			FROM temp_wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_info
 			GROUP BY page_title, year, month
 		) AS all_revisions
 		ON page_title = semi_automated_edit_page_title AND year = semi_automated_edit_year AND month = semi_automated_edit_month

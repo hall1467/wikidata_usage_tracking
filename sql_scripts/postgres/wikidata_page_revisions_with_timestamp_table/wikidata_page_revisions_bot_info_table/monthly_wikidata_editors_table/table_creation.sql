@@ -1,11 +1,11 @@
 CREATE TABLE monthly_wikidata_editors AS(
-	SELECT year, month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
+	SELECT semi_automated_and_all.year, semi_automated_and_all.month, bot_edits, semi_automated_edits, non_bot_edits, anon_edits, all_edits
 	FROM 
 	(
-		SELECT *
+		SELECT (case when year IS NOT NULL THEN year else anon_edit_year end) as year, (case when month IS NOT NULL THEN month else anon_edit_month end) as month, bot_edits, non_bot_edits, anon_edits
 		FROM 
 		(
-			SELECT *
+			SELECT (case when bot_edit_year IS NOT NULL THEN bot_edit_year else non_bot_edit_year end) as year, (case when bot_edit_month IS NOT NULL THEN bot_edit_month else non_bot_edit_month end) as month, bot_edits, non_bot_edits
 			FROM 
 			(
 				SELECT year AS bot_edit_year, month AS bot_edit_month, count(*) as bot_edits
@@ -57,7 +57,7 @@ CREATE TABLE monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%')
 			GROUP BY year, month
 		) AS anons
-		ON bot_edit_year = anon_edit_year AND bot_edit_month = anon_edit_month
+		ON bots_and_non_bots.year = anon_edit_year AND bots_and_non_bots.month = anon_edit_month
 	) AS bots_and_non_bots_and_anons
 	FULL OUTER JOIN
 	(
@@ -91,5 +91,5 @@ CREATE TABLE monthly_wikidata_editors AS(
 		) AS all_revisions
 		ON year = semi_automated_edit_year AND month = semi_automated_edit_month
 	) AS semi_automated_and_all
-	ON year = bot_edit_year AND month = bot_edit_month
+	ON semi_automated_and_all.year = bots_and_non_bots_and_anons.year AND semi_automated_and_all.month = bots_and_non_bots_and_anons.month
 );
