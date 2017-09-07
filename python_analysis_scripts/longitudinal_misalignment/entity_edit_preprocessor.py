@@ -60,12 +60,12 @@ def run(input_edit_data_file, output_file, verbose):
 
     for i, line in enumerate(input_edit_data_file):
         
-        if int(line[2]) == 1:
-            new_year = line[1] - 1
-            new_month = 12
+        if int(line[2]) == 12:
+            new_year = line[1] + 1
+            new_month = 1
         else:
             new_year = line[1]
-            new_month = line[2] - 1
+            new_month = line[2] + 1
 
     
         edits[line[0]]['bot_edits'] += line[3]
