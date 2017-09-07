@@ -1,1 +1,1 @@
-\COPY misalignment FROM '../../../../../wbc_entity_usage/usage_results/entity_categorization/entity_alignment_and_misalignment/aligned_and_misaligned_data_preprocessed.tsv';
+\COPY entity_previous_month_aggregated_edits FROM '../../../../../wbc_entity_usage/usage_results/entity_categorization/entity_alignment_and_misalignment/entity_edits_aggregated_by_month.tsv';
