@@ -1,1 +1,1 @@
-\copy (select * from misalignment_and_edits order by year, month) TO '../../../../../wbc_entity_usage/usage_results/entity_categorization/entity_alignment_and_misalignment/monthly_misalignment_and_edits.tsv'; 
+\copy (select * from misalignment_and_edits order by year, month) TO '../../../../../../../wbc_entity_usage/usage_results/sql_queries/entity_monthly_wikidata_editors/monthly_misalignment_and_edits.tsv'; 
