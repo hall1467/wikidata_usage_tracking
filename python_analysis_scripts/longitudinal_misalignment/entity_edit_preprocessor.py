@@ -57,32 +57,96 @@ def run(input_edit_data_file, output_file, verbose):
     # Gets updated as months go by
     edits = defaultdict(lambda: defaultdict(int))
 
+    previous_entity = None
+    previous_iteration_year = None
+    previous_iteration_month = None
 
     for i, line in enumerate(input_edit_data_file):
         
-        if int(line[2]) == 12:
-            new_year = line[1] + 1
-            new_month = 1
+        current_entity = line[0]
+        current_year = line[1]
+        current_month = line[2]
+
+        if current_entity == previous_entity:
+
+            # Create entries between previous and current entry of entity
+
+            incremented_date_year = previous_iteration_year
+            incremented_date_month = previous_iteration_month
+            
+            while int(str(current_year) + str(current_month).zfill(2)) >\
+                int(str(incremented_date_year) +
+                str(incremented_date_month).zfill(2)):
+
+                # run increment
+                incremented_date_year, incremented_date_month =\
+                    increment(incremented_date_year, incremented_date_month)
+
+
+                output_file.write([current_entity, 
+                                   incremented_date_year, 
+                                   incremented_date_month,
+                                   edits[previous_entity]['bot'], 
+                                   edits[previous_entity]['semi_automated'], 
+                                   edits[previous_entity]['non_bot'],
+                                   edits[previous_entity]['anon'],
+                                   edits[previous_entity]['all']])
+
+
+            incremented_date_year, incremented_date_month =\
+                increment(incremented_date_year, incremented_date_month)
+
+
         else:
-            new_year = line[1]
-            new_month = line[2] + 1
 
-    
-        edits[line[0]]['bot_edits'] += line[3]
-        edits[line[0]]['semi_automated_edits'] += line[4]
-        edits[line[0]]['non_bot_edits'] += line[5]
-        edits[line[0]]['anon_edits'] += line[6]
-        edits[line[0]]['all_edits'] += line[7]
+            # First create remaining entries for previous entity
+            last_date_for_edits_to_occur = 201705
+
+            while previous_entity != None and (last_date_for_edits_to_occur >=
+                int(str(incremented_date_year) +
+                str(incremented_date_month).zfill(2))):
+                
+                incremented_date_year, incremented_date_month =\
+                    increment(incremented_date_year, incremented_date_month)
 
 
-        output_file.write([line[0], 
-                           new_year, 
-                           new_month,
-                           edits[line[0]]['bot_edits'], 
-                           edits[line[0]]['semi_automated_edits'], 
-                           edits[line[0]]['non_bot_edits'],
-                           edits[line[0]]['anon_edits'],
-                           edits[line[0]]['all_edits']])
+                output_file.write([previous_entity, 
+                                   incremented_date_year, 
+                                   incremented_date_month,
+                                   edits[previous_entity]['bot'], 
+                                   edits[previous_entity]['semi_automated'], 
+                                   edits[previous_entity]['non_bot'],
+                                   edits[previous_entity]['anon'],
+                                   edits[previous_entity]['all']])
+
+
+
+            # Handle current entity which has not been seen in other iterations.
+            incremented_date_year, incremented_date_month =\
+                increment(current_year, current_month)
+
+
+
+        edits[current_entity]['bot'] += line[3]
+        edits[current_entity]['semi_automated'] += line[4]
+        edits[current_entity]['non_bot'] += line[5]
+        edits[current_entity]['anon'] += line[6]
+        edits[current_entity]['all'] += line[7]
+
+
+        output_file.write([current_entity, 
+                           incremented_date_year, 
+                           incremented_date_month,
+                           edits[current_entity]['bot'], 
+                           edits[current_entity]['semi_automated'], 
+                           edits[current_entity]['non_bot'],
+                           edits[current_entity]['anon'],
+                           edits[current_entity]['all']])
+
+
+        previous_entity = current_entity
+        previous_iteration_year = incremented_date_year
+        previous_iteration_month = incremented_date_month
 
 
         if verbose and i % 10000 == 0 and i != 0:
@@ -91,5 +155,19 @@ def run(input_edit_data_file, output_file, verbose):
 
 
 
+def increment(year, month):
+
+    if month == 12:
+        incremented_date_year = year + 1
+        incremented_date_month = 1
+    else:
+        incremented_date_year = year
+        incremented_date_month = month + 1
+
+    return incremented_date_year, incremented_date_month
+
+
+
 main()
+
 
