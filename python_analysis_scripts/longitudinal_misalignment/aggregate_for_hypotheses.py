@@ -207,7 +207,7 @@ def run(input_file, hypothesis_1_output_file,
                     hypotheses[hypothesis][date]["lq"]["non_bot_edits"],
                     hypotheses[hypothesis][date]["lq"]["anon_edits"],
                     hypotheses[hypothesis][date]["hq"]["bot_edits"],
-                    hypotheses[hypothesis][date]["hq"]["semi_automated_edits"]
+                    hypotheses[hypothesis][date]["hq"]["semi_automated_edits"],
                     hypotheses[hypothesis][date]["hq"]["non_bot_edits"],
                     hypotheses[hypothesis][date]["hq"]["anon_edits"]])
 
