@@ -62,7 +62,7 @@ def main(argv=None):
         headers=[
                  'file_date', 
                  'lower_quality_bot_edits',
-                 'lower_quality_semi_automated_edits'
+                 'lower_quality_semi_automated_edits',
                  'lower_quality_non_bot_edits',
                  'lower_quality_anon_edits',
                  'higher_quality_bot_edits',
