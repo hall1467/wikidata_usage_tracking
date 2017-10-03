@@ -1,0 +1,79 @@
+#quickstatements	41449564
+#petscan	5442222
+#autolist2	2710996
+[[mediawikigadgetmergejs|mergejs]]	1095770
+game	583343
+#wikidatagame	469791
+distributed	378491
+[[wikidataprimary	359112
+tool]]	359112
+#mix'n'match	324024
+#distributedgame	292079
+talkgadgetautoeditjs|autoedit]]	232398
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------
+
+
+
+
+
+
+
+
+#quickstatements
+#petscan
+#autolist2
+[[mediawikigadgetmergejs|mergejs]]
+#wikidatagame
+
+
+
+game
+via
+distributed
+with
+sources
+[[wikidataprimary
+tool]]
+#mix'n'match
+#distributedgame
+list
+[[mediawiki
+talkgadgetautoeditjs|autoedit]]
+entity
+descriptions
+create
+encyclopedic
+by
+scientific
