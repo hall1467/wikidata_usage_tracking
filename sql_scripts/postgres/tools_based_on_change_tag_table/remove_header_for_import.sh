@@ -1,0 +1,1 @@
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/usage_results/tools_based_on_change_tag/tool_revision_from_change_tag.tsv > /export/scratch2/wmf/wbc_entity_usage/usage_results/tools_based_on_change_tag/tool_revision_from_change_tag_no_header.tsv
