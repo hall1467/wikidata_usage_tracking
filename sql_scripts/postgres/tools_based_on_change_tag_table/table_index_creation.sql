@@ -1,0 +1,1 @@
+CREATE INDEX tools_based_on_change_tag_revision_id_index ON tools_based_on_change_tag(revision_id);
