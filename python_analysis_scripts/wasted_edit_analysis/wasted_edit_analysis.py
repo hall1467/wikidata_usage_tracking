@@ -1,6 +1,6 @@
 """
 Wasted edits occur after maximum quality class has been reached for an entity.
-The input will have an order.
+The input will have an order: entity, year, month
 
 Usage:
     wasted_edit_analysis (-h|--help)
@@ -64,6 +64,11 @@ def run(input_file, output_file, verbose):
     previous_entity = None
     highest_quality_class_number = 0
 
+    previous_bot_edits = 0
+    previous_semi_automated_edits = 0
+    previous_non_bot_edits = 0
+    previous_anon_edits = 0
+
     for i, line in enumerate(input_file):
 
         entity = line[0]
@@ -90,11 +95,14 @@ def run(input_file, output_file, verbose):
 
         if entity in entity_highest_quality:
             if quality_class_number <= entity_highest_quality[entity]:
-                wasted_edits[entity]["bot_edits"] += bot_edits
+                wasted_edits[entity]["bot_edits"]\
+                    += (bot_edits - previous_bot_edits)
                 wasted_edits[entity]["semi_automated_edits"]\
-                    += semi_automated_edits
-                wasted_edits[entity]["non_bot_edits"] += non_bot_edits
-                wasted_edits[entity]["anon_edits"] += anon_edits
+                    += (semi_automated_edits - previous_semi_automated_edits)
+                wasted_edits[entity]["non_bot_edits"]\
+                    += (non_bot_edits - previous_non_bot_edits)
+                wasted_edits[entity]["anon_edits"]\
+                    += (anon_edits - previous_anon_edits)
             else:
                 entity_highest_quality[entity] = quality_class_number
                 
@@ -102,8 +110,20 @@ def run(input_file, output_file, verbose):
                 wasted_edits[entity]["semi_automated_edits"] = 0
                 wasted_edits[entity]["non_bot_edits"] = 0
                 wasted_edits[entity]["anon_edits"] = 0
+
+            previous_bot_edits = bot_edits
+            previous_semi_automated_edits = semi_automated_edits
+            previous_non_bot_edits = non_bot_edits
+            previous_anon_edits = anon_edits
+
         else:
             entity_highest_quality[entity] = quality_class_number
+
+            previous_bot_edits = 0
+            previous_semi_automated_edits = 0
+            previous_non_bot_edits = 0
+            previous_anon_edits = 0
+
 
         previous_entity = entity
 
@@ -117,6 +137,7 @@ def run(input_file, output_file, verbose):
     all_semi_automated_edits = 0
     all_non_bot_edits = 0
     all_anon_edits = 0
+
 
 
     for entity in wasted_edits:
