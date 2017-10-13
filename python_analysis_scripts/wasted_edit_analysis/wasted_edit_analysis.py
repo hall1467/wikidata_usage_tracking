@@ -63,6 +63,7 @@ def run(input_file, output_file, verbose):
 
     previous_entity = None
     highest_view_class_number = 0
+    attained = False
 
     previous_bot_edits = 0
     previous_semi_automated_edits = 0
@@ -110,7 +111,7 @@ def run(input_file, output_file, verbose):
 
 
         if entity in entity_discovered:
-            if view_class_number <= quality_class_number:
+            if view_class_number <= quality_class_number and attained:
                 
                 wasted_edits[entity]["bot_edits"]\
                     += (bot_edits - previous_bot_edits)
@@ -120,8 +121,8 @@ def run(input_file, output_file, verbose):
                     += (non_bot_edits - previous_non_bot_edits)
                 wasted_edits[entity]["anon_edits"]\
                     += (anon_edits - previous_anon_edits)
+
             else:
-                
                 wasted_edits[entity]["bot_edits"] = 0
                 wasted_edits[entity]["semi_automated_edits"] = 0
                 wasted_edits[entity]["non_bot_edits"] = 0
@@ -139,6 +140,12 @@ def run(input_file, output_file, verbose):
             previous_semi_automated_edits = 0
             previous_non_bot_edits = 0
             previous_anon_edits = 0
+
+
+        if view_class_number <= quality_class_number:
+            attained = True
+        else:
+            attained = False
 
 
         previous_entity = entity
