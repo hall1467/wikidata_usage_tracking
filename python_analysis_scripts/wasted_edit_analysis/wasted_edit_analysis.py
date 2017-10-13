@@ -57,12 +57,12 @@ def main(argv=None):
 
 def run(input_file, output_file, verbose):
 
-    entity_highest_quality = {}
+    entity_highest_views = {}
     wasted_edits = defaultdict(lambda: defaultdict(int))
 
 
     previous_entity = None
-    highest_quality_class_number = 0
+    highest_view_class_number = 0
 
     previous_bot_edits = 0
     previous_semi_automated_edits = 0
@@ -73,6 +73,7 @@ def run(input_file, output_file, verbose):
 
         entity = line[0]
         qual = line[3]
+        views = line[4]
         bot_edits = line[5]
         semi_automated_edits = line[6]
         non_bot_edits = line[7]
@@ -93,8 +94,25 @@ def run(input_file, output_file, verbose):
             quality_class_number = 1
 
 
-        if entity in entity_highest_quality:
-            if quality_class_number <= entity_highest_quality[entity]:
+        view_class_number = 0
+
+        if views == 'A':
+            view_class_number = 5
+        elif views == 'B':
+            view_class_number = 4
+        elif views == 'C':
+            view_class_number = 3
+        elif views == 'D':
+            view_class_number = 2
+        elif views == 'E':
+            view_class_number = 1
+
+
+
+        if entity in entity_highest_views:
+            if view_class_number <= entity_highest_views[entity] and\
+                quality_class_number >= entity_highest_views[entity]:
+                
                 wasted_edits[entity]["bot_edits"]\
                     += (bot_edits - previous_bot_edits)
                 wasted_edits[entity]["semi_automated_edits"]\
@@ -104,7 +122,7 @@ def run(input_file, output_file, verbose):
                 wasted_edits[entity]["anon_edits"]\
                     += (anon_edits - previous_anon_edits)
             else:
-                entity_highest_quality[entity] = quality_class_number
+                entity_highest_views[entity] = quality_class_number
                 
                 wasted_edits[entity]["bot_edits"] = 0
                 wasted_edits[entity]["semi_automated_edits"] = 0
@@ -117,7 +135,7 @@ def run(input_file, output_file, verbose):
             previous_anon_edits = anon_edits
 
         else:
-            entity_highest_quality[entity] = quality_class_number
+            entity_highest_views[entity] = quality_class_number
 
             previous_bot_edits = 0
             previous_semi_automated_edits = 0
