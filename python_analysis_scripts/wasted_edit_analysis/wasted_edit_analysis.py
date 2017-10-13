@@ -57,7 +57,7 @@ def main(argv=None):
 
 def run(input_file, output_file, verbose):
 
-    entity_highest_views = {}
+    entity_discovered = {}
     wasted_edits = defaultdict(lambda: defaultdict(int))
 
 
@@ -109,9 +109,8 @@ def run(input_file, output_file, verbose):
 
 
 
-        if entity in entity_highest_views:
-            if view_class_number <= entity_highest_views[entity] and\
-                quality_class_number >= entity_highest_views[entity]:
+        if entity in entity_discovered:
+            if view_class_number <= quality_class_number:
                 
                 wasted_edits[entity]["bot_edits"]\
                     += (bot_edits - previous_bot_edits)
@@ -122,7 +121,6 @@ def run(input_file, output_file, verbose):
                 wasted_edits[entity]["anon_edits"]\
                     += (anon_edits - previous_anon_edits)
             else:
-                entity_highest_views[entity] = quality_class_number
                 
                 wasted_edits[entity]["bot_edits"] = 0
                 wasted_edits[entity]["semi_automated_edits"] = 0
@@ -135,7 +133,7 @@ def run(input_file, output_file, verbose):
             previous_anon_edits = anon_edits
 
         else:
-            entity_highest_views[entity] = quality_class_number
+            entity_discovered[entity] = 1
 
             previous_bot_edits = 0
             previous_semi_automated_edits = 0
