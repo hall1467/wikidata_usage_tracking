@@ -1,0 +1,7 @@
+CREATE TABLE wikidata_page_revisions_with_timestamp_bot_and_tool_change_tag_info AS (
+	SELECT wikidata_page_revisions_with_timestamp_bot_info.*, tools_based_on_change_tag.revision_id AS change_tag_revision_id
+	FROM wikidata_page_revisions_with_timestamp_bot_info
+	LEFT JOIN
+	tools_based_on_change_tag
+	ON wikidata_page_revisions_with_timestamp_bot_info.revision_id = tools_based_on_change_tag.revision_id
+);
