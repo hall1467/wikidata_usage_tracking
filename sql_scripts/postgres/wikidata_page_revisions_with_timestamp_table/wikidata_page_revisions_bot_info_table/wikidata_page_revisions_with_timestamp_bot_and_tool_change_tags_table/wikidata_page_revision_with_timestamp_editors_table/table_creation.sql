@@ -32,7 +32,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-				AND revision_id NOT IN (SELECT revision_id FROM tools_based_on_change_tag)
+				AND change_tag_revision_id IS NULL
 				GROUP BY page_title
 			) AS non_bot_edits_query
 			ON bot_edit_page_title = non_bot_edit_page_title
@@ -56,7 +56,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-			AND revision_id NOT IN (SELECT revision_id FROM tools_based_on_change_tag)
+			AND change_tag_revision_id IS NULL
 			GROUP BY page_title
 		) AS anons
 		ON bots_and_non_bots.page_title = anon_edit_page_title
@@ -83,7 +83,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-			OR revision_id IN (SELECT revision_id FROM tools_based_on_change_tag)
+			OR change_tag_revision_id IS NOT NULL
 			GROUP BY page_title
 		) AS semi_automated_revisions
 		FULL OUTER JOIN

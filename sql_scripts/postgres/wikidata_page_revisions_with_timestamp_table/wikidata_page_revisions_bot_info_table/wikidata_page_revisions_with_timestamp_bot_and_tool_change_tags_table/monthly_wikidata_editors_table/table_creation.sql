@@ -32,7 +32,7 @@ CREATE TABLE monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-				AND revision_id NOT IN (SELECT revision_id FROM tools_based_on_change_tag)
+				AND change_tag_revision_id IS NULL
 				GROUP BY year, month
 			) AS non_bot_edits_query
 			ON bot_edit_year = non_bot_edit_year AND bot_edit_month = non_bot_edit_month
@@ -56,7 +56,7 @@ CREATE TABLE monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-			AND revision_id NOT IN (SELECT revision_id FROM tools_based_on_change_tag)
+			AND change_tag_revision_id IS NULL
 			GROUP BY year, month
 		) AS anons
 		ON bots_and_non_bots.year = anon_edit_year AND bots_and_non_bots.month = anon_edit_month
@@ -83,7 +83,7 @@ CREATE TABLE monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-			OR revision_id IN (SELECT revision_id FROM tools_based_on_change_tag)
+			OR change_tag_revision_id IS NOT NULL
 			GROUP BY year, month
 		) AS semi_automated_revisions
 		FULL OUTER JOIN
