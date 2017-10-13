@@ -9,14 +9,14 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 			FROM 
 			(
 				SELECT page_title AS bot_edit_page_title, count(*) as bot_edits
-				FROM wikidata_page_revisions_with_timestamp_bot_info
+				FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 				WHERE bot_user_id IS NOT NULL
 				GROUP BY page_title
 			) AS bot_edits_query
 			FULL OUTER JOIN
 			(
 				SELECT page_title AS non_bot_edit_page_title, count(*) as non_bot_edits
-				FROM wikidata_page_revisions_with_timestamp_bot_info
+				FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 				WHERE (bot_user_id IS NULL AND revision_user NOT LIKE '%.%' AND NOT (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -40,7 +40,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 		FULL OUTER JOIN
 		(
 			SELECT page_title AS anon_edit_page_title, count(*) as anon_edits
-			FROM wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 			WHERE (bot_user_id IS NULL AND revision_user LIKE '%.%' AND NOT (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -67,7 +67,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 		FROM
 		(
 			SELECT page_title AS semi_automated_edit_page_title, count(*) as semi_automated_edits
-			FROM wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 			WHERE (bot_user_id IS NULL AND (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
@@ -89,7 +89,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 		FULL OUTER JOIN
 		(
 			SELECT page_title, count(*) as all_edits
-			FROM wikidata_page_revisions_with_timestamp_bot_info
+			FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 			GROUP BY page_title
 		) AS all_revisions
 		ON page_title = semi_automated_edit_page_title
