@@ -68,7 +68,7 @@ CREATE TABLE monthly_wikidata_editors AS(
 		(
 			SELECT year AS semi_automated_edit_year, month AS semi_automated_edit_month, count(*) as semi_automated_edits
 			FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
-			WHERE (bot_user_id IS NULL AND (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
+			WHERE bot_user_id IS NULL AND ((lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%autolist2%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%talkgadgetautoeditjs|autoedit]]%' OR
@@ -82,8 +82,8 @@ CREATE TABLE monthly_wikidata_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%mix''n''match%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
-																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
-			OR change_tag_revision_id IS NOT NULL
+																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%')
+			OR change_tag_revision_id IS NOT NULL)
 			GROUP BY year, month
 		) AS semi_automated_revisions
 		FULL OUTER JOIN
