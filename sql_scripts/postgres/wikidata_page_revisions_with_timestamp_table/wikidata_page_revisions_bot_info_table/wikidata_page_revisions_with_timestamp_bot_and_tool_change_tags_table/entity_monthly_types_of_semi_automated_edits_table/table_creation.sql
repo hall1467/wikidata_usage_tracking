@@ -16,5 +16,5 @@ SELECT *,
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%' THEN 'mergejs'
 	   END) as type_of_semi_automated_edit
 FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
-WHERE bot_user_id is NULL AND change_tag_revision_id IS NULL
+WHERE bot_user_id is NULL
 );
