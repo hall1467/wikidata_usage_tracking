@@ -1,1 +1,1 @@
-\copy (SELECT year, month, type_of_semi_automated_edit, count FROM type_of_semi_automated_edit ORDER BY year, month) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/semi_automated_entity_edits/semi_automated_edit_types_ordered_by_date.tsv'; 
+\copy (SELECT year, month, type_of_semi_automated_edit, count FROM semi_automated_entity_edits ORDER BY year, month) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/semi_automated_entity_edits/semi_automated_edit_types_ordered_by_date.tsv'; 
