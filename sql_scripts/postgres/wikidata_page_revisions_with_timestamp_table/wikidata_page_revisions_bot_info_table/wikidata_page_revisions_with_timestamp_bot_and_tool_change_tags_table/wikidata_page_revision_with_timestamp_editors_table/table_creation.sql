@@ -31,7 +31,8 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%mix''n''match%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
-																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
+																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%' OR
+																					revision_user = '2769139'))
 				AND change_tag_revision_id IS NULL
 				GROUP BY page_title
 			) AS non_bot_edits_query
@@ -55,7 +56,8 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%mix''n''match%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
-																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%'))
+																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%' OR
+																					revision_user = '2769139'))
 			AND change_tag_revision_id IS NULL
 			GROUP BY page_title
 		) AS anons
@@ -83,7 +85,7 @@ CREATE TABLE wikidata_page_revision_with_timestamp_editors AS(
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#distributedgame%' OR  
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' OR
 																					lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%')
-			OR change_tag_revision_id IS NOT NULL)
+			OR change_tag_revision_id IS NOT NULL OR revision_user = '2769139')
 			GROUP BY page_title
 		) AS semi_automated_revisions
 		FULL OUTER JOIN
