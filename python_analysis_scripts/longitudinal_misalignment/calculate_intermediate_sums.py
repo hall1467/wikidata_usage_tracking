@@ -1,12 +1,12 @@
 """
 Post processing (subset of columns) to calculate intermediate sum edit counts 
-and other variables
+and other variables. Date sorted.
 
 Usage:
-    post_processing (-h|--help)
-    post_processing <input> <output>
-                    [--debug]
-                    [--verbose]
+    calculate_intermediate_sums (-h|--help)
+    calculate_intermediate_sums <input> <output>
+                                [--debug]
+                                [--verbose]
 
 Options:
     -h, --help  This help message is printed
