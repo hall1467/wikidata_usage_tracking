@@ -1,6 +1,6 @@
 CREATE TABLE entity_monthly_types_of_semi_automated_edits AS (
 SELECT *, 
-	   (CASE WHEN (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#quickstatements%' OR revision_user = '2769139'))) THEN 'quickstatements'
+	   (CASE WHEN (lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#quickstatements%' OR revision_user = '2769139') THEN 'quickstatements'
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#petscan%' THEN 'petscan'
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#autolist2%' THEN 'autolist2'
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%talkgadgetautoeditjs|autoedit]]%' THEN 'autoedit'
