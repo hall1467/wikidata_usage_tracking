@@ -18,6 +18,8 @@ CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types AS (
 																						lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%')
 				OR change_tag_revision_id IS NOT NULL OR revision_user = '2769139') THEN 'semi_automated_edit'
 		 WHEN revision_user LIKE '%.%' THEN 'anon_edit'
-		 ELSE 'human_edit' END) AS edit_type
+		 ELSE 'human_edit' END) AS edit_type,
+	(CASE WHEN page_title IN (SELECT entity_id from entity_views_and_aggregated_revisions) THEN 'used' 
+		  ELSE 'not_used')
 	FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 );
