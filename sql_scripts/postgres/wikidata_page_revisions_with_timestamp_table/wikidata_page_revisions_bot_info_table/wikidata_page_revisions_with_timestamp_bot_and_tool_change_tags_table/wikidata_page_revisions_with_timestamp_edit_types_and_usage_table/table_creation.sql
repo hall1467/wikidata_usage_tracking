@@ -20,6 +20,6 @@ CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types AS (
 		 WHEN revision_user LIKE '%.%' THEN 'anon_edit'
 		 ELSE 'human_edit' END) AS edit_type,
 	(CASE WHEN page_title IN (SELECT entity_id from entity_views_and_aggregated_revisions) THEN 'used' 
-		  ELSE 'not_used')
+		  ELSE 'not_used' END) AS entity_usage
 	FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 );
