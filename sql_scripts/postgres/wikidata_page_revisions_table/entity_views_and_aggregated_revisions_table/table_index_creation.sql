@@ -1,0 +1,1 @@
+CREATE INDEX entity_id_index ON entity_views_and_aggregated_revisions(entity_id);
