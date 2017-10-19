@@ -1,4 +1,4 @@
-CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types AS (
+CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types_and_usage AS (
 	SELECT *,
 	(CASE WHEN bot_user_id IS NOT NULL THEN 'bot_edit'
 		 WHEN bot_user_id IS NULL AND ((lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
