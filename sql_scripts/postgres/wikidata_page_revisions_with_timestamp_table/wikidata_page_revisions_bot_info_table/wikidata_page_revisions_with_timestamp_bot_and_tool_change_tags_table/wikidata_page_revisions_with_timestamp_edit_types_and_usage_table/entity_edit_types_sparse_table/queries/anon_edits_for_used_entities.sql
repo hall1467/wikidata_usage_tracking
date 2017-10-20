@@ -1,1 +1,0 @@
-\copy (select revision_user, revision_timestamp, revision_id from temp where edit_type = 'anon_edit' order by revision_id) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_page_revisions_with_timestamp_edit_types/anon_edits_for_used_entities.tsv';
