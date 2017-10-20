@@ -1,15 +1,21 @@
-CREATE TABLE entity_edit_types_sparse AS (
+CREATE TABLE entity_edit_types_and_usage_sparse AS (
 	SELECT * 
 	FROM crosstab(
-		          'SELECT page_title, edit_type, count(*) 
-		           FROM wikidata_page_revisions_with_timestamp_edit_types 
-		           GROUP BY page_title, edit_type 
-		           ORDER BY page_title',
+		          'SELECT year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type, count(*) 
+		           FROM wikidata_page_revisions_with_timestamp_edit_types_and_usage
+		           GROUP BY year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type 
+		           ORDER BY year_month_page_title',
 		           'SELECT DISTINCT edit_type 
-		           FROM wikidata_page_revisions_with_timestamp_edit_types 
+		           FROM wikidata_page_revisions_with_timestamp_edit_types_and_usage 
 		           ORDER BY edit_type'
 		          ) AS (
-		                entity_id VARCHAR(265), 
+		                year_month_page_title TEXT, 
+		                page_views NUMERIC,
+		                number_of_revisions BIGINT,
+		                page_title VARCHAR(255),
+		                year BIGINT,
+		                month BIGINT,
+		                namespace BIGINT,
 		                anon_edits BIGINT, 
 		                bot_edits BIGINT, 
 		                human_edits BIGINT, 
