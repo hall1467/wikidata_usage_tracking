@@ -1,1 +1,2 @@
-\copy (SELECT page_title, year, month, edit_type, count(*) FROM wikidata_page_revisions_with_timestamp_edit_types GROUP BY page_title, year, month, edit_type ORDER BY page_title, year, month, edit_type) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_monthly_wikidata_editors/entity_monthly_edit_breakdowns.tsv'; 
+\copy () TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_monthly_wikidata_editors/entity_monthly_edit_breakdowns.tsv'; 
+SELECT page_title, year, month, edit_type, count(*) FROM wikidata_page_revisions_with_timestamp_edit_types_and_usage GROUP BY page_title, year, month, edit_type ORDER BY page_title, year, month, edit_type

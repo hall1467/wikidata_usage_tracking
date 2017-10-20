@@ -1,5 +1,5 @@
 CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types_and_usage AS (
-	SELECT *,
+	SELECT wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags.*, entity_views_and_aggregated_revisions.number_of_revisions, entity_views_and_aggregated_revisions.page_views,
 	(CASE WHEN bot_user_id IS NOT NULL THEN 'bot_edit'
 		 WHEN bot_user_id IS NULL AND ((lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%quickstatements%' OR 
 																						lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%petscan%' OR 
@@ -19,7 +19,14 @@ CREATE TABLE wikidata_page_revisions_with_timestamp_edit_types_and_usage AS (
 				OR change_tag_revision_id IS NOT NULL OR revision_user = '2769139') THEN 'semi_automated_edit'
 		 WHEN revision_user LIKE '%.%' THEN 'anon_edit'
 		 ELSE 'human_edit' END) AS edit_type,
-	(CASE WHEN page_title IN (SELECT entity_id from entity_views_and_aggregated_revisions) THEN 'used' 
-		  ELSE 'not_used' END) AS entity_usage
+	concat(year,'-',month,'-',page_title) AS year_month_page_title
 	FROM wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
+	LEFT JOIN
+	entity_views_and_aggregated_revisions
+	ON entity_id = page_title
 );
+
+
+
+
+
