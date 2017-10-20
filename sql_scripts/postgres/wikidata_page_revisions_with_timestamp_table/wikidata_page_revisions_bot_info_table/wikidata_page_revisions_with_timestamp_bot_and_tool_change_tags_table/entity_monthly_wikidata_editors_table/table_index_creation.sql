@@ -1,1 +1,0 @@
-CREATE INDEX entity_monthly_wikidata_editors_title_index ON entity_monthly_wikidata_editors(page_title);

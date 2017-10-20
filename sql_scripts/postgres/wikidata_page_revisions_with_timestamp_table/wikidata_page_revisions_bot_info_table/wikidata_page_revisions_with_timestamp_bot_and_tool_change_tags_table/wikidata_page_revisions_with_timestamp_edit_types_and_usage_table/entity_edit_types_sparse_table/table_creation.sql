@@ -9,7 +9,7 @@ CREATE TABLE entity_edit_types_sparse AS (
 		           FROM wikidata_page_revisions_with_timestamp_edit_types 
 		           ORDER BY edit_type'
 		          ) AS (
-		                entity_id VARCHAR(255), 
+		                entity_id VARCHAR(265), 
 		                anon_edits BIGINT, 
 		                bot_edits BIGINT, 
 		                human_edits BIGINT, 
