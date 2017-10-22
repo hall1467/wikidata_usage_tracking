@@ -1,4 +1,4 @@
-CREATE TABLE entity_edit_types_sparse_and_usage_sub_table_2 AS (
+CREATE TABLE entity_edit_types_sparse_and_usage_sub_table_3 AS (
 	SELECT * 
 	FROM crosstab(
 		          'SELECT year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type, count(*) 
