@@ -1,0 +1,1 @@
+\copy (SELECT page_title, year, month, bot_edits, semi_automated_edits, human_edits, anon_edits FROM entity_edit_types_sparse_and_usage WHERE page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_edit_types_sparse_and_usage/used_entity_monthly_edit_breakdowns.tsv';
