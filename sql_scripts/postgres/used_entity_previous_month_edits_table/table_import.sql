@@ -1,0 +1,1 @@
+\COPY used_entity_previous_month_edits FROM '../../../../../wbc_entity_usage/usage_results/entity_categorization/entity_alignment_and_misalignment/used_entity_edits_aggregated_by_month.tsv';
