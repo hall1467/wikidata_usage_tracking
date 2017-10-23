@@ -1,0 +1,1 @@
+\copy (select revision_user, edit_type, comment from wikidata_page_revisions_with_timestamp_edit_types_and_usage WHERE page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_page_revisions_with_timestamp_edit_types_and_usage/used_entity_revision_comments.tsv';
