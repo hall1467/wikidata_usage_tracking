@@ -24,7 +24,6 @@ from collections import defaultdict
 import mysqltsv
 import bz2
 import re
-from collections import defaultdict
 import sys
 
 
@@ -86,11 +85,14 @@ def run(input_edit_data_file, output_file, verbose):
                 output_file.write([current_entity, 
                                    incremented_date_year, 
                                    incremented_date_month,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
                                    edits[previous_entity]['bot'], 
                                    edits[previous_entity]['semi_automated'], 
                                    edits[previous_entity]['non_bot'],
-                                   edits[previous_entity]['anon'],
-                                   edits[previous_entity]['all']])
+                                   edits[previous_entity]['anon']])
 
 
             incremented_date_year, incremented_date_month =\
@@ -113,11 +115,14 @@ def run(input_edit_data_file, output_file, verbose):
                 output_file.write([previous_entity, 
                                    incremented_date_year, 
                                    incremented_date_month,
+                                   0,
+                                   0,
+                                   0,
+                                   0,
                                    edits[previous_entity]['bot'], 
                                    edits[previous_entity]['semi_automated'], 
                                    edits[previous_entity]['non_bot'],
-                                   edits[previous_entity]['anon'],
-                                   edits[previous_entity]['all']])
+                                   edits[previous_entity]['anon']])
 
 
 
@@ -131,17 +136,19 @@ def run(input_edit_data_file, output_file, verbose):
         edits[current_entity]['semi_automated'] += line[4]
         edits[current_entity]['non_bot'] += line[5]
         edits[current_entity]['anon'] += line[6]
-        edits[current_entity]['all'] += line[7]
 
 
         output_file.write([current_entity, 
                            incremented_date_year, 
                            incremented_date_month,
+                           line[3],
+                           line[4],
+                           line[5],
+                           line[6],
                            edits[current_entity]['bot'], 
                            edits[current_entity]['semi_automated'], 
                            edits[current_entity]['non_bot'],
-                           edits[current_entity]['anon'],
-                           edits[current_entity]['all']])
+                           edits[current_entity]['anon']])
 
 
         previous_entity = current_entity
