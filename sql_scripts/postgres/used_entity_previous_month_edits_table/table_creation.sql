@@ -9,5 +9,5 @@ CREATE TABLE used_entity_previous_month_edits(
 	total_bot_edits BIGINT,
 	total_semi_automated_edits BIGINT,
 	total_non_bot_edits BIGINT,
-	total_anon_edits BIGINT,
+	total_anon_edits BIGINT
 );
