@@ -40,7 +40,7 @@ def main(argv=None):
 
     input_edit_data_file = mysqltsv.Reader(bz2.open(args['<input_edit_data>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, int, int, int, int, int, int])
+        types=[str, int, int, int, int, int, int])
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"))
