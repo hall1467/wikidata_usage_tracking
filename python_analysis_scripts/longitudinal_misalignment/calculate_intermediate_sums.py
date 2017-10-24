@@ -37,14 +37,13 @@ def main(argv=None):
     )
 
     input_file = mysqltsv.Reader(open(args['<input>'], "r"), headers=True,
-        types=[int, float, int, int, int, int, int])
+        types=[int, float, int, int, int, int])
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
         'yyyymm', 'aligned_entities', 'difference_in_alignment_with_previous',
         'bot_edits', 'semi_automated_edits', 'non_bot_edits', 'anon_edits',
-        'all_edits', 'current_bot_edits_count', 
-        'current_semi_automated_edits_count', 'current_non_bot_edits_count',
-        'current_anon_edits_count', 'current_all_edits_count'])
+        'current_bot_edits_count', 'current_semi_automated_edits_count', 
+        'current_non_bot_edits_count', 'current_anon_edits_count'])
 
     verbose = args['--verbose']
 
@@ -68,7 +67,6 @@ def run(input_file, output_file, verbose):
         semi_automated_edits_count += line['semi_automated_edits']
         non_bot_edits_count += line['non_bot_edits']
         anon_edits_count += line['anon_edits']
-        all_edits_count += line['all_edits']
 
         output_file.write([line['yyyymm'], 
                            line['aligned_entities'],
@@ -76,13 +74,11 @@ def run(input_file, output_file, verbose):
                            line['bot_edits'], 
                            line['semi_automated_edits'], 
                            line['non_bot_edits'], 
-                           line['anon_edits'], 
-                           line['all_edits'], 
+                           line['anon_edits'],  
                            current_bot_edits_count, 
                            semi_automated_edits_count, 
                            non_bot_edits_count, 
-                           anon_edits_count, 
-                           all_edits_count])
+                           anon_edits_count])
 
         previous_alignment = line['aligned_entities']
 
