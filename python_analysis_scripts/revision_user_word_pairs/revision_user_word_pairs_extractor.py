@@ -28,7 +28,7 @@ from collections import defaultdict
 import re
 import mysqltsv
 
-STRUCTURED_COMMENT_RE = re.compile(r'^\/\*.*.\*\/')
+STRUCTURED_COMMENT_RE = re.compile(r'^(\/\*)(.*)(\*\/)')
 PUNCTUATION_RE = re.compile(r'\:|\(|\)|\.|\,|\-')
 
 logger = logging.getLogger(__name__)
@@ -60,7 +60,7 @@ def run(input_file, output_file, verbose):
         if comment != None:
             comment_match = re.match(STRUCTURED_COMMENT_RE, comment)
             if comment_match != None:
-                for word in comment_match.group(0).split():
+                for word in comment_match.group(2).split():
                     word_count[line[1]][str(line[0])+word.lower()] += 1
 
 
