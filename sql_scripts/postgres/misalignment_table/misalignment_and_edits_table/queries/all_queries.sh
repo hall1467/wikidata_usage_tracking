@@ -1,3 +1,4 @@
+psql wikidata_entities < anon_revision_alignment.sql
 psql wikidata_entities < monthly_edit_types.sql
 psql wikidata_entities < monthly_misalignment_and_edits_ordered_by_entity_year_month.sql
 psql wikidata_entities < edit_proportions_by_entity_views_5_17.sql
