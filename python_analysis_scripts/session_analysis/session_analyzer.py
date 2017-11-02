@@ -108,19 +108,19 @@ def run(input_revision_data_file, output_file, verbose):
             session_mean = time_difference/size
 
             if session_mean <= 5:
-                sessions_grouping_sizes[session[0:6]]['1'] +=\
+                sessions_grouping_sizes[session[0:6]]['under_5_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 5 and session_mean <= 10:
-                sessions_grouping_sizes[session[0:6]]['2'] +=\
+                sessions_grouping_sizes[session[0:6]]['5_to_10_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 10 and session_mean <= 20:
-                sessions_grouping_sizes[session[0:6]]['3'] +=\
+                sessions_grouping_sizes[session[0:6]]['10_to_20_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 20 and session_mean <= 100:
-                sessions_grouping_sizes[session[0:6]]['4'] +=\
+                sessions_grouping_sizes[session[0:6]]['20_to_100_seconds'] +=\
                     user_sessions_size[username][session]
             else:
-                sessions_grouping_sizes[session[0:6]]['5'] +=\
+                sessions_grouping_sizes[session[0:6]]['over_100_seconds'] +=\
                     user_sessions_size[username][session]
     
 
@@ -128,11 +128,11 @@ def run(input_revision_data_file, output_file, verbose):
     for month in sorted(sessions_grouping_sizes):
         output_file.write([
             month,
-            sessions_grouping_sizes[month]['1'],
-            sessions_grouping_sizes[month]['2'],
-            sessions_grouping_sizes[month]['3'],
-            sessions_grouping_sizes[month]['4'],
-            sessions_grouping_sizes[month]['5']])
+            sessions_grouping_sizes[month]['under_5_seconds'],
+            sessions_grouping_sizes[month]['5_to_10_seconds'],
+            sessions_grouping_sizes[month]['10_to_20_seconds'],
+            sessions_grouping_sizes[month]['20_to_100_seconds'],
+            sessions_grouping_sizes[month]['over_100_seconds']])
 
 
 main()
