@@ -107,20 +107,27 @@ def run(input_revision_data_file, output_file, verbose):
             size = user_sessions_size[username][session]
             session_mean = time_difference/size
 
+
+            incremented_date_year, incremented_date_month =\
+                increment(int(session[0:4]),int(session[4:6]))
+            incremented_date =\
+                str(incremented_date_year) + str(incremented_date_month)
+
+
             if session_mean <= 5:
-                sessions_grouping_sizes[session[0:6]]['under_5_seconds'] +=\
+                sessions_grouping_sizes[incremented_date]['under_5_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 5 and session_mean <= 10:
-                sessions_grouping_sizes[session[0:6]]['5_to_10_seconds'] +=\
+                sessions_grouping_sizes[incremented_date]['5_to_10_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 10 and session_mean <= 20:
-                sessions_grouping_sizes[session[0:6]]['10_to_20_seconds'] +=\
+                sessions_grouping_sizes[incremented_date]['10_to_20_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 20 and session_mean <= 100:
-                sessions_grouping_sizes[session[0:6]]['20_to_100_seconds'] +=\
+                sessions_grouping_sizes[incremented_date]['20_to_100_seconds'] +=\
                     user_sessions_size[username][session]
             else:
-                sessions_grouping_sizes[session[0:6]]['over_100_seconds'] +=\
+                sessions_grouping_sizes[incremented_date]['over_100_seconds'] +=\
                     user_sessions_size[username][session]
     
 
@@ -133,6 +140,20 @@ def run(input_revision_data_file, output_file, verbose):
             sessions_grouping_sizes[month]['10_to_20_seconds'],
             sessions_grouping_sizes[month]['20_to_100_seconds'],
             sessions_grouping_sizes[month]['over_100_seconds']])
+
+
+
+def increment(year, month):
+
+    if month == 12:
+        incremented_date_year = year + 1
+        incremented_date_month = 1
+    else:
+        incremented_date_year = year
+        incremented_date_month = month + 1
+
+    return incremented_date_year, incremented_date_month
+
 
 
 main()
