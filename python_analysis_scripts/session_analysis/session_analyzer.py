@@ -108,26 +108,26 @@ def run(input_revision_data_file, output_file, verbose):
             session_mean = time_difference/size
 
 
-            incremented_date_year, incremented_date_month =\
-                increment(int(session[0:4]),int(session[4:6]))
-            incremented_date =\
-                str(incremented_date_year) + str(incremented_date_month)
+            next_date_year, next_date_month =\
+                increment(int(session[0:4]), int(session[4:6]))
+            next_date =\
+                str(next_date_year) + str(next_date_month.zfill(2))
 
 
             if session_mean <= 5:
-                sessions_grouping_sizes[incremented_date]['under_5_seconds'] +=\
+                sessions_grouping_sizes[next_date]['under_5_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 5 and session_mean <= 10:
-                sessions_grouping_sizes[incremented_date]['5_to_10_seconds'] +=\
+                sessions_grouping_sizes[next_date]['5_to_10_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 10 and session_mean <= 20:
-                sessions_grouping_sizes[incremented_date]['10_to_20_seconds'] +=\
+                sessions_grouping_sizes[next_date]['10_to_20_seconds'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 20 and session_mean <= 100:
-                sessions_grouping_sizes[incremented_date]['20_to_100_seconds'] +=\
+                sessions_grouping_sizes[next_date]['20_to_100_seconds'] +=\
                     user_sessions_size[username][session]
             else:
-                sessions_grouping_sizes[incremented_date]['over_100_seconds'] +=\
+                sessions_grouping_sizes[next_date]['over_100_seconds'] +=\
                     user_sessions_size[username][session]
     
 
