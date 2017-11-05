@@ -3,6 +3,14 @@ set post_processing_results_directory = /export/scratch2/wmf/wbc_entity_usage/us
 
 psql wikidata_entities < all_edits_for_used_entities.sql
 
-mwsessions sessionize $sql_results_directory/all_edits_for_used_entities.tsv --events=$post_processing_results_directory/all_revision_session_data.tsv --verbose > $post_processing_results_directory/all_session_data.tsv
+cp $sql_results_directory/all_edits_for_used_entities.tsv $post_processing_results_directory
+
+echo "edit_type\tuser\ttimestamp\trevision_id" > $post_processing_results_directory/all_edits_for_used_entities_with_header.tsv
+
+cat $post_processing_results_directory/all_edits_for_used_entities.tsv >> $post_processing_results_directory/all_edits_for_used_entities_with_header.tsv
+
+mwsessions sessionize $post_processing_results_directory/all_edits_for_used_entities_with_header.tsv --events=$post_processing_results_directory/all_revision_session_data.tsv --verbose > $post_processing_results_directory/all_session_data.tsv
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/session_analysis/session_analyzer.py $post_processing_results_directory/all_revision_session_data.tsv $post_processing_results_directory/all_events_session_mean_frequency_edits.tsv --verbose
+
+
