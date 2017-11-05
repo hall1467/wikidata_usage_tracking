@@ -44,7 +44,11 @@ def main(argv=None):
         headers=True, types=[str, str, str, int, str, str, int, int, int, int])
 
 
-    output_file = mysqltsv.Writer(open(args['<output>'], "w"))
+    output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
+        'yyyymm', 'under_five_seconds', 'five_to_ten_seconds',
+        'ten_to_twenty_seconds', 'twenty_to_one_hundred_seconds',
+        'over_one_hundred_seconds'])
+
 
     verbose = args['--verbose']
 
@@ -115,19 +119,19 @@ def run(input_revision_data_file, output_file, verbose):
 
 
             if session_mean <= 5:
-                sessions_grouping_sizes[next_date]['under_5_seconds'] +=\
+                sessions_grouping_sizes[next_date]['under_five'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 5 and session_mean <= 10:
-                sessions_grouping_sizes[next_date]['5_to_10_seconds'] +=\
+                sessions_grouping_sizes[next_date]['five_to_ten'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 10 and session_mean <= 20:
-                sessions_grouping_sizes[next_date]['10_to_20_seconds'] +=\
+                sessions_grouping_sizes[next_date]['ten_to_twenty'] +=\
                     user_sessions_size[username][session]
             elif session_mean > 20 and session_mean <= 100:
-                sessions_grouping_sizes[next_date]['20_to_100_seconds'] +=\
+                sessions_grouping_sizes[next_date]['twenty_to_one_hundred'] +=\
                     user_sessions_size[username][session]
             else:
-                sessions_grouping_sizes[next_date]['over_100_seconds'] +=\
+                sessions_grouping_sizes[next_date]['over_one_hundred'] +=\
                     user_sessions_size[username][session]
     
 
@@ -135,11 +139,11 @@ def run(input_revision_data_file, output_file, verbose):
     for month in sorted(sessions_grouping_sizes):
         output_file.write([
             month,
-            sessions_grouping_sizes[month]['under_5_seconds'],
-            sessions_grouping_sizes[month]['5_to_10_seconds'],
-            sessions_grouping_sizes[month]['10_to_20_seconds'],
-            sessions_grouping_sizes[month]['20_to_100_seconds'],
-            sessions_grouping_sizes[month]['over_100_seconds']])
+            sessions_grouping_sizes[month]['under_five'],
+            sessions_grouping_sizes[month]['five_to_ten'],
+            sessions_grouping_sizes[month]['ten_to_twenty'],
+            sessions_grouping_sizes[month]['twenty_to_one_hundred'],
+            sessions_grouping_sizes[month]['over_one_hundred']])
 
 
 
