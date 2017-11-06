@@ -37,7 +37,7 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = mysqltsv.Reader(bz2.open(args['<input>'],
+    input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[str, int, int, str, str, int, int, int, int, int])
 

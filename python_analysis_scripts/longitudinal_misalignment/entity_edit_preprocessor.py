@@ -38,7 +38,7 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_edit_data_file = mysqltsv.Reader(bz2.open(args['<input_edit_data>'],
+    input_edit_data_file = mysqltsv.Reader(open(args['<input_edit_data>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[str, int, int, int, int, int, int])
 
