@@ -1,1 +1,1 @@
-\COPY used_entity_previous_month_edits FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/entity_edit_types_sparse_and_usage/used_entity_edits_aggregated_by_month.tsv';
+\COPY used_entity_previous_month_edits FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/entity_edit_types_sparse_and_usage/used_entity_edits_aggregated_by_month.tsv';
