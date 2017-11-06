@@ -22,7 +22,6 @@ import logging
 import operator
 from collections import defaultdict
 import mysqltsv
-import bz2
 from collections import defaultdict
 import sys
 
