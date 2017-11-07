@@ -16,8 +16,8 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
     > & $entity_edit_types_sparse_and_usage_processing_results_directory/used_entity_edits_aggregated_by_month_error_log.tsv
 
 # Create directly dependent tables
-source $used_entity_previous_month_edits_table_directory/table_creation.sql
-source $used_entity_previous_month_edits_table_directory/table_import.sql
+psql wikidata_entities < $used_entity_previous_month_edits_table_directory/table_creation.sql
+psql wikidata_entities < $used_entity_previous_month_edits_table_directory/table_import.sql
 
 psql wikidata_entities < $misalignment_and_edits_table_directory/table_creation.sql
 
