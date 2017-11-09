@@ -10,7 +10,7 @@ set wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_processing_r
 
 source $wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_table_directory/queries/all_queries.sh
 
-# Create (drop old table if need be) directly dependent tables
+# Create (drop old tables if need be) directly dependent tables
 
 psql wikidata_entities -c "drop entity_monthly_types_of_semi_automated_edits;"
 psql wikidata_entities < $entity_monthly_types_of_semi_automated_edits/table_creation.sql
