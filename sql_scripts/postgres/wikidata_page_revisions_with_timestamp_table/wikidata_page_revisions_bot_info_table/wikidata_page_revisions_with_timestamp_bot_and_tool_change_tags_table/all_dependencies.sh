@@ -7,15 +7,17 @@ set wikidata_page_revisions_with_timestamp_edit_types_and_usage_table_directory 
 set wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_sql_results_directory = /export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 set wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_processing_results_directory = /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags
 
-
+echo "Running 'wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags' table queries"
 source $wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_table_directory/queries/all_queries.sh
 
 # Create (drop old tables if need be) directly dependent tables
 
 psql wikidata_entities -c "drop entity_monthly_types_of_semi_automated_edits;"
+echo "Creating 'entity_monthly_types_of_semi_automated_edits' table"
 psql wikidata_entities < $entity_monthly_types_of_semi_automated_edits/table_creation.sql
 
 psql wikidata_entities -c "drop table wikidata_page_revisions_with_timestamp_edit_types_and_usage;"
+echo "Creating 'wikidata_page_revisions_with_timestamp_edit_types_and_usage' table"
 psql wikidata_entities < $wikidata_page_revisions_with_timestamp_edit_types_and_usages_table_directory/table_creation.sql
 
 # Run dependencies

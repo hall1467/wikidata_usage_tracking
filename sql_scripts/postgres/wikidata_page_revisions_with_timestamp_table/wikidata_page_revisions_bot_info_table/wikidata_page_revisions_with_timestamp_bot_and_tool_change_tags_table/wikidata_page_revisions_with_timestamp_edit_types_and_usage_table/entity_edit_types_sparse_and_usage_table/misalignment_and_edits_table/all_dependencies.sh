@@ -4,6 +4,7 @@ set misalignment_and_edits_sql_results_directory = /export/scratch2/wmf/wbc_enti
 set misalignment_and_edits_results_directory = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_and_edits
 
 
+echo "Running 'misalignment_and_edits' table queries"
 source $misalignment_and_edits_table_directory/queries/all_queries.sh
 
 
