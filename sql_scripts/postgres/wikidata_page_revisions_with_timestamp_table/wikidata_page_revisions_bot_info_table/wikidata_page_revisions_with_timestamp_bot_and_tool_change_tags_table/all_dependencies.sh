@@ -12,7 +12,7 @@ source $wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_table_di
 
 # Create (drop old tables if need be) directly dependent tables
 
-psql wikidata_entities -c "drop entity_monthly_types_of_semi_automated_edits;"
+psql wikidata_entities -c "drop table entity_monthly_types_of_semi_automated_edits;"
 echo "Creating 'entity_monthly_types_of_semi_automated_edits' table"
 psql wikidata_entities < $entity_monthly_types_of_semi_automated_edits/table_creation.sql
 
