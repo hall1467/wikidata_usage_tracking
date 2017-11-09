@@ -12,10 +12,12 @@ source $wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_table_di
 
 # Create (drop old tables if need be) directly dependent tables
 
+echo "Dropping old version of 'entity_monthly_types_of_semi_automated_edits' table (if it exists). Otherwise, will return error."
 psql wikidata_entities -c "drop table entity_monthly_types_of_semi_automated_edits;"
 echo "Creating 'entity_monthly_types_of_semi_automated_edits' table"
-psql wikidata_entities < $entity_monthly_types_of_semi_automated_edits/table_creation.sql
+psql wikidata_entities < $entity_monthly_types_of_semi_automated_edits_table_directory/table_creation.sql
 
+echo "Dropping old version of 'wikidata_page_revisions_with_timestamp_edit_types_and_usage' table (if it exists). Otherwise, will return error."
 psql wikidata_entities -c "drop table wikidata_page_revisions_with_timestamp_edit_types_and_usage;"
 echo "Creating 'wikidata_page_revisions_with_timestamp_edit_types_and_usage' table"
 psql wikidata_entities < $wikidata_page_revisions_with_timestamp_edit_types_and_usage_table_directory/table_creation.sql

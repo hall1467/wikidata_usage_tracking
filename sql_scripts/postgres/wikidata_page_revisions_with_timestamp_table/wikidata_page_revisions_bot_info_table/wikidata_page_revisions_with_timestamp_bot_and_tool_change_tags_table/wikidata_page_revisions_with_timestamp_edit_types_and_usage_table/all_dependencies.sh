@@ -8,6 +8,7 @@ source $wikidata_page_revisions_with_timestamp_edit_types_and_usage_table_direct
 
 # Create (drop old tables if need be) directly dependent tables
 
+echo "Dropping old version of 'entity_edit_types_sparse_and_usage' sub tables and table (if they exist). Otherwise, will return errors."
 psql wikidata_entities -c "drop table entity_edit_types_sparse_and_usage_sub_table_1;"
 psql wikidata_entities -c "drop table entity_edit_types_sparse_and_usage_sub_table_2;"
 psql wikidata_entities -c "drop table entity_edit_types_sparse_and_usage_sub_table_3;"
