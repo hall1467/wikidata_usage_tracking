@@ -7,7 +7,7 @@ set misalignment_and_edits_results_directory = /export/scratch2/wmf/wbc_entity_u
 source $misalignment_and_edits_table_directory/queries/all_queries.sh
 
 
-rm $misalignment_and_edits_results_directory/wasted_edits_error_log.tsv
+rm -f $misalignment_and_edits_results_directory/wasted_edits_error_log.tsv
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/wasted_edit_analysis/wasted_edit_analysis.py \
 $misalignment_and_edits_sql_results_directory/monthly_misalignment_and_edits_ordered_by_entity_year_month.tsv \
 $misalignment_and_edits_results_directory/misalignment_and_edits/wasted_edits.tsv \
