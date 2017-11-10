@@ -15,6 +15,6 @@ SELECT *,
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[userjitrixis/nameguzzlerjs|nameguzzler]]%' THEN 'nameguzzler'
 	         WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%[[mediawikigadgetmergejs|mergejs]]%' THEN 'mergejs'
 	   END) as type_of_semi_automated_edit
-FROM wikidata_page_revisions_with_timestamp_edit_types
+FROM wikidata_page_revisions_with_timestamp_edit_types_and_usage
 );
 
