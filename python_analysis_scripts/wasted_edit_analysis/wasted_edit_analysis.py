@@ -64,10 +64,6 @@ def run(input_file, output_file, verbose):
     highest_view_class_number = 0
     attained = False
 
-    previous_bot_edits = 0
-    previous_semi_automated_edits = 0
-    previous_non_bot_edits = 0
-    previous_anon_edits = 0
 
     for i, line in enumerate(input_file):
 
@@ -113,13 +109,13 @@ def run(input_file, output_file, verbose):
             if view_class_number <= quality_class_number and attained:
                 
                 wasted_edits[entity]["bot_edits"]\
-                    += (bot_edits - previous_bot_edits)
+                    += bot_edits
                 wasted_edits[entity]["semi_automated_edits"]\
-                    += (semi_automated_edits - previous_semi_automated_edits)
+                    += semi_automated_edits
                 wasted_edits[entity]["non_bot_edits"]\
-                    += (non_bot_edits - previous_non_bot_edits)
+                    += non_bot_edits
                 wasted_edits[entity]["anon_edits"]\
-                    += (anon_edits - previous_anon_edits)
+                    += anon_edits
 
             else:
                 wasted_edits[entity]["bot_edits"] = 0
@@ -127,18 +123,9 @@ def run(input_file, output_file, verbose):
                 wasted_edits[entity]["non_bot_edits"] = 0
                 wasted_edits[entity]["anon_edits"] = 0
 
-            previous_bot_edits = bot_edits
-            previous_semi_automated_edits = semi_automated_edits
-            previous_non_bot_edits = non_bot_edits
-            previous_anon_edits = anon_edits
 
         else:
             entity_discovered[entity] = 1
-
-            previous_bot_edits = 0
-            previous_semi_automated_edits = 0
-            previous_non_bot_edits = 0
-            previous_anon_edits = 0
 
 
         if view_class_number <= quality_class_number:
@@ -161,13 +148,14 @@ def run(input_file, output_file, verbose):
     all_anon_edits = 0
 
 
-
+    # Adding up totals by edit type
     for entity in wasted_edits:
 
         all_bot_edits += wasted_edits[entity]["bot_edits"]
         all_semi_automated_edits += wasted_edits[entity]["semi_automated_edits"]
         all_non_bot_edits += wasted_edits[entity]["non_bot_edits"]
         all_anon_edits += wasted_edits[entity]["anon_edits"]
+
 
     output_file.write([
         all_bot_edits,
