@@ -1,6 +1,1 @@
 # Have been running python scripts in the virtual environment on flagon here: /export/scratch2/wmf/scripts/
-
-set entity_monthly_types_of_semi_automated_edits_table_directory = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/wikidata_page_revisions_with_timestamp_table/wikidata_page_revisions_bot_info_table/wikidata_page_revisions_with_timestamp_bot_and_tool_change_tags_table/entity_monthly_types_of_semi_automated_edits_table
-
-echo "Running 'entity_monthly_types_of_semi_automated_edits' table queries"
-source $entity_monthly_types_of_semi_automated_edits_table_directory/queries/all_queries.sh
