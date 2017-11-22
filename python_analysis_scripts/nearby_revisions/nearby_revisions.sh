@@ -1,5 +1,5 @@
 
-psql wikidata_entities -c "\copy (select revision_id, revision_user, revision_timestamp, edit_type from wikidata_page_revisions_with_timestamp_edit_types_and_usage order by random() limit 100000) TO '/export/scratch2/wmf/edit_analyses/nearby_revisions/100000_random_item_or_property_revisions.tsv';"
+psql wikidata_entities -c "\copy (select revision_id, revision_user, revision_timestamp, edit_type from wikidata_page_revisions_with_timestamp_edit_types_and_usage where edit_type = 'bot_edit' or edit_type = 'human_edit' order by random() limit 100000) TO '/export/scratch2/wmf/edit_analyses/nearby_revisions/100000_random_item_or_property_revisions.tsv';"
 
 echo "revision_id\tuser_id\ttimestamp\tedit_type" > /export/scratch2/wmf/edit_analyses/nearby_revisions/100000_random_item_or_property_revisions_with_header.tsv
 
