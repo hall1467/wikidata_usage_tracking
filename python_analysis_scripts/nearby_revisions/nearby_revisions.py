@@ -80,6 +80,7 @@ def run(input_file, output_file, verbose):
             cast_timestamp + datetime.timedelta(minutes=61)
         decremented_cast_timestamp =\
             cast_timestamp - datetime.timedelta(minutes=61)
+
      
         # Range after
         for revision_id, user_id, timestamp, namespace in request_function_and_timestamp_adjusting(cast_timestamp, incremented_cast_timestamp, "newer", line, session_for_nearby_revisions):
@@ -88,7 +89,7 @@ def run(input_file, output_file, verbose):
             unique_revision_ids[timestamp][revision_id]["namespace"] = namespace
 
         # Range before
-        for revision_id, user_id, timestamp, namespace in request_function_and_timestamp_adjusting(cast_timestamp, incremented_cast_timestamp, "older", line, session_for_nearby_revisions):
+        for revision_id, user_id, timestamp, namespace in request_function_and_timestamp_adjusting(cast_timestamp, decremented_cast_timestamp, "older", line, session_for_nearby_revisions):
             unique_revision_ids[timestamp][revision_id]["user_id"] = user_id
             unique_revision_ids[timestamp][revision_id]["edit_type"] = line["edit_type"]
             unique_revision_ids[timestamp][revision_id]["namespace"] = namespace
