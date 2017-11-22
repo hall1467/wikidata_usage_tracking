@@ -1,7 +1,7 @@
 """
-Takes timestamp, revision id, user id, namespace, and edit type (specifically ordered) and gives back 
-nearby revisions (using Mediawiki API). User can specify how "near" (in 
-minutes).
+Takes timestamp, revision id, user id, namespace, and edit type 
+(specifically ordered) and gives back nearby revisions (using Mediawiki API). 
+User can specify how "near" (in minutes).
 
 Usage:
     filter_extra_sessions (-h|--help)
@@ -38,11 +38,13 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_sampled_revisions_file = mysqltsv.Reader(open(args['<input_sampled_revisions>'],'rt'),
-        headers=True, types=[int, int, str, str])
+    input_sampled_revisions_file = mysqltsv.Reader(
+        open(args['<input_sampled_revisions>'],'rt'), headers=True, 
+        types=[int, int, str, str])
 
-    input_revisions_in_sessions_file = mysqltsv.Reader(open(args['<input_revisions_in_sessions>'],'rt'),
-        headers=True, types=[int, int, int, str, str])
+    input_revisions_in_sessions_file = mysqltsv.Reader(
+        open(args['<input_revisions_in_sessions>'],'rt'), headers=True, 
+        types=[int, int, int, str, str])
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
@@ -50,10 +52,12 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(input_file, output_file, verbose)
+    run(input_sampled_revisions_file, input_revisions_in_sessions_file, 
+        output_file, verbose)
 
 
-def run(input_file, output_file, verbose):
+def run(input_sampled_revisions_file, input_revisions_in_sessions_file,
+    output_file, verbose):
 
     unique_revision_ids = defaultdict(lambda: defaultdict(dict))
     session_for_nearby_revisions = mwapi.Session("http://wikidata.org")
