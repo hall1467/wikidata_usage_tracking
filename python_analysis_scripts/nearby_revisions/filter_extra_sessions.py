@@ -1,5 +1,5 @@
 """
-Takes timestamp, revision id, user id, namespace, and edit type and gives back 
+Takes timestamp, revision id, user id, namespace, and edit type (specifically ordered) and gives back 
 nearby revisions (using Mediawiki API). User can specify how "near" (in 
 minutes).
 

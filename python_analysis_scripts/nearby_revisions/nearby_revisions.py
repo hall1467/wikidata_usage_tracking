@@ -1,5 +1,5 @@
 """
-Takes revision id, user id, timestamp, and edit type TSV and gives back nearby 
+Takes revision id, user id, timestamp, and edit type TSV (specifically ordered) and gives back nearby 
 revisions(using Mediawiki API). User can specify how "near" (in minutes).
 
 Usage:
