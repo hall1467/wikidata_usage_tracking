@@ -1,35 +1,33 @@
 """
-Takes revision id, user id, timestamp, and edit type TSV and gives back nearby 
-revisions(using Mediawiki API). User can specify how "near" (in minutes).
+Takes timestamp, revision id, user id, namespace, and edit type and gives back 
+nearby revisions (using Mediawiki API). User can specify how "near" (in 
+minutes).
 
 Usage:
-    nearby_revisions (-h|--help)
-    nearby_revisions <input> <output>
-                     [--debug]
-                     [--verbose]
+    filter_extra_sessions (-h|--help)
+    filter_extra_sessions <input_sampled_revisions> <input_revisions_in_sessions> <output>
+                          [--debug]
+                          [--verbose]
 
 Options:
-    -h, --help  This help message is printed
-    <input>     Path to file to process.
-    <output>    Where output will be written
-    --debug     Print debug logging to stderr
-    --verbose   Print dots and stuff to stderr  
+    -h, --help                     This help message is printed
+    <input_sampled_revisions>      Path to sampled revisions file to process.
+    <input_revisions_in_sessions>  Path to input revisions in sessions file to 
+                                   process.
+    <output>                       Where output will be written
+    --debug                        Print debug logging to stderr
+    --verbose                      Print dots and stuff to stderr  
 """
 
 
 import docopt
 import logging
 import operator
-import mwapi
 import sys
-import datetime
-import iso8601
 from collections import defaultdict
-import re
 import mysqltsv
 
 
-WIKIDATA_ITEM_RE = re.compile(r'^Q\d+')
 logger = logging.getLogger(__name__)
 
 
@@ -40,8 +38,11 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = mysqltsv.Reader(open(args['<input>'],'rt'),
+    input_sampled_revisions_file = mysqltsv.Reader(open(args['<input_sampled_revisions>'],'rt'),
         headers=True, types=[int, int, str, str])
+
+    input_revisions_in_sessions_file = mysqltsv.Reader(open(args['<input_revisions_in_sessions>'],'rt'),
+        headers=True, types=[int, int, int, str, str])
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
