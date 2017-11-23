@@ -72,8 +72,15 @@ def run(input_files, revisions_output_file, verbose):
                     revision_user_text = stub_file_page_revision.user.text
 
 
-                nearby_revision_timestamp = iso8601.parse_date(nearby_revision["timestamp"])
-                cast_nearby_revision_timestamp = str(nearby_revision_timestamp.year).zfill(4) + str(nearby_revision_timestamp.month).zfill(2) + str(nearby_revision_timestamp.day).zfill(2) + str(nearby_revision_timestamp.hour).zfill(2) + str(nearby_revision_timestamp.minute).zfill(2) + str(nearby_revision_timestamp.second).zfill(2)
+                timestamp =
+                    iso8601.parse_date(stub_file_page_revision.timestamp)
+                cast_nearby_revision_timestamp = 
+                    str(timestamp.year).zfill(4) + 
+                    str(timestamp.month).zfill(2) + 
+                    str(timestamp.day).zfill(2) + 
+                    str(timestamp.hour).zfill(2) + 
+                    str(timestamp.minute).zfill(2) + 
+                    str(timestamp.second).zfill(2)
   
 
                 yield stub_file_page_revision.page.title,\
