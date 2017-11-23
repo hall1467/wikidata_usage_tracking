@@ -23,7 +23,7 @@ import sys
 import logging
 import mwxml
 import mysqltsv
-import iso8601
+import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +73,7 @@ def run(input_files, revisions_output_file, verbose):
 
 
                 timestamp =\
-                    iso8601.parse_date(stub_file_page_revision.timestamp)
+                    datetime.fromtimestamp(stub_file_page_revision.timestamp)
                     
                 cast_timestamp =\
                     str(timestamp.year).zfill(4) +\
