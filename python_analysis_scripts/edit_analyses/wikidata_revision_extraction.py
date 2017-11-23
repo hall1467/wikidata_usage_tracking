@@ -73,7 +73,7 @@ def run(input_files, revisions_output_file, verbose):
 
 
                 timestamp =\
-                    datetime.datetime.
+                    datetime.datetime.\
                         utcfromtimestamp(stub_file_page_revision.timestamp)
                     
                 cast_timestamp =\
