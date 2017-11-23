@@ -47,39 +47,37 @@ def run(input_files, revisions_output_file, verbose):
 
     def process_pages(stub_file_dump_object, file_url):
         for stub_file_page in stub_file_dump_object:
-            
-            if stub_file_page.namespace == 0 or stub_file_page.namespace == 120:
+        
+            for stub_file_page_revision in stub_file_page:
 
-                for stub_file_page_revision in stub_file_page:
+                revision_comment = stub_file_page_revision.comment
+                revision_user_id = "NULL"
+                revision_user_text = "NULL"
 
-                    revision_comment = stub_file_page_revision.comment
+                if revision_comment is None:
+                    revision_comment = "NULL"
+
+                if stub_file_page_revision.user is None:       
+                    logger.warning(
+                        "No user. Fields will be NULL. Revision: {0}"
+                        .format(stub_file_page_revision))
                     revision_user_id = "NULL"
                     revision_user_text = "NULL"
+                elif stub_file_page_revision.user.id is None:
+                    revision_user_id = "NULL"
+                    revision_user_text = stub_file_page_revision.user.text
+                else:
+                    revision_user_id = stub_file_page_revision.user.id
+                    revision_user_text = stub_file_page_revision.user.text
 
-                    if revision_comment is None:
-                        revision_comment = "NULL"
-
-                    if stub_file_page_revision.user is None:       
-                        logger.warning(
-                            "No user. Fields will be NULL. Revision: {0}"
-                            .format(stub_file_page_revision))
-                        revision_user_id = "NULL"
-                        revision_user_text = "NULL"
-                    elif stub_file_page_revision.user.id is None:
-                        revision_user_id = "NULL"
-                        revision_user_text = stub_file_page_revision.user.text
-                    else:
-                        revision_user_id = stub_file_page_revision.user.id
-                        revision_user_text = stub_file_page_revision.user.text
-
-                        
-                    yield stub_file_page_revision.page.title,\
-                          stub_file_page_revision.id,\
-                          revision_user_id,\
-                          revision_user_text,\
-                          revision_comment,\
-                          stub_file_page.namespace,\
-                          stub_file_page_revision.timestamp
+                    
+                yield stub_file_page_revision.page.title,\
+                      stub_file_page_revision.id,\
+                      revision_user_id,\
+                      revision_user_text,\
+                      revision_comment,\
+                      stub_file_page.namespace,\
+                      stub_file_page_revision.timestamp
 
     i = 0
     for title, revision_id, user_id, user_text, comment, namespace, timestamp\
