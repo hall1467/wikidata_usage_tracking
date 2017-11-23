@@ -84,7 +84,7 @@ def run(input_files, revisions_output_file, verbose):
     i = 0
     revisions_output_file.write(["page_title", "revision_id", "user_id_or_ip", 
         "comment", "namespace", "timestamp"])
-    for title, revision_id, user_id, user_text, comment, namespace, timestamp
+    for title, revision_id, user_id, user_text, comment, namespace, timestamp\
         in mwxml.map(process_pages, input_files):
         i += 1
         revisions_output_file.write([title, revision_id, user_id, user_text, 
