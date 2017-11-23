@@ -74,12 +74,13 @@ def run(input_files, revisions_output_file, verbose):
 
                 timestamp =\
                     iso8601.parse_date(stub_file_page_revision.timestamp)
+                    
                 cast_timestamp =\
                     str(timestamp.year).zfill(4) +\
-                    str(timestamp.month).zfill(2) +
-                    str(timestamp.day).zfill(2) +
-                    str(timestamp.hour).zfill(2) +
-                    str(timestamp.minute).zfill(2) +
+                    str(timestamp.month).zfill(2) +\
+                    str(timestamp.day).zfill(2) +\
+                    str(timestamp.hour).zfill(2) +\
+                    str(timestamp.minute).zfill(2) +\
                     str(timestamp.second).zfill(2)
   
 
