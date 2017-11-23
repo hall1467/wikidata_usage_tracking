@@ -74,7 +74,7 @@ def run(input_files, revisions_output_file, verbose):
 
                 timestamp =\
                     iso8601.parse_date(stub_file_page_revision.timestamp)
-                cast_nearby_revision_timestamp =
+                cast_timestamp =\
                     str(timestamp.year).zfill(4) + 
                     str(timestamp.month).zfill(2) + 
                     str(timestamp.day).zfill(2) + 
@@ -89,7 +89,7 @@ def run(input_files, revisions_output_file, verbose):
                       revision_user_text,\
                       revision_comment,\
                       stub_file_page.namespace,\
-                      stub_file_page_revision.timestamp
+                      cast_timestamp
 
     i = 0
     for title, revision_id, user_id, user_text, comment, namespace, timestamp\
