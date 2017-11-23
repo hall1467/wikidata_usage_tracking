@@ -72,9 +72,9 @@ def run(input_files, revisions_output_file, verbose):
                     revision_user_text = stub_file_page_revision.user.text
 
 
-                timestamp =
+                timestamp =\
                     iso8601.parse_date(stub_file_page_revision.timestamp)
-                cast_nearby_revision_timestamp = 
+                cast_nearby_revision_timestamp =
                     str(timestamp.year).zfill(4) + 
                     str(timestamp.month).zfill(2) + 
                     str(timestamp.day).zfill(2) + 
