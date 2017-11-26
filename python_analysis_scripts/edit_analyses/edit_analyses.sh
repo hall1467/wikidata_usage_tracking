@@ -4,6 +4,13 @@
 
 #sort -k 7,7 -t '	' -n -T /export/scratch2/temp /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes.tsv -o /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv
 
-mwsessions sessionize /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv --events=/export/scratch2/wmf/edit_analyses/revision_session_data.tsv --verbose > /export/scratch2/wmf/edit_analyses/session_data.tsv
+echo "title\trev_id\tuser_id\tusername\tcomment\tnamespace\ttimestamp" > /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
+
+cat /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv >> /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
+
+rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv
+
+mwsessions sessionize /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv --events=/export/scratch2/wmf/edit_analyses/revision_session_data.tsv --verbose > /export/scratch2/wmf/edit_analyses/session_data.tsv
+
 # Need a script that will go back and remove sessions that do not contain one of the original 100000 item or property edits
 # Script can take in the tsv return from sql query sessions
