@@ -4,7 +4,7 @@
 
 #sort -k 7,7 -t '	' -n -T /export/scratch2/temp /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes.tsv -o /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv
 
-echo "title\trev_id\tuser_id\tusername\tcomment\tnamespace\ttimestamp" > /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
+echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
 
 cat /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv >> /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
 
