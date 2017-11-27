@@ -98,7 +98,7 @@ def run(input_revision_event_data_file, input_random_session_data_file,
 
 
         if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Revisions returned: {0}\n".format(i))  
+            sys.stderr.write("Revisions considered: {0}\n".format(i))  
             sys.stderr.flush()
 
 
