@@ -15,7 +15,7 @@
 
 tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/select_actual_revision_from_random_sessions.py /export/scratch2/wmf/edit_analyses/revision_session_data.tsv /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/select_actual_revisions_from_random_sessions.py /export/scratch2/wmf/edit_analyses/revision_session_data.tsv /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
 
 # Python script needs to go and get actual revisions for each of these 100000. Also will need to make sure there is at least one edit to either the property or item namespaces for these. 
 
