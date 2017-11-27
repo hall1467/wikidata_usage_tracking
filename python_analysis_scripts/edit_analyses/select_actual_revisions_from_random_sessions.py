@@ -78,7 +78,7 @@ def run(input_revision_event_data_file, input_random_session_data_file,
 
 
     for i, line in enumerate(input_revision_event_data_file):
-        if line["user"] in random_sessions and
+        if line["user"] in random_sessions and\
             line["session_start"] in random_sessions[line["user"]]:
 
             output_file.write(
