@@ -46,9 +46,9 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
-    'title', 'rev_id', 'user', 'username', 'comment', 'namespace', 'timestamp',
-    'prev_timestamp', 'session_start', 'session_end', 'session_index', 
-    'session_events', 'event_index'])
+        'title', 'rev_id', 'user', 'username', 'comment', 'namespace', 
+        'timestamp', 'prev_timestamp', 'session_start', 'session_end', 
+        'session_index', 'session_events', 'event_index'])
 
     verbose = args['--verbose']
 
