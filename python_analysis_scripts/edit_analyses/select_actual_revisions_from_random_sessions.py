@@ -5,10 +5,10 @@ that are part of the random sessions
 
 
 Usage:
-    nearby_revisions (-h|--help)
-    nearby_revisions <input_revision_event_data> <input_random_session_data> <output>
-                     [--debug]
-                     [--verbose]
+    select_actual_revisions_from_random_sessions (-h|--help)
+    select_actual_revisions_from_random_sessions <input_revision_event_data> <input_random_session_data> <output>
+                                                 [--debug]
+                                                 [--verbose]
 
 Options:
     -h, --help                   This help message is printed
@@ -25,7 +25,6 @@ Options:
 import docopt
 import logging
 import operator
-import mwapi
 import sys
 from collections import defaultdict
 import mysqltsv
