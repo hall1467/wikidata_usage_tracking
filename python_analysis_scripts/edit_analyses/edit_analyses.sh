@@ -13,7 +13,7 @@
 #mwsessions sessionize /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv --events=/export/scratch2/wmf/edit_analyses/revision_session_data.tsv --verbose > /export/scratch2/wmf/edit_analyses/session_data.tsv
 
 
-tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv
+#tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py /export/scratch2/wmf/edit_analyses/revision_session_data.tsv /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
 
