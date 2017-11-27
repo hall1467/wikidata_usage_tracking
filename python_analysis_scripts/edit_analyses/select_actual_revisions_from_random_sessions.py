@@ -57,8 +57,8 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(input_revision_event_data_file, input_random_session_data_file, output, 
-        verbose)
+    run(input_revision_event_data_file, input_random_session_data_file, 
+        output_file, verbose)
 
 
 def run(input_revision_event_data_file, input_random_session_data_file, 
