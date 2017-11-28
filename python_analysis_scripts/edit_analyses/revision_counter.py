@@ -63,7 +63,7 @@ def run(input_file, verbose):
     session_sum = 0
     for user in sessions:
         for session_start in sessions[user]:
-            session += 1
+            session_sum += 1
 
     print("Sessions: {0}".format(session_sum))
 
