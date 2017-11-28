@@ -64,36 +64,38 @@ def run(input_file, output_file, verbose):
         agg_stats[line["user"]][line["session_start"]]['edits'] += 1
         edit_type[line["user"]][line["session_start"]] = line["edit_type"]
 
-        session_length = datetime.datetime(line["session_start"][0:4],
-                                           line["session_start"][4:6],
-                                           line["session_start"][6:8],
-                                           line["session_start"][8:10],
-                                           line["session_start"][10:12],
-                                           line["session_start"][12:14]) -\
-                         datetime.datetime(line["session_end"][0:4],
-                                           line["session_end"][4:6],
-                                           line["session_end"][6:8],
-                                           line["session_end"][8:10],
-                                           line["session_end"][10:12],
-                                           line["session_end"][12:14])
+        session_length = datetime.datetime(int(line["session_start"][0:4]),
+                                           int(line["session_start"][4:6]),
+                                           int(line["session_start"][6:8]),
+                                           int(line["session_start"][8:10]),
+                                           int(line["session_start"][10:12]),
+                                           int(line["session_start"][12:14]))
+                         -\
+                         datetime.datetime(int(line["session_end"][0:4]),
+                                           int(line["session_end"][4:6]),
+                                           int(line["session_end"][6:8]),
+                                           int(line["session_end"][8:10]),
+                                           int(line["session_end"][10:12]),
+                                           int(line["session_end"][12:14]))
 
         agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
             session_length
 
         if line["prev_timestamp"] != "NULL":
             previous_timestamp = line["prev_timestamp"]
-            inter_edit_time = datetime.datetime(line["timestamp"][0:4],
-                                                line["timestamp"][4:6],
-                                                line["timestamp"][6:8],
-                                                line["timestamp"][8:10],
-                                                line["timestamp"][10:12],
-                                                line["session_start"][12:14]) -\
-                              datetime.datetime(previous_timestamp[0:4],
-                                                previous_timestamp[4:6],
-                                                previous_timestamp[6:8],
-                                                previous_timestamp[8:10],
-                                                previous_timestamp[10:12],
-                                                previous_timestamp[12:14])
+            inter_edit_time = datetime.datetime(int(line["timestamp"][0:4]),
+                                                int(line["timestamp"][4:6]),
+                                                int(line["timestamp"][6:8]),
+                                                int(line["timestamp"][8:10]),
+                                                int(line["timestamp"][10:12]),
+                                                int(line["timestamp"][12:14])) 
+                              -\
+                              datetime.datetime(int(previous_timestamp[0:4]),
+                                                int(previous_timestamp[4:6]),
+                                                int(previous_timestamp[6:8]),
+                                                int(previous_timestamp[8:10]),
+                                                int(previous_timestamp[10:12]),
+                                                int(previous_timestamp[12:14]))
 
             inter_edit_times[line["user"]][line["session_start"]]\
                 .append(inter_edit_time)
