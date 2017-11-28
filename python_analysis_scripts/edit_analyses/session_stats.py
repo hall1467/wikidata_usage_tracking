@@ -92,12 +92,12 @@ def run(input_file, output_file, verbose):
             human_session_sum += 1
 
 
-    output_file.write("Sessions: {0}".format(session_sum))
-    output_file.write("Bot sessions: {0}".format(bot_session_sum))
-    output_file.write("Bot revisions: {0}".format(bot_revisions_sum))
-    output_file.write("Human sessions: {0}".format(human_session_sum))
-    output_file.write("Human revisions: {0}".format(human_revisions_sum))
-    output_file.write("Revision namespaces: {0}".format(revision_namespaces))
+    output_file.write("Sessions: {0}\n".format(session_sum))
+    output_file.write("Bot sessions: {0}\n".format(bot_session_sum))
+    output_file.write("Bot revisions: {0}\n".format(bot_revisions_sum))
+    output_file.write("Human sessions: {0}\n".format(human_session_sum))
+    output_file.write("Human revisions: {0}\n".format(human_revisions_sum))
+    output_file.write("Revision namespaces: {0}\n".format(revision_namespaces))
 
 
 main()

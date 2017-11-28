@@ -46,10 +46,12 @@ def main(argv=None):
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
         'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
-        'namespace_120_edits', 'edits', 'edit_type', 
-        'session_length_in_seconds', "inter_edits_less_than_5_seconds", 
-        "inter_edits_between_5_and_20_seconds", 
-        "inter_edits_greater_than_20_seconds"])
+        'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
+        'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
+        'namespace_121_edits', 'edits', 'edit_type', 
+        'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
+        'inter_edits_between_5_and_20_seconds', 
+        'inter_edits_greater_than_20_seconds'])
 
     verbose = args['--verbose']
 
@@ -124,8 +126,10 @@ def run(input_file, output_file, verbose):
                 session_start in inter_edit_times[user]:
                 inter_edit_mean = statistics\
                     .mean(inter_edit_times[user][session_start])
-                inter_edit_std = statistics\
-                    .stdev(inter_edit_times[user][session_start])
+
+                if len(inter_edit_times[user][session_start]) > 1:
+                    inter_edit_std = statistics\
+                        .stdev(inter_edit_times[user][session_start])
 
                 for inter_edit_time in inter_edit_times[user][session_start]:
                     if inter_edit_time < 5:
@@ -140,7 +144,13 @@ def run(input_file, output_file, verbose):
                 [inter_edit_mean,
                  inter_edit_std,
                  agg_stats[user][session_start][0],
+                 agg_stats[user][session_start][1],
+                 agg_stats[user][session_start][2],
+                 agg_stats[user][session_start][3],
+                 agg_stats[user][session_start][4],
+                 agg_stats[user][session_start][5],
                  agg_stats[user][session_start][120],
+                 agg_stats[user][session_start][121],
                  agg_stats[user][session_start]["edits"],
                  edit_type[user][session_start],
                  agg_stats[user][session_start]["session_length"],
