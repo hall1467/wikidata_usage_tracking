@@ -77,7 +77,7 @@ def run(input_file, output_file, verbose):
                                            line["session_end"][10:12],
                                            line["session_end"][12:14])
 
-        agg_stats[line["user"]][line["session_start"]]['session_length'] +=
+        agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
             session_length
 
         if line["prev_timestamp"] != "NULL":
