@@ -81,7 +81,7 @@ def run(input_file, output_file, verbose):
         agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
             session_length.total_seconds()
 
-        if line["prev_timestamp"] != "NULL":
+        if line["prev_timestamp"]:
             previous_timestamp = line["prev_timestamp"]
             inter_edit_time = datetime.datetime(int(line["timestamp"][0:4]),
                                                 int(line["timestamp"][4:6]),
