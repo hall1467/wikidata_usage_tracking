@@ -39,7 +39,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(
         open(args['<input>'],'rt'), headers=True, 
-        types=[str, str, str, str, str, int, int, str, int, int, str, str, str,
+        types=[str, str, str, str, str, int, str, str, str, str, str, str, str,
             str])
 
 
@@ -81,7 +81,7 @@ def run(input_file, output_file, verbose):
             session_length
 
         if line["prev_timestamp"] != "NULL":
-            previous_timestamp = int(line["prev_timestamp"])
+            previous_timestamp = line["prev_timestamp"]
             inter_edit_time = datetime.datetime(line["timestamp"][0:4],
                                                 line["timestamp"][4:6],
                                                 line["timestamp"][6:8],
