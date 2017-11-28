@@ -109,7 +109,7 @@ def run(input_file, output_file, verbose):
 
     for user in agg_stats:
         for session_start in agg_stats[user]:
-            if user in inter_edit_times and
+            if user in inter_edit_times and\
                 session_start in inter_edit_times[user]:
                 inter_edit_mean = statistics
                     .mean(inter_edit_times[user][session_start])
