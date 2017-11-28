@@ -5,7 +5,7 @@ Selects number of distinct revisions.
 
 Usage:
     session_stats (-h|--help)
-    session_stats <input><output>
+    session_stats <input> <output>
                   [--debug]
                   [--verbose]
 
