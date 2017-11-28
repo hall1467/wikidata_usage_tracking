@@ -65,19 +65,19 @@ def run(input_file, output_file, verbose):
         agg_stats[line["user"]][line["session_start"]]['edits'] += 1
         edit_type[line["user"]][line["session_start"]] = line["edit_type"]
 
-        session_length = datetime.datetime(int(line["session_start"][0:4]),
-                                           int(line["session_start"][4:6]),
-                                           int(line["session_start"][6:8]),
-                                           int(line["session_start"][8:10]),
-                                           int(line["session_start"][10:12]),
-                                           int(line["session_start"][12:14]))\
-                         -\
-                         datetime.datetime(int(line["session_end"][0:4]),
+        session_length = datetime.datetime(int(line["session_end"][0:4]),
                                            int(line["session_end"][4:6]),
                                            int(line["session_end"][6:8]),
                                            int(line["session_end"][8:10]),
                                            int(line["session_end"][10:12]),
-                                           int(line["session_end"][12:14]))
+                                           int(line["session_start"][12:14]))\
+                         -\
+                         datetime.datetime(int(line["session_start"][0:4]),
+                                           int(line["session_start"][4:6]),
+                                           int(line["session_start"][6:8]),
+                                           int(line["session_start"][8:10]),
+                                           int(line["session_start"][10:12]),
+                                           int(line["session_start"][12:14]))
 
         agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
             session_length.total_seconds()
