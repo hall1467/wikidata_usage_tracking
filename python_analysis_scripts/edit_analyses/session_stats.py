@@ -4,8 +4,8 @@ Selects number of distinct revisions.
 
 
 Usage:
-    revision_counter (-h|--help)
-    revision_counter <input>
+    session_stats (-h|--help)
+    session_stats <input>
                      [--debug]
                      [--verbose]
 
@@ -49,10 +49,16 @@ def main(argv=None):
 def run(input_file, verbose):
     
     sessions = defaultdict(lambda: defaultdict(int))
+    bot_sessions = defaultdict(lambda: defaultdict(int))
+    human_sessions = defaultdict(lambda: defaultdict(int))
 
 
     for i, line in enumerate(input_file):
         sessions[line["user"]][line["session_start"]] = 1
+        if line["edit_type"] == 'bot':
+            bot_sessions[line["user"]][line["session_start"]] = 1
+        else:
+            human_sessions[line["user"]][line["session_start"]] = 1
 
 
         if verbose and i % 10000 == 0 and i != 0:
@@ -65,7 +71,20 @@ def run(input_file, verbose):
         for session_start in sessions[user]:
             session_sum += 1
 
+    bot_session_sum = 0
+    for user in bot_sessions:
+        for session_start in bot_sessions[user]:
+            bot_session_sum += 1
+
+    human_session_sum = 0
+    for user in human_sessions:
+        for session_start in human_sessions[user]:
+            human_session_sum += 1
+
+
     print("Sessions: {0}".format(session_sum))
+    print("Bot sessions: {0}".format(bot_session_sum))
+    print("Human sessions: {0}".format(human_session_sum))
 
 
 main()
