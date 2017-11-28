@@ -25,6 +25,7 @@ import sys
 import mysqltsv
 from collections import defaultdict
 import datetime
+import statistics
 
 
 logger = logging.getLogger(__name__)
@@ -108,8 +109,8 @@ def run(input_file, output_file, verbose):
 
     for user in agg_stats:
         for session_start in agg_stats[user]:
-            inter_edit_mean = mean(inter_edit_times[user][session_start])
-            inter_edit_std = stdev(inter_edit_times[user][session_start])
+            inter_edit_mean = statistics.mean(inter_edit_times[user][session_start])
+            inter_edit_std = statistics.stdev(inter_edit_times[user][session_start])
 
             output_file.write(
                 [inter_edit_mean,
