@@ -39,7 +39,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(
         open(args['<input>'],'rt'), headers=True, 
-        types=[str, str, str, str, str, int, str, str, str, str, str, str, str,
+        types=[str, str, str, str, str, int, int, str, int, int, str, str, str,
             str])
 
 
@@ -77,23 +77,26 @@ def run(input_file, output_file, verbose):
                                            line["session_end"][10:12],
                                            line["session_end"][12:14])
 
-        agg_stats[line["user"]][line["session_start"]]['session_length'] += session_length
+        agg_stats[line["user"]][line["session_start"]]['session_length'] +=
+            session_length
 
         if line["prev_timestamp"] != "NULL":
+            previous_timestamp = int(line["prev_timestamp"])
             inter_edit_time = datetime.datetime(line["timestamp"][0:4],
                                                 line["timestamp"][4:6],
                                                 line["timestamp"][6:8],
                                                 line["timestamp"][8:10],
                                                 line["timestamp"][10:12],
                                                 line["session_start"][12:14]) -\
-                              datetime.datetime(line["prev_timestamp"][0:4],
-                                                line["prev_timestamp"][4:6],
-                                                line["prev_timestamp"][6:8],
-                                                line["prev_timestamp"][8:10],
-                                                line["prev_timestamp"][10:12],
-                                                line["prev_timestamp"][12:14])
+                              datetime.datetime(previous_timestamp[0:4],
+                                                previous_timestamp[4:6],
+                                                previous_timestamp[6:8],
+                                                previous_timestamp[8:10],
+                                                previous_timestamp[10:12],
+                                                previous_timestamp[12:14])
 
-            inter_edit_times[line["user"]][line["session_start"]].append(inter_edit_time)
+            inter_edit_times[line["user"]][line["session_start"]]
+                .append(inter_edit_time)
 
 
         if verbose and i % 10000 == 0 and i != 0:
