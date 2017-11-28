@@ -99,7 +99,7 @@ def run(input_file, output_file, verbose):
                                                 int(previous_timestamp[12:14]))
 
             inter_edit_times[line["user"]][line["session_start"]]\
-                .append(inter_edit_time)
+                .append(inter_edit_time.total_seconds())
 
 
         if verbose and i % 10000 == 0 and i != 0:
