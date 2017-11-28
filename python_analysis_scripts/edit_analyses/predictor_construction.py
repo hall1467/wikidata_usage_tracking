@@ -109,9 +109,12 @@ def run(input_file, output_file, verbose):
 
     for user in agg_stats:
         for session_start in agg_stats[user]:
-            if user in inter_edit_times and session_start in inter_edit_times[user]:
-                inter_edit_mean = statistics.mean(inter_edit_times[user][session_start])
-                inter_edit_std = statistics.stdev(inter_edit_times[user][session_start])
+            if user in inter_edit_times and
+                session_start in inter_edit_times[user]:
+                inter_edit_mean = statistics
+                    .mean(inter_edit_times[user][session_start])
+                inter_edit_std = statistics
+                    .stdev(inter_edit_times[user][session_start])
             else:
                 inter_edit_mean = "NULL"
                 inter_edit_std = "NULL"
