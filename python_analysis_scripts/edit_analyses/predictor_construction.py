@@ -69,7 +69,7 @@ def run(input_file, output_file, verbose):
                                            line["session_start"][6:8],
                                            line["session_start"][8:10],
                                            line["session_start"][10:12],
-                                           line["session_start"][12:14]) -
+                                           line["session_start"][12:14]) -\
                          datetime.datetime(line["session_end"][0:4],
                                            line["session_end"][4:6],
                                            line["session_end"][6:8],
@@ -85,7 +85,7 @@ def run(input_file, output_file, verbose):
                                                 line["timestamp"][6:8],
                                                 line["timestamp"][8:10],
                                                 line["timestamp"][10:12],
-                                                line["session_start"][12:14]) -
+                                                line["session_start"][12:14]) -\
                               datetime.datetime(line["prev_timestamp"][0:4],
                                                 line["prev_timestamp"][4:6],
                                                 line["prev_timestamp"][6:8],
