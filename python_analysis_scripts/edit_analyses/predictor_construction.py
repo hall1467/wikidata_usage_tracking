@@ -45,8 +45,11 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
-        'mean', 'std', 'namespace_0_edits', 'namespace_120_edits', 'edits', 
-        'edit_type', 'session_length'])
+        'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
+        'namespace_120_edits', 'edits', 'edit_type', 
+        'session_length_in_seconds', "inter_edits_less_than_5_seconds", 
+        "inter_edits_between_5_and_20_seconds", 
+        "inter_edits_greater_than_20_seconds"])
 
     verbose = args['--verbose']
 
@@ -69,7 +72,7 @@ def run(input_file, output_file, verbose):
                                            int(line["session_end"][6:8]),
                                            int(line["session_end"][8:10]),
                                            int(line["session_end"][10:12]),
-                                           int(line["session_start"][12:14]))\
+                                           int(line["session_end"][12:14]))\
                          -\
                          datetime.datetime(int(line["session_start"][0:4]),
                                            int(line["session_start"][4:6]),
@@ -109,15 +112,30 @@ def run(input_file, output_file, verbose):
 
     for user in agg_stats:
         for session_start in agg_stats[user]:
+
+            inter_edit_mean = "NULL"
+            inter_edit_std = "NULL"
+            inter_edits_less_than_5_seconds = 0
+            inter_edits_between_5_and_20_seconds = 0
+            inter_edits_greater_than_20_seconds = 0
+
+
+
             if user in inter_edit_times and\
                 session_start in inter_edit_times[user]:
                 inter_edit_mean = statistics\
                     .mean(inter_edit_times[user][session_start])
                 inter_edit_std = statistics\
                     .stdev(inter_edit_times[user][session_start])
-            else:
-                inter_edit_mean = "NULL"
-                inter_edit_std = "NULL"
+
+                for inter_edit_time in inter_edit_times[user][session_start]:
+                    if inter_edit_time < 5:
+                        inter_edits_less_than_5_seconds += 1
+                    elif inter_edit_time >= 5 and inter_edit_time <= 20:
+                        inter_edits_between_5_and_20_seconds += 1
+                    else:
+                        inter_edits_greater_than_20_seconds += 1
+
 
             output_file.write(
                 [inter_edit_mean,
@@ -126,7 +144,10 @@ def run(input_file, output_file, verbose):
                  agg_stats[user][session_start][120],
                  agg_stats[user][session_start]["edits"],
                  edit_type[user][session_start],
-                 agg_stats[user][session_start]["session_length"]])
+                 agg_stats[user][session_start]["session_length"],
+                 inter_edits_less_than_5_seconds,
+                 inter_edits_between_5_and_20_seconds,
+                 inter_edits_greater_than_20_seconds])
 
 
         if verbose and i % 10000 == 0 and i != 0:
