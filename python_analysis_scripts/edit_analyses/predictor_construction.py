@@ -79,7 +79,7 @@ def run(input_file, output_file, verbose):
                                            int(line["session_end"][12:14]))
 
         agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
-            session_length
+            session_length.total_seconds()
 
         if line["prev_timestamp"] != "NULL":
             previous_timestamp = line["prev_timestamp"]
