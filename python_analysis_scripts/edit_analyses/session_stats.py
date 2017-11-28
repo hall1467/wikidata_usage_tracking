@@ -5,13 +5,14 @@ Selects number of distinct revisions.
 
 Usage:
     session_stats (-h|--help)
-    session_stats <input>
-                     [--debug]
-                     [--verbose]
+    session_stats <input><output>
+                  [--debug]
+                  [--verbose]
 
 Options:
     -h, --help  This help message is printed
-    <input>     Path to input file to process.                           
+    <input>     Path to input file to process.
+    <output>    Where output will be written                           
     --debug     Print debug logging to stderr
     --verbose   Print dots and stuff to stderr  
 """
@@ -40,13 +41,14 @@ def main(argv=None):
         types=[str, str, str, str, str, int, str, str, str, str, str, str, 
             str, str])
 
+    output_file = open(args['<output>'], "w")
 
     verbose = args['--verbose']
 
-    run(input_file, verbose)
+    run(input_file, output_file, verbose)
 
 
-def run(input_file, verbose):
+def run(input_file, output_file, verbose):
     
     sessions = defaultdict(lambda: defaultdict(int))
     bot_sessions = defaultdict(lambda: defaultdict(int))
@@ -90,12 +92,12 @@ def run(input_file, verbose):
             human_session_sum += 1
 
 
-    print("Sessions: {0}".format(session_sum))
-    print("Bot sessions: {0}".format(bot_session_sum))
-    print("Bot revisions: {0}".format(bot_revisions_sum))
-    print("Human sessions: {0}".format(human_session_sum))
-    print("Human revisions: {0}".format(human_revisions_sum))
-    print("Revision namespaces: {0}".format(revision_namespaces))
+    output_file.write("Sessions: {0}".format(session_sum))
+    output_file.write("Bot sessions: {0}".format(bot_session_sum))
+    output_file.write("Bot revisions: {0}".format(bot_revisions_sum))
+    output_file.write("Human sessions: {0}".format(human_session_sum))
+    output_file.write("Human revisions: {0}".format(human_revisions_sum))
+    output_file.write("Revision namespaces: {0}".format(revision_namespaces))
 
 
 main()
