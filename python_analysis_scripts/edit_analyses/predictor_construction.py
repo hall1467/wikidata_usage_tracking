@@ -95,7 +95,7 @@ def run(input_file, output_file, verbose):
                                                 previous_timestamp[10:12],
                                                 previous_timestamp[12:14])
 
-            inter_edit_times[line["user"]][line["session_start"]]
+            inter_edit_times[line["user"]][line["session_start"]]\
                 .append(inter_edit_time)
 
 
