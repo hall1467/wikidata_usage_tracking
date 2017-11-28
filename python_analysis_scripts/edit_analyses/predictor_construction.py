@@ -105,7 +105,6 @@ def run(input_file, output_file, verbose):
 
 
         if verbose and i % 10000 == 0 and i != 0:
-            break
             sys.stderr.write("Revisions analyzed: {0}\n".format(i))  
             sys.stderr.flush()
 
