@@ -51,10 +51,13 @@ def run(input_file, verbose):
     sessions = defaultdict(lambda: defaultdict(int))
     bot_sessions = defaultdict(lambda: defaultdict(int))
     human_sessions = defaultdict(lambda: defaultdict(int))
+    revision_namespaces = defaultdict(int)
 
 
     for i, line in enumerate(input_file):
         sessions[line["user"]][line["session_start"]] = 1
+        revision_namespaces[line["namespace"]] += 1
+
         if line["edit_type"] == 'bot':
             bot_sessions[line["user"]][line["session_start"]] = 1
         else:
@@ -85,6 +88,7 @@ def run(input_file, verbose):
     print("Sessions: {0}".format(session_sum))
     print("Bot sessions: {0}".format(bot_session_sum))
     print("Human sessions: {0}".format(human_session_sum))
+    print("Revision namespaces: {0}".format(revision_namespaces))
 
 
 main()
