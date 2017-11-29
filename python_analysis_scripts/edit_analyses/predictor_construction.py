@@ -140,7 +140,7 @@ def run(input_file, output_file, verbose):
                         inter_edits_greater_than_20_seconds += 1
 
 
-            if edit_type[user][session_start] = "bot":
+            if edit_type[user][session_start] == "bot":
                 bot_edit = "TRUE"
                 human_edit = "FALSE"
             else:
