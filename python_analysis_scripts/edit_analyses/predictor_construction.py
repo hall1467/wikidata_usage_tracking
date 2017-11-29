@@ -140,6 +140,14 @@ def run(input_file, output_file, verbose):
                         inter_edits_greater_than_20_seconds += 1
 
 
+            if edit_type[user][session_start] = "bot":
+                bot_edit = "TRUE"
+                human_edit = "FALSE"
+            else:
+                bot_edit = "FALSE"
+                human_edit = "TRUE"
+
+
             output_file.write(
                 [inter_edit_mean,
                  inter_edit_std,
@@ -152,7 +160,8 @@ def run(input_file, output_file, verbose):
                  agg_stats[user][session_start][120],
                  agg_stats[user][session_start][121],
                  agg_stats[user][session_start]["edits"],
-                 edit_type[user][session_start],
+                 bot_edit,
+                 human_edit,
                  agg_stats[user][session_start]["session_length"],
                  inter_edits_less_than_5_seconds,
                  inter_edits_between_5_and_20_seconds,

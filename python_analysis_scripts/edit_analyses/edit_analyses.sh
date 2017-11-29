@@ -23,6 +23,9 @@
 
 #python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/label_edits_as_bot_or_human.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv /export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_bots/bot_user_ids.tsv /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
+#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
+
+cat /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv | grep -vP "NULL\tNULL" > /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_revisions_containing_sessions_with_greater_than_2_revisions.tsv
+
