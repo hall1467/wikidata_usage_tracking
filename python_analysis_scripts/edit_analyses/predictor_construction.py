@@ -48,7 +48,7 @@ def main(argv=None):
         'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
         'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
         'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
-        'namespace_121_edits', 'edits', 'edit_type', 
+        'namespace_121_edits', 'edits', 'bots', 'human' 
         'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
         'inter_edits_between_5_and_20_seconds', 
         'inter_edits_greater_than_20_seconds'])
