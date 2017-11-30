@@ -130,6 +130,8 @@ def run(input_file, output_file, verbose):
                 if len(inter_edit_times[user][session_start]) > 1:
                     inter_edit_std = statistics\
                         .stdev(inter_edit_times[user][session_start])
+                else:
+                    continue
 
                 for inter_edit_time in inter_edit_times[user][session_start]:
                     if inter_edit_time < 5:
@@ -138,6 +140,8 @@ def run(input_file, output_file, verbose):
                         inter_edits_between_5_and_20_seconds += 1
                     else:
                         inter_edits_greater_than_20_seconds += 1
+            else:
+                continue
 
 
             if edit_type[user][session_start] == "bot":
