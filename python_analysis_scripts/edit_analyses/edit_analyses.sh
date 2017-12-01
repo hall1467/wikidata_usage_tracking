@@ -36,4 +36,7 @@
 ######### Model test set generation #########
 
 # Removes retracted and anonymous user names
-tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > /export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv
+#tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > /export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv
+
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/take_out_used_data_from_testing_set.py /export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_revisions_from_100000_random_registered_human_and_bot_sessions.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
+
