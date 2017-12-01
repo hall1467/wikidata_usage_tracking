@@ -72,11 +72,12 @@ def run(input_building_data_file, input_testing_data_file,
             sys.stderr.flush()
 
     for i, line in enumerate(input_testing_data_file):
+        
         if line[0] in random_building_sessions and\
             line[1] in random_building_sessions[line[0]]:
-        
-            random_testing_sessions[line[0]][line[1]] = 1
+            continue
 
+        else:
 
             output_file.write(
                 [line[0],
