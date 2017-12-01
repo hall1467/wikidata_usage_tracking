@@ -41,11 +41,11 @@ def main(argv=None):
     )
 
     input_building_data_file = mysqltsv.Reader(
-        open(args['<input_random_session_data>'],'rt'), headers=False, 
+        open(args['<input_building_data>'],'rt'), headers=False, 
         types=[str, str, str, str, str])
 
     input_testing_data_file = mysqltsv.Reader(
-        open(args['<input_random_session_data>'],'rt'), headers=False, 
+        open(args['<input_testing_data>'],'rt'), headers=False, 
         types=[str, str, str, str, str])
 
 
