@@ -5,15 +5,16 @@ Take labelled data and aggregates to create predictors for a model.
 
 Usage:
     predictor_construction (-h|--help)
-    predictor_construction <input>
+    predictor_construction <input_training> <input_testing>
                            [--debug]
                            [--verbose]
 
 Options:
-    -h, --help  This help message is printed
-    <input>     Path to input file to process.                           
-    --debug     Print debug logging to stderr
-    --verbose   Print dots and stuff to stderr  
+    -h, --help        This help message is printed
+    <input_training>  Path to input training file to process.
+    <input_testing>   Path to input training file to process.                          
+    --debug           Print debug logging to stderr
+    --verbose         Print dots and stuff to stderr  
 """
 
 
@@ -22,9 +23,6 @@ import logging
 import operator
 import sys
 import mysqltsv
-from collections import defaultdict
-import datetime
-import statistics
 import sklearn
 import sklearn.ensemble
 import sklearn.model_selection
@@ -41,10 +39,15 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = mysqltsv.Reader(
+    input_training_file = mysqltsv.Reader(
         open(args['<input>'],'rt'), headers=True, 
-        types=[float, float, int, int, int, int, int, int, int, int, int, str, str,
-            float, int, int, int])
+        types=[float, float, int, int, int, int, int, int, int, int, int, str,
+            str, float, int, int, int])
+
+    input_testing_file = mysqltsv.Reader(
+        open(args['<input>'],'rt'), headers=True, 
+        types=[float, float, int, int, int, int, int, int, int, int, int, str,
+            str, float, int, int, int])
 
 
     # output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
@@ -58,44 +61,78 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(input_file, verbose)
+    run(input_training_file, input_testing_file, verbose)
 
 
-def run(input_file, verbose):
+def run(input_training_file, input_testing_file, verbose):
     
-    predictors = []
-    responses = []
+    training_predictors = []
+    training_responses = []
+    testing_predictors = []
+    testing_responses = []
 
-    for i, line in enumerate(input_file):
+    for i, line in enumerate(input_training_file):
         # predictors.append([line['mean_in_seconds']])
 
 
 
-        predictors.append([line['mean_in_seconds'],
-                   line['std_in_seconds'],
-                   line['namespace_0_edits'],
-                   line['namespace_1_edits'],
-                   line['namespace_2_edits'],
-                   line['namespace_3_edits'],
-                   line['namespace_4_edits'],
-                   line['namespace_5_edits'],
-                   line['namespace_120_edits'],
-                   line['namespace_121_edits'],
-                   line['edits'],
-                   line['session_length_in_seconds'],
-                   line['inter_edits_less_than_5_seconds'],
-                   line['inter_edits_between_5_and_20_seconds'],
-                   line['inter_edits_greater_than_20_seconds']])
+        training_predictors.append([line['mean_in_seconds'],
+                                   line['std_in_seconds'],
+                                   line['namespace_0_edits'],
+                                   line['namespace_1_edits'],
+                                   line['namespace_2_edits'],
+                                   line['namespace_3_edits'],
+                                   line['namespace_4_edits'],
+                                   line['namespace_5_edits'],
+                                   line['namespace_120_edits'],
+                                   line['namespace_121_edits'],
+                                   line['edits'],
+                                   line['session_length_in_seconds'],
+                                   line['inter_edits_less_than_5_seconds'],
+                                   line['inter_edits_between_5_and_20_seconds'],
+                                   line['inter_edits_greater_than_20_seconds']])
 
 
         if line['bot'] == 'TRUE':
-          bot = 1
-          human = 0
+            bot = 1
+            human = 0
         else:
-          bot = 0
-          human = 1
+            bot = 0
+            human = 1
 
-        responses.append(bot)
+        training_responses.append(bot)
+
+
+    for i, line in enumerate(input_testing_file):
+        # predictors.append([line['mean_in_seconds']])
+
+
+
+        testing_predictors.append([line['mean_in_seconds'],
+                                   line['std_in_seconds'],
+                                   line['namespace_0_edits'],
+                                   line['namespace_1_edits'],
+                                   line['namespace_2_edits'],
+                                   line['namespace_3_edits'],
+                                   line['namespace_4_edits'],
+                                   line['namespace_5_edits'],
+                                   line['namespace_120_edits'],
+                                   line['namespace_121_edits'],
+                                   line['edits'],
+                                   line['session_length_in_seconds'],
+                                   line['inter_edits_less_than_5_seconds'],
+                                   line['inter_edits_between_5_and_20_seconds'],
+                                   line['inter_edits_greater_than_20_seconds']])
+
+
+        if line['bot'] == 'TRUE':
+            bot = 1
+            human = 0
+        else:
+            bot = 0
+            human = 1
+
+        testing_responses.append(bot)
 
 
 
@@ -107,7 +144,7 @@ def run(input_file, verbose):
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
                        scoring="roc_auc")\
-        .fit(predictors, responses)
+        .fit(testing_predictors, testing_responses)
 
     print("ROC RANDOM FOREST")
     print("BEST SCORE")
@@ -116,8 +153,9 @@ def run(input_file, verbose):
     print((roc_r_forest_fitted_model.best_estimator_))
     print ("BEST PARAMS")
     print((roc_r_forest_fitted_model.best_params_))
-    print ("SCORE WITH ENTIRE DATASET")
-    print((roc_r_forest_fitted_model.score(predictors, responses)))
+    print ("SCORE WITH TESTING DATASET")
+    print((roc_r_forest_fitted_model
+               .score(testing_predictors, testing_responses)))
     print()
 
 
@@ -130,7 +168,7 @@ def run(input_file, verbose):
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
                        scoring="average_precision")\
-        .fit(predictors, responses)
+        .fit(testing_predictors, testing_responses)
 
     print("AVERAGE PRECISION RANDOM FOREST")
     print("BEST SCORE")
@@ -139,8 +177,9 @@ def run(input_file, verbose):
     print((average_prec_r_forest_fitted_model.best_estimator_))
     print ("BEST PARAMS")
     print((average_prec_r_forest_fitted_model.best_params_))
-    print ("SCORE WITH ENTIRE DATASET")
-    print((average_prec_r_forest_fitted_model.score(predictors, responses)))
+    print ("SCORE WITH TESTING DATASET")
+    print((average_prec_r_forest_fitted_model
+               .score(testing_predictors, testing_responses)))
     print()
 
 
@@ -152,7 +191,7 @@ def run(input_file, verbose):
                         'learning_rate' : [.01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="roc_auc")\
-        .fit(predictors, responses)
+        .fit(testing_predictors, testing_responses)
 
 
     print("ROC GRADIENT BOOSTING")
@@ -162,8 +201,9 @@ def run(input_file, verbose):
     print((roc_gradient_b_fitted_model.best_estimator_))
     print ("BEST PARAMS")
     print((roc_gradient_b_fitted_model.best_params_))
-    print ("SCORE WITH ENTIRE DATASET")
-    print((roc_gradient_b_fitted_model.score(predictors, responses)))
+    print ("SCORE WITH TESTING DATASET")
+    print((roc_gradient_b_fitted_model
+               .score(testing_predictors, testing_responses)))
     print()
 
 
@@ -175,7 +215,7 @@ def run(input_file, verbose):
                         'learning_rate' : [.01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="average_precision")\
-        .fit(predictors, responses)
+        .fit(testing_predictors, testing_responses)
 
 
     print("AVERAGE PRECISION GRADIENT BOOSTING")
@@ -185,8 +225,9 @@ def run(input_file, verbose):
     print((average_prec_gradient_b_fitted_model.best_estimator_))
     print ("BEST PARAMS")
     print((average_prec_gradient_b_fitted_model.best_params_))
-    print ("SCORE WITH ENTIRE DATASET")
-    print((average_prec_gradient_b_fitted_model.score(predictors, responses)))
+    print ("SCORE WITH TESTING DATASET")
+    print((average_prec_gradient_b_fitted_model
+               .score(testing_predictors, testing_responses)))
     print()
 
 
