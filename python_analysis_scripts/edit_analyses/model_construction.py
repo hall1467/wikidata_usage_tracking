@@ -144,7 +144,7 @@ def run(input_training_file, input_testing_file, verbose):
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
                        scoring="roc_auc")\
-        .fit(testing_predictors, testing_responses)
+        .fit(training_predictors, training_responses)
 
     print("ROC RANDOM FOREST")
     print("BEST SCORE")
@@ -168,7 +168,7 @@ def run(input_training_file, input_testing_file, verbose):
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
                        scoring="average_precision")\
-        .fit(testing_predictors, testing_responses)
+        .fit(training_predictors, training_responses)
 
     print("AVERAGE PRECISION RANDOM FOREST")
     print("BEST SCORE")
@@ -191,7 +191,7 @@ def run(input_training_file, input_testing_file, verbose):
                         'learning_rate' : [.01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="roc_auc")\
-        .fit(testing_predictors, testing_responses)
+        .fit(training_predictors, training_responses)
 
 
     print("ROC GRADIENT BOOSTING")
@@ -215,7 +215,7 @@ def run(input_training_file, input_testing_file, verbose):
                         'learning_rate' : [.01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="average_precision")\
-        .fit(testing_predictors, testing_responses)
+        .fit(training_predictors, training_responses)
 
 
     print("AVERAGE PRECISION GRADIENT BOOSTING")
