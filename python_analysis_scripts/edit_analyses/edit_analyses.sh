@@ -72,7 +72,7 @@ echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > \
     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
 
-tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep "^NULL" >> \
+tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
 #mwsessions sessionize --user=username \
