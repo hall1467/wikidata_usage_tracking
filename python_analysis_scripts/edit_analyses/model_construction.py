@@ -40,12 +40,12 @@ def main(argv=None):
     )
 
     input_training_file = mysqltsv.Reader(
-        open(args['<input>'],'rt'), headers=True, 
+        open(args['<input_training>'],'rt'), headers=True, 
         types=[float, float, int, int, int, int, int, int, int, int, int, str,
             str, float, int, int, int])
 
     input_testing_file = mysqltsv.Reader(
-        open(args['<input>'],'rt'), headers=True, 
+        open(args['<input_testing>'],'rt'), headers=True, 
         types=[float, float, int, int, int, int, int, int, int, int, int, str,
             str, float, int, int, int])
 
