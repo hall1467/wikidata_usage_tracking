@@ -154,7 +154,7 @@ def run(input_training_file, input_anonymous_data_file,
                                .predict(anonymous_predictors)
 
     sys.stderr.write("Random forest predictor weightings: {0}\n"
-      .format(r_forest_fitted_model.features_importances_))  
+      .format(r_forest_fitted_model.feature_importances_))  
     sys.stderr.flush()
 
     gradient_b_fitted_model = sklearn.ensemble.GradientBoostingClassifier(
@@ -166,7 +166,7 @@ def run(input_training_file, input_anonymous_data_file,
                                  .predict(anonymous_predictors)
 
     sys.stderr.write("Gradient boosting predictor weightings: {0}\n"
-      .format(gradient_b_fitted_model.features_importances_))  
+      .format(gradient_b_fitted_model.feature_importances_))  
     sys.stderr.flush()
 
     for i, line in enumerate(anonymous_predictors):
