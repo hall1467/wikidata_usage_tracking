@@ -68,30 +68,30 @@
 ######### Run model on anonymous edit data #########
 ####################################################
 
-echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > \
-    /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
+# echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > \
+#     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
 
-tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
-    /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
+# tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
+#     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
-#mwsessions sessionize --user=username \
-# /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
-# --events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
-# /export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
+mwsessions sessionize --user=username \
+/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
+--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
+/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
 
-#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_edits.py \
-# /export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv \
-# /export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users.tsv --verbose --debug > & \
-# /export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_edits.py \
+/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv \
+/export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users.tsv --verbose --debug > & \
+/export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users_error_log.tsv
 
-#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
-# /export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users.tsv \
-# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv --verbose --debug > & \
-# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_error_log.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
+/export/scratch2/wmf/edit_analyses/revision_session_data_anonymous_users.tsv \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv --verbose --debug > & \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt
 
-#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_predictor_construction.py \
-# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
-# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv --verbose --debug > & \
-# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_predictor_construction.py \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv --verbose --debug > & \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data_error_log.tsv
 
