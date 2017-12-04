@@ -44,6 +44,7 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
+        'username', 'session_start',
         'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
         'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
         'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
@@ -142,7 +143,9 @@ def run(input_file, output_file, verbose):
 
 
             output_file.write(
-                [inter_edit_mean,
+                [user, 
+                 session_start,
+                 inter_edit_mean,
                  inter_edit_std,
                  agg_stats[user][session_start][0],
                  agg_stats[user][session_start][1],

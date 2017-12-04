@@ -29,6 +29,7 @@ import sklearn
 import sklearn.ensemble
 import sklearn.model_selection
 import numpy
+from collections import defaultdict
 
 
 logger = logging.getLogger(__name__)
@@ -48,8 +49,8 @@ def main(argv=None):
 
     input_anonymous_data_file = mysqltsv.Reader(
         open(args['<input_anonymous_data>'],'rt'), headers=True, 
-        types=[float, float, int, int, int, int, int, int, int, int, int, float,
-            int, int, int])
+        types=[str, str, float, float, int, int, int, int, int, int, int, int, 
+        int, float, int, int, int])
 
 
     r_forest_predictions_output_file = mysqltsv.Writer(open(args['<r_forest_predictions_output>'], "w"), headers=[
@@ -85,6 +86,7 @@ def run(input_training_file, input_anonymous_data_file,
     training_predictors = []
     training_responses = []
     anonymous_predictors = []
+    user_and_session_start = []
 
     for i, line in enumerate(input_training_file):
         # predictors.append([line['mean_in_seconds']])
@@ -119,7 +121,8 @@ def run(input_training_file, input_anonymous_data_file,
 
 
     for i, line in enumerate(input_anonymous_data_file):
-        # predictors.append([line['mean_in_seconds']])
+        user_and_session_start.append({'user' : line['user'], 
+                                'session_start' : line['session_start']})
 
 
 
@@ -150,6 +153,10 @@ def run(input_training_file, input_anonymous_data_file,
     r_forest_predictions = r_forest_fitted_model\
                                .predict(anonymous_predictors)
 
+    sys.stderr.write("Random forest predictor weightings: {0}\n"
+      .format(r_forest_fitted_model.feature_importances_))  
+    sys.stderr.flush()
+
     gradient_b_fitted_model = sklearn.ensemble.GradientBoostingClassifier(
                                   n_estimators=1300, max_depth=5, 
                                   learning_rate=.01, max_features='log2')\
@@ -158,11 +165,16 @@ def run(input_training_file, input_anonymous_data_file,
     gradient_b_predictions = gradient_b_fitted_model\
                                  .predict(anonymous_predictors)
 
+    sys.stderr.write("Gradient boosting predictor weightings: {0}\n"
+      .format(gradient_b_fitted_model.feature_importances_))  
+    sys.stderr.flush()
 
     for i, line in enumerate(anonymous_predictors):
 
         r_forest_predictions_output_file.write(
-            [line[0],
+            [user_and_session_start[i]['user'],
+             user_and_session_start[i]['session_start'],
+             line[0],
              line[1],
              line[2],
              line[3],
@@ -180,7 +192,9 @@ def run(input_training_file, input_anonymous_data_file,
              r_forest_predictions[i]])
 
         gradient_b_predictions_output_file.write(
-            [line[0],
+            [user_and_session_start[i]['user'],
+             user_and_session_start[i]['session_start'],
+             line[0],
              line[1],
              line[2],
              line[3],
