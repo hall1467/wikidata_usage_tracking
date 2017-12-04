@@ -54,21 +54,21 @@ def main(argv=None):
 
 
     r_forest_predictions_output_file = mysqltsv.Writer(open(args['<r_forest_predictions_output>'], "w"), headers=[
-        'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
-        'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
-        'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
-        'namespace_121_edits', 'edits', 'session_length_in_seconds', 
-        'inter_edits_less_than_5_seconds', 
+        'username', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
+        'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
+        'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
+        'namespace_120_edits', 'namespace_121_edits', 'edits', 
+        'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
         'inter_edits_between_5_and_20_seconds', 
         'inter_edits_greater_than_20_seconds', 'bot_prediction'])
 
 
     gradient_b_predictions_output_file = mysqltsv.Writer(open(args['<gradient_b_predictions_output>'], "w"), headers=[
-        'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
-        'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
-        'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
-        'namespace_121_edits', 'edits',  'session_length_in_seconds', 
-        'inter_edits_less_than_5_seconds', 
+        'username', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
+        'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
+        'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
+        'namespace_120_edits', 'namespace_121_edits', 'edits', 
+        'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
         'inter_edits_between_5_and_20_seconds', 
         'inter_edits_greater_than_20_seconds', 'bot_prediction'])
 
@@ -121,7 +121,7 @@ def run(input_training_file, input_anonymous_data_file,
 
 
     for i, line in enumerate(input_anonymous_data_file):
-        user_and_session_start.append({'user' : line['user'], 
+        user_and_session_start.append({'username' : line['username'], 
                                 'session_start' : line['session_start']})
 
 
@@ -154,7 +154,7 @@ def run(input_training_file, input_anonymous_data_file,
                                .predict(anonymous_predictors)
 
     sys.stderr.write("Random forest predictor weightings: {0}\n"
-      .format(r_forest_fitted_model.feature_importances_))  
+      .format(r_forest_fitted_model.features_importances_))  
     sys.stderr.flush()
 
     gradient_b_fitted_model = sklearn.ensemble.GradientBoostingClassifier(
@@ -166,13 +166,13 @@ def run(input_training_file, input_anonymous_data_file,
                                  .predict(anonymous_predictors)
 
     sys.stderr.write("Gradient boosting predictor weightings: {0}\n"
-      .format(gradient_b_fitted_model.feature_importances_))  
+      .format(gradient_b_fitted_model.features_importances_))  
     sys.stderr.flush()
 
     for i, line in enumerate(anonymous_predictors):
 
         r_forest_predictions_output_file.write(
-            [user_and_session_start[i]['user'],
+            [user_and_session_start[i]['username'],
              user_and_session_start[i]['session_start'],
              line[0],
              line[1],
@@ -192,7 +192,7 @@ def run(input_training_file, input_anonymous_data_file,
              r_forest_predictions[i]])
 
         gradient_b_predictions_output_file.write(
-            [user_and_session_start[i]['user'],
+            [user_and_session_start[i]['username'],
              user_and_session_start[i]['session_start'],
              line[0],
              line[1],
