@@ -72,7 +72,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
     inter_edit_times = defaultdict(lambda: defaultdict(list))
 
     for i, line in enumerate(input_file):
-        agg_stats[line["username"]][line["session_start"]][line["namespace"]]
+        agg_stats[line["username"]][line["session_start"]][line["namespace"]]\
             += 1
         agg_stats[line["username"]][line["session_start"]]['edits'] += 1
 
