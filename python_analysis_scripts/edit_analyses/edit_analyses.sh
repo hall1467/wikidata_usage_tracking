@@ -98,8 +98,8 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_applied_to_anonymous_users.py \
 /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv --verbose \
+/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv \
 /export/scratch2/wmf/edit_analyses/random_forest_predictions_for_anonymous_user_sessions.tsv \
-/export/scratch2/wmf/edit_analyses/gradient_boosting_predictions_for_anonymous_user_sessions.tsv  > & \
+/export/scratch2/wmf/edit_analyses/gradient_boosting_predictions_for_anonymous_user_sessions.tsv --verbose > & \
 /export/scratch2/wmf/edit_analyses/model_applied_to_anonymous_users_error_log.txt
 

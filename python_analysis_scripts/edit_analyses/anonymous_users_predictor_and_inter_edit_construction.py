@@ -119,7 +119,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
 
 
     for username in agg_stats:
-        for session_start in agg_stats[user]:
+        for session_start in agg_stats[username]:
 
             inter_edit_mean = "NULL"
             inter_edit_std = "NULL"
@@ -164,16 +164,16 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                  session_start,
                  inter_edit_mean,
                  inter_edit_std,
-                 agg_stats[user][session_start][0],
-                 agg_stats[user][session_start][1],
-                 agg_stats[user][session_start][2],
-                 agg_stats[user][session_start][3],
-                 agg_stats[user][session_start][4],
-                 agg_stats[user][session_start][5],
-                 agg_stats[user][session_start][120],
-                 agg_stats[user][session_start][121],
-                 agg_stats[user][session_start]["edits"],
-                 agg_stats[user][session_start]["session_length"],
+                 agg_stats[username][session_start][0],
+                 agg_stats[username][session_start][1],
+                 agg_stats[username][session_start][2],
+                 agg_stats[username][session_start][3],
+                 agg_stats[username][session_start][4],
+                 agg_stats[username][session_start][5],
+                 agg_stats[username][session_start][120],
+                 agg_stats[username][session_start][121],
+                 agg_stats[username][session_start]["edits"],
+                 agg_stats[username][session_start]["session_length"],
                  inter_edits_less_than_5_seconds,
                  inter_edits_between_5_and_20_seconds,
                  inter_edits_greater_than_20_seconds])
