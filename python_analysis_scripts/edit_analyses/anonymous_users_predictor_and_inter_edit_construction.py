@@ -134,11 +134,11 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                 inter_edit_mean = statistics\
                     .mean(inter_edit_times[username][session_start])
 
-                    for inter_edit in inter_edit_times[username][session_start]:
-                        inter_edit_output_file.write(
-                            [username, 
-                             session_start,
-                             inter_edit])
+                for inter_edit in inter_edit_times[username][session_start]:
+                    inter_edit_output_file.write(
+                        [username, 
+                         session_start,
+                         inter_edit])
 
                 if len(inter_edit_times[username][session_start]) > 1:
                     inter_edit_std = statistics\
