@@ -45,10 +45,10 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
-        'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
-        'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
-        'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
-        'namespace_121_edits', 'edits', 'bot', 'human', 
+        'user', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
+        'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
+        'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
+        'namespace_120_edits', 'namespace_121_edits', 'edits', 'bot', 'human', 
         'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
         'inter_edits_between_5_and_20_seconds', 
         'inter_edits_greater_than_20_seconds'])
@@ -83,7 +83,7 @@ def run(input_file, output_file, verbose):
                                            int(line["session_start"][10:12]),
                                            int(line["session_start"][12:14]))
 
-        agg_stats[line["user"]][line["session_start"]]['session_length'] +=\
+        agg_stats[line["user"]][line["session_start"]]['session_length'] =\
             session_length.total_seconds()
 
         if line["prev_timestamp"]:
@@ -153,7 +153,9 @@ def run(input_file, output_file, verbose):
 
 
             output_file.write(
-                [inter_edit_mean,
+                [user, 
+                 session_start,
+                 inter_edit_mean,
                  inter_edit_std,
                  agg_stats[user][session_start][0],
                  agg_stats[user][session_start][1],

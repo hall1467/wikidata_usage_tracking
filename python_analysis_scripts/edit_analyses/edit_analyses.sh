@@ -31,7 +31,7 @@
 
 #python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
 
-#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
 
 
 #############################################
@@ -51,17 +51,17 @@
 
 #python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats_error_log.txt
 
-#python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
 
 
 ##############################################
 ######### Model training and testing #########
 ##############################################
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
-# 	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-# 	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
-# 	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
+	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
+	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
 
 
 ####################################################
@@ -90,16 +90,16 @@
 # /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv --verbose --debug > & \
 # /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_predictor_and_inter_edit_construction.py \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_inter_edit.tsv --verbose --debug > & \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictor_and_inter_edit_construction_error_log.tsv
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_predictor_and_inter_edit_construction.py \
+# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv \
+# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv \
+# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_inter_edit.tsv --verbose --debug > & \
+# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictor_and_inter_edit_construction_error_log.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_applied_to_anonymous_users.py \
-/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv \
-/export/scratch2/wmf/edit_analyses/random_forest_predictions_for_anonymous_user_sessions.tsv \
-/export/scratch2/wmf/edit_analyses/gradient_boosting_predictions_for_anonymous_user_sessions.tsv --verbose > & \
-/export/scratch2/wmf/edit_analyses/model_applied_to_anonymous_users_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_applied_to_anonymous_users.py \
+# /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+# /export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_predictors_data.tsv \
+# /export/scratch2/wmf/edit_analyses/random_forest_predictions_for_anonymous_user_sessions.tsv \
+# /export/scratch2/wmf/edit_analyses/gradient_boosting_predictions_for_anonymous_user_sessions.tsv --verbose > & \
+# /export/scratch2/wmf/edit_analyses/model_applied_to_anonymous_users_error_log.txt
 
