@@ -31,7 +31,7 @@
 
 #python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
 
 
 #############################################
@@ -51,7 +51,7 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
 
 #python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats.txt --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv --verbose --debug > & /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
 
 
 ##############################################

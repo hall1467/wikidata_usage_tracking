@@ -139,7 +139,7 @@ def run(input_training_file, input_testing_file, verbose):
     roc_r_forest_fitted_model = sklearn.model_selection.GridSearchCV(
                        sklearn.ensemble.RandomForestClassifier(),
                        {'n_estimators' : [10, 20, 40, 80, 160, 320, 640, 960, 
-                       1280, 2560], 
+                                          1280, 2560], 
                         'min_samples_leaf' : [1, 3, 5, 7, 13, 15, 17], 
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
@@ -163,7 +163,7 @@ def run(input_training_file, input_testing_file, verbose):
     average_prec_r_forest_fitted_model = sklearn.model_selection.GridSearchCV(
                        sklearn.ensemble.RandomForestClassifier(),
                        {'n_estimators' : [10, 20, 40, 80, 160, 320, 640, 960, 
-                       1280, 2560], 
+                                          1280, 2560], 
                         'min_samples_leaf' : [1, 3, 5, 7, 13, 15, 17], 
                         'criterion' : ['gini', 'entropy'],
                         'max_features' : ['log2']}, 
@@ -186,9 +186,10 @@ def run(input_training_file, input_testing_file, verbose):
 
     roc_gradient_b_fitted_model = sklearn.model_selection.GridSearchCV(
                        sklearn.ensemble.GradientBoostingClassifier(),
-                       {'n_estimators' : [100, 300, 500, 700, 900, 1100, 1300], 
+                       {'n_estimators' : [100, 300, 500, 700, 900, 1100, 1300, 
+                                          1500, 1700], 
                         'max_depth' : [1, 3, 5, 7, 9], 
-                        'learning_rate' : [.01, .1, .5, 1],
+                        'learning_rate' : [.001, .01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="roc_auc")\
         .fit(training_predictors, training_responses)
@@ -210,9 +211,10 @@ def run(input_training_file, input_testing_file, verbose):
 
     average_prec_gradient_b_fitted_model = sklearn.model_selection.GridSearchCV(
                        sklearn.ensemble.GradientBoostingClassifier(),
-                       {'n_estimators' : [100, 300, 500, 700, 900, 1100, 1300], 
+                       {'n_estimators' : [100, 300, 500, 700, 900, 1100, 1300, 
+                                          1500, 1700], 
                         'max_depth' : [1, 3, 5, 7, 9], 
-                        'learning_rate' : [.01, .1, .5, 1],
+                        'learning_rate' : [.001, .01, .1, .5, 1],
                         'max_features' : ['log2']}, 
                        scoring="average_precision")\
         .fit(training_predictors, training_responses)
