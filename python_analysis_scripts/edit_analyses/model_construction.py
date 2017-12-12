@@ -41,23 +41,14 @@ def main(argv=None):
 
     input_training_file = mysqltsv.Reader(
         open(args['<input_training>'],'rt'), headers=True, 
-        types=[str, str, float, float, int, int, int, int, int, int, int, int, 
-            int, str, str, float, int, int, int])
+        types=[str, str, str, float, float, int, int, int, int, int, int, int, 
+            int, int, str, str, float, int, int, int])
 
     input_testing_file = mysqltsv.Reader(
         open(args['<input_testing>'],'rt'), headers=True, 
-        types=[str, str, float, float, int, int, int, int, int, int, int, int,
-         int, str, str, float, int, int, int])
+        types=[str, str, str, float, float, int, int, int, int, int, int, int, 
+            int, int, str, str, float, int, int, int])
 
-
-    # output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
-    #     'mean_in_seconds', 'std_in_seconds', 'namespace_0_edits', 
-    #     'namespace_1_edits', 'namespace_2_edits', 'namespace_3_edits',
-    #     'namespace_4_edits', 'namespace_5_edits', 'namespace_120_edits', 
-    #     'namespace_121_edits', 'edits', 'bot', 'human' 
-    #     'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
-    #     'inter_edits_between_5_and_20_seconds', 
-    #     'inter_edits_greater_than_20_seconds'])
 
     verbose = args['--verbose']
 
@@ -72,7 +63,6 @@ def run(input_training_file, input_testing_file, verbose):
     testing_responses = []
 
     for i, line in enumerate(input_training_file):
-        # predictors.append([line['mean_in_seconds']])
 
 
 
@@ -104,7 +94,6 @@ def run(input_training_file, input_testing_file, verbose):
 
 
     for i, line in enumerate(input_testing_file):
-        # predictors.append([line['mean_in_seconds']])
 
 
 

@@ -24,10 +24,12 @@ import logging
 import operator
 import sys
 import mysqltsv
+import re
 
 
 logger = logging.getLogger(__name__)
 
+BOT_NAME_RE = re.compile(r'.*bot$', re.I)
 
 def main(argv=None):
     args = docopt.docopt(__doc__)
@@ -68,9 +70,17 @@ def run(input_revisions_file, input_bot_user_ids_file, output_file, verbose):
 
 
     for i, line in enumerate(input_revisions_file):
+
         if line["user"] in bot_user_ids:
             edit_type = "bot"
         else:
+            
+            if BOT_NAME_RE.match(line["username"]):
+                sys.stderr.write("Revision ends with bot: '{0}''. Skipping\n".
+                    format(line["username"]))  
+                sys.stderr.flush()
+                continue
+
             edit_type = "human"
 
 

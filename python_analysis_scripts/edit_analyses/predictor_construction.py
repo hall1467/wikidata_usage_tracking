@@ -45,11 +45,12 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"), headers=[
-        'user', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
-        'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
-        'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
-        'namespace_120_edits', 'namespace_121_edits', 'edits', 'bot', 'human', 
-        'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
+        'user', 'username', 'session_start', 'mean_in_seconds', 
+        'std_in_seconds', 'namespace_0_edits', 'namespace_1_edits', 
+        'namespace_2_edits', 'namespace_3_edits', 'namespace_4_edits', 
+        'namespace_5_edits', 'namespace_120_edits', 'namespace_121_edits', 
+        'edits', 'bot', 'human', 'session_length_in_seconds', 
+        'inter_edits_less_than_5_seconds', 
         'inter_edits_between_5_and_20_seconds', 
         'inter_edits_greater_than_20_seconds'])
 
@@ -63,11 +64,13 @@ def run(input_file, output_file, verbose):
     agg_stats = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     inter_edit_times = defaultdict(lambda: defaultdict(list))
     edit_type = defaultdict(lambda: defaultdict(list))
+    usernames = defaultdict(lambda: defaultdict(list))
 
     for i, line in enumerate(input_file):
         agg_stats[line["user"]][line["session_start"]][line["namespace"]] += 1
         agg_stats[line["user"]][line["session_start"]]['edits'] += 1
         edit_type[line["user"]][line["session_start"]] = line["edit_type"]
+        usernames[line["user"]][line["session_start"]] = line["username"]
 
         session_length = datetime.datetime(int(line["session_end"][0:4]),
                                            int(line["session_end"][4:6]),
@@ -124,6 +127,7 @@ def run(input_file, output_file, verbose):
 
             if user in inter_edit_times and\
                 session_start in inter_edit_times[user]:
+                
                 inter_edit_mean = statistics\
                     .mean(inter_edit_times[user][session_start])
 
@@ -153,7 +157,8 @@ def run(input_file, output_file, verbose):
 
 
             output_file.write(
-                [user, 
+                [user,
+                 usernames[user][session_start],
                  session_start,
                  inter_edit_mean,
                  inter_edit_std,

@@ -90,7 +90,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                                            int(line["session_start"][10:12]),
                                            int(line["session_start"][12:14]))
 
-        agg_stats[line["username"]][line["session_start"]]['session_length'] +=\
+        agg_stats[line["username"]][line["session_start"]]['session_length'] =\
             session_length.total_seconds()
 
         if line["prev_timestamp"]:
@@ -131,6 +131,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
 
             if username in inter_edit_times and\
                 session_start in inter_edit_times[username]:
+                
                 inter_edit_mean = statistics\
                     .mean(inter_edit_times[username][session_start])
 
@@ -141,7 +142,9 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                 else:
                     continue
 
-                for inter_edit_time in inter_edit_times[username][session_start]:
+                for inter_edit_time in 
+                    inter_edit_times[username][session_start]:
+                    
                     if inter_edit_time < 5:
                         inter_edits_less_than_5_seconds += 1
                     elif inter_edit_time >= 5 and inter_edit_time <= 20:
