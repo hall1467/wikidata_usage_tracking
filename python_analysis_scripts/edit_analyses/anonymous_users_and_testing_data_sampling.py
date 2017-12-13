@@ -17,9 +17,9 @@ Options:
     <input_anonymous_user_threshold_scores>  Path to input anonymous user model 
                                              threshold scores file to sample.
     <anonymous_user_samples_output>          Where anonymous samples will be 
-                                             written. HTML file.
+                                             written.
     <testing_samples_output>                 Where testing samples will be 
-                                             written. HTML file.                    
+                                             written.                    
     --debug                                  Print debug logging to stderr
     --verbose                                Print dots and stuff to stderr  
 """
@@ -56,11 +56,15 @@ def main(argv=None):
         int, int, int, int, float, int, int, int, float])
 
 
-    anonymous_user_samples_output_file =\
-        open(args['<anonymous_user_samples_output>'], "w")
+    anonymous_user_samples_output_file = mysqltsv.Writer(
+        open(args['<anonymous_user_samples_output>'], "w"),
+        headers=['session start timestamp', 'session completed timestamp',
+                 'url'])
 
-
-    testing_samples_output_file = open(args['<testing_samples_output>'], "w")
+    testing_samples_output_file = mysqltsv.Writer(
+        open(args['<testing_samples_output>'], "w"),
+        headers=['session start timestamp', 'session completed timestamp',
+                 'url'])
 
     verbose = args['--verbose']
 
@@ -80,23 +84,23 @@ def run(input_testing_file, input_anonymous_user_threshold_scores_file,
     # Anonymous file sampling
     for i, line in enumerate(input_anonymous_user_threshold_scores_file):
 
-        if line['threshold_score'] >= 1.78:
+        if line['threshold_score'] >= 1.59:
             recall_rounded = 'less_than_10_percent'
-        elif line['threshold_score'] >= 1.11:
+        elif line['threshold_score'] >= .76:
             recall_rounded = '10_to_20_percent'
-        elif line['threshold_score'] >= .314:
+        elif line['threshold_score'] >= .17:
             recall_rounded = '20_to_30_percent'
-        elif line['threshold_score'] >= -.366:
+        elif line['threshold_score'] >= -.51:
             recall_rounded = '30_to_40_percent'
-        elif line['threshold_score'] >= -1.21:
+        elif line['threshold_score'] >= -1.16:
             recall_rounded = '40_to_50_percent'
-        elif line['threshold_score'] >= -1.97:
+        elif line['threshold_score'] >= -1.82:
             recall_rounded = '50_to_60_percent'
-        elif line['threshold_score'] >= -2.78:
+        elif line['threshold_score'] >= -2.59:
             recall_rounded = '60_to_70_percent'
-        elif line['threshold_score'] >= -3.57:
+        elif line['threshold_score'] >= -3.39:
             recall_rounded = '70_to_80_percent'
-        elif line['threshold_score'] >= -4.23:
+        elif line['threshold_score'] >= -4.21:
             recall_rounded = '80_to_90_percent'
         else:
             recall_rounded = 'greater_than_90_percent'
@@ -150,17 +154,32 @@ def run(input_testing_file, input_anonymous_user_threshold_scores_file,
         if line['bot'] == 'TRUE' and line['bot_prediction'] == 0:
             false_negative_testing_sessions.append(line)
 
-    testing_samples_output_file.write("<h1>False negatives from the test" +
-        " set</h1>")
-    testing_samples_output_file.write("<ol>")
+    # testing_samples_output_file.write("<h1>False negatives from the test" +
+    #     " set</h1>")
+    # testing_samples_output_file.write("<ol>")
 
     for line in random.sample(false_negative_testing_sessions, 100):
-        url = create_url_item(line['username'], line['session_start'], 
-                              line["session_length_in_seconds"])
 
-        testing_samples_output_file.write(url)
+        testing_samples_output_file.write(create_url_item(line['username'], 
+                              line['session_start'], 
+                              line["session_length_in_seconds"]))
 
-    testing_samples_output_file.write("</ol>")
+          # output_file.write(
+          #       [line["title"],
+          #        line["rev_id"],
+          #        line["user"],
+          #        line["username"],
+          #        line["comment"],
+          #        line["namespace"],
+          #        line["timestamp"],
+          #        line["prev_timestamp"],
+          #        line["session_start"],
+          #        line["session_end"],
+          #        line["session_index"],
+          #        line["session_events"],
+          #        line["event_index"]]) 
+
+    # testing_samples_output_file.write("</ol>")
 
 
 def create_url_item(username, starting_timestamp, session_length_in_seconds):
@@ -197,17 +216,17 @@ def create_url_item(username, starting_timestamp, session_length_in_seconds):
         str(session_completed.day).zfill(2)
 
 
-    url = "https://wikidata.org/w/index.php?limit=250&title=\
-              Special%3AContributions&contribs=user&target=" +\
+    url = "https://wikidata.org/w/index.php?limit=250&title=" +\
+              "Special%3AContributions&contribs=user&target=" +\
               converted_username +"&namespace=&tagfilter=&start=" +\
               starting_year_month_day + "&end=" + completed_year_month_day
               
-    url_html = "<li><ul><li> Starting timestamp: " + starting_timestamp +\
-               " <li> Session completed: " + session_completed_string +\
-               " <li> Contributions page(s): <a href=\"" +\
-               url + "\">" + url + "</a></p></ul></li>"
+    # url_html = "<li><ul><li> Starting timestamp: " + starting_timestamp +\
+    #            " <li> Session completed: " + session_completed_string +\
+    #            " <li> Contributions page(s): <a href=\"" +\
+    #            url + "\">" + url + "</a></p></ul></li>"
 
-    return url_html
+    return starting_timestamp, session_completed_string, url
 
 main()
 
