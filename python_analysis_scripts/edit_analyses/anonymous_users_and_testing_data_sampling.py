@@ -134,19 +134,17 @@ def run(input_testing_file, input_anonymous_user_threshold_scores_file,
 
 
     for recall in increasing_recall:
-        anonymous_user_samples_output_file.write("<h1>Considered bot" + 
-            " sessions when recall: {0}</h1>".format(recall))
 
-        anonymous_user_samples_output_file.write("<ol>")
+        anonymous_user_samples_output_file.write(["RECALL", recall, ""])
+
+
 
         for recall_session in recall_sample[recall]:
             for session in recall_session:
-                url = create_url_item(session['username'], 
-                                      session['session_start'], 
-                                      session["session_length_in_seconds"])
-                anonymous_user_samples_output_file.write(url)
-
-        anonymous_user_samples_output_file.write("</ol>")
+                anonymous_user_samples_output_file.write(
+                    create_url_item(session['username'], 
+                                    session['session_start'], 
+                                    session["session_length_in_seconds"]))
 
 
     # Testing file sampling
@@ -154,9 +152,6 @@ def run(input_testing_file, input_anonymous_user_threshold_scores_file,
         if line['bot'] == 'TRUE' and line['bot_prediction'] == 0:
             false_negative_testing_sessions.append(line)
 
-    # testing_samples_output_file.write("<h1>False negatives from the test" +
-    #     " set</h1>")
-    # testing_samples_output_file.write("<ol>")
 
     for line in random.sample(false_negative_testing_sessions, 100):
 
@@ -164,26 +159,9 @@ def run(input_testing_file, input_anonymous_user_threshold_scores_file,
                               line['session_start'], 
                               line["session_length_in_seconds"]))
 
-          # output_file.write(
-          #       [line["title"],
-          #        line["rev_id"],
-          #        line["user"],
-          #        line["username"],
-          #        line["comment"],
-          #        line["namespace"],
-          #        line["timestamp"],
-          #        line["prev_timestamp"],
-          #        line["session_start"],
-          #        line["session_end"],
-          #        line["session_index"],
-          #        line["session_events"],
-          #        line["event_index"]]) 
-
-    # testing_samples_output_file.write("</ol>")
 
 
 def create_url_item(username, starting_timestamp, session_length_in_seconds):
-    url = ""
     converted_username = username.replace(":","%3A")
     converted_starting_timestamp =\
         datetime.datetime(int(starting_timestamp[0:4]),
@@ -197,13 +175,21 @@ def create_url_item(username, starting_timestamp, session_length_in_seconds):
     session_completed = converted_starting_timestamp +\
                         datetime.timedelta(seconds=session_length_in_seconds)
 
-    session_completed_string = str(session_completed.year) +\
-                               str(session_completed.month).zfill(2) +\
-                               str(session_completed.day).zfill(2) +\
-                               str(session_completed.hour).zfill(2) +\
-                               str(session_completed.minute).zfill(2) +\
-                               str(session_completed.second).zfill(2)
+    starting_timestamp_readable = \
+        str(converted_starting_timestamp.year) + "-" +\
+        str(converted_starting_timestamp.month).zfill(2) + "-" +\
+        str(converted_starting_timestamp.day).zfill(2) + " " +\
+        str(converted_starting_timestamp.hour).zfill(2) + " " +\
+        str(converted_starting_timestamp.minute).zfill(2) + " " +\
+        str(converted_starting_timestamp.second).zfill(2)
 
+    session_completed_readable = \
+        str(session_completed.year) + "-" +\
+        str(session_completed.month).zfill(2) + "-" +\
+        str(session_completed.day).zfill(2) + " " +\
+        str(session_completed.hour).zfill(2) + " " +\
+        str(session_completed.minute).zfill(2) + " " +\
+        str(session_completed.second).zfill(2)
 
     starting_year_month_day =\
         str(converted_starting_timestamp.year).zfill(2) + "-" +\
@@ -221,12 +207,8 @@ def create_url_item(username, starting_timestamp, session_length_in_seconds):
               converted_username +"&namespace=&tagfilter=&start=" +\
               starting_year_month_day + "&end=" + completed_year_month_day
               
-    # url_html = "<li><ul><li> Starting timestamp: " + starting_timestamp +\
-    #            " <li> Session completed: " + session_completed_string +\
-    #            " <li> Contributions page(s): <a href=\"" +\
-    #            url + "\">" + url + "</a></p></ul></li>"
 
-    return starting_timestamp, session_completed_string, url
+    return starting_timestamp_readable, session_completed_readable, url
 
 main()
 

@@ -56,8 +56,8 @@ def main(argv=None):
 
     input_training_file = mysqltsv.Reader(
         open(args['<input_training>'],'rt'), headers=True, 
-        types=[float, float, int, int, int, int, int, int, int, int, int, str,
-            str, float, int, int, int])
+        types=[str, str, str, float, float, int, int, int, int, int, int, int, 
+            int, int, str, str, float, int, int, int])
 
     input_testing_file = mysqltsv.Reader(
         open(args['<input_testing>'],'rt'), headers=True, 
@@ -266,7 +266,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                 gradient_b_fitted_model.decision_function(testing_predictors))))
     sys.stderr.flush()
 
-
+        
     threshold_scores =\
         gradient_b_fitted_model.decision_function(anonymous_predictors)
 
