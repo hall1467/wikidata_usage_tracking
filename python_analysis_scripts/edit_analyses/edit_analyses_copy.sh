@@ -22,9 +22,9 @@
 # cat /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv >> \
 # 	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv
 
-rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv
+# rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp.tsv
 
-rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes.tsv
+# rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes.tsv
 
 ######### Sessionize all of Wikidata's history #########
 
@@ -37,47 +37,47 @@ rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escape
 ###########################################################
 
 # Removes retracted and anonymous user names
-tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > \
-	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv
+# tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > \
+# 	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
-	/export/scratch2/wmf/edit_analyses/revision_session_data.tsv \
-	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
+# 	/export/scratch2/wmf/edit_analyses/revision_session_data.tsv \
+# 	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_error_log.txt
 
-psql wikidata_entities < /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/wikidata_bots_table/queries/bot_user_ids.sql
+# psql wikidata_entities < /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/wikidata_bots_table/queries/bot_user_ids.sql
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/label_edits_as_bot_or_human.py \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
-	/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_bots/bot_user_ids.tsv \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/label_edits_as_bot_or_human.py \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
+# 	/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_bots/bot_user_ids.tsv \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	/export/scratch2/wmf/edit_analyses/session_stats.txt \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	/export/scratch2/wmf/edit_analyses/session_stats.txt \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
-	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
+# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
 
 
 #############################################
@@ -85,80 +85,80 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
 #############################################
 
 # Removes retracted and anonymous user names
-tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv
+# tail -n +2 /export/scratch2/wmf/edit_analyses/session_data.tsv | grep -v "^NULL" | shuf -n 100000 > \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/take_out_used_data_from_testing_set.py \
-	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/take_out_used_data_from_testing_set.py \
+# 	/export/scratch2/wmf/edit_analyses/100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
-	/export/scratch2/wmf/edit_analyses/revision_session_data.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
+# 	/export/scratch2/wmf/edit_analyses/revision_session_data.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/label_edits_as_bot_or_human.py \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
-	/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_bots/bot_user_ids.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/label_edits_as_bot_or_human.py \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits.tsv \
+# 	/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_bots/bot_user_ids.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats.txt \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/session_stats.py \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats.txt \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv \
-	--verbose \
-	--debug > & \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
 
 
 ##############################################
 ######### Model training and testing #########
 ##############################################
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
-# 	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-# 	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
-# 	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
+	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
+	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
 
 
 ####################################################
 ######### Run model on anonymous edit data #########
 ####################################################
 
-# echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > \
-#     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
+echo "title\trev_id\tuser\tusername\tcomment\tnamespace\ttimestamp" > \
+    /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
 
-# tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
-#     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
+tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
+    /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
-# mwsessions sessionize --user=username \
-# 	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
-# 	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
-# 	/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
+mwsessions sessionize --user=username \
+	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
+	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
+	/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
 
 # python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_edits.py \
 # 	/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv \
