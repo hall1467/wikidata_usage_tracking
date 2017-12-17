@@ -59,12 +59,22 @@ def main(argv=None):
     anonymous_user_samples_output_file = mysqltsv.Writer(
         open(args['<anonymous_user_samples_output>'], "w"),
         headers=['session start timestamp', 'session completed timestamp',
-                 'url'])
+                 'url', 'Consistent revision frequency', 
+                 'Comment is "Updated item"', 
+                 'Similar operations occur to different pages', 
+                 'More than one claim edited per revision', 
+                 'At least one rev. comment is prefixed by "bot" or "robot"', 
+                 'Short session with rapid revisions', 'Not-obviously a bot'])
 
     testing_samples_output_file = mysqltsv.Writer(
         open(args['<testing_samples_output>'], "w"),
         headers=['session start timestamp', 'session completed timestamp',
-                 'url'])
+                 'url', 'Consistent revision frequency', 
+                 'Comment is "Updated item"', 
+                 'Similar operations occur to different pages', 
+                 'More than one claim edited per revision', 
+                 'At least one rev. comment is prefixed by "bot" or "robot"', 
+                 'Short session with rapid revisions', 'Not-obviously a bot'])
 
     verbose = args['--verbose']
 
@@ -192,23 +202,30 @@ def create_url_item(username, starting_timestamp, session_length_in_seconds):
         str(session_completed.second).zfill(2)
 
     starting_year_month_day =\
-        str(converted_starting_timestamp.year).zfill(2) + "-" +\
+        str(converted_starting_timestamp.year).zfill(4) + "-" +\
         str(converted_starting_timestamp.month).zfill(2) + "-" +\
-        str(converted_starting_timestamp.day).zfill(2)
+        str(converted_starting_timestamp.day).zfill(2) + "T" +\
+        str(converted_starting_timestamp.hour).zfill(2) + ":" +\
+        str(converted_starting_timestamp.minute).zfill(2) + ":" +\
+        str(converted_starting_timestamp.second).zfill(2) + "Z"
 
     completed_year_month_day =\
-        str(session_completed.year) + "-" +\
+        str(session_completed.year).zfill(4) + "-" +\
         str(session_completed.month).zfill(2) + "-" +\
-        str(session_completed.day).zfill(2)
+        str(session_completed.day).zfill(2) + "T" +\
+        str(session_completed.hour).zfill(2) + ":" +\
+        str(session_completed.minute).zfill(2) + ":" +\
+        str(session_completed.second).zfill(2) + "Z"
 
 
-    url = "https://wikidata.org/w/index.php?limit=250&title=" +\
-              "Special%3AContributions&contribs=user&target=" +\
-              converted_username +"&namespace=&tagfilter=&start=" +\
-              starting_year_month_day + "&end=" + completed_year_month_day
-              
+    url = "https://wikidata.org/w/api.php?action=query&list=usercontribs" + \
+          "&uclimit=max&ucstart=" + starting_year_month_day + "&ucend=" + \
+          completed_year_month_day + "&ucuser=" + converted_username + \
+          "&ucdir=newer"
+
 
     return starting_timestamp_readable, session_completed_readable, url
+
 
 main()
 
