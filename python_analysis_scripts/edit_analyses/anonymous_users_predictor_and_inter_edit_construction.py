@@ -142,7 +142,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                 else:
                     continue
 
-                for inter_edit_time in 
+                for inter_edit_time in \
                     inter_edit_times[username][session_start]:
                     
                     if inter_edit_time < 5:
