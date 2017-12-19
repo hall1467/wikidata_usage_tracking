@@ -29,7 +29,7 @@ rm -f /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escape
 ######### Sessionize all of Wikidata's history #########
 
 mwsessions sessionize /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv \
-	--events=/export/scratch2/wmf/edit_analyses/revision_session_data.tsv --verbose > \
+	--events=/export/scratch2/wmf/edit_analyses/revision_session_data.tsv > \
 	/export/scratch2/wmf/edit_analyses/session_data.tsv
 
 ###########################################################
@@ -157,7 +157,7 @@ tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_e
 
 mwsessions sessionize --user=username \
 	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
-	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
+	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv > \
 	/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_edits.py \
