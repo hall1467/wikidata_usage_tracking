@@ -174,7 +174,7 @@ def run(input_file, output_file, verbose):
             if BOT_RE.match(comment):
                 # print("MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
                 agg_stats[user][start]["bot_revision_comment"] = 1
-            else:
+            # else:
                 # print("NOT MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
 
             if GENERIC_EDIT_COMMENT_RE.match(comment):
