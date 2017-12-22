@@ -4,8 +4,8 @@ Take labelled data and aggregates to create predictors for a model.
 
 
 Usage:
-    predictor_construction (-h|--help)
-    predictor_construction <input_training> <input_testing>
+    model_construction (-h|--help)
+    model_construction <input_training> <input_testing>
                            [--debug]
                            [--verbose]
 
@@ -42,12 +42,14 @@ def main(argv=None):
     input_training_file = mysqltsv.Reader(
         open(args['<input_training>'],'rt'), headers=True, 
         types=[str, str, str, float, float, int, int, int, int, int, int, int, 
-            int, int, str, str, float, int, int, int])
+            int, int, str, str, float, int, int, int, int, int, int, int, int, 
+            int, int, int, int, int, int, int, int, int])
 
     input_testing_file = mysqltsv.Reader(
         open(args['<input_testing>'],'rt'), headers=True, 
         types=[str, str, str, float, float, int, int, int, int, int, int, int, 
-            int, int, str, str, float, int, int, int])
+            int, int, str, str, float, int, int, int, int, int, int, int, int, 
+            int, int, int, int, int, int, int, int, int])
 
 
     verbose = args['--verbose']
@@ -80,7 +82,21 @@ def run(input_training_file, input_testing_file, verbose):
                                    line['session_length_in_seconds'],
                                    line['inter_edits_less_than_5_seconds'],
                                    line['inter_edits_between_5_and_20_seconds'],
-                                   line['inter_edits_greater_than_20_seconds']])
+                                   line['inter_edits_greater_than_20_seconds'],
+                                   line['claims'],
+                                   line['distinct_claims'],
+                                   line['distinct_pages'],
+                                   line['disinct_edit_kinds'],
+                                   line['generic_bot_comment'],
+                                   line['bot_revision_comment'],
+                                   line['sitelink_changes'],
+                                   line['alias_changed'],
+                                   line['label_changed'],
+                                   line['description_changed'],
+                                   line['edit_war'],
+                                   line['inter_edits_less_than_2_seconds'],
+                                   line['things_removed'],
+                                   line['things_modified']])
 
 
         if line['bot'] == 'TRUE':
@@ -111,7 +127,21 @@ def run(input_training_file, input_testing_file, verbose):
                                    line['session_length_in_seconds'],
                                    line['inter_edits_less_than_5_seconds'],
                                    line['inter_edits_between_5_and_20_seconds'],
-                                   line['inter_edits_greater_than_20_seconds']])
+                                   line['inter_edits_greater_than_20_seconds'],
+                                   line['claims'],
+                                   line['distinct_claims'],
+                                   line['distinct_pages'],
+                                   line['disinct_edit_kinds'],
+                                   line['generic_bot_comment'],
+                                   line['bot_revision_comment'],
+                                   line['sitelink_changes'],
+                                   line['alias_changed'],
+                                   line['label_changed'],
+                                   line['description_changed'],
+                                   line['edit_war'],
+                                   line['inter_edits_less_than_2_seconds'],
+                                   line['things_removed'],
+                                   line['things_modified']])
 
 
         if line['bot'] == 'TRUE':
