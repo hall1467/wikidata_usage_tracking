@@ -157,7 +157,7 @@ def run(input_file, output_file, verbose):
                                                  [start]\
                                                  ["com"]\
                                                  [comment_title_with_n] = 1
-                    else:
+                    # else:
                         # print("NOT MATCHED BY PROPERTY REGEX", comment, user, line['username'], line['timestamp'])
                 if EDIT_KIND_RE.match(comment).group(4) == '-set' or \
                     EDIT_KIND_RE.match(comment).group(4) == '-update':
