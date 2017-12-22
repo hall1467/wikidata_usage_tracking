@@ -168,7 +168,7 @@ def run(input_file, output_file, verbose):
 
                     agg_stats[user][start]["things_removed"] += 1
 
-            else:
+            # else:
                 # print("NOT MATCHED BY EDIT KIND REGEX", comment, user, line['username'], line['timestamp'])
 
             if BOT_RE.match(comment):
