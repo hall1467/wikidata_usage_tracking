@@ -136,8 +136,9 @@ def run(input_file, output_file, verbose):
                         agg_stats[user][start]["claim_creation"] += 1
 
                     if PROPERTY_RE.match(comment):
-                        print("MATCHED BY PROPERTY REGEX", comment, user, line['username'], line['timestamp'])
+
                         claim = PROPERTY_RE.match(comment).group(1)
+                        # print("MATCHED BY PROPERTY REGEX", comment, user, line['username'], line['timestamp'], claim)
                         agg_unique_attributes[user][start]["claims"][claim] = 1
 
                         comment_title_with_n = comment + title_with_n
@@ -157,7 +158,7 @@ def run(input_file, output_file, verbose):
                                                  ["com"]\
                                                  [comment_title_with_n] = 1
                     else:
-                        print("NOT MATCHED BY PROPERTY REGEX", comment, user, line['username'], line['timestamp'])
+                        # print("NOT MATCHED BY PROPERTY REGEX", comment, user, line['username'], line['timestamp'])
                 if EDIT_KIND_RE.match(comment).group(4) == '-set' or \
                     EDIT_KIND_RE.match(comment).group(4) == '-update':
 
@@ -168,13 +169,13 @@ def run(input_file, output_file, verbose):
                     agg_stats[user][start]["things_removed"] += 1
 
             else:
-                print("NOT MATCHED BY EDIT KIND REGEX", comment, user, line['username'], line['timestamp'])
+                # print("NOT MATCHED BY EDIT KIND REGEX", comment, user, line['username'], line['timestamp'])
 
             if BOT_RE.match(comment):
-                print("MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
+                # print("MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
                 agg_stats[user][start]["bot_revision_comment"] = 1
             else:
-                print("NOT MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
+                # print("NOT MATCHED BY BOT REGEX", comment, user, line['username'], line['timestamp'])
 
             if GENERIC_EDIT_COMMENT_RE.match(comment):
 

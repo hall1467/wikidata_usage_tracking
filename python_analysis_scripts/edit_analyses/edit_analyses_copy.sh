@@ -72,12 +72,12 @@
 # 	--debug > & \
 # 	/export/scratch2/wmf/edit_analyses/session_stats_error_log.txt
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
-# 	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-# 	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-# 	--verbose \
-# 	--debug > & \
-# 	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
+	/export/scratch2/wmf/edit_analyses/revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+	--verbose \
+	--debug > & \
+	/export/scratch2/wmf/edit_analyses/predictors_and_labelled_data_error_log.tsv
 
 
 #############################################
@@ -126,22 +126,22 @@
 # 	--debug > & \
 # 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_session_stats_error_log.txt
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
-# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
-# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv \
-# 	--verbose \
-# 	--debug > & \
-# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/predictor_construction.py \
+	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_revisions_from_100000_random_registered_human_and_bot_sessions_containing_item_or_property_edits_labelled.tsv \
+	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv \
+	--verbose \
+	--debug > & \
+	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data_error_log.tsv
 
 
 ##############################################
 ######### Model training and testing #########
 ##############################################
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
-# 	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
-# 	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
-# 	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/model_construction.py \
+	       /export/scratch2/wmf/edit_analyses/predictors_and_labelled_data.tsv \
+	       /export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_predictors_and_labelled_data.tsv > \
+	       /export/scratch2/wmf/edit_analyses/model_building_results.txt
 
 
 ####################################################
@@ -155,10 +155,10 @@
 # tail -n +2 /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header.tsv | grep -P "^[^\t]+\t[^\t]+\tNULL" >> \
 #     /export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv
 
-mwsessions sessionize --user=username \
-	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
-	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
-	/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
+# mwsessions sessionize --user=username \
+# 	/export/scratch2/wmf/edit_analyses/wikidata_page_revisions_20170501_escaped_backslashes_ordered_by_timestamp_with_header_null_user_id.tsv \
+# 	--events=/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv --verbose > \
+# 	/export/scratch2/wmf/edit_analyses/session_data_null_user_id.tsv
 
 # python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_edits.py \
 # 	/export/scratch2/wmf/edit_analyses/revision_session_data_null_user_id.tsv \
