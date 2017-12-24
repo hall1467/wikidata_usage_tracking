@@ -77,6 +77,7 @@ def run(input_file, output_file, verbose):
     agg_stats = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     inter_edit_times = defaultdict(lambda: defaultdict(list))
     edit_type = defaultdict(lambda: defaultdict(list))
+    usernames = defaultdict(lambda: defaultdict(list))
     agg_unique_attributes = defaultdict(lambda: defaultdict(lambda:
         defaultdict(lambda: defaultdict(int))))
 
@@ -98,6 +99,7 @@ def run(input_file, output_file, verbose):
         agg_stats[user][start][line["namespace"]] += 1
         agg_stats[user][start]['edits'] += 1
         edit_type[user][start] = line["edit_type"]
+        usernames[user][start] = line["username"]
 
 
         # Iteration 2 of predictor creation: looking at comments
