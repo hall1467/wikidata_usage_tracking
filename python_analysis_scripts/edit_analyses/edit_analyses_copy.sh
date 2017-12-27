@@ -238,7 +238,10 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
 	/export/scratch2/wmf/edit_analyses/random_forest_predictions_for_anonymous_user_sessions.tsv \
 	/export/scratch2/wmf/edit_analyses/gradient_boosting_predictions_for_anonymous_user_sessions.tsv \
 	/export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_for_anonymous_user_sessions.tsv \
+	/export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
+	/export/scratch2/wmf/edit_analyses/gradient_boosting_PR_I2_for_anonymous_user_sessions.tsv \
+	/export/scratch2/wmf/edit_analyses/gradient_boosting_ROC_I2_for_anonymous_user_sessions.tsv \
 	--verbose > & \
 	/export/scratch2/wmf/edit_analyses/model_applied_to_anonymous_users_error_log.txt
 
