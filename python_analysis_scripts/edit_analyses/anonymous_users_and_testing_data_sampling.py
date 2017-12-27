@@ -6,22 +6,28 @@ Also, samples testing data.
 
 Usage:
     anonymous_users_and_testing_data_sampling (-h|--help)
-    anonymous_users_and_testing_data_sampling <input_testing> <input_anonymous_user_threshold_scores> <anonymous_user_samples_output> <testing_samples_output>
+    anonymous_users_and_testing_data_sampling <input_testing> <input_anonymous_user_threshold_scores> <input_anonymous_user_threshold_scores_i2> <anonymous_user_samples_output> <anonymous_user_samples_i2_output> <testing_samples_output>
                                               [--debug]
                                               [--verbose]
 
 Options:
-    -h, --help                               This help message is printed
-    <input_testing>                          Path to input testing data file
-                                             to process.
-    <input_anonymous_user_threshold_scores>  Path to input anonymous user model 
-                                             threshold scores file to sample.
-    <anonymous_user_samples_output>          Where anonymous samples will be 
-                                             written.
-    <testing_samples_output>                 Where testing samples will be 
-                                             written.                    
-    --debug                                  Print debug logging to stderr
-    --verbose                                Print dots and stuff to stderr  
+    -h, --help                                  This help message is printed
+    <input_testing>                             Path to input testing data file
+                                                to process.
+    <input_anonymous_user_threshold_scores>     Path to input anonymous user 
+                                                model threshold scores file to 
+                                                sample.
+    <input_anonymous_user_threshold_scores_i2>  Path to input anonymous user 
+                                                model threshold iteration 2 
+                                                scores file to sample.
+    <anonymous_user_samples_output>             Where anonymous samples will be 
+                                                written.
+    <anonymous_user_samples_i2_output>          Where iteration 2 anonymous 
+                                                samples will be written.                                              
+    <testing_samples_output>                    Where testing samples will be 
+                                                written.                    
+    --debug                                     Print debug logging to stderr
+    --verbose                                   Print dots and stuff to stderr  
 """
 
 
@@ -55,9 +61,26 @@ def main(argv=None):
         headers=True, types=[str, str, float, float, int, int, int, int, int, 
         int, int, int, int, float, int, int, int, float])
 
+    input_anonymous_user_threshold_scores_i2_file = mysqltsv.Reader(
+        open(args['<input_anonymous_user_threshold_scores_i2>'],'rt'),
+        headers=True, types=[str, str, float, float, int, int, int, int, int, 
+        int, int, int, int, float, int, int, int, int, int, int, int, int, int, 
+        int, int, int, int, int, int, int, int, float])
+
 
     anonymous_user_samples_output_file = mysqltsv.Writer(
         open(args['<anonymous_user_samples_output>'], "w"),
+        headers=['session start timestamp', 'session completed timestamp',
+                 'url', 'Consistent revision frequency', 
+                 'Comment is "Updated item"', 
+                 'Similar operations occur to different pages', 
+                 'More than one claim edited per revision', 
+                 'At least one rev. comment is prefixed by "bot" or "robot"', 
+                 'Short session with rapid revisions', 'Not-obviously a bot'])
+
+
+    anonymous_user_samples_i2_output_file = mysqltsv.Writer(
+        open(args['<anonymous_user_samples_i2_output>'], "w"),
         headers=['session start timestamp', 'session completed timestamp',
                  'url', 'Consistent revision frequency', 
                  'Comment is "Updated item"', 
@@ -79,82 +102,31 @@ def main(argv=None):
     verbose = args['--verbose']
 
     run(input_testing_file, input_anonymous_user_threshold_scores_file, 
-        anonymous_user_samples_output_file, testing_samples_output_file, 
+        input_anonymous_user_threshold_scores_i2_file,
+        anonymous_user_samples_output_file, 
+        anonymous_user_samples_i2_output_file, testing_samples_output_file, 
         verbose)
 
 
 def run(input_testing_file, input_anonymous_user_threshold_scores_file, 
-    anonymous_user_samples_output_file, testing_samples_output_file,
+    input_anonymous_user_threshold_scores_i2_file,
+    anonymous_user_samples_output_file,
+    anonymous_user_samples_i2_output_file, testing_samples_output_file,
     verbose):
 
 
-    threshold_scores = defaultdict(list)
+    
     false_negative_testing_sessions = []
 
     # Anonymous file sampling
-    for i, line in enumerate(input_anonymous_user_threshold_scores_file):
-
-        if line['threshold_score'] >= 1.59:
-            recall_rounded = 'less_than_10_percent'
-        elif line['threshold_score'] >= .76:
-            recall_rounded = '10_to_20_percent'
-        elif line['threshold_score'] >= .17:
-            recall_rounded = '20_to_30_percent'
-        elif line['threshold_score'] >= -.51:
-            recall_rounded = '30_to_40_percent'
-        elif line['threshold_score'] >= -1.16:
-            recall_rounded = '40_to_50_percent'
-        elif line['threshold_score'] >= -1.82:
-            recall_rounded = '50_to_60_percent'
-        elif line['threshold_score'] >= -2.59:
-            recall_rounded = '60_to_70_percent'
-        elif line['threshold_score'] >= -3.39:
-            recall_rounded = '70_to_80_percent'
-        elif line['threshold_score'] >= -4.21:
-            recall_rounded = '80_to_90_percent'
-        else:
-            recall_rounded = 'greater_than_90_percent'
-
-            
-
-            
-        threshold_scores[recall_rounded]\
-            .append({'username' : line['username'], 
-                     'session_start' : line['session_start'],
-                     'threshold_score' : line['threshold_score'],
-                     'session_length_in_seconds' : 
-                          line['session_length_in_seconds']})
+    anonymous_sampling(input_anonymous_user_threshold_scores_file, 
+        anonymous_user_samples_output_file, 1.59, .76, .17, -.51, -1.16, -1.82, 
+        -2.59, -3.39, -4.21)
 
 
-    recall_sample = defaultdict(list)
-    for recall in threshold_scores:
-        number_of_samples = 20
-        length_of_recall = len(threshold_scores[recall])
-        if length_of_recall < number_of_samples:
-            number_of_samples = length_of_recall
-        recall_sample[recall].append(random.sample(threshold_scores[recall],
-                                                   number_of_samples))
-
-
-    increasing_recall = ['less_than_10_percent', '10_to_20_percent', 
-                         '20_to_30_percent', '30_to_40_percent', 
-                         '40_to_50_percent', '50_to_60_percent', 
-                         '60_to_70_percent', '70_to_80_percent', 
-                         '80_to_90_percent', 'greater_than_90_percent']
-
-
-    for recall in increasing_recall:
-
-        anonymous_user_samples_output_file.write(["RECALL", recall, ""])
-
-
-
-        for recall_session in recall_sample[recall]:
-            for session in recall_session:
-                anonymous_user_samples_output_file.write(
-                    create_url_item(session['username'], 
-                                    session['session_start'], 
-                                    session["session_length_in_seconds"]))
+    anonymous_sampling(input_anonymous_user_threshold_scores_i2_file, 
+        anonymous_user_samples_i2_output_file, 5.46, 4.01, 3.01, 2.21, 1.41, 
+        .66, -.18, -1.18, -2.39)
 
 
     # Testing file sampling
@@ -225,6 +197,74 @@ def create_url_item(username, starting_timestamp, session_length_in_seconds):
 
 
     return starting_timestamp_readable, session_completed_readable, url
+
+
+
+def anonymous_sampling(sampling_file, anonymous_user_samples_output_file, ten, 
+    twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety):
+    
+    threshold_scores = defaultdict(list)
+    for i, line in enumerate(sampling_file):
+
+        if line['threshold_score'] >= ten:
+            recall_rounded = 'less_than_10_percent'
+        elif line['threshold_score'] >= twenty:
+            recall_rounded = '10_to_20_percent'
+        elif line['threshold_score'] >= thirty:
+            recall_rounded = '20_to_30_percent'
+        elif line['threshold_score'] >= forty:
+            recall_rounded = '30_to_40_percent'
+        elif line['threshold_score'] >= fifty:
+            recall_rounded = '40_to_50_percent'
+        elif line['threshold_score'] >= sixty:
+            recall_rounded = '50_to_60_percent'
+        elif line['threshold_score'] >= seventy:
+            recall_rounded = '60_to_70_percent'
+        elif line['threshold_score'] >= eighty:
+            recall_rounded = '70_to_80_percent'
+        elif line['threshold_score'] >= ninety:
+            recall_rounded = '80_to_90_percent'
+        else:
+            recall_rounded = 'greater_than_90_percent'
+
+                     
+        threshold_scores[recall_rounded]\
+            .append({'username' : line['username'], 
+                     'session_start' : line['session_start'],
+                     'threshold_score' : line['threshold_score'],
+                     'session_length_in_seconds' : 
+                          line['session_length_in_seconds']})
+
+
+    recall_sample = defaultdict(list)
+    for recall in threshold_scores:
+        number_of_samples = 20
+        length_of_recall = len(threshold_scores[recall])
+        if length_of_recall < number_of_samples:
+            number_of_samples = length_of_recall
+        recall_sample[recall].append(random.sample(threshold_scores[recall],
+                                                   number_of_samples))
+
+
+    increasing_recall = ['less_than_10_percent', '10_to_20_percent', 
+                         '20_to_30_percent', '30_to_40_percent', 
+                         '40_to_50_percent', '50_to_60_percent', 
+                         '60_to_70_percent', '70_to_80_percent', 
+                         '80_to_90_percent', 'greater_than_90_percent']
+
+
+    for recall in increasing_recall:
+
+        anonymous_user_samples_output_file.write(["RECALL", recall, ""])
+
+
+
+        for recall_session in recall_sample[recall]:
+            for session in recall_session:
+                anonymous_user_samples_output_file.write(
+                    create_url_item(session['username'], 
+                                    session['session_start'], 
+                                    session["session_length_in_seconds"]))
 
 
 main()
