@@ -57,17 +57,20 @@ def main(argv=None):
     input_training_file = mysqltsv.Reader(
         open(args['<input_training>'],'rt'), headers=True, 
         types=[str, str, str, float, float, int, int, int, int, int, int, int, 
-            int, int, str, str, float, int, int, int])
+            int, int, str, str, float, int, int, int, int, int, int, int, 
+            int, int, int, int, int, int, int, int, int, int]) 
 
     input_testing_file = mysqltsv.Reader(
         open(args['<input_testing>'],'rt'), headers=True, 
         types=[str, str, str, float, float, int, int, int, int, int, int, int, 
-            int, int, str, str, float, int, int, int])
+            int, int, str, str, float, int, int, int, int, int, int, int, 
+            int, int, int, int, int, int, int, int, int, int])
 
     input_anonymous_data_file = mysqltsv.Reader(
         open(args['<input_anonymous_data>'],'rt'), headers=True, 
         types=[str, str, float, float, int, int, int, int, int, int, int, int, 
-            int, float, int, int, int])
+            int, float, int, int, int, int, int, int, int, int, int, int, int, 
+            int, int, int, int, int, int])
 
 
     r_forest_predictions_output_file = mysqltsv.Writer(
@@ -129,10 +132,15 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
     testing_output_file, verbose):
     
     training_predictors = []
+    training_predictors_i2 = []
     training_responses = []
+    training_responses_i2 = []
     testing_predictors = []
+    testing_predictors_i2 = []
     testing_responses = []
+    testing_responses_i2 = []
     anonymous_predictors = []
+    anonymous_predictors_i2 = []
     anonymous_user_and_session_start = []
     testing_user_non_predictors = []
 
@@ -155,6 +163,37 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                    line['inter_edits_between_5_and_20_seconds'],
                                    line['inter_edits_greater_than_20_seconds']])
 
+        training_predictors_i2\
+            .append([line['mean_in_seconds'],
+                    line['std_in_seconds'],
+                    line['namespace_0_edits'],
+                    line['namespace_1_edits'],
+                    line['namespace_2_edits'],
+                    line['namespace_3_edits'],
+                    line['namespace_4_edits'],
+                    line['namespace_5_edits'],
+                    line['namespace_120_edits'],
+                    line['namespace_121_edits'],
+                    line['edits'],
+                    line['session_length_in_seconds'],
+                    line['inter_edits_less_than_5_seconds'],
+                    line['inter_edits_between_5_and_20_seconds'],
+                    line['inter_edits_greater_than_20_seconds'],
+                    line['claims'], 
+                    line['distinct_claims'], 
+                    line['distinct_pages'], 
+                    line['disinct_edit_kinds'], 
+                    line['generic_bot_comment'], 
+                    line['bot_revision_comment'], 
+                    line['sitelink_changes'], 
+                    line['alias_changed'], 
+                    line['label_changed'], 
+                    line['description_changed'], 
+                    line['edit_war'], 
+                    line['inter_edits_less_than_2_seconds'], 
+                    line['things_removed'], 
+                    line['things_modified']])
+
 
         if line['bot'] == 'TRUE':
             bot = 1
@@ -164,6 +203,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
             human = 1
 
         training_responses.append(bot)
+        training_responses_i2.append(bot)
 
 
     for i, line in enumerate(input_testing_file):
@@ -191,6 +231,39 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                    line['inter_edits_greater_than_20_seconds']])
 
 
+        testing_predictors_i2\
+            .append([line['mean_in_seconds'],
+                    line['std_in_seconds'],
+                    line['namespace_0_edits'],
+                    line['namespace_1_edits'],
+                    line['namespace_2_edits'],
+                    line['namespace_3_edits'],
+                    line['namespace_4_edits'],
+                    line['namespace_5_edits'],
+                    line['namespace_120_edits'],
+                    line['namespace_121_edits'],
+                    line['edits'],
+                    line['session_length_in_seconds'],
+                    line['inter_edits_less_than_5_seconds'],
+                    line['inter_edits_between_5_and_20_seconds'],
+                    line['inter_edits_greater_than_20_seconds'],
+                    line['claims'], 
+                    line['distinct_claims'], 
+                    line['distinct_pages'], 
+                    line['disinct_edit_kinds'], 
+                    line['generic_bot_comment'], 
+                    line['bot_revision_comment'], 
+                    line['sitelink_changes'], 
+                    line['alias_changed'], 
+                    line['label_changed'], 
+                    line['description_changed'], 
+                    line['edit_war'], 
+                    line['inter_edits_less_than_2_seconds'], 
+                    line['things_removed'], 
+                    line['things_modified']])
+
+
+
         if line['bot'] == 'TRUE':
             bot = 1
             human = 0
@@ -199,6 +272,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
             human = 1
 
         testing_responses.append(bot)
+        testing_responses_i2.append(bot)
 
 
     for i, line in enumerate(input_anonymous_data_file):
@@ -223,6 +297,37 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                    line['inter_edits_between_5_and_20_seconds'],
                                    line['inter_edits_greater_than_20_seconds']])
 
+
+        anonymous_predictors_i2\
+            .append([line['mean_in_seconds'],
+                    line['std_in_seconds'],
+                    line['namespace_0_edits'],
+                    line['namespace_1_edits'],
+                    line['namespace_2_edits'],
+                    line['namespace_3_edits'],
+                    line['namespace_4_edits'],
+                    line['namespace_5_edits'],
+                    line['namespace_120_edits'],
+                    line['namespace_121_edits'],
+                    line['edits'],
+                    line['session_length_in_seconds'],
+                    line['inter_edits_less_than_5_seconds'],
+                    line['inter_edits_between_5_and_20_seconds'],
+                    line['inter_edits_greater_than_20_seconds'],
+                    line['claims'], 
+                    line['distinct_claims'], 
+                    line['distinct_pages'], 
+                    line['disinct_edit_kinds'], 
+                    line['generic_bot_comment'], 
+                    line['bot_revision_comment'], 
+                    line['sitelink_changes'], 
+                    line['alias_changed'], 
+                    line['label_changed'], 
+                    line['description_changed'], 
+                    line['edit_war'], 
+                    line['inter_edits_less_than_2_seconds'], 
+                    line['things_removed'], 
+                    line['things_modified']])
 
 
 
@@ -266,9 +371,39 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                 gradient_b_fitted_model.decision_function(testing_predictors))))
     sys.stderr.flush()
 
+
+    gradient_b_i2_fitted_model = sklearn.ensemble.GradientBoostingClassifier(
+                                  n_estimators=1100, max_depth=3, 
+                                  learning_rate=.1, max_features='log2')\
+        .fit(training_predictors_i2, training_responses_i2)
+
+    gradient_b_predictions = gradient_b_fitted_model\
+                                 .predict(anonymous_predictors)
+
+    sys.stderr.write("Gradient boosting predictor weightings I2: {0}\n"
+        .format(gradient_b_i2_fitted_model.feature_importances_))
+    sys.stderr.write("Gradient default boosting precision I2: {0}\n"
+        .format(sklearn.metrics.precision_score(testing_responses_i2,
+                gradient_b_i2_fitted_model.predict(testing_predictors_i2))))
+    sys.stderr.write("Gradient default boosting recall I2: {0}\n"
+        .format(sklearn.metrics.recall_score(testing_responses_i2,
+                gradient_b_i2_fitted_model.predict(testing_predictors_i2))))
+    sys.stderr.write("Gradient boosting precision recall curve I2: {0}\n"
+        .format(sklearn.metrics.precision_recall_curve(testing_responses_i2,
+                gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))))
+    sys.stderr.flush()
+
+    p, r, t = sklearn.metrics.precision_recall_curve(testing_responses_i2, gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
+    # for i, line in enumerate(p):
+    #     print(p[i],r[i])
+    # print("ROC next")
+
+    p, r, t = sklearn.metrics.roc_curve(testing_responses_i2, gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
+    # for i, line in enumerate(p):
+        # print(p[i],r[i])
         
     threshold_scores =\
-        gradient_b_fitted_model.decision_function(anonymous_predictors)
+        gradient_b_i2_fitted_model.decision_function(anonymous_predictors_i2)
 
 
     testing_predictions =\
