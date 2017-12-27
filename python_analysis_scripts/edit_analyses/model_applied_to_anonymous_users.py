@@ -5,29 +5,37 @@ Apply previously generated model to anonymous user data.
 
 Usage:
     model_applied_to_anonymous_users (-h|--help)
-    model_applied_to_anonymous_users <input_training> <input_testing> <input_anonymous_data> <r_forest_predictions_output> <gradient_b_predictions_output> <gradient_b_threshold_scores_output> <testing_output>
+    model_applied_to_anonymous_users <input_training> <input_testing> <input_anonymous_data> <r_forest_predictions_output> <gradient_b_predictions_output> <gradient_b_threshold_scores_output> <gradient_b_threshold_scores_i2_output> <testing_output> <pr_output> <roc_output>
                                      [--debug]
                                      [--verbose]
 
 Options:
-    -h, --help                            This help message is printed
-    <input_training>                      Path to input training file to 
-                                          process.
-    <input_testing>                       Path to input anonymous user data file
-                                          to process.
-    <input_anonymous_data>                Path to input anonymous user data file 
-                                          to process.
-    <r_forest_predictions_output>         Where random forest predictions will 
-                                          be written
-    <gradient_b_predictions_output>       Where gradient boosting predictions 
-                                          will be written
-    <gradient_b_threshold_scores_output>  Where gradient boosting thresold 
-                                          scores will be written
-    <testing_output>                      Where testing predictions and original
-                                          predictors and labele data will be 
-                                          written                          
-    --debug                               Print debug logging to stderr
-    --verbose                             Print dots and stuff to stderr  
+    -h, --help                               This help message is printed
+    <input_training>                         Path to input training file to 
+                                             process.
+    <input_testing>                          Path to input anonymous user data
+                                             file to process.
+    <input_anonymous_data>                   Path to input anonymous user data 
+                                             file to process.
+    <r_forest_predictions_output>            Where random forest predictions 
+                                             will be written
+    <gradient_b_predictions_output>          Where gradient boosting predictions 
+                                             will be written
+    <gradient_b_threshold_scores_output>     Where gradient boosting thresold 
+                                             scores will be written
+    <gradient_b_threshold_scores_i2_output>  Where iteration 2 gradient boosting
+                                             thresold scores will be written
+    <testing_output>                         Where testing predictions and 
+                                             original predictors and labelled 
+                                             data will be written     
+    <pr_output>                              Where precision versus recall 
+                                             output data for gradient boosting 
+                                             iteration 2 will be written 
+    <roc_output>                             Where roc output data for gradient 
+                                             boosting iteration 2 will be 
+                                             written                      
+    --debug                                  Print debug logging to stderr
+    --verbose                                Print dots and stuff to stderr  
 """
 
 
@@ -106,6 +114,22 @@ def main(argv=None):
             'inter_edits_greater_than_20_seconds', 'threshold_score'])
 
 
+    gradient_b_threshold_scores_i2_output_file = mysqltsv.Writer(
+        open(args['<gradient_b_threshold_scores_i2_output>'], "w"), headers=[
+            'username', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
+            'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
+            'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
+            'namespace_120_edits', 'namespace_121_edits', 'edits', 
+            'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
+            'inter_edits_between_5_and_20_seconds', 
+            'inter_edits_greater_than_20_seconds', 'claims', 'distinct_claims', 
+            'distinct_pages', 'disinct_edit_kinds', 'generic_bot_comment', 
+            'bot_revision_comment', 'sitelink_changes', 'alias_changed', 
+            'label_changed', 'description_changed', 'edit_war', 
+            'inter_edits_less_than_2_seconds', 'things_removed', 
+            'things_modified', 'threshold_score'])
+
+
     testing_output_file = mysqltsv.Writer(
         open(args['<testing_output>'], "w"), headers=[
             'user', 'username', 'session_start', 'mean_in_seconds', 
@@ -119,17 +143,30 @@ def main(argv=None):
             'bot_prediction'])
 
 
+    pr_output_file = mysqltsv.Writer(
+        open(args['<pr_output>'], "w"), headers=[
+            'precision', 'recall'])
+
+
+    roc_output_file = mysqltsv.Writer(
+        open(args['<roc_output>'], "w"), headers=[
+            'true positives', 'false positives'])
+
+
     verbose = args['--verbose']
 
     run(input_training_file, input_testing_file, input_anonymous_data_file, 
         r_forest_predictions_output_file, gradient_b_predictions_output_file,
-        gradient_b_threshold_scores_output_file, testing_output_file, verbose)
+        gradient_b_threshold_scores_output_file, 
+        gradient_b_threshold_scores_i2_output_file, testing_output_file, 
+        pr_output_file, roc_output_file, verbose)
 
 
 def run(input_training_file, input_testing_file, input_anonymous_data_file, 
     r_forest_predictions_output_file, 
-    gradient_b_predictions_output_file, gradient_b_threshold_scores_output_file,
-    testing_output_file, verbose):
+    gradient_b_predictions_output_file, gradient_b_threshold_scores_output_file, 
+    gradient_b_threshold_scores_i2_output_file, testing_output_file, 
+    pr_output_file, roc_output_file, verbose):
     
     training_predictors = []
     training_predictors_i2 = []
@@ -390,26 +427,30 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                 gradient_b_i2_fitted_model.predict(testing_predictors_i2))))
     sys.stderr.write("Gradient boosting precision recall curve I2: {0}\n"
         .format(sklearn.metrics.precision_recall_curve(testing_responses_i2,
-                gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))))
+                gradient_b_i2_fitted_model.
+                    decision_function(testing_predictors_i2))))
     sys.stderr.flush()
 
-    p, r, t = sklearn.metrics.precision_recall_curve(testing_responses_i2, gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
-    # for i, line in enumerate(p):
-    #     print(p[i],r[i])
-    # print("ROC next")
+    p, r, t = sklearn.metrics.precision_recall_curve(testing_responses_i2, 
+        gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
 
-    p, r, t = sklearn.metrics.roc_curve(testing_responses_i2, gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
-    # for i, line in enumerate(p):
-        # print(p[i],r[i])
+    for i, line in enumerate(p):
+        pr_output_file.write([p[i], r[i]])
+
+    false_value, true_value, t = sklearn.metrics.roc_curve(testing_responses_i2, 
+        gradient_b_i2_fitted_model.decision_function(testing_predictors_i2))
+
+    for i, line in enumerate(false_value):
+        roc_output_file.write([false_value[i], true_value[i]])
         
     threshold_scores =\
         gradient_b_i2_fitted_model.decision_function(anonymous_predictors_i2)
-
 
     testing_predictions =\
         gradient_b_fitted_model.predict(testing_predictors)
 
     for i, line in enumerate(testing_predictors):
+        
         testing_output_file.write(
             [testing_user_non_predictors[i]['user'],
              testing_user_non_predictors[i]['username'],
@@ -434,7 +475,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
              testing_predictions[i]])
 
 
-    for i, line in enumerate(anonymous_predictors):
+    for i, line in enumerate(anonymous_predictors_i2):
 
         r_forest_predictions_output_file.write(
             [anonymous_user_and_session_start[i]['username'],
@@ -496,6 +537,41 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
              line[12],
              line[13],
              line[14],
+             threshold_scores[i]])
+
+
+        gradient_b_threshold_scores_i2_output_file.write(
+            [anonymous_user_and_session_start[i]['username'],
+             anonymous_user_and_session_start[i]['session_start'],
+             line[0],
+             line[1],
+             line[2],
+             line[3],
+             line[4],
+             line[5],
+             line[6],
+             line[7],
+             line[8],
+             line[9],
+             line[10],
+             line[11],
+             line[12],
+             line[13],
+             line[14],
+             line[15],
+             line[16],
+             line[17],
+             line[18],
+             line[19],
+             line[20],
+             line[21],
+             line[22],
+             line[23],
+             line[24],
+             line[25],
+             line[26],
+             line[27],
+             line[28],
              threshold_scores[i]])
 
 
