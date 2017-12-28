@@ -150,7 +150,7 @@ def main(argv=None):
 
     roc_output_file = mysqltsv.Writer(
         open(args['<roc_output>'], "w"), headers=[
-            'true positives', 'false positives'])
+            'false_positives', 'true_positives'])
 
 
     verbose = args['--verbose']
