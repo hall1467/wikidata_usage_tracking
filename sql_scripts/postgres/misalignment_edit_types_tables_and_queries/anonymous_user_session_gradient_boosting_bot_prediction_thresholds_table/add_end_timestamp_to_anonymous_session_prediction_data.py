@@ -85,11 +85,11 @@ def run(input_file, output_file, verbose):
             datetime.timedelta(seconds=session_length_in_seconds)
 
         session_completed_output_timestamp =\
-            str(session_completed.year).zfill(4) +
-            str(session_completed.month).zfill(2) +
-            str(session_completed.day).zfill(2) +
-            str(session_completed.hour).zfill(2) +
-            str(session_completed.minute).zfill(2) +
+            str(session_completed.year).zfill(4) +\
+            str(session_completed.month).zfill(2) +\
+            str(session_completed.day).zfill(2) +\
+            str(session_completed.hour).zfill(2) +\
+            str(session_completed.minute).zfill(2) +\
             str(session_completed.second).zfill(2)
 
 
