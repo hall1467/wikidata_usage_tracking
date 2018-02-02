@@ -1,0 +1,1 @@
+\copy (SELECT edit_type, count(*) FROM wikidata_page_revisions_with_timestamp_edit_types_and_usage WHERE page_views IS NOT NULL GROUP BY edit_type) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/sql_queries/wikidata_page_revisions_with_timestamp_edit_types_and_usage/edit_type_sums.tsv';
