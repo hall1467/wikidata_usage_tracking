@@ -72,12 +72,12 @@ def run(input_file, output_file, verbose):
     for i, line in enumerate(input_file):
 
         converted_session_start_timestamp =\
-            datetime.datetime(int(starting_timestamp[0:4]),
-                              int(starting_timestamp[4:6]),
-                              int(starting_timestamp[6:8]),
-                              int(starting_timestamp[8:10]),
-                              int(starting_timestamp[10:12]),
-                              int(starting_timestamp[12:14]))
+            datetime.datetime(int(line['session_start'][0:4]),
+                              int(line['session_start'][4:6]),
+                              int(line['session_start'][6:8]),
+                              int(line['session_start'][8:10]),
+                              int(line['session_start'][10:12]),
+                              int(line['session_start'][12:14]))
 
 
 
