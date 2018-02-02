@@ -46,7 +46,7 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(
-        open(args['<gradient_b_threshold_scores_i2_output>'], "w"), headers=[
+        open(args['<output>'], "w"), headers=[
             'username', 'session_start', 'session_end', 'mean_in_seconds', 
             'std_in_seconds', 'namespace_0_edits', 'namespace_1_edits', 
             'namespace_2_edits', 'namespace_3_edits', 'namespace_4_edits', 
