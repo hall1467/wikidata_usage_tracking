@@ -1,4 +1,4 @@
-CREATE TABLE anonymous_user_session_gradient_boosting_bot_prediction_thresholds(
+CREATE TABLE anonymous_user_session_gradient_boosting_bot_pred_thresholds(
 	username                             VARCHAR(265),
 	session_start                        BIGINT,
 	session_end                          BIGINT,

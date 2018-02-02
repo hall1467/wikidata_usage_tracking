@@ -18,7 +18,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_table_creation.sql
 
 # "anonymous_user_session_gradient_boosting_bot_prediction_thresholds" table creation
-python add_end_timestamp_to_anonymous_session_prediction_data.py \
+python $base/anonymous_user_session_gradient_boosting_bot_prediction_thresholds_table/add_end_timestamp_to_anonymous_session_prediction_data.py \
 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end.tsv \
 	--verbose > & \
