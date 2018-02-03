@@ -10,22 +10,20 @@ Usage:
                                                            [--verbose]
 
 Options:
-    -h, --help       This help message is printed
-    <input_testing>  Path to input data file to process.
-    <output>         Where output will be written.                    
-    --debug          Print debug logging to stderr
-    --verbose        Print dots and stuff to stderr  
+    -h, --help  This help message is printed
+    <input>     Path to input data file to process.
+    <output>    Where output will be written.                    
+    --debug     Print debug logging to stderr
+    --verbose   Print dots and stuff to stderr  
 """
 
 
 import docopt
 import logging
-import operator
 import sys
 import mysqltsv
 import datetime
 from collections import defaultdict
-import random
 
 
 logger = logging.getLogger(__name__)
