@@ -13,7 +13,7 @@ CREATE TABLE anonymous_user_session_gradient_boosting_bot_pred_thresholds(
 	namespace_120_edits                  INT,
 	namespace_121_edits                  INT,
 	edits                                INT,
-	session_length_in_seconds            FLOAT,
+	session_length_in_seconds            DECIMAL,
 	inter_edits_less_than_5_seconds      INT,
 	inter_edits_between_5_and_20_seconds INT,
 	inter_edits_greater_than_20_seconds  INT,
