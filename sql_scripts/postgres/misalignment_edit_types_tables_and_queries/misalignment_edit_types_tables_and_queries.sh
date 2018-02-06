@@ -1,6 +1,7 @@
 # Have been running python scripts in the virtual environment on flagon here: /export/scratch2/wmf/scripts/
 
 # need to delete tables if created
+# Need to delete tables if they aren't needed anymore? They take up a ton of space probably.
 set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/misalignment_edit_types_tables_and_queries
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries
 
@@ -24,14 +25,14 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 # 	--verbose > & \
 # 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_error_log.tsv
 
-psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
+# psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
 
 # tail -n +2 $results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end.tsv \
 # 	> $results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_no_header.tsv
 
-psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
+# psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
 psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_user_session_gradient_boosting_bot_pred_thresholds_ordered_by_username_and_session_start_query.sql
-psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
+# psql wikidata_entities < $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
 
 # "entity_revisions_and_types_and_usages_sparse" table creation
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_sparse_table/entity_revisions_and_types_and_usages_sparse_sub_table_1_table_creation.sql
