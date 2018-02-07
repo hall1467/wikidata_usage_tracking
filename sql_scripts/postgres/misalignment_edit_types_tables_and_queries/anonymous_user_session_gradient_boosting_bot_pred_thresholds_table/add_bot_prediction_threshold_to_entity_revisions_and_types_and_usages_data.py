@@ -8,8 +8,8 @@ timestamp for the 'entity_revisions_and_types_and_usages' table and
 
 
 Usage:
-    add_bot_prediction_to_entity_revisions_and_types_and_usages_data (-h|--help)
-    add_bot_prediction_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <anonymous_session_predictions_input> <output>
+    add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data (-h|--help)
+    add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <anonymous_session_predictions_input> <output>
                                                                      [--debug]
                                                                      [--verbose]
 
