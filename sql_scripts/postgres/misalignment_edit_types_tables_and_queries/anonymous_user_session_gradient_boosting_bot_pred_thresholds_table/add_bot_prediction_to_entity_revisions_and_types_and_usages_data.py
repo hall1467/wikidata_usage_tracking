@@ -9,7 +9,7 @@ timestamp for the 'entity_revisions_and_types_and_usages' table and
 
 Usage:
     add_bot_prediction_to_entity_revisions_and_types_and_usages_data (-h|--help)
-    add_bot_prediction_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <anonymous_session_predictions_input> --high_precision_threshold_input=<high_th> --low_precision_threshold_input=<low_th> <output>
+    add_bot_prediction_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <anonymous_session_predictions_input> <output>
                                                                      [--debug]
                                                                      [--verbose]
 
@@ -20,10 +20,6 @@ Options:
     <anonymous_session_predictions_input>       Path to input anonymous session 
                                                 predictions data file to 
                                                 process.
-    --high_precision_threshold_input=<high_th>  Bot prediction threshold where
-                                                precision is high
-    --low_precision_threshold_input=<low_th>    Bot prediction threshold where
-                                                precision is low
     <output>                                    Where output will be written.                    
     --debug                                     Print debug logging to stderr
     --verbose                                   Print dots and stuff to stderr  
