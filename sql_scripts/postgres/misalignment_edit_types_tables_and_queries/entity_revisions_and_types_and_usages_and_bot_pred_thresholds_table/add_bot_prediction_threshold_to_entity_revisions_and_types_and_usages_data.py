@@ -78,7 +78,7 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
 
     for i, line in enumerate(entity_revisions_input_file):
 
-        bot_prediction_threshold = None
+        bot_prediction_threshold = "\N"
 
         if line[2] in anonymous_predictions:
 
