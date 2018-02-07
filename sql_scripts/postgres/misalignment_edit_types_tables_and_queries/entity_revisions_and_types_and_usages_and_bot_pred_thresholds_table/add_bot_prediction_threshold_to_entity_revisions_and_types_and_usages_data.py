@@ -54,13 +54,7 @@ def main(argv=None):
         open(args['<anonymous_session_predictions_input>'],'rt'),
         headers=False, types=[str, int, int, float])
 
-    output_file = mysqltsv.Writer(
-        open(args['<output>'], "w"), headers=[
-            'page_title', 'revision_id', 'revision_user', 'comment', 
-            'namespace', 'revision_timestamp', 'year', 'month', 'bot_user_id', 
-            'change_tag_revision_id', 'number_of_revisions', 'page_views', 
-            'edit_type', 'year_month_page_title', 'bot_prediction_threshold'])
-
+    output_file = mysqltsv.Writer(open(args['<output>'], "w"))
 
     verbose = args['--verbose']
 
