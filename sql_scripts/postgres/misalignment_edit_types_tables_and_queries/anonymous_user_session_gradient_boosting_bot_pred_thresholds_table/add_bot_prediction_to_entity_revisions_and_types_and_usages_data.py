@@ -54,9 +54,6 @@ def main(argv=None):
         open(args['<anonymous_session_predictions_input>'],'rt'),
         headers=False, types=[str, int, int, float])
 
-    high_precision_thresh = args['--high_precision_threshold_input']
-    low_precision_thresh = args['--low_precision_threshold_input']
-
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), headers=[
             'page_title', 'revision_id', 'revision_user', 'comment', 
@@ -68,11 +65,11 @@ def main(argv=None):
     verbose = args['--verbose']
 
     run(entity_revisions_input_file, anonymous_session_predictions_input_file,
-        high_precision_thresh, low_precision_thresh, output_file, verbose)
+        output_file, verbose)
 
 
 def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
-    high_precision_thresh, low_precision_thresh, output_file, verbose):
+    output_file, verbose):
 
     anonymous_predictions = defaultdict(list)
 
