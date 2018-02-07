@@ -57,9 +57,6 @@ def main(argv=None):
     high_precision_thresh = args['--high_precision_threshold_input']
     low_precision_thresh = args['--low_precision_threshold_input']
 
-    print(high_precision_thresh)
-    print(low_precision_thresh)
-
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), headers=[
             'page_title', 'revision_id', 'revision_user', 'comment', 
