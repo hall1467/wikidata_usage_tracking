@@ -38,7 +38,7 @@ python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/
 	$results/anonymous_user_session_gradient_boosting_bot_pred_thresholds_ordered_by_username_and_session_start.tsv \
 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
 	--verbose > & \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.tsv
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
 # "entity_revisions_and_types_and_usages_sparse" table creation
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_sparse_table/entity_revisions_and_types_and_usages_sparse_sub_table_1_table_creation.sql
