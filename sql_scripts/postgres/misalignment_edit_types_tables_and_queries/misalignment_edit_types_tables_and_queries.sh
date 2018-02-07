@@ -36,7 +36,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 
 
 # "entity_revisions_and_types_and_usages_and_bot_pred_thresholds" table creation
-# python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
+# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
 # 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
 # 	$results/anonymous_user_session_gradient_boosting_bot_pred_thresholds_ordered_by_username_and_session_start.tsv \
 # 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \

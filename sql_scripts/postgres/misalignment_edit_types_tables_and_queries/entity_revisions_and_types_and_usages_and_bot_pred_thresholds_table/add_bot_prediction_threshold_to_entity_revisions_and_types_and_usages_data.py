@@ -59,7 +59,7 @@ def main(argv=None):
             'page_title', 'revision_id', 'revision_user', 'comment', 
             'namespace', 'revision_timestamp', 'year', 'month', 'bot_user_id', 
             'change_tag_revision_id', 'number_of_revisions', 'page_views', 
-            'edit_type', 'year_month_page_title', 'bot_prediction'])
+            'edit_type', 'year_month_page_title', 'bot_prediction_threshold'])
 
 
     verbose = args['--verbose']
@@ -84,7 +84,7 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
 
     for i, line in enumerate(entity_revisions_input_file):
 
-        bot_prediction = None
+        bot_prediction_threshold = None
 
         if line[2] in anonymous_predictions:
 
@@ -100,13 +100,13 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
             if line[5] >= potential_session[1] and \
                 line[5] <= potential_session[2]:
 
-                bot_prediction = potential_session[3]
+                bot_prediction_threshold = potential_session[3]
 
             elif line[5] > potential_session[2]:
                 if next_session and line[5] >= next_session[1] and \
                     line[5] <= next_session[2]:
                     
-                    bot_prediction = next_session[3]
+                    bot_prediction_threshold = next_session[3]
 
                 if len(anonymous_predictions[line[2]]) > 1:
                     # In situation where one remains, leave it in place.
@@ -130,7 +130,7 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
              line[11],
              line[12],
              line[13],
-             bot_prediction])
+             bot_prediction_threshold])
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Revisions finished updating: {0}\n".format(i))  
