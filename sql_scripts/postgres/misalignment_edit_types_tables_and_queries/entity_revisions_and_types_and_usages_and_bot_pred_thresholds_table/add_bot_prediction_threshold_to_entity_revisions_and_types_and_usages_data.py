@@ -104,7 +104,7 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
 
                 if len(anonymous_predictions[line[2]]) > 1:
                     # In situation where one remains, leave it in place.
-                    anonymous_predictions[line[2]].pop(1)
+                    anonymous_predictions[line[2]].pop(0)
 
 
 
