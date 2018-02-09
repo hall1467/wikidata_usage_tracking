@@ -1,4 +1,4 @@
-CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_table_1 AS (
+CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1 AS (
 	SELECT * 
 	FROM crosstab(
 		          'SELECT year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type_updated, count(*) 

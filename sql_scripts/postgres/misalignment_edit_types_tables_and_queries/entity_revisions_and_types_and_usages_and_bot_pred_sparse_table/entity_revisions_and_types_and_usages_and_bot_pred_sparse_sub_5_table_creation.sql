@@ -1,9 +1,9 @@
-CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_table_2 AS (
+CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5 AS (
 	SELECT * 
 	FROM crosstab(
 		          'SELECT year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type_updated, count(*) 
 		           FROM entity_revisions_and_types_and_usages_and_bot_pred_thresholds
-		           WHERE cast(substring(page_title from 2) AS INT) >= 4000000 AND cast(substring(page_title from 2) AS INT) < 8000000
+		           WHERE cast(substring(page_title from 2) AS INT) >= 16000000
 		           GROUP BY year_month_page_title, page_views, number_of_revisions, page_title, year, month, namespace, edit_type_updated 
 		           ORDER BY year_month_page_title',
 		           'SELECT DISTINCT edit_type_updated 
@@ -17,7 +17,7 @@ CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_table
 		                year BIGINT,
 		                month BIGINT,
 		                namespace BIGINT,
-	                    anon_one_hundred_recall_bot_edit BIGINT,
+		                anon_one_hundred_recall_bot_edit BIGINT,
 		                anon_ten_recall_bot_edit BIGINT,
 		                anon_twenty_recall_bot_edit BIGINT,
 		                anon_thirty_recall_bot_edit BIGINT,
