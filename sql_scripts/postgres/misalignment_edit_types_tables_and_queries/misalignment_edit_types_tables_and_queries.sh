@@ -43,9 +43,9 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 # 	--verbose > & \
 # 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_new_edit_type_column.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_new_edit_type_column.sql
 
 # "entity_revisions_and_types_and_usages_and_bot_pred_thresholds" table creation
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1_table_creation.sql
@@ -54,3 +54,27 @@ psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pre
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_4_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table_creation.sql
+
+psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/used_entity_monthly_edit_breakdowns_query.sql
+
+# "used_entity_previous_month_edits" table creation
+python $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_edit_preprocessor.py \
+	$results/used_entity_monthly_edit_breakdowns.tsv \
+	$results/used_entity_edits_aggregated_by_month.tsv \
+	--verbose > & \
+	$results/used_entity_edits_aggregated_by_month_error_log.txt
+
+psql wikidata_entities < $base/used_entity_previous_month_edits_table/used_entity_previous_month_edits_table_creation.sql
+psql wikidata_entities < $base/used_entity_previous_month_edits_table/used_entity_previous_month_edits_table_import.sql
+
+# "misalignment_and_edits" table creation
+psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
+psql wikidata_entities < $base/misalignment_and_edits_table/monthly_misalignment_and_edits_ordered_by_entity_year_month_query.sql
+
+python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
+	$results/monthly_misalignment_and_edits_ordered_by_entity_year_month.tsv \
+	$results/wasted_edits.tsv \
+	--verbose > & \
+	$results/wasted_edits_error_log.txt
+
+

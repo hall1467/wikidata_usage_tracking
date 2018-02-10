@@ -1,0 +1,1 @@
+\COPY used_entity_previous_month_edits FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_entity_edits_aggregated_by_month.tsv';

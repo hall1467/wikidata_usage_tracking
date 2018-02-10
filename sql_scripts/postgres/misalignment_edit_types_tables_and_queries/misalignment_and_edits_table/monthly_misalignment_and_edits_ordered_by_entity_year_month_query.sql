@@ -1,0 +1,1 @@
+\copy (SELECT entity_id, year, month, quality_class, views_class, total_bot_edits, total_semi_automated_edits, total_non_bot_edits, total_anon_edits FROM misalignment_and_edits ORDER BY entity_id, year, month) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/monthly_misalignment_and_edits_ordered_by_entity_year_month.tsv'; 
