@@ -55,10 +55,10 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table_creation.sql
 
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/used_entity_monthly_edit_breakdowns_query.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/used_entity_monthly_edit_breakdowns_query.sql
 
 # "used_entity_previous_month_edits" table creation
-python $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_edit_preprocessor.py \
+python $base/used_entity_previous_month_edits_table/entity_edit_preprocessor.py \
 	$results/used_entity_monthly_edit_breakdowns.tsv \
 	$results/used_entity_edits_aggregated_by_month.tsv \
 	--verbose > & \
