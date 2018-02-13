@@ -60,7 +60,6 @@ def run(input_file, output_file, verbose):
 
 
     previous_entity = None
-    highest_view_class_number = 0
     attained = False
 
 
