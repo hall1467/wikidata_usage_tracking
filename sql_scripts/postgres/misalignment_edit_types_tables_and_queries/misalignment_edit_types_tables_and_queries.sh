@@ -83,11 +83,11 @@ echo "Removing old version of '$results/entity_revisions_and_types_and_usages_wi
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_new_edit_type_column.sql
 
 
-##########################################################################################################
-echo "'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table creation and querying section"
-##########################################################################################################
+######################################################################################################
+echo "'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table creation and querying section"
+######################################################################################################
 
-echo "Dropping old versions of 'entity_revisions_and_types_and_usages_and_bot_pred' table and sub tables (if they exist)."
+echo "Dropping old versions of 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table and sub tables (if they exist)."
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3;"
@@ -95,7 +95,7 @@ echo "Dropping old versions of 'entity_revisions_and_types_and_usages_and_bot_pr
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse;"
 
-echo "Creating 'entity_revisions_and_types_and_usages_and_bot_pred' table and sub tables (first)."
+echo "Creating 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table and sub tables (first)."
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3_table_creation.sql
@@ -106,14 +106,13 @@ echo "Creating 'entity_revisions_and_types_and_usages_and_bot_pred' table and su
 echo "Dropping table 'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' since it isn't needed anymore."
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_thresholds;"
 
-echo "Dropping table and sub tables of'entity_revisions_and_types_and_usages_and_bot_pred' since they aren't needed anymore."
+echo "Dropping table and sub tables of 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' since they aren't needed anymore."
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_4;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5;"
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse;"
-
 
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/used_entity_monthly_edit_breakdowns_query.sql
 
