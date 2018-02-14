@@ -31,6 +31,9 @@ echo "'entity_revisions_and_types_and_usages' table creation and querying sectio
 
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_semi_automated_100_random_revisions_per_type_query.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_semi_automated_revision_word_counts_query.sql
+
 
 echo "Dropping table 'entity_revisions_and_bot_flags_and_tool_change_tags' since it isn't needed anymore."
 # psql wikidata_entities -c "drop table entity_revisions_and_bot_flags_and_tool_change_tags;"
@@ -145,7 +148,10 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # rm -f $results/wasted_edits_error_log.txt
 
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
-# psql wikidata_entities < $base/misalignment_and_edits_table/monthly_misalignment_and_edits_ordered_by_entity_year_month_query.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_ordered_by_entity_year_month_query.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17.sql
 
 # python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
 # 	$results/monthly_misalignment_and_edits_ordered_by_entity_year_month.tsv \
