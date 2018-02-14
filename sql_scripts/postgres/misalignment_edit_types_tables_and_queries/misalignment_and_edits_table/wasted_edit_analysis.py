@@ -62,16 +62,16 @@ def main(argv=None):
                  'semi_automated_edits_proportion',
                  'non_bot_edits_proportion',
                  'other_anon_edits_proportion',
-                 'anon_ten_recall_bot_edit_proportion',
-                 'anon_twenty_recall_bot_edit_proportion',
-                 'anon_thirty_recall_bot_edit_proportion',
-                 'anon_forty_recall_bot_edit_proportion',
-                 'anon_fifty_recall_bot_edit_proportion',
-                 'anon_sixty_recall_bot_edit_proportion',
-                 'anon_seventy_recall_bot_edit_proportion',
-                 'anon_eighty_recall_bot_edit_proportion',
-                 'anon_ninety_recall_bot_edit_proportion',
-                 'anon_one_hundred_recall_bot_edit_proportion',
+                 'anon_ten_recall_bot_edits_proportion',
+                 'anon_twenty_recall_bot_edits_proportion',
+                 'anon_thirty_recall_bot_edits_proportion',
+                 'anon_forty_recall_bot_edits_proportion',
+                 'anon_fifty_recall_bot_edits_proportion',
+                 'anon_sixty_recall_bot_edits_proportion',
+                 'anon_seventy_recall_bot_edits_proportion',
+                 'anon_eighty_recall_bot_edits_proportion',
+                 'anon_ninety_recall_bot_edits_proportion',
+                 'anon_one_hundred_recall_bot_edits_proportion',
                  'all_types_of_anon_edits_proportion'])
 
     verbose = args['--verbose']
@@ -259,7 +259,7 @@ def run(input_file, output_file, verbose):
         all_wasted_semi_automated_edits\
             += wasted_edits[entity]["semi_automated_edits"]
         all_wasted_non_bot_edits += wasted_edits[entity]["non_bot_edits"]
-        all_wasted_other_anon_edits += wasted_edits[entity]["anon_edits"]
+        all_wasted_other_anon_edits += wasted_edits[entity]["other_anon_edits"]
         all_wasted_anon_ten_recall_bot_edits\
             += wasted_edits[entity]["anon_ten_recall_bot_edits"]
         all_wasted_anon_twenty_recall_bot_edits\
