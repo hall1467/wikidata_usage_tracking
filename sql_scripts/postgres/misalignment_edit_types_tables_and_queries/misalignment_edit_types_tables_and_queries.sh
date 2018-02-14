@@ -1,6 +1,5 @@
 # Have been running python scripts in the virtual environment on flagon here: /export/scratch2/wmf/scripts/
 
-# Might want to fill in any additional queries. Including one for final jupyter notebook
 set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/misalignment_edit_types_tables_and_queries
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries
 
@@ -8,6 +7,9 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_e
 #############################################################
 echo "'entity_revisions' table creation and querying section"
 #############################################################
+
+echo "Dropping old version of 'entity_revisions' table (if it exists)."
+psql wikidata_entities -c "drop table entity_revisions;"
 
 psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_creation.sql
 psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_import.sql
@@ -17,6 +19,9 @@ psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_ind
 ################################################################################################
 echo "'entity_revisions_and_bot_flags_and_tool_change_tags' table creation and querying section"
 ################################################################################################
+
+echo "Dropping old version of 'entity_revisions_and_bot_flags_and_tool_change_tags' table (if it exists)."
+psql wikidata_entities -c "drop table entity_revisions_and_bot_flags_and_tool_change_tags;"
 
 psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_creation.sql
 psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_index_creation.sql
@@ -28,6 +33,9 @@ echo "Dropping table 'entity_revisions' since it isn't needed anymore."
 ##################################################################################
 echo "'entity_revisions_and_types_and_usages' table creation and querying section"
 ##################################################################################
+
+echo "Dropping old version of 'entity_revisions_and_types_and_usages' table (if it exists)."
+# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages;"
 
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
@@ -45,6 +53,9 @@ echo "Dropping table 'entity_revisions_and_types_and_usages' since it isn't need
 #########################################################################################################
 echo "'anonymous_user_session_gradient_boosting_bot_pred_thresholds' table creation and querying section"
 #########################################################################################################
+
+echo "Dropping old version of 'anonymous_user_session_gradient_boosting_bot_pred_thresholds' table (if it exists)."
+# psql wikidata_entities -c "drop table anonymous_user_session_gradient_boosting_bot_pred_thresholds;"
 
 echo "Removing old version of '$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_error_log.txt' (if it exists)."
 # rm -f $results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_error_log.txt
@@ -70,6 +81,9 @@ echo "Removing old version of '$results/gradient_boosting_threshold_scores_I2_fo
 ##########################################################################################################
 echo "'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table creation and querying section"
 ##########################################################################################################
+
+echo "Dropping old version of 'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table (if it exists)."
+# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_thresholds;"
 
 echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt' (if it exists)."
 # rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
@@ -124,6 +138,9 @@ echo "Dropping table and sub tables of 'entity_revisions_and_types_and_usages_an
 echo "'used_entity_previous_month_edits' table creation and querying section"
 #############################################################################
 
+echo "Dropping old version of 'used_entity_previous_month_edits' table (if it exists)."
+# psql wikidata_entities -c "drop table used_entity_previous_month_edits;"
+
 # echo "Removing old version of '$results/used_entity_edits_aggregated_by_month_error_log.txt' (if it exists)."
 # rm -f $results/used_entity_edits_aggregated_by_month_error_log.txt
 
@@ -143,6 +160,9 @@ echo "'used_entity_previous_month_edits' table creation and querying section"
 ###################################################################
 echo "'misalignment_and_edits' table creation and querying section"
 ###################################################################
+
+echo "Dropping old version of 'misalignment_and_edits' table (if it exists)."
+# psql wikidata_entities -c "drop table misalignment_and_edits;"
 
 echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exists)."
 # rm -f $results/wasted_edits_error_log.txt
