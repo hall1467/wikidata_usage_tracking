@@ -9,11 +9,11 @@ echo "'entity_revisions' table creation and querying section"
 #############################################################
 
 echo "Dropping old version of 'entity_revisions' table (if it exists)."
-psql wikidata_entities -c "drop table entity_revisions;"
+# psql wikidata_entities -c "drop table entity_revisions;"
 
-psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_creation.sql
-psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_import.sql
-psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_index_creation.sql
+# psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_creation.sql
+# psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_import.sql
+# psql wikidata_entities < $base/entity_revisions_table/entity_revisions_table_index_creation.sql
 
 
 ################################################################################################
@@ -21,10 +21,10 @@ echo "'entity_revisions_and_bot_flags_and_tool_change_tags' table creation and q
 ################################################################################################
 
 echo "Dropping old version of 'entity_revisions_and_bot_flags_and_tool_change_tags' table (if it exists)."
-psql wikidata_entities -c "drop table entity_revisions_and_bot_flags_and_tool_change_tags;"
+# psql wikidata_entities -c "drop table entity_revisions_and_bot_flags_and_tool_change_tags;"
 
-psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_creation.sql
-psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_index_creation.sql
+# psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_creation.sql
+# psql wikidata_entities < $base/entity_revisions_and_bot_flags_and_tool_change_tags_table/entity_revisions_and_bot_flags_and_tool_change_tags_table_index_creation.sql
 
 echo "Dropping table 'entity_revisions' since it isn't needed anymore."
 # psql wikidata_entities -c "drop table entity_revisions;"
@@ -169,7 +169,7 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_ordered_by_entity_year_month_query.sql
-# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_ordered_by_year_month_query.sql
+psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_ordered_by_year_month_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
