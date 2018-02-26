@@ -1,5 +1,5 @@
 ALTER TABLE entity_revisions_and_types_and_usages_and_bot_pred_thresholds
-ADD COLUMN "edit_type_updated" text;
+ADD COLUMN edit_type_updated text;
 
 UPDATE entity_revisions_and_types_and_usages_and_bot_pred_thresholds
 SET edit_type_updated = (CASE WHEN edit_type = 'anon_edit' AND bot_prediction_threshold >= 5.46 THEN 'anon_ten_recall_bot_edit'

@@ -1,13 +1,13 @@
 """
-Add end timestamp to anonymous session bot prediction data.
+Add end timestamp to user session bot prediction data.
 
 
 
 Usage:
-    add_end_timestamp_to_anonymous_session_prediction_data (-h|--help)
-    add_end_timestamp_to_anonymous_session_prediction_data <input> <output>
-                                                           [--debug]
-                                                           [--verbose]
+    add_end_timestamp_to_user_session_prediction_data (-h|--help)
+    add_end_timestamp_to_user_session_prediction_data <input> <output>
+                                                      [--debug]
+                                                      [--verbose]
 
 Options:
     -h, --help  This help message is printed
@@ -45,7 +45,7 @@ def main(argv=None):
 
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), headers=[
-            'username', 'session_start', 'session_end', 'mean_in_seconds', 
+            'user', 'session_start', 'session_end', 'mean_in_seconds', 
             'std_in_seconds', 'namespace_0_edits', 'namespace_1_edits', 
             'namespace_2_edits', 'namespace_3_edits', 'namespace_4_edits', 
             'namespace_5_edits', 'namespace_120_edits', 'namespace_121_edits', 
@@ -92,7 +92,7 @@ def run(input_file, output_file, verbose):
 
 
         output_file.write(
-            [line['username'],
+            [line['user'],
              line['session_start'],
              session_completed_output_timestamp,
              line['mean_in_seconds'],

@@ -1,28 +1,28 @@
 """
 Add bot prediction to entity revisions and types and usages table data. Both
-datasets are sorted by username and timestamp. Specifically, the revision
+datasets are sorted by user and timestamp. Specifically, the revision
 timestamp for the 'entity_revisions_and_types_and_usages' table and 
 'session_start' for the data coming from the 
-'anonymous_user_session_gradient_boosting_bot_pred_thresholds' table.
+'user_session_gradient_boosting_bot_pred_thresholds' table.
 
 
 
 Usage:
     add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data (-h|--help)
-    add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <anonymous_session_predictions_input> <output>
-                                                                     [--debug]
-                                                                     [--verbose]
+    add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data <entity_revisions_input> <session_predictions_input> <output>
+                                                                               [--debug]
+                                                                               [--verbose]
 
 Options:
-    -h, --help                                  This help message is printed
-    <entity_revisions_input>                    Path to input entity revisions
-                                                data file to process.
-    <anonymous_session_predictions_input>       Path to input anonymous session 
-                                                predictions data file to 
-                                                process.
-    <output>                                    Where output will be written.                    
-    --debug                                     Print debug logging to stderr
-    --verbose                                   Print dots and stuff to stderr  
+    -h, --help                   This help message is printed
+    <entity_revisions_input>     Path to input entity revisions
+                                 data file to process.
+    <session_predictions_input>  Path to input session 
+                                 predictions data file to 
+                                 process.
+    <output>                     Where output will be written.                    
+    --debug                      Print debug logging to stderr
+    --verbose                    Print dots and stuff to stderr  
 """
 
 
@@ -50,29 +50,29 @@ def main(argv=None):
         headers=False, types=[str, int, str, str, str, int, int, int, str, str, 
         str, str, str, str])
 
-    anonymous_session_predictions_input_file = mysqltsv.Reader(
-        open(args['<anonymous_session_predictions_input>'],'rt'),
+    session_predictions_input_file = mysqltsv.Reader(
+        open(args['<session_predictions_input>'],'rt'),
         headers=False, types=[str, int, int, float])
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"))
 
     verbose = args['--verbose']
 
-    run(entity_revisions_input_file, anonymous_session_predictions_input_file,
+    run(entity_revisions_input_file, session_predictions_input_file,
         output_file, verbose)
 
 
-def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
+def run(entity_revisions_input_file, session_predictions_input_file,
     output_file, verbose):
 
-    anonymous_predictions = defaultdict(list)
+    predictions = defaultdict(list)
 
-    for i, line in enumerate(anonymous_session_predictions_input_file):
-        anonymous_predictions[line[0]].append(line)
+    for i, line in enumerate(session_predictions_input_file):
+        predictions[line[0]].append(line)
 
 
         if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Anon preds put in dictionary: {0}\n".format(i))  
+            sys.stderr.write("Preds put in dictionary: {0}\n".format(i))  
             sys.stderr.flush()
 
 
@@ -80,13 +80,13 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
 
         bot_prediction_threshold = "\\N"
 
-        if line[2] in anonymous_predictions:
+        if line[2] in predictions:
 
             unconsidered_sessions = []
-            potential_session = anonymous_predictions[line[2]][0]
+            potential_session = predictions[line[2]][0]
 
-            if len(anonymous_predictions[line[2]]) > 1:
-                next_session = anonymous_predictions[line[2]][1]
+            if len(predictions[line[2]]) > 1:
+                next_session = predictions[line[2]][1]
             else:
                 next_session = None
 
@@ -102,9 +102,9 @@ def run(entity_revisions_input_file, anonymous_session_predictions_input_file,
                     
                     bot_prediction_threshold = next_session[3]
 
-                if len(anonymous_predictions[line[2]]) > 1:
+                if len(predictions[line[2]]) > 1:
                     # In situation where one remains, leave it in place.
-                    anonymous_predictions[line[2]].pop(0)
+                    predictions[line[2]].pop(0)
 
 
 
