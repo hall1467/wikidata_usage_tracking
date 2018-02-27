@@ -63,41 +63,41 @@ echo "Removing old version of '$results/add_end_timestamp_to_anonymous_session_p
 echo "Removing old version of '$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_no_header.tsv' (if it exists)."
 # rm -f $results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions_with_session_end_no_header.tsv
 
-echo "Removing old version of '$base/registered_human_and_bot_sessions.tsv' (if it exists)."
+echo "Removing old version of '$results/registered_human_and_bot_sessions.tsv' (if it exists)."
 # rm -f $results/registered_human_and_bot_sessions.tsv
 
-echo "Removing old version of '$base/revisions_registered_human_and_bot_sessions_error_log.txt' (if it exists)."
+echo "Removing old version of '$results/revisions_registered_human_and_bot_sessions_error_log.txt' (if it exists)."
 # rm -f $results/revisions_registered_human_and_bot_sessions_error_log.txt
 
-echo "Removing old version of '$base/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt' (if it exists)."
+echo "Removing old version of '$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt' (if it exists)."
 # rm -f $results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt
 
-echo "Removing old version of '$base/registered_users_predictor_and_inter_edit_construction_error_log.tsv' (if it exists)."
+echo "Removing old version of '$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv' (if it exists)."
 # rm -f $results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
 
-echo "Removing old version of '$base/model_applied_to_registered_users_error_log.txt' (if it exists)."
+echo "Removing old version of '$results/model_applied_to_registered_users_error_log.txt' (if it exists)."
 # rm -f $results/model_applied_to_registered_users_error_log.txt
 
 # Removes retracted and anonymous user names
-tail -n +2 /export/scratch2/wmf/edit_analyses/old_12_12_17/session_data.tsv | grep -v "^NULL" > $results/registered_human_and_bot_sessions.tsv
+# tail -n +2 /export/scratch2/wmf/edit_analyses/old_12_12_17/session_data.tsv | grep -v "^NULL" > $results/registered_human_and_bot_sessions.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
-	/export/scratch2/wmf/edit_analyses/old_12_12_17/revision_session_data.tsv \
-	$results/registered_human_and_bot_sessions.tsv \
-	$results/revisions_registered_human_and_bot_sessions.tsv \
-	--verbose \
-	--debug > & \
-	$results/revisions_registered_human_and_bot_sessions_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
+# 	/export/scratch2/wmf/edit_analyses/old_12_12_17/revision_session_data.tsv \
+# 	$results/registered_human_and_bot_sessions.tsv \
+# 	$results/revisions_registered_human_and_bot_sessions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/revisions_registered_human_and_bot_sessions_error_log.txt
 
 echo "Removing '$results/registered_human_and_bot_sessions.tsv' to save space."
-# rm -f $results/registered_human_and_bot_sessions.tsv
+rm -f $results/registered_human_and_bot_sessions.tsv
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
-# 	$results/revisions_registered_human_and_bot_sessions.tsv \
-# 	$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv --verbose --debug > & \
-# 	$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_revisions_containing_property_or_item_edits.py \
+	$results/revisions_registered_human_and_bot_sessions.tsv \
+	$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv --verbose --debug > & \
+	$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits_error_log.txt
 
-echo "Removing '$base/revisions_registered_human_and_bot_sessions.tsv' to save space."
+echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to save space."
 # rm -f $results/revisions_registered_human_and_bot_sessions.tsv
 
 # python $base/user_session_gradient_boosting_bot_pred_thresholds_table/registered_users_predictor_and_inter_edit_construction.py \
@@ -152,6 +152,9 @@ echo "Dropping old version of 'entity_revisions_and_types_and_usages_and_bot_pre
 echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt' (if it exists)."
 # rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
+echo "Removing old version of '$results/revision_misalignment_matcher_error_log.txt' (if it exists)."
+# rm -f $results/revision_misalignment_matcher_error_log.txt
+
 # python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
 # 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
 # 	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_username_and_session_start.tsv \
@@ -159,6 +162,11 @@ echo "Removing old version of '$results/entity_revisions_and_types_and_usages_wi
 # 	--verbose > & \
 # 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
+# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
+# 	--verbose > & \
+# 	$results/revision_misalignment_matcher_error_log.txt
 
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
