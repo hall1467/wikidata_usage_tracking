@@ -4,6 +4,7 @@ datasets are sorted by user and timestamp. Specifically, the revision
 timestamp for the 'entity_revisions_and_types_and_usages' table and 
 'session_start' for the data coming from the 
 'user_session_gradient_boosting_bot_pred_thresholds' table.
+Has been updated to include starting session timestamp as well.
 
 
 
@@ -79,6 +80,7 @@ def run(entity_revisions_input_file, session_predictions_input_file,
     for i, line in enumerate(entity_revisions_input_file):
 
         bot_prediction_threshold = "\\N"
+        start_of_session = "\\N"
 
         if line[2] in predictions:
 
@@ -95,12 +97,14 @@ def run(entity_revisions_input_file, session_predictions_input_file,
                 line[5] <= potential_session[2]:
 
                 bot_prediction_threshold = potential_session[3]
+                start_of_session = potential_session[1]
 
             elif line[5] > potential_session[2]:
                 if next_session and line[5] >= next_session[1] and \
                     line[5] <= next_session[2]:
                     
                     bot_prediction_threshold = next_session[3]
+                    start_of_session = next_session[1]
 
                 if len(predictions[line[2]]) > 1:
                     # In situation where one remains, leave it in place.
@@ -124,7 +128,8 @@ def run(entity_revisions_input_file, session_predictions_input_file,
              line[11],
              line[12],
              line[13],
-             bot_prediction_threshold])
+             bot_prediction_threshold,
+             start_of_session])
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Revisions finished updating: {0}\n".format(i))  
