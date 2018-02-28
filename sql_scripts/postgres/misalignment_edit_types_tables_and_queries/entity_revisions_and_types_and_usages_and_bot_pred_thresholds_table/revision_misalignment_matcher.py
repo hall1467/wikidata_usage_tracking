@@ -40,7 +40,7 @@ def main(argv=None):
     revisions_input_file = mysqltsv.Reader(
         open(args['<revisions_input>'],'rt'),
         headers=False, types=[str, int, str, str, str, int, int, int, str, str, 
-        str, str, str, str, str, int])
+        str, str, str, str, str, str])
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"))
