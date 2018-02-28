@@ -14,7 +14,7 @@ CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_thresholds(
 	edit_type                   TEXT,
 	year_month_page_title       TEXT,
 	bot_prediction_threshold    DECIMAL,
-	misalignment_matching_year  BIGINT,
-	misalignment_matching_month BIGINT,
 	session_start               BIGINT
+	misalignment_matching_year  BIGINT,
+	misalignment_matching_month BIGINT
 );
