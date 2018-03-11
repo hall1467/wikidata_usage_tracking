@@ -86,18 +86,20 @@ def run(revisions_input_file, output_file, verbose):
         else:
             edit_type_updated = "\\N"
 
-        print(comment)
-        if REFERENCE_MANIPULATION_RE.match(comment):
+
+        if comment and REFERENCE_MANIPULATION_RE.match(comment):
             reference_manipulation = True
         else:
             reference_manipulation = False
 
-        if SITELINK_MANIPULATION_RE.match(comment):
+        if comment and SITELINK_MANIPULATION_RE.match(comment):
             sitelink_manipulation = True
         else:
             sitelink_manipulation = False
 
-        if LABEL_DESCRIPTION_OR_ALIAS_MANIPULATION_RE.match(comment):
+        if comment and \
+            LABEL_DESCRIPTION_OR_ALIAS_MANIPULATION_RE.match(comment):
+
             label_description_or_alias_manipulation = True
         else:
             label_description_or_alias_manipulation = False
