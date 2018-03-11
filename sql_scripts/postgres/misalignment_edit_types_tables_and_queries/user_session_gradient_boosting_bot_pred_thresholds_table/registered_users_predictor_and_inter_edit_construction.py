@@ -104,7 +104,7 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
         title_with_n = str(line["namespace"])+line["title"]
 
         if previous_user and previous_session_start and \
-            previous_user != user and previous_session_start != start:
+            (previous_user != user or previous_session_start != start):
 
             write_out_current_results(agg_stats, inter_edit_times, 
                 agg_unique_attributes, usernames, predictor_output_file, 

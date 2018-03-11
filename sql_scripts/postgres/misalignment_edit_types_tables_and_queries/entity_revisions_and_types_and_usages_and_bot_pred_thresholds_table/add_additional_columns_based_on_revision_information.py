@@ -62,29 +62,29 @@ def run(revisions_input_file, output_file, verbose):
         bot_prediction_threshold = line[14]
 
         if not bot_prediction_threshold:
-            edit_type = "\\N"
+            edit_type_updated = "\\N"
         elif bot_prediction_threshold >= 5.46:
-            edit_type = 'anon_ten_recall_bot_edit'
+            edit_type_updated = 'anon_ten_recall_bot_edit'
         elif bot_prediction_threshold >= 4.01:
-            edit_type = 'anon_twenty_recall_bot_edit'
+            edit_type_updated = 'anon_twenty_recall_bot_edit'
         elif bot_prediction_threshold >= 3.01:
-            edit_type = 'anon_thirty_recall_bot_edit'
+            edit_type_updated = 'anon_thirty_recall_bot_edit'
         elif bot_prediction_threshold >= 2.21:
-            edit_type = 'anon_forty_recall_bot_edit'
+            edit_type_updated = 'anon_forty_recall_bot_edit'
         elif bot_prediction_threshold >= 1.41:
-            edit_type = 'anon_fifty_recall_bot_edit'
+            edit_type_updated = 'anon_fifty_recall_bot_edit'
         elif bot_prediction_threshold >= .66:
-            edit_type = 'anon_sixty_recall_bot_edit'
+            edit_type_updated = 'anon_sixty_recall_bot_edit'
         elif bot_prediction_threshold >= -.18:
-            edit_type = 'anon_seventy_recall_bot_edit'
+            edit_type_updated = 'anon_seventy_recall_bot_edit'
         elif bot_prediction_threshold >= -1.18:
-            edit_type = 'anon_eighty_recall_bot_edit'
+            edit_type_updated = 'anon_eighty_recall_bot_edit'
         elif bot_prediction_threshold >= -2.39:
-            edit_type = 'anon_ninety_recall_bot_edit'
+            edit_type_updated = 'anon_ninety_recall_bot_edit'
         elif bot_prediction_threshold >= -5.25:
-            edit_type = 'anon_one_hundred_recall_bot_edit'
+            edit_type_updated = 'anon_one_hundred_recall_bot_edit'
         else:
-            edit_type = "\\N"
+            edit_type_updated = "\\N"
 
 
         if REFERENCE_RE.match(comment):
@@ -122,7 +122,7 @@ def run(revisions_input_file, output_file, verbose):
              line[15],
              line[16],
              line[17],
-             edit_type,
+             edit_type_updated,
              reference_manipulation,
              sitelink_manipulation,
              label_description_or_alias_manipulation])
@@ -131,19 +131,6 @@ def run(revisions_input_file, output_file, verbose):
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
             sys.stderr.flush()
-
-
-
-def increment(year, month):
-
-    if month == 12:
-        incremented_date_year = year + 1
-        incremented_date_month = 1
-    else:
-        incremented_date_year = year
-        incremented_date_month = month + 1
-
-    return incremented_date_year, incremented_date_month
 
 
 
