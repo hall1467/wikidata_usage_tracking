@@ -81,7 +81,6 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
     
     agg_stats = defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
     inter_edit_times = defaultdict(lambda: defaultdict(list))
-    edit_type = defaultdict(lambda: defaultdict(list))
     agg_unique_attributes = defaultdict(lambda: defaultdict(lambda:
         defaultdict(lambda: defaultdict(int))))
     usernames = defaultdict(lambda: defaultdict(list))
@@ -89,6 +88,9 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
 
     namespace_0_total = 0
     edit_kind_regex_total = 0
+
+    previous_user = None
+    previous_session_start = None
 
 
     for i, line in enumerate(input_file):
@@ -100,6 +102,21 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
         previous_timestamp = line["prev_timestamp"]
         timestamp = line["timestamp"]
         title_with_n = str(line["namespace"])+line["title"]
+
+        if previous_user and previous_session_start and \
+            previous_user != user and previous_session_start != start:
+
+            write_out_current_results(agg_stats, inter_edit_times, 
+                agg_unique_attributes, usernames, predictor_output_file, 
+                inter_edit_output_file, verbose)
+
+                agg_stats = defaultdict(lambda: 
+                    defaultdict(lambda: defaultdict(int)))
+                inter_edit_times = defaultdict(lambda: defaultdict(list))
+                agg_unique_attributes = defaultdict(lambda: defaultdict(lambda:
+                    defaultdict(lambda: defaultdict(int))))
+                usernames = defaultdict(lambda: defaultdict(list))
+                
 
         agg_stats[user][start][line["namespace"]] += 1
         agg_stats[user][start]['edits'] += 1
@@ -229,11 +246,19 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                 .append(inter_edit_time.total_seconds())
 
 
+        previous_user = user
+        previous_session_start = start
+
+
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Revisions analyzed: {0}\n".format(i))  
             sys.stderr.flush()
 
 
+
+def write_out_current_results(agg_stats, inter_edit_times, 
+    agg_unique_attributes, usernames, predictor_output_file, 
+    inter_edit_output_file, verbose):
 
     for user in agg_stats:
         for session_start in agg_stats[user]:
@@ -312,14 +337,6 @@ def run(input_file, predictor_output_file, inter_edit_output_file, verbose):
                  inter_edits_less_than_2_seconds,
                  agg_stats[user][session_start]["things_removed"],
                  agg_stats[user][session_start]["things_modified"]])
-
-
-        if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Sessions processed: {0}\n".format(i))  
-            sys.stderr.flush()
-
-
-
 
 
 main()
