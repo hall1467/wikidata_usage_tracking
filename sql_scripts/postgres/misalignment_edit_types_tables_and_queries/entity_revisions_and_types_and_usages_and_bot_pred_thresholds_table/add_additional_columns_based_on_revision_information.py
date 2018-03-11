@@ -87,7 +87,7 @@ def run(revisions_input_file, output_file, verbose):
             edit_type_updated = "\\N"
 
 
-        if REFERENCE_RE.match(comment):
+        if REFERENCE_MANIPULATION_RE.match(comment):
             reference_manipulation = True
         else:
             reference_manipulation = False
