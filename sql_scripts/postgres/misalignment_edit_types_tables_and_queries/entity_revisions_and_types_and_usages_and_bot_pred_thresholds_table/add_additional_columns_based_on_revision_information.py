@@ -42,7 +42,7 @@ def main(argv=None):
     revisions_input_file = mysqltsv.Reader(
         open(args['<revisions_input>'],'rt'),
         headers=False, types=[str, int, str, str, str, int, int, int, str, str, 
-        str, str, str, str, float, str, int, int])
+        str, str, str, str, str, str, int, int])
 
 
     output_file = mysqltsv.Writer(open(args['<output>'], "w"))
@@ -63,25 +63,25 @@ def run(revisions_input_file, output_file, verbose):
 
         if not bot_prediction_threshold:
             edit_type_updated = "\\N"
-        elif bot_prediction_threshold >= 5.46:
+        elif float(bot_prediction_threshold) >= 5.46:
             edit_type_updated = 'anon_ten_recall_bot_edit'
-        elif bot_prediction_threshold >= 4.01:
+        elif float(bot_prediction_threshold) >= 4.01:
             edit_type_updated = 'anon_twenty_recall_bot_edit'
-        elif bot_prediction_threshold >= 3.01:
+        elif float(bot_prediction_threshold) >= 3.01:
             edit_type_updated = 'anon_thirty_recall_bot_edit'
-        elif bot_prediction_threshold >= 2.21:
+        elif float(bot_prediction_threshold) >= 2.21:
             edit_type_updated = 'anon_forty_recall_bot_edit'
-        elif bot_prediction_threshold >= 1.41:
+        elif float(bot_prediction_threshold) >= 1.41:
             edit_type_updated = 'anon_fifty_recall_bot_edit'
-        elif bot_prediction_threshold >= .66:
+        elif float(bot_prediction_threshold) >= .66:
             edit_type_updated = 'anon_sixty_recall_bot_edit'
-        elif bot_prediction_threshold >= -.18:
+        elif float(bot_prediction_threshold) >= -.18:
             edit_type_updated = 'anon_seventy_recall_bot_edit'
-        elif bot_prediction_threshold >= -1.18:
+        elif float(bot_prediction_threshold) >= -1.18:
             edit_type_updated = 'anon_eighty_recall_bot_edit'
-        elif bot_prediction_threshold >= -2.39:
+        elif float(bot_prediction_threshold) >= -2.39:
             edit_type_updated = 'anon_ninety_recall_bot_edit'
-        elif bot_prediction_threshold >= -5.25:
+        elif float(bot_prediction_threshold) >= -5.25:
             edit_type_updated = 'anon_one_hundred_recall_bot_edit'
         else:
             edit_type_updated = "\\N"
