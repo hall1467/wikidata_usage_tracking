@@ -61,7 +61,7 @@ def run(revisions_input_file, output_file, verbose):
         comment = line[3]
         bot_prediction_threshold = line[14]
 
-        if not bot_prediction_threshold:
+        if bot_prediction_threshold == "\\N":
             edit_type_updated = "\\N"
         elif float(bot_prediction_threshold) >= 5.46:
             edit_type_updated = 'anon_ten_recall_bot_edit'
