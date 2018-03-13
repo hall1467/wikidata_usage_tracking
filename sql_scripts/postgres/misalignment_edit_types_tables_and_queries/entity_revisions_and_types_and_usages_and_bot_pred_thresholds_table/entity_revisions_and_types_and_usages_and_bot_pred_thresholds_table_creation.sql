@@ -17,7 +17,7 @@ CREATE TABLE entity_revisions_and_types_and_usages_and_bot_pred_thresholds(
 	session_start                           BIGINT,
 	misalignment_matching_year              BIGINT,
 	misalignment_matching_month             BIGINT,
-	edit_type_updated                       BIGINT,
+	edit_type_updated                       TEXT,
 	reference_manipulation                  BOOLEAN,
 	sitelink_manipulation                   BOOLEAN,
 	label_description_or_alias_manipulation BOOLEAN
