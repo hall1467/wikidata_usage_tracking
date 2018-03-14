@@ -2,7 +2,7 @@ CREATE TABLE misalignment_and_edits AS (
 SELECT quality_class, view_class, entity_revisions_and_types_and_usages_and_bot_pred_thresholds.*
 FROM entity_revisions_and_types_and_usages_and_bot_pred_thresholds
 INNER JOIN misalignment 
-ON misalignment.entity_id = entity_revisions_and_types_and_usages_and_bot_pred_thresholds.entity_id 
+ON misalignment.entity_id = entity_revisions_and_types_and_usages_and_bot_pred_thresholds.page_title
 	AND misalignment.year = entity_revisions_and_types_and_usages_and_bot_pred_thresholds.misalignment_matching_year 
 	AND misalignment.month = entity_revisions_and_types_and_usages_and_bot_pred_thresholds.misalignment_matching_month
 );
