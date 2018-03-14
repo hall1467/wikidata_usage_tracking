@@ -76,7 +76,7 @@ def main(argv=None):
 
     input_registered_data_file = mysqltsv.Reader(
         open(args['<input_registered_data>'],'rt'), headers=True, 
-        types=[str, str, float, float, int, int, int, int, int, int, int, int, 
+        types=[str, str, str, float, float, int, int, int, int, int, int, int, int, 
             int, float, int, int, int, int, int, int, int, int, int, int, int, 
             int, int, int, int, int, int])
 
