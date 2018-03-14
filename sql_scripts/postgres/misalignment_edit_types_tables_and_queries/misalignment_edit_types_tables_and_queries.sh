@@ -120,7 +120,7 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # 	--verbose > & \
 # 	$results/model_applied_to_registered_users_error_log.txt
 
-python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
+python $base/user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
 	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
 	$results/gradient_boosting_threshold_scores_I2_for_user_sessions.tsv \
