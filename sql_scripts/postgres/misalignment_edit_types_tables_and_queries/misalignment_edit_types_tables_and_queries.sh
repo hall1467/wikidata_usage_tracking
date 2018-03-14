@@ -106,19 +106,19 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # 	$results/REGISTERED_USERS_inter_edit.tsv --verbose --debug > & \
 # 	$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
 
-# python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
-# 	$results/predictors_and_labelled_data.tsv \
-# 	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
-# 	$results/REGISTERED_USERS_predictors_data.tsv \
-# 	$results/random_forest_predictions_for_registered_user_sessions.tsv \
-# 	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
-# 	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
-# 	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
-# 	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
-# 	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
-# 	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
-# 	--verbose > & \
-# 	$results/model_applied_to_registered_users_error_log.txt
+python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
+	$results/predictors_and_labelled_data.tsv \
+	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
+	$results/REGISTERED_USERS_predictors_data.tsv \
+	$results/random_forest_predictions_for_registered_user_sessions.tsv \
+	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
+	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
+	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
+	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
+	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
+	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
+	--verbose > & \
+	$results/model_applied_to_registered_users_error_log.txt
 
 # python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
 # 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv
@@ -178,7 +178,7 @@ echo "Removing old version of '$results/revision_misalignment_matcher_error_log.
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
 
 echo "Removing '$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv' to save space."
-rm -f $results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv
+# rm -f $results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv
 
 ######################################################################################################
 echo "'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table creation and querying section"
@@ -242,12 +242,12 @@ echo "'misalignment_and_edits' table creation and querying section"
 ###################################################################
 
 echo "Dropping old version of 'misalignment_and_edits' table (if it exists)."
-psql wikidata_entities -c "drop table misalignment_and_edits;"
+# psql wikidata_entities -c "drop table misalignment_and_edits;"
 
 echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exists)."
-rm -f $results/wasted_edits_error_log.txt
+# rm -f $results/wasted_edits_error_log.txt
 
-psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_entity_edits_ordered_by_entity_year_month_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_entity_edits_grouped_and_ordered_by_year_month_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
