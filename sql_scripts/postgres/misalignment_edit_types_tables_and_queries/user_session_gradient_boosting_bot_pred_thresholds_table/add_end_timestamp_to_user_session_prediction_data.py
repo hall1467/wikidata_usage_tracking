@@ -113,7 +113,7 @@ def run(input_file, output_file, verbose):
              line['claims'],
              line['distinct_claims'],
              line['distinct_pages'],
-             line['disinct_edit_kinds'],
+             line['distinct_edit_kinds'],
              line['generic_bot_comment'],
              line['bot_revision_comment'],
              line['sitelink_changes'],
