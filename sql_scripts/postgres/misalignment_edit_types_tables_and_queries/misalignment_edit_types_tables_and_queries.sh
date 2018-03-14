@@ -106,26 +106,26 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # 	$results/REGISTERED_USERS_inter_edit.tsv --verbose --debug > & \
 # 	$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
 
-python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
-	$results/predictors_and_labelled_data.tsv \
-	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
-	$results/REGISTERED_USERS_predictors_data.tsv \
-	$results/random_forest_predictions_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
-	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
-	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
-	--verbose > & \
-	$results/model_applied_to_registered_users_error_log.txt
-
-# python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
-# 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv
-# 	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv
-# 	$results/gradient_boosting_threshold_scores_I2_for_user_sessions.tsv
+# python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
+# 	$results/predictors_and_labelled_data.tsv \
+# 	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
+# 	$results/REGISTERED_USERS_predictors_data.tsv \
+# 	$results/random_forest_predictions_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
+# 	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
+# 	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
 # 	--verbose > & \
-# 	$results/merge_bot_prediction_files_error_log.txt
+# 	$results/model_applied_to_registered_users_error_log.txt
+
+python $base/anonymous_user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
+	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv
+	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv
+	$results/gradient_boosting_threshold_scores_I2_for_user_sessions.tsv
+	--verbose > & \
+	$results/merge_bot_prediction_files_error_log.txt
 
 # python $base/user_session_gradient_boosting_bot_pred_thresholds_table/add_end_timestamp_to_user_session_prediction_data.py \
 # 	$results/gradient_boosting_threshold_scores_I2_for_user_sessions.tsv \
