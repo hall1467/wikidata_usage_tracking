@@ -133,13 +133,13 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # 	--verbose > & \
 # 	$results/add_end_timestamp_to_user_session_prediction_data_error_log.txt
 
-psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
+# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
 
-tail -n +2 $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end.tsv \
-	> $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end_no_header.tsv
+# tail -n +2 $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end.tsv \
+# 	> $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end_no_header.tsv
 
-psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
-psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start_query.sql
+# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
+# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start_query.sql
 
 
 ##########################################################################################################
@@ -147,20 +147,20 @@ echo "'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table crea
 ##########################################################################################################
 
 echo "Dropping old version of 'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table (if it exists)."
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_thresholds;"
+psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_thresholds;"
 
-# echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt' (if it exists)."
-# rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
+echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt' (if it exists)."
+rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
 echo "Removing old version of '$results/revision_misalignment_matcher_error_log.txt' (if it exists)."
-# rm -f $results/revision_misalignment_matcher_error_log.txt
+rm -f $results/revision_misalignment_matcher_error_log.txt
 
-# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
-# 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
-# 	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
-# 	--verbose > & \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
+python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
+	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
+	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+	--verbose > & \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
 # python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
 # 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
