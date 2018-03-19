@@ -156,7 +156,7 @@ echo "Removing old version of '$results/entity_revisions_and_types_and_usages_wi
 # rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_error_log.txt
 
 echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt' (if it exists)."
-# rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
+rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
 
 # python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
 # 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \

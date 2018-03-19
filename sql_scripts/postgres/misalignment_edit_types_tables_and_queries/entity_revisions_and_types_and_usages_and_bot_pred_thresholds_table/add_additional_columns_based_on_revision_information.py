@@ -81,10 +81,8 @@ def run(revisions_input_file, output_file, verbose):
             edit_type_updated = 'anon_eighty_recall_bot_edit'
         elif float(bot_prediction_threshold) >= -2.39:
             edit_type_updated = 'anon_ninety_recall_bot_edit'
-        elif float(bot_prediction_threshold) >= -5.25:
-            edit_type_updated = 'anon_one_hundred_recall_bot_edit'
         else:
-            edit_type_updated = "\\N"
+            edit_type_updated = 'anon_one_hundred_recall_bot_edit'
 
 
         if comment and REFERENCE_MANIPULATION_RE.match(comment):
