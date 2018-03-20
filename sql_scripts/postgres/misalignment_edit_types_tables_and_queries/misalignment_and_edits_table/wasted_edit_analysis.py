@@ -37,8 +37,9 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, int, str, str, int, int, int, int, int, int, int, int, 
-        int, int, int, int, int, int, int])
+        types=[str, int, str, str, str, int, int, int, str, str, 
+        str, str, str, str, str, str, int, int, str, str, str, str, str, 
+        str])
 
 
     output_file = mysqltsv.Writer(
@@ -47,32 +48,7 @@ def main(argv=None):
                  'bot_edits',
                  'semi_automated_edits',
                  'non_bot_edits',
-                 'other_anon_edits',
-                 'anon_ten_recall_bot_edits',
-                 'anon_twenty_recall_bot_edits',
-                 'anon_thirty_recall_bot_edits',
-                 'anon_forty_recall_bot_edits',
-                 'anon_fifty_recall_bot_edits',
-                 'anon_sixty_recall_bot_edits',
-                 'anon_seventy_recall_bot_edits',
-                 'anon_eighty_recall_bot_edits',
-                 'anon_ninety_recall_bot_edits',
-                 'anon_one_hundred_recall_bot_edits',
-                 'bot_edits_proportion',
-                 'semi_automated_edits_proportion',
-                 'non_bot_edits_proportion',
-                 'other_anon_edits_proportion',
-                 'anon_ten_recall_bot_edits_proportion',
-                 'anon_twenty_recall_bot_edits_proportion',
-                 'anon_thirty_recall_bot_edits_proportion',
-                 'anon_forty_recall_bot_edits_proportion',
-                 'anon_fifty_recall_bot_edits_proportion',
-                 'anon_sixty_recall_bot_edits_proportion',
-                 'anon_seventy_recall_bot_edits_proportion',
-                 'anon_eighty_recall_bot_edits_proportion',
-                 'anon_ninety_recall_bot_edits_proportion',
-                 'anon_one_hundred_recall_bot_edits_proportion',
-                 'all_types_of_anon_edits_proportion'])
+                 'anon_edits'])
 
     verbose = args['--verbose']
 
@@ -85,61 +61,33 @@ def run(input_file, output_file, verbose):
     wasted_edits = defaultdict(lambda: defaultdict(int))
 
 
-    previous_entity = None
     attained = False
+    month_when_attained = None
 
-    all_bot_edits = 0
-    all_semi_automated_edits = 0
-    all_non_bot_edits = 0
-    all_other_anon_edits = 0
-    all_anon_ten_recall_bot_edits = 0
-    all_anon_twenty_recall_bot_edits = 0
-    all_anon_thirty_recall_bot_edits = 0
-    all_anon_forty_recall_bot_edits = 0
-    all_anon_fifty_recall_bot_edits = 0
-    all_anon_sixty_recall_bot_edits = 0
-    all_anon_seventy_recall_bot_edits = 0
-    all_anon_eighty_recall_bot_edits = 0
-    all_anon_ninety_recall_bot_edits = 0
-    all_anon_one_hundred_recall_bot_edits = 0
+    all_edit_types = defaultdict(int)
 
 
     for i, line in enumerate(input_file):
 
+
+        if verbose and i % 10000 == 0 and i != 0:
+            sys.stderr.write("Processing revision: {0}\n".format(i))  
+            sys.stderr.flush()
+
+
         entity = line[0]
-        qual = line[3]
-        views = line[4]
-        bot_edits = line[5]
-        semi_automated_edits = line[6]
-        non_bot_edits = line[7]
-        other_anon_edits = line[8]
-        anon_ten_recall_bot_edits = line[9]
-        anon_twenty_recall_bot_edits = line[10]
-        anon_thirty_recall_bot_edits = line[11]
-        anon_forty_recall_bot_edits = line[12]
-        anon_fifty_recall_bot_edits = line[13]
-        anon_sixty_recall_bot_edits = line[14]
-        anon_seventy_recall_bot_edits = line[15]
-        anon_eighty_recall_bot_edits = line[16]
-        anon_ninety_recall_bot_edits = line[17]
-        anon_one_hundred_recall_bot_edits = line[18]
+        qual = line[22]
+        views = line[23]
+        agent_type = line[12]
+        misalignment_matching_month = line[17]
 
 
-        all_bot_edits += bot_edits
-        all_semi_automated_edits += semi_automated_edits
-        all_non_bot_edits += non_bot_edits
-        all_other_anon_edits += other_anon_edits
-        all_anon_ten_recall_bot_edits += anon_ten_recall_bot_edits
-        all_anon_twenty_recall_bot_edits += anon_twenty_recall_bot_edits
-        all_anon_thirty_recall_bot_edits += anon_thirty_recall_bot_edits
-        all_anon_forty_recall_bot_edits += anon_forty_recall_bot_edits
-        all_anon_fifty_recall_bot_edits += anon_fifty_recall_bot_edits
-        all_anon_sixty_recall_bot_edits += anon_sixty_recall_bot_edits
-        all_anon_seventy_recall_bot_edits += anon_seventy_recall_bot_edits
-        all_anon_eighty_recall_bot_edits += anon_eighty_recall_bot_edits
-        all_anon_ninety_recall_bot_edits += anon_ninety_recall_bot_edits
-        all_anon_one_hundred_recall_bot_edits\
-            += anon_one_hundred_recall_bot_edits
+        # Filtering out unused entities
+        if qual == '\\N':
+            continue
+
+
+        all_edit_types[agent_type] += 1
 
 
         quality_class_number = 0
@@ -173,187 +121,65 @@ def run(input_file, output_file, verbose):
 
         if entity in entity_discovered:
             if view_class_number <= quality_class_number and attained:
-                
-                wasted_edits[entity]["bot_edits"]\
-                    += bot_edits
-                wasted_edits[entity]["semi_automated_edits"]\
-                    += semi_automated_edits
-                wasted_edits[entity]["non_bot_edits"]\
-                    += non_bot_edits
-                wasted_edits[entity]["other_anon_edits"]\
-                    += other_anon_edits
-                wasted_edits[entity]["anon_ten_recall_bot_edits"]\
-                    += anon_ten_recall_bot_edits
-                wasted_edits[entity]["anon_twenty_recall_bot_edits"]\
-                    += anon_twenty_recall_bot_edits
-                wasted_edits[entity]["anon_thirty_recall_bot_edits"]\
-                    += anon_thirty_recall_bot_edits
-                wasted_edits[entity]["anon_forty_recall_bot_edits"]\
-                    += anon_forty_recall_bot_edits
-                wasted_edits[entity]["anon_fifty_recall_bot_edits"]\
-                    += anon_fifty_recall_bot_edits
-                wasted_edits[entity]["anon_sixty_recall_bot_edits"]\
-                    += anon_sixty_recall_bot_edits
-                wasted_edits[entity]["anon_seventy_recall_bot_edits"]\
-                    += anon_seventy_recall_bot_edits
-                wasted_edits[entity]["anon_eighty_recall_bot_edits"]\
-                    += anon_eighty_recall_bot_edits
-                wasted_edits[entity]["anon_ninety_recall_bot_edits"]\
-                    += anon_ninety_recall_bot_edits
-                wasted_edits[entity]["anon_one_hundred_recall_bot_edits"]\
-                    += anon_one_hundred_recall_bot_edits
+                wasted_edits[entity][agent_type] += 1
             else:
-                wasted_edits[entity]["bot_edits"] = 0
-                wasted_edits[entity]["semi_automated_edits"] = 0
-                wasted_edits[entity]["non_bot_edits"] = 0
-                wasted_edits[entity]["other_anon_edits"] = 0
-                wasted_edits[entity]["anon_ten_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_twenty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_thirty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_forty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_fifty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_sixty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_seventy_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_eighty_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_ninety_recall_bot_edits"] = 0
-                wasted_edits[entity]["anon_one_hundred_recall_bot_edits"] = 0
-
+                wasted_edits[entity][agent_type] = 0
 
         else:
             entity_discovered[entity] = 1
+            month_when_attained = None
 
 
         if view_class_number <= quality_class_number:
             attained = True
+
+            # If month_when_attained is not already set, then set current month
+            if not month_when_attained:
+                month_when_attained = misalignment_matching_month
         else:
             attained = False
+            month_when_attained = None
 
 
-        previous_entity = entity
 
- 
-        if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Entity-months processed: {0}\n".format(i))  
-            sys.stderr.flush()
 
 
     all_wasted_bot_edits = 0
     all_wasted_semi_automated_edits = 0
-    all_wasted_non_bot_edits = 0
-    all_wasted_other_anon_edits = 0
-    all_wasted_anon_ten_recall_bot_edits = 0
-    all_wasted_anon_twenty_recall_bot_edits = 0
-    all_wasted_anon_thirty_recall_bot_edits = 0
-    all_wasted_anon_forty_recall_bot_edits = 0
-    all_wasted_anon_fifty_recall_bot_edits = 0
-    all_wasted_anon_sixty_recall_bot_edits = 0
-    all_wasted_anon_seventy_recall_bot_edits = 0
-    all_wasted_anon_eighty_recall_bot_edits = 0
-    all_wasted_anon_ninety_recall_bot_edits = 0
-    all_wasted_anon_one_hundred_recall_bot_edits = 0
+    all_wasted_human_edits = 0
+    all_wasted_anon_edits = 0
 
     # Adding up totals by edit type
     for entity in wasted_edits:
 
-        all_wasted_bot_edits += wasted_edits[entity]["bot_edits"]
+        all_wasted_bot_edits += wasted_edits[entity]['bot_edit']
         all_wasted_semi_automated_edits\
-            += wasted_edits[entity]["semi_automated_edits"]
-        all_wasted_non_bot_edits += wasted_edits[entity]["non_bot_edits"]
-        all_wasted_other_anon_edits += wasted_edits[entity]["other_anon_edits"]
-        all_wasted_anon_ten_recall_bot_edits\
-            += wasted_edits[entity]["anon_ten_recall_bot_edits"]
-        all_wasted_anon_twenty_recall_bot_edits\
-            += wasted_edits[entity]["anon_twenty_recall_bot_edits"]
-        all_wasted_anon_thirty_recall_bot_edits\
-            += wasted_edits[entity]["anon_thirty_recall_bot_edits"]
-        all_wasted_anon_forty_recall_bot_edits\
-            += wasted_edits[entity]["anon_forty_recall_bot_edits"]
-        all_wasted_anon_fifty_recall_bot_edits\
-            += wasted_edits[entity]["anon_fifty_recall_bot_edits"]
-        all_wasted_anon_sixty_recall_bot_edits\
-            += wasted_edits[entity]["anon_sixty_recall_bot_edits"]
-        all_wasted_anon_seventy_recall_bot_edits\
-            += wasted_edits[entity]["anon_seventy_recall_bot_edits"]
-        all_wasted_anon_eighty_recall_bot_edits\
-            += wasted_edits[entity]["anon_eighty_recall_bot_edits"]
-        all_wasted_anon_ninety_recall_bot_edits\
-            += wasted_edits[entity]["anon_ninety_recall_bot_edits"]
-        all_wasted_anon_one_hundred_recall_bot_edits\
-            += wasted_edits[entity]["anon_one_hundred_recall_bot_edits"]
-
-
-    all_wasted_types_of_anon_edits =\
-        all_wasted_other_anon_edits +\
-        all_wasted_anon_ten_recall_bot_edits +\
-        all_wasted_anon_twenty_recall_bot_edits +\
-        all_wasted_anon_thirty_recall_bot_edits +\
-        all_wasted_anon_forty_recall_bot_edits +\
-        all_wasted_anon_fifty_recall_bot_edits +\
-        all_wasted_anon_sixty_recall_bot_edits +\
-        all_wasted_anon_seventy_recall_bot_edits +\
-        all_wasted_anon_eighty_recall_bot_edits +\
-        all_wasted_anon_ninety_recall_bot_edits +\
-        all_wasted_anon_one_hundred_recall_bot_edits
-
-    all_types_of_anon_edits =\
-        all_other_anon_edits +\
-        all_anon_ten_recall_bot_edits +\
-        all_anon_twenty_recall_bot_edits +\
-        all_anon_thirty_recall_bot_edits +\
-        all_anon_forty_recall_bot_edits +\
-        all_anon_fifty_recall_bot_edits +\
-        all_anon_sixty_recall_bot_edits +\
-        all_anon_seventy_recall_bot_edits +\
-        all_anon_eighty_recall_bot_edits +\
-        all_anon_ninety_recall_bot_edits +\
-        all_anon_one_hundred_recall_bot_edits
+            += wasted_edits[entity]['semi_automated_edit']
+        all_wasted_human_edits += wasted_edits[entity]['human_edit']
+        all_wasted_anon_edits += wasted_edits[entity]['anon_edit']
 
 
     output_file.write([
         all_wasted_bot_edits,
         all_wasted_semi_automated_edits,
-        all_wasted_non_bot_edits,
-        all_wasted_other_anon_edits,
-        all_wasted_anon_ten_recall_bot_edits,
-        all_wasted_anon_twenty_recall_bot_edits,
-        all_wasted_anon_thirty_recall_bot_edits,
-        all_wasted_anon_forty_recall_bot_edits,
-        all_wasted_anon_fifty_recall_bot_edits,
-        all_wasted_anon_sixty_recall_bot_edits,
-        all_wasted_anon_seventy_recall_bot_edits,
-        all_wasted_anon_eighty_recall_bot_edits,
-        all_wasted_anon_ninety_recall_bot_edits,
-        all_wasted_anon_one_hundred_recall_bot_edits,
+        all_wasted_human_edits,
+        all_wasted_anon_edits,
         all_wasted_bot_edits/\
-            all_bot_edits,
+            all_edit_types['bot_edit'] 
+                if all_edit_types['bot_edit'] > 0 
+                else 0,
         all_wasted_semi_automated_edits/\
-            all_semi_automated_edits,
-        all_wasted_non_bot_edits/\
-            all_non_bot_edits,
-        all_wasted_other_anon_edits/\
-            all_other_anon_edits,
-        all_wasted_anon_ten_recall_bot_edits/\
-            all_anon_ten_recall_bot_edits,
-        all_wasted_anon_twenty_recall_bot_edits/\
-            all_anon_twenty_recall_bot_edits,
-        all_wasted_anon_thirty_recall_bot_edits/\
-            all_anon_thirty_recall_bot_edits,
-        all_wasted_anon_forty_recall_bot_edits/\
-            all_anon_forty_recall_bot_edits,
-        all_wasted_anon_fifty_recall_bot_edits/\
-            all_anon_fifty_recall_bot_edits,
-        all_wasted_anon_sixty_recall_bot_edits/\
-            all_anon_sixty_recall_bot_edits,
-        all_wasted_anon_seventy_recall_bot_edits/\
-            all_anon_seventy_recall_bot_edits,
-        all_wasted_anon_eighty_recall_bot_edits/\
-            all_anon_eighty_recall_bot_edits,
-        all_wasted_anon_ninety_recall_bot_edits/\
-            all_anon_ninety_recall_bot_edits,
-        all_wasted_anon_one_hundred_recall_bot_edits/\
-            all_anon_one_hundred_recall_bot_edits,
-        all_wasted_types_of_anon_edits/\
-            all_types_of_anon_edits])
+            all_edit_types['semi_automated_edit']
+                if all_edit_types['semi_automated_edit'] > 0 
+                else 0,
+        all_wasted_human_edits/\
+            all_edit_types['human_edit']
+                if all_edit_types['human_edit'] > 0 
+                else 0,
+        all_wasted_anon_edits/\
+            all_edit_types['anon_edit']
+                if all_edit_types['anon_edit'] > 0 
+                else 0])
 
 
 
