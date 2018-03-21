@@ -56,47 +56,12 @@ def main(argv=None):
                  'month',
                  'alignment_percentage',
                  'bot_edit',
-                 'quickstatements',
-                 'petscan',
-                 'autolist2',
-                 'autoedit',
-                 'labellister',
-                 'itemcreator',
-                 'dragrefjs',
-                 'lcjs',
-                 'wikidatagame',
-                 'wikidataprimary',
-                 'mixnmatch',
-                 'distributedgame',
-                 'nameguzzler',
-                 'mergejs',
-                 'reasonator',
-                 'duplicity',
-                 'tabernacle',
-                 'Widar',
-                 'reCh',
-                 'HHVM',
-                 'PAWS',
-                 'Kaspar',
-                 'itemFinder',
-                 'rgCh',
-                 'not_flagged_elsewhere_quickstatments_bot_account',
-                 'other_semi_automated_edit_since_change_tag',
+                 'semi_automated_edit',
                  'anon_edit',
                  'human_edit',
-                 'anon_ten_recall_bot_edit',
-                 'anon_twenty_recall_bot_edit',
-                 'anon_thirty_recall_bot_edit',
-                 'anon_forty_recall_bot_edit',
-                 'anon_fifty_recall_bot_edit',
-                 'anon_sixty_recall_bot_edit',
-                 'anon_seventy_recall_bot_edit',
-                 'anon_eighty_recall_bot_edit',
-                 'anon_ninety_recall_bot_edit',
-                 'anon_one_hundred_recall_bot_edit',
-                 'reference_manipulation',
-                 'sitelink_manipulation',
-                 'label_description_or_alias_manipulation'])
+                 'semi_automated_bot_like_edit',
+                 'human_bot_like_edit',
+                 'anon_bot_like_edit'])
 
 
     output_views_and_quality_class_edit_types_file = mysqltsv.Writer(
@@ -195,19 +160,35 @@ def run(input_file, output_alignment_and_aggregations_file,
             continue
 
         # Incrementing the agent type count
-        agg[m_match_year][m_match_month][agent_type] += 1
+        if agent_type == 'bot_edit' or agent_type == 'human_edit' or \
+            agent_type == 'anon_edit':
 
-        # Incrementing for different edit types
-        if reference_edit == 't':
-            agg[m_match_year][m_match_month]['reference_edit'] += 1
-        if sitelink_edit == 't':
-            agg[m_match_year][m_match_month]['sitelink_edit'] += 1
-        if l_d_or_a_edit == 't':
-            agg[m_match_year][m_match_month]['l_d_or_a_edit'] += 1
+            agg[m_match_year][m_match_month][agent_type] += 1
+        else:
+            agg[m_match_year][m_match_month]['semi_automated_edit'] += 1
 
 
         if not (agent_anon_recall_level == '\\N'):
-            agg[m_match_year][m_match_month][agent_anon_recall_level] += 1
+            if agent_type == 'human_edit' and \
+                (agent_anon_recall_level == 'anon_ten_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_twenty_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_thirty_recall_bot_edit'):
+
+                agg[m_match_year][m_match_month]['human_bot_like_edit'] += 1
+
+            elif agent_type == 'anon_edit' and \
+                (agent_anon_recall_level == 'anon_ten_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_twenty_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_thirty_recall_bot_edit'):
+
+                agg[m_match_year][m_match_month]['anon_bot_like_edit'] += 1
+
+            elif agent_type != 'bot_edit' and \
+                (agent_anon_recall_level == 'anon_ten_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_twenty_recall_bot_edit' or \
+                agent_anon_recall_level == 'anon_thirty_recall_bot_edit'):
+
+                agg[m_match_year][m_match_month]['tool_bot_like_edit'] += 1
 
 
 
@@ -237,47 +218,12 @@ def run(input_file, output_alignment_and_aggregations_file,
                     (len(align[year][month]['aligned']) + 
                     len(align[year][month]['misaligned'])),
                 agg[year][month]['bot_edit'],
-                agg[year][month]['quickstatements'],
-                agg[year][month]['petscan'],
-                agg[year][month]['autolist2'],
-                agg[year][month]['autoedit'],
-                agg[year][month]['labellister'],
-                agg[year][month]['itemcreator'],
-                agg[year][month]['dragrefjs'],
-                agg[year][month]['lcjs'],
-                agg[year][month]['wikidatagame'],
-                agg[year][month]['wikidataprimary'],
-                agg[year][month]['mixnmatch'],
-                agg[year][month]['distributedgame'],
-                agg[year][month]['nameguzzler'],
-                agg[year][month]['mergejs'],
-                agg[year][month]['reasonator'],
-                agg[year][month]['duplicity'],
-                agg[year][month]['tabernacle'],
-                agg[year][month]['Widar'],
-                agg[year][month]['reCh'],
-                agg[year][month]['HHVM'],
-                agg[year][month]['PAWS'],
-                agg[year][month]['Kaspar'],
-                agg[year][month]['itemFinder'],
-                agg[year][month]['rgCh'],
-                agg[year][month]['not_flagged_elsewhere_quickstatments_bot_account'],
-                agg[year][month]['other_semi_automated_edit_since_change_tag'],
-                agg[year][month]['anon_edit'],
+                agg[year][month]['semi_automated_edit'],
                 agg[year][month]['human_edit'],
-                agg[year][month]['anon_ten_recall_bot_edit'],
-                agg[year][month]['anon_twenty_recall_bot_edit'],
-                agg[year][month]['anon_thirty_recall_bot_edit'],
-                agg[year][month]['anon_forty_recall_bot_edit'],
-                agg[year][month]['anon_fifty_recall_bot_edit'],
-                agg[year][month]['anon_sixty_recall_bot_edit'],
-                agg[year][month]['anon_seventy_recall_bot_edit'],
-                agg[year][month]['anon_eighty_recall_bot_edit'],
-                agg[year][month]['anon_ninety_recall_bot_edit'],
-                agg[year][month]['anon_one_hundred_recall_bot_edit'],
-                agg[year][month]['reference_manipulation'],
-                agg[year][month]['sitelink_manipulation'],
-                agg[year][month]['label_description_or_alias_manipulation']])
+                agg[year][month]['anon_edit'],
+                agg[year][month]['tool_bot_like_edit'],
+                agg[year][month]['human_bot_like_edit'],
+                agg[year][month]['anon_bot_like_edit']])
 
 
     for v_class in v_and_q_class_edits:
