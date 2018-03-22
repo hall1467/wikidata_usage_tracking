@@ -30,9 +30,13 @@ import operator
 from collections import defaultdict
 import mysqltsv
 import sys
+import re
 
 
 logger = logging.getLogger(__name__)
+
+
+EDIT_KIND_RE = re.compile(r'/\* (wb(set|create|edit|remove)([a-z]+)((-[a-z]+)*))', re.I)
 
 
 def main(argv=None):
@@ -57,8 +61,8 @@ def main(argv=None):
                  'alignment_percentage',
                  'bot_edit',
                  'semi_automated_edit',
-                 'anon_edit',
                  'human_edit',
+                 'anon_edit',
                  'semi_automated_bot_like_edit',
                  'human_bot_like_edit',
                  'anon_bot_like_edit'])
@@ -157,6 +161,12 @@ def run(input_file, output_alignment_and_aggregations_file,
 
         # Filtering out unused entities
         if quality_class == '\\N':
+            continue
+
+        # Also, filtering out sitelink edits
+        if namespace == "0" and comment and \
+            EDIT_KIND_RE.match(comment) and \
+            EDIT_KIND_RE.match(comment).group(3) == 'sitelink':
             continue
 
         # Incrementing the agent type count
