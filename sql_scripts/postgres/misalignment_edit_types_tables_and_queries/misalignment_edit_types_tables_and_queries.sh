@@ -256,10 +256,11 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
-psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_ordered_by_year_and_month.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits.sql
 
 python $base/misalignment_and_edits_table/attribute_aggregator.py \
 	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
+	$results/attribute_aggreations.tsv \
 	$results/views_and_quality_class_edits.tsv \
 	$results/views_class_edits.tsv \
 	$results/quality_class_edits.tsv \
