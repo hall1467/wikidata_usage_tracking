@@ -258,19 +258,31 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits.sql
 
-python $base/misalignment_and_edits_table/attribute_aggregator.py \
-	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
-	$results/attribute_aggreations.tsv \
-	$results/views_and_quality_class_edits.tsv \
-	$results/views_class_edits.tsv \
-	$results/quality_class_edits.tsv \
-	--verbose > & \
-	$results/attribute_aggregator_error_log.txt
+# python $base/misalignment_and_edits_table/attribute_aggregator.py \
+# 	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
+# 	$results/attribute_aggreations.tsv \
+# 	$results/views_and_quality_class_edits.tsv \
+# 	$results/views_class_edits.tsv \
+# 	$results/quality_class_edits.tsv \
+# 	--verbose > & \
+# 	$results/attribute_aggregator_error_log.txt
 
 # python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
 # 	$results/misalignment_and_edits_entity_edits_ordered_by_entity_year_month.tsv \
 # 	$results/wasted_edits.tsv \
 # 	--verbose > & \
 # 	$results/wasted_edits_error_log.txt
+
+## Note right now, output from attribute_aggregator.py is being manually merged with monthly misalignment data
+
+###################################################################
+echo "'misaglinment_and_edits_and_weighted_sums' table creation and querying section"
+###################################################################
+
+psql wikidata_entities < $base/misalignment_and_edits_and_weighted_sums_table/entity_weighted_sums_and_page_views.sql
+
+shuf -n 1000000 $results/entity_weighted_sums_and_page_views.tsv > $results/entity_weighted_sums_and_page_views_sampled_1_million.tsv
+
+
 
 
