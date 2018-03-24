@@ -1,0 +1,1 @@
+\COPY sampled_quality_weighted_sum_and_views_05_17 FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/entity_weighted_sums_and_page_views_sampled_1_million.tsv';
