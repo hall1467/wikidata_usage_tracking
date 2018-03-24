@@ -256,7 +256,7 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
-# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
 
 # python $base/misalignment_and_edits_table/attribute_aggregator.py \
 # 	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
@@ -279,12 +279,13 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_views_05_17', and 'sampled_quality_weighted_sum_and_views_05_17_with_revisions' table creations and querying section"
 ###################################################################
 
-# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_table/entity_weighted_sums_and_page_views.sql
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_table/entity_weighted_sums_and_page_views_query.sql
 
 # shuf -n 1000000 $results/entity_weighted_sums_and_page_views.tsv > $results/entity_weighted_sums_and_page_views_sampled_1_million.tsv
 
 # psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_creation.sql
 # psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_import.sql
 
-psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_table_creation.sql
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_table_creation.sql
 
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_table/quality_weighted_sum_and_views_05_17_with_revisions_query.sql
