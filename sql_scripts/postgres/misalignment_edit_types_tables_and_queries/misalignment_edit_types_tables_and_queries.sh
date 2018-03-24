@@ -288,4 +288,4 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_table_creation.sql
 
-psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/quality_weighted_sum_and_views_05_17_with_revisions_query.sql
+psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_query.sql
