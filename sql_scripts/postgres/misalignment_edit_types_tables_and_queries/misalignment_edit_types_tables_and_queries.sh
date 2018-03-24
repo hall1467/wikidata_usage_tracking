@@ -283,8 +283,8 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # shuf -n 1000000 $results/entity_weighted_sums_and_page_views.tsv > $results/entity_weighted_sums_and_page_views_sampled_1_million.tsv
 
-psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_creation.sql
-psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_import.sql
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_creation.sql
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_table_import.sql
 
 psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_table_creation.sql
 
