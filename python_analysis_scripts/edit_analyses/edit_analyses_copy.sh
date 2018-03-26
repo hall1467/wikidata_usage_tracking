@@ -246,11 +246,11 @@ python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scri
 	--verbose > & \
 	/export/scratch2/wmf/edit_analyses/model_applied_to_anonymous_users_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_and_testing_data_sampling.py \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
-	/export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_for_anonymous_user_sessions.tsv \
-  /export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
-	/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_threshold_scores_samples.html \
-	/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_threshold_scores_I2_samples.html \
-	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_false_negatives.html
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/anonymous_users_and_testing_data_sampling.py \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
+# 	/export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_for_anonymous_user_sessions.tsv \
+#   /export/scratch2/wmf/edit_analyses/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
+# 	/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_threshold_scores_samples.html \
+# 	/export/scratch2/wmf/edit_analyses/ANONYMOUS_USERS_threshold_scores_I2_samples.html \
+# 	/export/scratch2/wmf/edit_analyses/MODEL_TESTING_FILTERED_false_negatives.html
 
