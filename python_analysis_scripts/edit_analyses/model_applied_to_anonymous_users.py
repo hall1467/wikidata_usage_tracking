@@ -433,7 +433,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                   learning_rate=.1, max_features='log2')\
         .fit(training_predictors_i2, training_responses_i2)
 
-    gradient_b_predictions_i2 = gradient_b_fitted_model\
+    gradient_b_predictions_i2 = gradient_b_i2_fitted_model\
                                  .predict(anonymous_predictors_i2)
 
     sys.stderr.write("Gradient boosting predictor weightings I2: {0}\n"
