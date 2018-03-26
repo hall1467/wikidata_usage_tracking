@@ -463,7 +463,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
         roc_output_file.write([false_value[i], true_value[i]])
         
     threshold_scores_i1 =\
-        gradient_b_i2_fitted_model.decision_function(anonymous_predictors)
+        gradient_b_fitted_model.decision_function(anonymous_predictors)
 
     threshold_scores_i2 =\
         gradient_b_i2_fitted_model.decision_function(anonymous_predictors_i2)
