@@ -5,7 +5,7 @@ Apply previously generated model to anonymous user data.
 
 Usage:
     model_applied_to_anonymous_users (-h|--help)
-    model_applied_to_anonymous_users <input_training> <input_testing> <input_anonymous_data> <r_forest_predictions_output> <gradient_b_predictions_output> <gradient_b_threshold_scores_output> <gradient_b_threshold_scores_i2_output> <testing_output> <pr_output> <roc_output>
+    model_applied_to_anonymous_users <input_training> <input_testing> <input_anonymous_data> <r_forest_predictions_output> <gradient_b_predictions_output> <gradient_b_predictions_i2_output> <gradient_b_threshold_scores_output> <gradient_b_threshold_scores_i2_output> <testing_output> <pr_output> <roc_output>
                                      [--debug]
                                      [--verbose]
 
@@ -21,6 +21,8 @@ Options:
                                              will be written
     <gradient_b_predictions_output>          Where gradient boosting predictions 
                                              will be written
+    <gradient_b_predictions_i2_output>       Where iteration 2 gradient boosting 
+                                             predictions will be written
     <gradient_b_threshold_scores_output>     Where gradient boosting thresold 
                                              scores will be written
     <gradient_b_threshold_scores_i2_output>  Where iteration 2 gradient boosting
@@ -102,6 +104,21 @@ def main(argv=None):
             'inter_edits_between_5_and_20_seconds', 
             'inter_edits_greater_than_20_seconds', 'bot_prediction'])
 
+    gradient_b_predictions_i2_output_file = mysqltsv.Writer(
+        open(args['<gradient_b_predictions_i2_output>'], "w"), headers=[
+            'username', 'session_start', 'mean_in_seconds', 'std_in_seconds', 
+            'namespace_0_edits', 'namespace_1_edits', 'namespace_2_edits', 
+            'namespace_3_edits', 'namespace_4_edits', 'namespace_5_edits', 
+            'namespace_120_edits', 'namespace_121_edits', 'edits', 
+            'session_length_in_seconds', 'inter_edits_less_than_5_seconds', 
+            'inter_edits_between_5_and_20_seconds', 
+            'inter_edits_greater_than_20_seconds', 'claims', 'distinct_claims', 
+            'distinct_pages', 'disinct_edit_kinds', 'generic_bot_comment', 
+            'bot_revision_comment', 'sitelink_changes', 'alias_changed', 
+            'label_changed', 'description_changed', 'edit_war', 
+            'inter_edits_less_than_2_seconds', 'things_removed', 
+            'things_modified', 'bot_prediction'])
+
 
     gradient_b_threshold_scores_output_file = mysqltsv.Writer(
         open(args['<gradient_b_threshold_scores_output>'], "w"), headers=[
@@ -157,6 +174,7 @@ def main(argv=None):
 
     run(input_training_file, input_testing_file, input_anonymous_data_file, 
         r_forest_predictions_output_file, gradient_b_predictions_output_file,
+        gradient_b_predictions_i2_output_file,
         gradient_b_threshold_scores_output_file, 
         gradient_b_threshold_scores_i2_output_file, testing_output_file, 
         pr_output_file, roc_output_file, verbose)
@@ -164,7 +182,8 @@ def main(argv=None):
 
 def run(input_training_file, input_testing_file, input_anonymous_data_file, 
     r_forest_predictions_output_file, 
-    gradient_b_predictions_output_file, gradient_b_threshold_scores_output_file, 
+    gradient_b_predictions_output_file, gradient_b_predictions_i2_output_file,
+    gradient_b_threshold_scores_output_file, 
     gradient_b_threshold_scores_i2_output_file, testing_output_file, 
     pr_output_file, roc_output_file, verbose):
     
@@ -392,7 +411,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                   learning_rate=.01, max_features='log2')\
         .fit(training_predictors, training_responses)
 
-    gradient_b_predictions = gradient_b_fitted_model\
+    gradient_b_predictions_i1 = gradient_b_fitted_model\
                                  .predict(anonymous_predictors)
 
     sys.stderr.write("Gradient boosting predictor weightings: {0}\n"
@@ -414,8 +433,8 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
                                   learning_rate=.1, max_features='log2')\
         .fit(training_predictors_i2, training_responses_i2)
 
-    gradient_b_predictions = gradient_b_fitted_model\
-                                 .predict(anonymous_predictors)
+    gradient_b_predictions_i2 = gradient_b_fitted_model\
+                                 .predict(anonymous_predictors_i2)
 
     sys.stderr.write("Gradient boosting predictor weightings I2: {0}\n"
         .format(gradient_b_i2_fitted_model.feature_importances_))
@@ -443,7 +462,10 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
     for i, line in enumerate(false_value):
         roc_output_file.write([false_value[i], true_value[i]])
         
-    threshold_scores =\
+    threshold_scores_i1 =\
+        gradient_b_i2_fitted_model.decision_function(anonymous_predictors)
+
+    threshold_scores_i2 =\
         gradient_b_i2_fitted_model.decision_function(anonymous_predictors_i2)
 
     testing_predictions =\
@@ -516,7 +538,42 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
              line[12],
              line[13],
              line[14],
-             gradient_b_predictions[i]])
+             gradient_b_predictions_i1[i]])
+
+
+        gradient_b_predictions_i2_output_file.write(
+            [anonymous_user_and_session_start[i]['username'],
+             anonymous_user_and_session_start[i]['session_start'],
+             line[0],
+             line[1],
+             line[2],
+             line[3],
+             line[4],
+             line[5],
+             line[6],
+             line[7],
+             line[8],
+             line[9],
+             line[10],
+             line[11],
+             line[12],
+             line[13],
+             line[14],
+             line[15],
+             line[16],
+             line[17],
+             line[18],
+             line[19],
+             line[20],
+             line[21],
+             line[22],
+             line[23],
+             line[24],
+             line[25],
+             line[26],
+             line[27],
+             line[28],
+             gradient_b_predictions_i2[i]])
 
 
         gradient_b_threshold_scores_output_file.write(
@@ -537,7 +594,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
              line[12],
              line[13],
              line[14],
-             threshold_scores[i]])
+             threshold_scores_i1[i]])
 
 
         gradient_b_threshold_scores_i2_output_file.write(
@@ -572,7 +629,7 @@ def run(input_training_file, input_testing_file, input_anonymous_data_file,
              line[26],
              line[27],
              line[28],
-             threshold_scores[i]])
+             threshold_scores_i2[i]])
 
 
 main()
