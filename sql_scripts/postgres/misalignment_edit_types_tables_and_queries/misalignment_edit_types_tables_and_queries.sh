@@ -250,7 +250,7 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # update above python script to write to different directory
 # input_for_rmse_split_directory
 
-split -d -l 1 $results/wasted_edits.tsv testing_split
+split -d -l 1 $results/wasted_edits.tsv $input_for_rmse_split_directory/testing_split
 
 # tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv \
 # 	> $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
