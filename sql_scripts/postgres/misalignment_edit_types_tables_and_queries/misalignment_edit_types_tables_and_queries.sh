@@ -183,62 +183,6 @@ rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresho
 echo "Removing '$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv' to save space."
 # rm -f $results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv
 
-######################################################################################################
-echo "'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table creation and querying section"
-######################################################################################################
-
-echo "Dropping old versions of 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table and sub tables (if they exist)."
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_4;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse;"
-
-echo "Creating 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' table and sub tables (first)."
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_4_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table_creation.sql
-
-echo "Dropping table 'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' since it isn't needed anymore."
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_thresholds;"
-
-echo "Dropping table and sub tables of 'entity_revisions_and_types_and_usages_and_bot_pred_sparse' since they aren't needed anymore."
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_1;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_2;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_3;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_4;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse_sub_5;"
-# psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages_and_bot_pred_sparse;"
-
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_sparse_table/used_entity_monthly_edit_breakdowns_query.sql
-
-
-#############################################################################
-echo "'used_entity_previous_month_edits' table creation and querying section"
-#############################################################################
-
-echo "Dropping old version of 'used_entity_previous_month_edits' table (if it exists)."
-# psql wikidata_entities -c "drop table used_entity_previous_month_edits;"
-
-# echo "Removing old version of '$results/used_entity_edits_aggregated_by_month_error_log.txt' (if it exists)."
-# rm -f $results/used_entity_edits_aggregated_by_month_error_log.txt
-
-# python $base/used_entity_previous_month_edits_table/entity_edit_preprocessor.py \
-# 	$results/used_entity_monthly_edit_breakdowns.tsv \
-# 	$results/used_entity_edits_aggregated_by_month.tsv \
-# 	--verbose > & \
-# 	$results/used_entity_edits_aggregated_by_month_error_log.txt
-
-# psql wikidata_entities < $base/used_entity_previous_month_edits_table/used_entity_previous_month_edits_table_creation.sql
-# psql wikidata_entities < $base/used_entity_previous_month_edits_table/used_entity_previous_month_edits_table_import.sql
-
-# echo "Dropping file '$results/used_entity_edits_aggregated_by_month.tsv' since it isn't needed anymore."
-# rm -f $results/used_entity_edits_aggregated_by_month.tsv
-
 
 ###################################################################
 echo "'misalignment_and_edits' table creation and querying section"
@@ -288,4 +232,21 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_table_creation.sql
 
-psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_query.sql
+# psql wikidata_entities < $base/quality_weighted_sum_and_views_05_17_tables/sampled_quality_weighted_sum_and_views_05_17_with_revisions_query.sql
+
+
+# Ran: \copy (SELECT page_id, title, rev_id, monthly_timestamp, prediction, weighted_sum from monthly_item_quality order by monthly_timestamp) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/monthly_item_quality_sorted_by_month.tsv';
+
+# Need a script here that takes in quality_weighted_sum_and_views_05_17 and output from above query
+
+python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
+		$results/entity_weighted_sums_and_page_views.tsv \
+		$results/monthly_item_quality_sorted_by_month.tsv \
+		$results/input_for_RMSE.tsv \
+		--verbose > & \
+		$results/misalignment_preprocessor_error_log.txt
+
+
+
+
+
