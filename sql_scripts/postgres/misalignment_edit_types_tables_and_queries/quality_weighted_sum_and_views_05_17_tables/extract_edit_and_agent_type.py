@@ -8,12 +8,12 @@ Usage:
                                 [--verbose]
 
 Options:
-    -h, --help                           This help message is printed
-    <input>                              Path to misalignment/edit
-                                         breakdown file to process.
-    <output_alignment_and_aggregations>  Where output will be written
-    --debug                              Print debug logging to stderr
-    --verbose                            Print dots and stuff to stderr  
+    -h, --help  This help message is printed
+    <input>     Path to misalignment/edit
+                breakdown file to process.
+    <output>    Where output will be written
+    --debug     Print debug logging to stderr
+    --verbose   Print dots and stuff to stderr  
 """
 
 
@@ -47,22 +47,23 @@ def main(argv=None):
 
 
     output_file = mysqltsv.Writer(
-        open(args['<output_alignment_and_aggregations>'], "w"), 
+        open(args['<output>'], "w"), 
         headers=[
                  'namespace',
                  'page_title',
                  'edit_type',
                  'agent_type',
                  'weighted_sum',
-                 'page_views'])
+                 'page_views',
+                 'revision_id'])
 
 
     verbose = args['--verbose']
 
-    run(input_file, output, verbose)
+    run(input_file, output_file, verbose)
 
 
-def run(input_file, output, verbose):
+def run(input_file, output_file, verbose):
 
 
     for i, line in enumerate(input_file):
@@ -76,6 +77,7 @@ def run(input_file, output, verbose):
 
 
         page_title = line[0]
+        revision_id = line[1]
         comment = line[3]
         namespace = line[4]
         page_views = line[11]
@@ -105,15 +107,16 @@ def run(input_file, output, verbose):
             elif EDIT_KIND_RE.match(comment).group(3) == 'reference' or \
                 EDIT_KIND_RE.match(comment).group(3) == 'references':
 
-                output_edit_type = "description"
+                output_edit_type = "reference"
+
+            elif EDIT_KIND_RE.match(comment).group(3) == 'qualifier':
+
+                output_edit_type = "qualifier"
 
             elif EDIT_KIND_RE.match(comment).group(3) == 'claim' or \
                 EDIT_KIND_RE.match(comment).group(3) == 'claims':
 
                 output_edit_type = "claim"
-            else:
-
-                output_edit_type = "other"
 
         # Incrementing the agent type count
         if agent_type == 'bot_edit' or agent_type == 'human_edit' or \
@@ -122,17 +125,18 @@ def run(input_file, output, verbose):
             output_agent_type = agent_type
         else:
 
-            output_agent_type = semi_automated_edit
+            output_agent_type = 'semi_automated_edit'
 
 
 
-        output.write([
+        output_file.write([
             namespace,
             page_title,
             output_edit_type,
             output_agent_type,
             weighted_sum,
-            page_views])
+            page_views,
+            revision_id])
 
 
 
