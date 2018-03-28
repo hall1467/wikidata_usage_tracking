@@ -2,6 +2,7 @@
 
 set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/misalignment_edit_types_tables_and_queries
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries
+set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 
 
 #############################################################
@@ -239,14 +240,23 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # Need a script here that takes in quality_weighted_sum_and_views_05_17 and output from above query
 
-python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
-		$results/entity_weighted_sums_and_page_views.tsv \
-		$results/monthly_item_quality_sorted_by_month.tsv \
-		$results/input_for_RMSE.tsv \
-		--verbose > & \
-		$results/misalignment_preprocessor_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
+# 		$results/entity_weighted_sums_and_page_views.tsv \
+# 		$results/monthly_item_quality_sorted_by_month.tsv \
+# 		$results/input_for_RMSE.tsv \
+# 		--verbose > & \
+# 		$results/misalignment_preprocessor_error_log.txt
 
+# update above python script to write to different directory
+# input_for_rmse_split_directory
 
+split -d -l 1 $results/wasted_edits.tsv testing_split
+
+# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv \
+# 	> $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
+
+# length of May 2017 Wikidata entity "universe"
+# split -d  -l 22149170 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv input_for_RMSE_sub_
 
 
 
