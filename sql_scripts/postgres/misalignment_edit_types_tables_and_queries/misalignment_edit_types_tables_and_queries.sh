@@ -259,7 +259,7 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # Should delete output file before for loop
 
 foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/ $input_RMSE_file
+	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_for_rmse_split_directory/$input_RMSE_file
 end
 
 
