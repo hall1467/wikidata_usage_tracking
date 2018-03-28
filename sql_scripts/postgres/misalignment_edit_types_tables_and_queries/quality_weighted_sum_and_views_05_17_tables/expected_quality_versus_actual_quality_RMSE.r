@@ -1,4 +1,4 @@
-entity_weighted_sums_and_page_views <- read.table(commandArgs()[6], header=TRUE, sep="\t");
+# entity_weighted_sums_and_page_views <- read.table(commandArgs()[6], header=TRUE, sep="\t");
 
 print(commandArgs())
 # summary(entity_weighted_sums_and_page_views)
