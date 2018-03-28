@@ -1,5 +1,3 @@
-print(commandArgs())
-
 entity_weighted_sums_and_page_views <- read.table(commandArgs()[6], header=TRUE, sep="\t");
 
 entity_weighted_sums_and_page_views$expected_quality_quantile = ecdf(entity_weighted_sums_and_page_views$page_views)(entity_weighted_sums_and_page_views$page_views);
