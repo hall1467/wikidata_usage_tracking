@@ -1,6 +1,5 @@
 """
 Aggregates various attributes of misalignment and edit data by month.
-Returns in json format.
 
 Usage:
     extract_edit_and_agent_type (-h|--help)
@@ -25,8 +24,6 @@ from collections import defaultdict
 import mysqltsv
 import sys
 import re
-import json2tsv
-import json
 
 
 logger = logging.getLogger(__name__)
@@ -46,10 +43,19 @@ def main(argv=None):
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[str, int, str, str, str, int, int, int, str, str, 
         str, str, str, str, str, str, int, int, str, str, str, str, str, 
-        str])
+        str, float])
 
 
-    output_file = open(args['<output>'], "w")
+    output_file = mysqltsv.Writer(
+        open(args['<output>'], "w"), 
+        headers=[
+                 'namespace',
+                 'page_title',
+                 'edit_type',
+                 'agent_type',
+                 'weighted_sum',
+                 'page_views',
+                 'revision_id'])
 
 
     verbose = args['--verbose']
@@ -76,6 +82,7 @@ def run(input_file, output_file, verbose):
         namespace = line[4]
         page_views = line[11]
         agent_type = line[12]
+        weighted_sum = line[24]
 
 
         # Also, filtering out sitelink edits
@@ -122,14 +129,16 @@ def run(input_file, output_file, verbose):
 
 
 
-        output_file.write(json.dumps({
-                    'namespace' : namespace,
-                    'page_title': page_title,
-                    'edit_type': output_edit_type,
-                    'agent_type': output_agent_type,
-                    'page_views': page_views,
-                    'rev_id': revision_id
-                }) + "\n")
+        output_file.write([
+            namespace,
+            page_title,
+            output_edit_type,
+            output_agent_type,
+            weighted_sum,
+            page_views,
+            revision_id])
+
+
 
 
 main()
