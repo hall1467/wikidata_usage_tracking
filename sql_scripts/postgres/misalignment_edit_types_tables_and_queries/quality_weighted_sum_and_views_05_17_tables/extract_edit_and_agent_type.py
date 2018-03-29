@@ -25,7 +25,6 @@ from collections import defaultdict
 import mysqltsv
 import sys
 import re
-import json2tsv
 import json
 
 
