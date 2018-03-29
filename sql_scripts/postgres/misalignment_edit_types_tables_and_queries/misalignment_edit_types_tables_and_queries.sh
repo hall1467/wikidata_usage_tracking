@@ -270,9 +270,9 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # shuf -n 1000000 $results/used_misalignment_and_edits_may_2016_to_2017.tsv > $results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv
 
-python $base/quality_weighted_sum_and_views_05_17_tables/convert_sample_tsv_to_json.py \
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
 	--verbose > & \
-	$results/convert_sample_tsv_to_json_error_log.txt
+	$results/extract_edit_and_agent_type_error_log.txt
 
