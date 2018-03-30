@@ -10,6 +10,7 @@ entity_weighted_sums_and_page_views$quality_difference = entity_weighted_sums_an
 entity_weighted_sums_and_page_views$quality_difference_sign = if (entity_weighted_sums_and_page_views$quality_difference < 0) -1 else 1;
 
 mean_quality_difference = mean(entity_weighted_sums_and_page_views$quality_difference)
+#Line below should be taking mean not sum. Won't effect results but should fix
 mean_quality_differences_squared = sum((entity_weighted_sums_and_page_views$quality_difference^2)*entity_weighted_sums_and_page_views$quality_difference_sign)
 
 
