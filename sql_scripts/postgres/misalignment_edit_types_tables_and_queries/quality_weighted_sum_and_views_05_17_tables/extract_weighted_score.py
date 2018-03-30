@@ -52,7 +52,7 @@ def main(argv=None):
                  'agent_type',
                  'page_views',
                  'rev_id',
-                 'weighted_score',])
+                 'weighted_sum',])
 
     verbose = args['--verbose']
 
@@ -75,9 +75,9 @@ def run(input_file, output_file, verbose):
             continue
         probabilities = \
             json_line['score']['itemquality']['score']['probability']
-        weighted_score = probabilities['E'] * 1 + probabilities['D'] * 2 + \
+        weighted_sum = probabilities['E'] * 1 + probabilities['D'] * 2 + \
             probabilities['C'] * 3 + probabilities['B'] * 4 + \
-            probabilities['B'] * 5 
+            probabilities['A'] * 5 
         output_edit_type = None
         output_agent_type = None
 
@@ -92,7 +92,7 @@ def run(input_file, output_file, verbose):
             json_line['agent_type'],
             json_line['page_views'],
             json_line['rev_id'],
-            weighted_score])
+            weighted_sum])
 
 
 
