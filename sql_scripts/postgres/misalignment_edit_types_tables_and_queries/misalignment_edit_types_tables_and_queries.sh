@@ -310,44 +310,44 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
 # 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
+# cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
+# cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
 # cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
 # 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2013_to_2014_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2013_to_2014_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2014_to_2015_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
+	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2014_to_2015_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2015_to_2016_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
+	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2015_to_2016_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2016_to_2017_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2016_to_2017_log.txt
 
 
