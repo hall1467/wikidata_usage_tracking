@@ -268,38 +268,38 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # \copy (SELECT page_title, revision_id, revision_user, comment, namespace, revision_timestamp, year, month, bot_user_id, change_tag_revision_id, number_of_revisions, page_views, edit_type, year_month_page_title, bot_prediction_threshold, session_start, misalignment_matching_year, misalignment_matching_month, edit_type_updated, reference_manipulation, sitelink_manipulation, label_description_or_alias_manipulation, quality_class, views_class FROM misalignment_and_edits where revision_timestamp >= 20150500000000 and revision_timestamp < 20160500000000 AND page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_misalignment_and_edits_may_2015_to_2016.tsv';
 # \copy (SELECT page_title, revision_id, revision_user, comment, namespace, revision_timestamp, year, month, bot_user_id, change_tag_revision_id, number_of_revisions, page_views, edit_type, year_month_page_title, bot_prediction_threshold, session_start, misalignment_matching_year, misalignment_matching_month, edit_type_updated, reference_manipulation, sitelink_manipulation, label_description_or_alias_manipulation, quality_class, views_class FROM misalignment_and_edits where revision_timestamp >= 20160500000000 and revision_timestamp < 20170500000000 AND page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_misalignment_and_edits_may_2016_to_2017.tsv';
 
-shuf -n 1000000 $results/used_misalignment_and_edits_may_2013_to_2014.tsv > $results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv
-shuf -n 1000000 $results/used_misalignment_and_edits_may_2014_to_2015.tsv > $results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv
-shuf -n 1000000 $results/used_misalignment_and_edits_may_2015_to_2016.tsv > $results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv
+# shuf -n 1000000 $results/used_misalignment_and_edits_may_2013_to_2014.tsv > $results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv
+# shuf -n 1000000 $results/used_misalignment_and_edits_may_2014_to_2015.tsv > $results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv
+# shuf -n 1000000 $results/used_misalignment_and_edits_may_2015_to_2016.tsv > $results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv
 # shuf -n 1000000 $results/used_misalignment_and_edits_may_2016_to_2017.tsv > $results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json \
-	--verbose > & \
-	$results/extract_edit_and_agent_type_may_2013_to_2014_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+# 	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json \
+# 	--verbose > & \
+# 	$results/extract_edit_and_agent_type_may_2013_to_2014_error_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json \
-	--verbose > & \
-	$results/extract_edit_and_agent_type_may_2014_to_2015_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+# 	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json \
+# 	--verbose > & \
+# 	$results/extract_edit_and_agent_type_may_2014_to_2015_error_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json \
-	--verbose > & \
-	$results/extract_edit_and_agent_type_may_2015_to_2016_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+# 	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json \
+# 	--verbose > & \
+# 	$results/extract_edit_and_agent_type_may_2015_to_2016_error_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
-	--verbose > & \
-	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+# 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
+# 	--verbose > & \
+# 	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
 
 
 # Run ores
@@ -308,44 +308,44 @@ cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json 
 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
+# cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
+# cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
-
-
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2013_to_2014_log.txt
+# cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2014_to_2015_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2013_to_2014_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2015_to_2016_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2014_to_2015_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2016_to_2017_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2015_to_2016_log.txt
+
+
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2016_to_2017_log.txt
 
 
