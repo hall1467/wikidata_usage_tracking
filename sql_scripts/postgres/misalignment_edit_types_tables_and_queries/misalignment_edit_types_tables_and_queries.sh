@@ -220,6 +220,8 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 
 ## Note right now, output from attribute_aggregator.py is being manually merged with monthly misalignment data
 
+# Further changes of rmse and mean error between months are manually computed in Excel
+
 ###################################################################
 echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_views_05_17', and 'sampled_quality_weighted_sum_and_views_05_17_with_revisions' table creations and querying section"
 ###################################################################
@@ -304,17 +306,17 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # Run ores
 
-cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
+# cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
+
+cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
+	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
 
-# cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
-
-# cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
+cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
 # cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
