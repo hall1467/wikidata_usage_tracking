@@ -215,7 +215,7 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 
 ## This is just for bot prediction work
 python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
-	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
+	$results/misalignment_and_edits.tsv \
 	$results/attribute_aggreations_used_and_unused.tsv \
 	$results/views_and_quality_class_edits_used_and_unused.tsv \
 	$results/views_class_edits_used_and_unused.tsv \
