@@ -212,6 +212,17 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # 	--verbose > & \
 # 	$results/attribute_aggregator_error_log.txt
 
+
+## This is just for bot prediction work
+python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
+	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
+	$results/attribute_aggreations_used_and_unused.tsv \
+	$results/views_and_quality_class_edits_used_and_unused.tsv \
+	$results/views_class_edits_used_and_unused.tsv \
+	$results/quality_class_edits_used_and_unused.tsv \
+	--verbose > & \
+	$results/attribute_aggregator_used_and_unused_error_log.txt
+
 # python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
 # 	$results/misalignment_and_edits_entity_edits_ordered_by_entity_year_month.tsv \
 # 	$results/wasted_edits.tsv \
@@ -323,31 +334,31 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2013_to_2014_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2013_to_2014_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2014_to_2015_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2014_to_2015_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2015_to_2016_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2015_to_2016_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2016_to_2017_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2016_to_2017_log.txt
 
 
