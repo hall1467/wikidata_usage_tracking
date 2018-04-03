@@ -7,7 +7,7 @@ weighted_sum_distribution = ecdf(entity_weighted_sums_and_page_views$weighted_su
 entity_weighted_sums_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=entity_weighted_sums_and_page_views$expected_quality_quantile);
 entity_weighted_sums_and_page_views$quality_difference = entity_weighted_sums_and_page_views$weighted_sum - entity_weighted_sums_and_page_views$expected_quality;
 
-entity_weighted_sums_and_page_views$quality_difference_sign = if (entity_weighted_sums_and_page_views$quality_difference < 0) -1 else 1;
+entity_weighted_sums_and_page_views$quality_difference_sign = sign(entity_weighted_sums_and_page_views$quality_difference);
 
 mean_quality_difference = mean(entity_weighted_sums_and_page_views$quality_difference)
 #Line below should be taking mean not sum. Won't effect results but should fix
