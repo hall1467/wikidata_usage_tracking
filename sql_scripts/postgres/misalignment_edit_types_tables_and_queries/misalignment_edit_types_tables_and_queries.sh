@@ -201,7 +201,7 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
-psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
+# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
 
 # python $base/misalignment_and_edits_table/attribute_aggregator.py \
 # 	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
@@ -214,14 +214,14 @@ psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edi
 
 
 ## This is just for bot prediction work
-python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
-	$results/misalignment_and_edits.tsv \
-	$results/attribute_aggreations_used_and_unused.tsv \
-	$results/views_and_quality_class_edits_used_and_unused.tsv \
-	$results/views_class_edits_used_and_unused.tsv \
-	$results/quality_class_edits_used_and_unused.tsv \
-	--verbose > & \
-	$results/attribute_aggregator_used_and_unused_error_log.txt
+# python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
+# 	$results/misalignment_and_edits.tsv \
+# 	$results/attribute_aggreations_used_and_unused.tsv \
+# 	$results/views_and_quality_class_edits_used_and_unused.tsv \
+# 	$results/views_class_edits_used_and_unused.tsv \
+# 	$results/quality_class_edits_used_and_unused.tsv \
+# 	--verbose > & \
+# 	$results/attribute_aggregator_used_and_unused_error_log.txt
 
 # python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
 # 	$results/misalignment_and_edits_entity_edits_ordered_by_entity_year_month.tsv \
@@ -253,12 +253,12 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # Need a script here that takes in quality_weighted_sum_and_views_05_17 and output from above query
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
-# 		$results/entity_weighted_sums_and_page_views.tsv \
-# 		$results/monthly_item_quality_sorted_by_month.tsv \
-# 		$results/input_for_RMSE.tsv \
-# 		--verbose > & \
-# 		$results/misalignment_preprocessor_error_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
+		$results/entity_weighted_sums_and_page_views.tsv \
+		$results/monthly_item_quality_sorted_by_month.tsv \
+		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+		--verbose > & \
+		$results/misalignment_preprocessor_error_log.txt
 
 # update above python script to write to different directory
 # input_for_rmse_split_directory

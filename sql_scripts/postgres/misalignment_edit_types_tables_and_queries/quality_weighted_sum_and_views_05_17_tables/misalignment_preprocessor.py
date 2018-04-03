@@ -115,7 +115,8 @@ def run(input_universe_file, input_monthly_item_quality_file, output_file,
                 if univ_entity in monthly_entity_weighted_sums and \
                     prev_month in monthly_entity_weighted_sums[univ_entity]:
 
-                    output_weighted_sum = \
+                    # Add 1 since we have a class for non-existent items
+                    output_weighted_sum = 1 + \
                         monthly_entity_weighted_sums[univ_entity][prev_month]
                 else:
                     output_weighted_sum = 0
