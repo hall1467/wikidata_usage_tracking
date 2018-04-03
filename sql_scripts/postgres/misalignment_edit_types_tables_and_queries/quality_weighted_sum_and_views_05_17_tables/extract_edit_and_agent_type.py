@@ -115,14 +115,14 @@ def run(input_file, output_file, verbose):
         if agent_type == 'bot_edit' or agent_type == 'human_edit' or \
             agent_type == 'anon_edit':
 
-            if agent_type == 'human_edit' and :
+            if agent_type == 'human_edit' and \
                 (agent_bot_pred == 'anon_ten_recall_bot_edit' or \
                 agent_bot_pred == 'anon_twenty_recall_bot_edit' or 
                 agent_bot_pred == 'anon_thirty_recall_bot_edit'):
 
                 output_agent_type = 'human_bot_like_edit'
 
-            elif agent_type == 'anon_edit' and :
+            elif agent_type == 'anon_edit' and \
                 (agent_bot_pred == 'anon_ten_recall_bot_edit' or \
                 agent_bot_pred == 'anon_twenty_recall_bot_edit' or 
                 agent_bot_pred == 'anon_thirty_recall_bot_edit'):
