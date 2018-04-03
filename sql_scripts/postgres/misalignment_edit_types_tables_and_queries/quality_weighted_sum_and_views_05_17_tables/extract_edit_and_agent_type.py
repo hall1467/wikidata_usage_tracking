@@ -75,6 +75,7 @@ def run(input_file, output_file, verbose):
         namespace = line[4]
         page_views = line[11]
         agent_type = line[12]
+        agent_bot_pred = line[18]
 
 
         # Also, filtering out sitelink edits
@@ -114,7 +115,23 @@ def run(input_file, output_file, verbose):
         if agent_type == 'bot_edit' or agent_type == 'human_edit' or \
             agent_type == 'anon_edit':
 
-            output_agent_type = agent_type
+            if agent_type == 'human_edit' and :
+                (agent_bot_pred == 'anon_ten_recall_bot_edit' or \
+                agent_bot_pred == 'anon_twenty_recall_bot_edit' or 
+                agent_bot_pred == 'anon_thirty_recall_bot_edit'):
+
+                output_agent_type = 'human_bot_like_edit'
+
+            elif agent_type == 'anon_edit' and :
+                (agent_bot_pred == 'anon_ten_recall_bot_edit' or \
+                agent_bot_pred == 'anon_twenty_recall_bot_edit' or 
+                agent_bot_pred == 'anon_thirty_recall_bot_edit'):
+
+                output_agent_type = 'anon_bot_like_edit'
+
+            else:
+                
+                output_agent_type = agent_type
         else:
 
             output_agent_type = 'semi_automated_edit'

@@ -253,12 +253,12 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 
 # Need a script here that takes in quality_weighted_sum_and_views_05_17 and output from above query
 
-python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
-		$results/entity_weighted_sums_and_page_views.tsv \
-		$results/monthly_item_quality_sorted_by_month.tsv \
-		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-		--verbose > & \
-		$results/misalignment_preprocessor_error_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocessor.py \
+# 		$results/entity_weighted_sums_and_page_views.tsv \
+# 		$results/monthly_item_quality_sorted_by_month.tsv \
+# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+# 		--verbose > & \
+# 		$results/misalignment_preprocessor_error_log.txt
 
 # update above python script to write to different directory
 # input_for_rmse_split_directory
@@ -287,32 +287,32 @@ python $base/quality_weighted_sum_and_views_05_17_tables/misalignment_preprocess
 # shuf -n 1000000 $results/used_misalignment_and_edits_may_2016_to_2017.tsv > $results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-# 	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json \
-# 	--verbose > & \
-# 	$results/extract_edit_and_agent_type_may_2013_to_2014_error_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
+	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json \
+	--verbose > & \
+	$results/extract_edit_and_agent_type_may_2013_to_2014_error_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-# 	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
-# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json \
-# 	--verbose > & \
-# 	$results/extract_edit_and_agent_type_may_2014_to_2015_error_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
+	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json \
+	--verbose > & \
+	$results/extract_edit_and_agent_type_may_2014_to_2015_error_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-# 	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
-# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json \
-# 	--verbose > & \
-# 	$results/extract_edit_and_agent_type_may_2015_to_2016_error_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
+	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json \
+	--verbose > & \
+	$results/extract_edit_and_agent_type_may_2015_to_2016_error_log.txt
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
-# 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
-# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
-# 	--verbose > & \
-# 	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_edit_and_agent_type.py \
+	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
+	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
+	--verbose > & \
+	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
 
 
 # Run ores
