@@ -1,6 +1,7 @@
-entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
+# entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
 output_file <- read.table(commandArgs(trailingOnly = TRUE)[2]);
 
+print(output_file)
 colnames(entity_weighted_sums_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 entity_weighted_sums_and_page_views$expected_quality_quantile = ecdf(entity_weighted_sums_and_page_views$page_views)(entity_weighted_sums_and_page_views$page_views);
 weighted_sum_distribution = ecdf(entity_weighted_sums_and_page_views$weighted_sum);
