@@ -1,5 +1,5 @@
 entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
-output_file <- read.table(commandArgs(trailingOnly = TRUE)[2], header=FALSE, sep="\t");
+output_file <- read.table(commandArgs(trailingOnly = TRUE)[2]);
 
 print(output_file)
 print(is.string(print(output_file)))
