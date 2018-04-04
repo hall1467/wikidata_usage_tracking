@@ -26,7 +26,7 @@ output = rbind(output, c(entity_weighted_sums_and_page_views[1,2],
                          rmse,
                          rmse_with_sign))
 
-write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
+# write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
 
 
 
