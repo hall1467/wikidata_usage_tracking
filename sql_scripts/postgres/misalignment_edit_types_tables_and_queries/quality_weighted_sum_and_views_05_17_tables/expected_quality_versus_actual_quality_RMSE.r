@@ -1,4 +1,4 @@
-# entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
+entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
 output_file <- commandArgs(trailingOnly = TRUE)[2];
 print("Here")
 print(output_file)
@@ -26,7 +26,7 @@ output = rbind(output, c(entity_weighted_sums_and_page_views[1,2],
                          rmse,
                          rmse_with_sign))
 
-# write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
+write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
 
 
 
