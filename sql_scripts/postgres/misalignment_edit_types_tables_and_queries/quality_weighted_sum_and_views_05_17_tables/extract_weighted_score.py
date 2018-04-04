@@ -75,9 +75,9 @@ def run(input_file, output_file, verbose):
             continue
         probabilities = \
             json_line['score']['itemquality']['score']['probability']
-        weighted_sum = probabilities['E'] * 1 + probabilities['D'] * 2 + \
-            probabilities['C'] * 3 + probabilities['B'] * 4 + \
-            probabilities['A'] * 5 
+        weighted_sum = (probabilities['E'] * 0 + probabilities['D'] * 1 + \
+            probabilities['C'] * 2 + probabilities['B'] * 3 + \
+            probabilities['A'] * 4) + 1 
         output_edit_type = None
         output_agent_type = None
 
