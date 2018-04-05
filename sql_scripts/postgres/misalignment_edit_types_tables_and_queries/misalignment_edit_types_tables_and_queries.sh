@@ -203,14 +203,11 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
 
-# python $base/misalignment_and_edits_table/attribute_aggregator.py \
-# 	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
-# 	$results/attribute_aggreations.tsv \
-# 	$results/views_and_quality_class_edits.tsv \
-# 	$results/views_class_edits.tsv \
-# 	$results/quality_class_edits.tsv \
-# 	--verbose > & \
-# 	$results/attribute_aggregator_error_log.txt
+python $base/misalignment_and_edits_table/attribute_aggregator.py \
+	$results/misalignment_and_edits_ordered_by_year_and_month.tsv \
+	$results/attribute_aggregations.tsv \
+	--verbose > & \
+	$results/attribute_aggregator_error_log.txt
 
 
 ## This is just for bot prediction work
@@ -273,29 +270,29 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # More recently have been moving into directories by year and manually running each to speed up this process. 
 # Otherwise takes 18 hours for the below loop
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
+# end
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
+# end
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
+# end
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
+# end
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
+# end
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_rmse_with_sign.tsv
-end
+# foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
+# 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
+# end
 
 
 # \copy (SELECT page_title, revision_id, revision_user, comment, namespace, revision_timestamp, year, month, bot_user_id, change_tag_revision_id, number_of_revisions, page_views, edit_type, year_month_page_title, bot_prediction_threshold, session_start, misalignment_matching_year, misalignment_matching_month, edit_type_updated, reference_manipulation, sitelink_manipulation, label_description_or_alias_manipulation, quality_class, views_class FROM misalignment_and_edits where revision_timestamp >= 20130500000000 and revision_timestamp < 20140500000000 AND page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_misalignment_and_edits_may_2013_to_2014.tsv';
@@ -356,31 +353,31 @@ end
 # 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2013_to_2014_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2013_to_2014_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2014_to_2015_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2014_to_2015_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2015_to_2016_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2015_to_2016_log.txt
 
 
-python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2016_to_2017_log.txt
+# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_weighted_score_extracted.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2016_to_2017_log.txt
 
 

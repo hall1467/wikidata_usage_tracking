@@ -1,26 +1,20 @@
 """
-Aggregates various attributes of misalignment and edit data by month.
+Aggregates agent type data by month for used entities.
 
 Usage:
     attribute_aggregator (-h|--help)
-    attribute_aggregator <input> <output_alignment_and_aggregations> <output_views_and_quality_class_edit_types> <output_views_class_edit_types> <output_quality_class_edit_types>
+    attribute_aggregator <input> <output_aggregations>
                          [--debug]
                          [--verbose]
 
 Options:
-    -h, --help                                   This help message is printed
-    <input>                                      Path to misalignment/edit
-                                                 breakdown file to process.
-    <output_alignment_and_aggregations>          Where alignment and aggregation 
-                                                 output will be written
-    <output_views_and_quality_class_edit_types>  Where views and quality class
-                                                 edit types will be written
-    <output_views_class_edit_types>              Where views class edit types
-                                                 will be written
-    <output_quality_class_edit_types>            Where quality class edit types
-                                                 will be written
-    --debug                                      Print debug logging to stderr
-    --verbose                                    Print dots and stuff to stderr  
+    -h, --help             This help message is printed
+    <input>                Path to misalignment/edit
+                           breakdown file to process.
+    <output_aggregations>  Where aggregation 
+                           output will be written
+    --debug                Print debug logging to stderr
+    --verbose              Print dots and stuff to stderr  
 """
 
 
@@ -53,76 +47,59 @@ def main(argv=None):
         str])
 
 
-    output_alignment_and_aggregations_file = mysqltsv.Writer(
-        open(args['<output_alignment_and_aggregations>'], "w"), 
+    output_aggregations_file = mysqltsv.Writer(
+        open(args['<output_aggregations>'], "w"), 
         headers=[
                  'year',
                  'month',
-                 'alignment_percentage',
                  'bot_edit',
-                 'semi_automated_edit',
-                 'human_edit',
+                 'quickstatements',
+                 'petscan',
+                 'autolist2',
+                 'autoedit',
+                 'labellister',
+                 'itemcreator',
+                 'dragrefjs',
+                 'lcjs',
+                 'wikidatagame',
+                 'wikidataprimary',
+                 'mixnmatch',
+                 'distributedgame',
+                 'nameguzzler',
+                 'mergejs',
+                 'reasonator',
+                 'duplicity',
+                 'tabernacle',
+                 'Widar',
+                 'reCh',
+                 'HHVM',
+                 'PAWS',
+                 'Kaspar',
+                 'itemFinder',
+                 'rgCh',
+                 'not_flagged_elsewhere_quickstatments_bot_account',
+                 'other_semi_automated_edit_since_change_tag',
                  'anon_edit',
-                 'semi_automated_bot_like_edit',
+                 'human_edit',
+                 'tool_bot_like_edit',
                  'human_bot_like_edit',
                  'anon_bot_like_edit'])
 
 
-    output_views_and_quality_class_edit_types_file = mysqltsv.Writer(
-        open(args['<output_views_and_quality_class_edit_types>'], "w"), 
-        headers=[
-                 'views_class',
-                 'quality_class',
-                 'bot_edit',
-                 'semi_automated_edit',
-                 'human_edit',
-                 'anon_edit'])
-
-
-    output_views_class_edit_types_file = mysqltsv.Writer(
-        open(args['<output_views_class_edit_types>'], "w"), 
-        headers=[
-                 'views_class',
-                 'bot_edit',
-                 'semi_automated_edit',
-                 'human_edit',
-                 'anon_edit'])
-
-
-    output_quality_class_edit_types_file = mysqltsv.Writer(
-        open(args['<output_quality_class_edit_types>'], "w"), 
-        headers=[
-                 'quality_class',
-                 'bot_edit',
-                 'semi_automated_edit',
-                 'human_edit',
-                 'anon_edit'])
 
 
     verbose = args['--verbose']
 
-    run(input_file, output_alignment_and_aggregations_file, 
-        output_views_and_quality_class_edit_types_file,
-        output_views_class_edit_types_file,
-        output_quality_class_edit_types_file,
+    run(input_file, output_aggregations_file,
         verbose)
 
 
-def run(input_file, output_alignment_and_aggregations_file, 
-        output_views_and_quality_class_edit_types_file,
-        output_views_class_edit_types_file,
-        output_quality_class_edit_types_file, verbose):
+def run(input_file, output_aggregations_file,
+        verbose):
 
 
     agg = \
         defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
-    align = \
-        defaultdict(lambda: defaultdict(
-            lambda: defaultdict(lambda: defaultdict(lambda: defaultdict(int)))))
-    v_and_q_class_edits = \
-        defaultdict(lambda: defaultdict(lambda: defaultdict(int)))
-    v_class_edits = defaultdict(lambda: defaultdict(int))
-    q_class_edits = defaultdict(lambda: defaultdict(int))
 
 
     for i, line in enumerate(input_file):
@@ -163,19 +140,8 @@ def run(input_file, output_alignment_and_aggregations_file,
         if quality_class == '\\N':
             continue
 
-        # Also, filtering out sitelink edits
-        if namespace == "0" and comment and \
-            EDIT_KIND_RE.match(comment) and \
-            EDIT_KIND_RE.match(comment).group(3) == 'sitelink':
-            continue
-
         # Incrementing the agent type count
-        if agent_type == 'bot_edit' or agent_type == 'human_edit' or \
-            agent_type == 'anon_edit':
-
-            agg[m_match_year][m_match_month][agent_type] += 1
-        else:
-            agg[m_match_year][m_match_month]['semi_automated_edit'] += 1
+        agg[m_match_year][m_match_month][agent_type] += 1
 
 
         if not (agent_anon_recall_level == '\\N'):
@@ -201,68 +167,45 @@ def run(input_file, output_alignment_and_aggregations_file,
                 agg[m_match_year][m_match_month]['tool_bot_like_edit'] += 1
 
 
-
-        # Calculating Alignment
-
-        n_and_title = namespace + page_title
-            
-        if quality_class == views_class:
-            align[m_match_year][m_match_month]['aligned'][n_and_title] = 1
-        else:
-            align[m_match_year][m_match_month]['misaligned'][n_and_title] = 1
-
-
-        # Update views and quality class edit counts
-        v_and_q_class_edits[views_class][quality_class][agent_type]\
-            += 1
-        v_class_edits[views_class][agent_type] += 1
-        q_class_edits[quality_class][agent_type] += 1
-
-
     for year in agg:
         for month in agg[year]:
             output_alignment_and_aggregations_file.write([
                 year,
                 month,
-                len(align[year][month]['aligned'])/
-                    (len(align[year][month]['aligned']) + 
-                    len(align[year][month]['misaligned'])),
                 agg[year][month]['bot_edit'],
-                agg[year][month]['semi_automated_edit'],
-                agg[year][month]['human_edit'],
+                agg[year][month]['quickstatements'],
+                agg[year][month]['petscan'],
+                agg[year][month]['autolist2'],
+                agg[year][month]['autoedit'],
+                agg[year][month]['labellister'],
+                agg[year][month]['itemcreator'],
+                agg[year][month]['dragrefjs'],
+                agg[year][month]['lcjs'],
+                agg[year][month]['wikidatagame'],
+                agg[year][month]['wikidataprimary'],
+                agg[year][month]['mixnmatch'],
+                agg[year][month]['distributedgame'],
+                agg[year][month]['nameguzzler'],
+                agg[year][month]['mergejs'],
+                agg[year][month]['reasonator'],
+                agg[year][month]['duplicity'],
+                agg[year][month]['tabernacle'],
+                agg[year][month]['Widar'],
+                agg[year][month]['reCh'],
+                agg[year][month]['HHVM'],
+                agg[year][month]['PAWS'],
+                agg[year][month]['Kaspar'],
+                agg[year][month]['itemFinder'],
+                agg[year][month]['rgCh'],
+                agg[year][month]['not_flagged_elsewhere_quickstatments_bot_account'],
+                agg[year][month]['other_semi_automated_edit_since_change_tag'],
                 agg[year][month]['anon_edit'],
+                agg[year][month]['human_edit'],
                 agg[year][month]['tool_bot_like_edit'],
                 agg[year][month]['human_bot_like_edit'],
                 agg[year][month]['anon_bot_like_edit']])
 
-
-    for v_class in v_and_q_class_edits:
-        for q_class in v_and_q_class_edits[v_class]:
-            output_views_and_quality_class_edit_types_file.write([
-                v_class,
-                q_class,
-                v_and_q_class_edits[v_class][q_class]['bot_edit'],
-                v_and_q_class_edits[v_class][q_class]['semi_automated_edit'],
-                v_and_q_class_edits[v_class][q_class]['human_edit'],
-                v_and_q_class_edits[v_class][q_class]['anon_edit']])
-
-
-    for v_class in v_class_edits:
-        output_views_class_edit_types_file.write([
-            v_class,
-            v_class_edits[v_class]['bot_edit'],
-            v_class_edits[v_class]['semi_automated_edit'],
-            v_class_edits[v_class]['human_edit'],
-            v_class_edits[v_class]['anon_edit']])
-
-
-    for q_class in q_class_edits:
-        output_quality_class_edit_types_file.write([
-            q_class,
-            q_class_edits[q_class]['bot_edit'],
-            q_class_edits[q_class]['semi_automated_edit'],
-            q_class_edits[q_class]['human_edit'],
-            q_class_edits[q_class]['anon_edit']]) 
+ 
 
 
 main()
