@@ -1,7 +1,7 @@
 entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
 output_file <- commandArgs(trailingOnly = TRUE)[2];
-print("Here")
-print(output_file)
+
+
 colnames(entity_weighted_sums_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 entity_weighted_sums_and_page_views$expected_quality_quantile = ecdf(entity_weighted_sums_and_page_views$page_views)(entity_weighted_sums_and_page_views$page_views);
 weighted_sum_distribution = ecdf(entity_weighted_sums_and_page_views$weighted_sum);
@@ -16,7 +16,7 @@ rmse = sqrt(sum(entity_weighted_sums_and_page_views$quality_difference^2)/nrow(e
 
 sum_quality_differences_squared = sum((entity_weighted_sums_and_page_views$quality_difference^2)*entity_weighted_sums_and_page_views$quality_difference_sign)
 sum_quality_differences_squared_sign = sign(sum_quality_differences_squared)
-rmse_with_sign = sqrt(abs(sum_quality_differences_squared))*sum_quality_differences_squared_sign
+rmse_with_sign = sqrt(abs(sum_quality_differences_squared)/nrow(entity_weighted_sums_and_page_views))*sum_quality_differences_squared_sign
     
 output = data.frame()
 output = rbind(output, c(entity_weighted_sums_and_page_views[1,2], 
