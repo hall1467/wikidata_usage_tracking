@@ -169,7 +169,7 @@ def run(input_file, output_aggregations_file,
 
     for year in agg:
         for month in agg[year]:
-            output_alignment_and_aggregations_file.write([
+            output_aggregations_file.write([
                 year,
                 month,
                 agg[year][month]['bot_edit'],
