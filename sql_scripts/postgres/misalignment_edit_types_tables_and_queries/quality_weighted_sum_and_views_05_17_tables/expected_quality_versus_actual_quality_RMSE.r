@@ -12,6 +12,9 @@ entity_weighted_sums_and_page_views$quality_difference_sign = sign(entity_weight
 
 me = sum(entity_weighted_sums_and_page_views$quality_difference)/nrow(entity_weighted_sums_and_page_views)
 mae = sum(abs(entity_weighted_sums_and_page_views$quality_difference))/nrow(entity_weighted_sums_and_page_views)
+median_error = median(entity_weighted_sums_and_page_views$quality_difference)
+median_absolute_error = median(abs(entity_weighted_sums_and_page_views$quality_difference))
+mad = median(abs(entity_weighted_sums_and_page_views$quality_difference - median(entity_weighted_sums_and_page_views$quality_difference)))
 rmse = sqrt(sum(entity_weighted_sums_and_page_views$quality_difference^2)/nrow(entity_weighted_sums_and_page_views))
 
 sum_quality_differences_squared = sum((entity_weighted_sums_and_page_views$quality_difference^2)*entity_weighted_sums_and_page_views$quality_difference_sign)
@@ -23,6 +26,9 @@ output = rbind(output, c(entity_weighted_sums_and_page_views[1,2],
                          entity_weighted_sums_and_page_views[1,3], 
                          me,
                          mae,
+                         median_error,
+                         median_absolute_error,
+                         mad,
                          rmse,
                          rmse_with_sign))
 
