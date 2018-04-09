@@ -143,6 +143,15 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start_query.sql
 
 
+## For bot prediction work additional analysis
+
+tail -n +2 $results/gradient_boosting_predictions_i2_for_anonymous_user_sessions.tsv \
+	> $results/gradient_boosting_predictions_i2_for_anonymous_user_sessions_no_header.tsv
+
+psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_session_gradient_boosting_bot_pred_table_creation.sql
+psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/anonymous_session_gradient_boosting_bot_pred_table_import.sql
+
+
 ##########################################################################################################
 echo "'entity_revisions_and_types_and_usages_and_bot_pred_thresholds' table creation and querying section"
 ##########################################################################################################
@@ -294,7 +303,7 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # 	Rscript $base/quality_weighted_sum_and_views_05_17_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
 
-Rscript $base/quality_weighted_sum_and_views_05_17_tables/revision_expected_quality_versus_actual_quality_varying_distributions.r
+# Rscript $base/quality_weighted_sum_and_views_05_17_tables/revision_expected_quality_versus_actual_quality_varying_distributions.r
 
 # \copy (SELECT page_title, revision_id, revision_user, comment, namespace, revision_timestamp, year, month, bot_user_id, change_tag_revision_id, number_of_revisions, page_views, edit_type, year_month_page_title, bot_prediction_threshold, session_start, misalignment_matching_year, misalignment_matching_month, edit_type_updated, reference_manipulation, sitelink_manipulation, label_description_or_alias_manipulation, quality_class, views_class FROM misalignment_and_edits where revision_timestamp >= 20130500000000 and revision_timestamp < 20140500000000 AND page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_misalignment_and_edits_may_2013_to_2014.tsv';
 # \copy (SELECT page_title, revision_id, revision_user, comment, namespace, revision_timestamp, year, month, bot_user_id, change_tag_revision_id, number_of_revisions, page_views, edit_type, year_month_page_title, bot_prediction_threshold, session_start, misalignment_matching_year, misalignment_matching_month, edit_type_updated, reference_manipulation, sitelink_manipulation, label_description_or_alias_manipulation, quality_class, views_class FROM misalignment_and_edits where revision_timestamp >= 20140500000000 and revision_timestamp < 20150500000000 AND page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/used_misalignment_and_edits_may_2014_to_2015.tsv';
