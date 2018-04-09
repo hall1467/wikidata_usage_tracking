@@ -23,9 +23,11 @@ for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalig
                     '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_53',
                     '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_54'                     
 )){
+    
     quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
-    
+    print(rmse_file)
+    print(nrow(quality_and_page_views))
     # 2013-2014
 
     quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)

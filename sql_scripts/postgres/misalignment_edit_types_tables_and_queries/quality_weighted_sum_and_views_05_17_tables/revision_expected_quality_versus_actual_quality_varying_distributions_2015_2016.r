@@ -26,7 +26,8 @@ for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalig
 )){
     quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
-    
+    print(rmse_file)
+    print(nrow(quality_and_page_views))
     # 2013-2014
 
     quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)
