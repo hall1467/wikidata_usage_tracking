@@ -203,11 +203,11 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
 
-python $base/misalignment_and_edits_table/attribute_aggregator.py \
-	$results/misalignment_and_edits.tsv \
-	$results/attribute_aggregations.tsv \
-	--verbose > & \
-	$results/attribute_aggregator_error_log.txt
+# python $base/misalignment_and_edits_table/attribute_aggregator.py \
+# 	$results/misalignment_and_edits.tsv \
+# 	$results/attribute_aggregations.tsv \
+# 	--verbose > & \
+# 	$results/attribute_aggregator_error_log.txt
 
 
 ## This is just for bot prediction work
