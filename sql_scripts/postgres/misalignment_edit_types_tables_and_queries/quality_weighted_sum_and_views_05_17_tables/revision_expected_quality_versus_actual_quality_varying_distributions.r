@@ -30,7 +30,7 @@ for (rmse_file in c('input_for_RMSE_sub_06',
                     'input_for_RMSE_sub_17',
                     'input_for_RMSE_sub_18'                     
 )){
-    rmse_full_path = directory_2014 + rmse_file;
+    rmse_full_path = paste(directory_2014, rmse_file);
     quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
@@ -86,7 +86,7 @@ for (rmse_file in c('input_for_RMSE_sub_18',
                     'input_for_RMSE_sub_29',
                     'input_for_RMSE_sub_30'                     
 )){
-    rmse_full_path = directory_2015 + rmse_file;
+    rmse_full_path = paste(directory_2015, rmse_file);
     quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
@@ -141,7 +141,7 @@ for (rmse_file in c('input_for_RMSE_sub_30',
                     'input_for_RMSE_sub_41',
                     'input_for_RMSE_sub_42'                     
 )){
-    rmse_full_path = directory_2016 + rmse_file;
+    rmse_full_path = paste(directory_2016, rmse_file);
     quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
@@ -196,7 +196,7 @@ for (rmse_file in c('input_for_RMSE_sub_42',
                     'input_for_RMSE_sub_53',
                     'input_for_RMSE_sub_54'                     
 )){
-    rmse_full_path = directory_2017 + rmse_file;
+    rmse_full_path = paste(directory_2017, rmse_file);
     quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
