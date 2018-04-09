@@ -1,4 +1,4 @@
-# install.packages("data.table", repos='http://cran.rstudio.com')
+install.packages("data.table", repos='http://cran.rstudio.com', dependencies=TRUE)
 library(data.table)
 
 revisions_weighted_sums_and_page_views_2013_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv", header=TRUE, sep="\t")
