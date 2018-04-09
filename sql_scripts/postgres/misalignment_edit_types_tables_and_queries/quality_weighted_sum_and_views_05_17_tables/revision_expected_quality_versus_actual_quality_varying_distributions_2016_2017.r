@@ -33,9 +33,9 @@ for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalig
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
     revisions_weighted_sums_and_page_views_2016_2017 = merge(revisions_weighted_sums_and_page_views_2016_2017, quality_and_page_views, by = "page_title")
-    revisions_weighted_sums_and_page_views_2016_2017 = revisions_weighted_sums_and_page_views_2016_2017[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
-    colnames(revisions_weighted_sums_and_page_views_2016_2017) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
-    revisions_weighted_sums_and_page_views_2016_2017$quality_difference = revisions_weighted_sums_and_page_views_2016_2017$weighted_sum - revisions_weighted_sums_and_page_views_2016_2017$expected_quality
+    # revisions_weighted_sums_and_page_views_2016_2017 = revisions_weighted_sums_and_page_views_2016_2017[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
+    # colnames(revisions_weighted_sums_and_page_views_2016_2017) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
+    revisions_weighted_sums_and_page_views_2016_2017$quality_difference = revisions_weighted_sums_and_page_views_2016_2017$weighted_sum.x - revisions_weighted_sums_and_page_views_2016_2017$expected_quality
 
 
     

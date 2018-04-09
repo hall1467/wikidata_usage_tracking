@@ -1,5 +1,4 @@
-install.packages("data.table", repos='http://cran.rstudio.com', dependencies=TRUE)
-library(data.table)
+
 
 revisions_weighted_sums_and_page_views_2013_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv", header=TRUE, sep="\t")
 
@@ -34,9 +33,9 @@ for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalig
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
     revisions_weighted_sums_and_page_views_2013_2014 = merge(revisions_weighted_sums_and_page_views_2013_2014, quality_and_page_views, by = "page_title")
-    revisions_weighted_sums_and_page_views_2013_2014 = revisions_weighted_sums_and_page_views_2013_2014[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
-    colnames(revisions_weighted_sums_and_page_views_2013_2014) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
-    revisions_weighted_sums_and_page_views_2013_2014$quality_difference = revisions_weighted_sums_and_page_views_2013_2014$weighted_sum - revisions_weighted_sums_and_page_views_2013_2014$expected_quality
+    # revisions_weighted_sums_and_page_views_2013_2014 = revisions_weighted_sums_and_page_views_2013_2014[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
+    # colnames(revisions_weighted_sums_and_page_views_2013_2014) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
+    revisions_weighted_sums_and_page_views_2013_2014$quality_difference = revisions_weighted_sums_and_page_views_2013_2014$weighted_sum.x - revisions_weighted_sums_and_page_views_2013_2014$expected_quality
 
 
     
