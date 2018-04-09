@@ -14,24 +14,21 @@ revisions_weighted_sums_and_page_views_2016_2017 <- read.table("/export/scratch2
 # summary(revisions_weighted_sums_and_page_views_2016_2017)
 
 
-directory_2014 = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/'
-
-for (rmse_file in c('input_for_RMSE_sub_06',
-                    'input_for_RMSE_sub_07',
-                    'input_for_RMSE_sub_08',
-                    'input_for_RMSE_sub_09',
-                    'input_for_RMSE_sub_10',
-                    'input_for_RMSE_sub_11',
-                    'input_for_RMSE_sub_12',
-                    'input_for_RMSE_sub_13',
-                    'input_for_RMSE_sub_14',
-                    'input_for_RMSE_sub_15',
-                    'input_for_RMSE_sub_16',
-                    'input_for_RMSE_sub_17',
-                    'input_for_RMSE_sub_18'                     
+for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_06',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_08',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_09',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_10',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_11',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_12',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_13',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_14',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_15',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_16',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_17',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_18'                     
 )){
-    rmse_full_path = paste(directory_2014, rmse_file);
-    quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
+    quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
     # 2013-2014
@@ -70,24 +67,22 @@ for (rmse_file in c('input_for_RMSE_sub_06',
 }
 
 
-directory_2015 = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/'
 
-for (rmse_file in c('input_for_RMSE_sub_18',
-                    'input_for_RMSE_sub_19',
-                    'input_for_RMSE_sub_20',
-                    'input_for_RMSE_sub_21',
-                    'input_for_RMSE_sub_22',
-                    'input_for_RMSE_sub_23',
-                    'input_for_RMSE_sub_24',
-                    'input_for_RMSE_sub_25',
-                    'input_for_RMSE_sub_26',
-                    'input_for_RMSE_sub_27',
-                    'input_for_RMSE_sub_28',
-                    'input_for_RMSE_sub_29',
-                    'input_for_RMSE_sub_30'                     
+for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_18',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_19',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_20',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_21',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_22',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_23',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_24',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_25',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_26',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_27',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_28',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_29',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_30'                     
 )){
-    rmse_full_path = paste(directory_2015, rmse_file);
-    quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
+    quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
     # 2013-2014
@@ -125,24 +120,22 @@ for (rmse_file in c('input_for_RMSE_sub_18',
     
 }
 
-directory_2016 = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/'
 
-for (rmse_file in c('input_for_RMSE_sub_30',
-                    'input_for_RMSE_sub_31',
-                    'input_for_RMSE_sub_32',
-                    'input_for_RMSE_sub_33',
-                    'input_for_RMSE_sub_34',
-                    'input_for_RMSE_sub_35',
-                    'input_for_RMSE_sub_36',
-                    'input_for_RMSE_sub_37',
-                    'input_for_RMSE_sub_38',
-                    'input_for_RMSE_sub_39',
-                    'input_for_RMSE_sub_40',
-                    'input_for_RMSE_sub_41',
-                    'input_for_RMSE_sub_42'                     
+for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_30',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_31',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_32',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_33',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_34',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_35',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_36',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2015/input_for_RMSE_sub_37',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_38',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_39',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_40',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_41',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_42'                     
 )){
-    rmse_full_path = paste(directory_2016, rmse_file);
-    quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
+    quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
     # 2013-2014
@@ -180,24 +173,22 @@ for (rmse_file in c('input_for_RMSE_sub_30',
     
 }
 
-directory_2017 = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/'
 
-for (rmse_file in c('input_for_RMSE_sub_42',
-                    'input_for_RMSE_sub_43',
-                    'input_for_RMSE_sub_44',
-                    'input_for_RMSE_sub_45',
-                    'input_for_RMSE_sub_46',
-                    'input_for_RMSE_sub_47',
-                    'input_for_RMSE_sub_48',
-                    'input_for_RMSE_sub_49',
-                    'input_for_RMSE_sub_50',
-                    'input_for_RMSE_sub_51',
-                    'input_for_RMSE_sub_52',
-                    'input_for_RMSE_sub_53',
-                    'input_for_RMSE_sub_54'                     
+for (rmse_file in c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_42',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_43',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_44',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_45',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_46',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_47',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_48',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2016/input_for_RMSE_sub_49',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_50',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_51',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_52',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_53',
+                    '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2017/input_for_RMSE_sub_54'                     
 )){
-    rmse_full_path = paste(directory_2017, rmse_file);
-    quality_and_page_views <- read.table(rmse_full_path, header=FALSE, sep="\t")
+    quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
     
     # 2013-2014
