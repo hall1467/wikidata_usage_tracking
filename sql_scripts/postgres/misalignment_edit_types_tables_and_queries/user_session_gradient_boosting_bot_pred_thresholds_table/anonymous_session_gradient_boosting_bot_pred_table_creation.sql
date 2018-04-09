@@ -1,7 +1,6 @@
 CREATE TABLE anonymous_session_gradient_boosting_bot_pred_table(
 	revision_user                        VARCHAR(265),
 	session_start                        BIGINT,
-	session_end                          BIGINT,
 	mean_in_seconds                      DECIMAL,
 	std_in_seconds                       DECIMAL,
 	namespace_0_edits                    INT,
