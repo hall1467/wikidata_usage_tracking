@@ -73,8 +73,8 @@ def run(input_file, output_file, verbose):
         revision_id = line[1]
         comment = line[3]
         namespace = line[4]
-        misallignment_year = line[16]
-        misallignment_month = line[17]
+        misalignment_year = line[16]
+        misalignment_month = line[17]
         page_views = line[11]
         agent_type = line[12]
         agent_bot_pred = line[18]
@@ -141,8 +141,8 @@ def run(input_file, output_file, verbose):
 
 
         output_file.write(json.dumps({
-                    'misalignment_year' : year,
-                    'misalignment_month' : month,
+                    'misalignment_year' : misalignment_year,
+                    'misalignment_month' : misalignment_month,
                     'namespace' : namespace,
                     'page_title': page_title,
                     'edit_type': output_edit_type,
