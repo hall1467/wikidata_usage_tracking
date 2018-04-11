@@ -54,11 +54,11 @@ for (monthly_distribution_and_edits in c(
                     c('/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_19', 'test')
 )){
   
-     distribution = monthly_distribution_and_edits[0]
+     distribution = monthly_distribution_and_edits[0][1]
      revisions = monthly_distribution_and_edits[1]
-     # print(distribution)
+     print(distribution)
      # print(revisions)
-     print(monthly_distribution_and_edits)
+     # print(monthly_distribution_and_edits)
 
 #     quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
 #     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
