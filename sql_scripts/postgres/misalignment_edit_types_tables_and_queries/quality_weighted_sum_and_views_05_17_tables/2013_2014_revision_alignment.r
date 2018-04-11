@@ -34,7 +34,7 @@
 
 
 
-
+all_revisions = data.frame()
 
 
 for (monthly_distribution_and_edits in list(
@@ -55,31 +55,28 @@ for (monthly_distribution_and_edits in list(
 )){
   
 
-     # distribution = monthly_distribution_and_edits[['distribution']]
-     print(monthly_distribution_and_edits$distribution)
-     # revisions = monthly_distribution_and_edits[1]
-     # print(distribution)
-     # print(revisions)
-     # print(monthly_distribution_and_edits)
+     distribution = monthly_distribution_and_edits$distribution
+     revisions = monthly_distribution_and_edits$revision
 
-#     quality_and_page_views <- read.table(rmse_file, header=FALSE, sep="\t")
-#     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
-#     print(rmse_file)
-#     print(nrow(quality_and_page_views))
-    
-#     if 
 
-#     quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)
-#     weighted_sum_distribution = ecdf(quality_and_page_views$weighted_sum)
-#     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
-
-#     revisions_weighted_sums_and_page_views = merge(revisions_weighted_sums_and_page_views_2016_2017, quality_and_page_views, by = "page_title")
-#     revisions_weighted_sums_and_page_views_2016_2017 = revisions_weighted_sums_and_page_views_2016_2017[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
-#     colnames(revisions_weighted_sums_and_page_views_2016_2017) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
-#     revisions_weighted_sums_and_page_views$quality_difference = revisions_weighted_sums_and_page_views$weighted_sum.x - revisions_weighted_sums_and_page_views$expected_quality
-
+     quality_and_page_views <- read.table(distribution, header=FALSE, sep="\t")
+     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 
     
-#     quality_and_page_views = NULL
+
+
+    quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)
+    weighted_sum_distribution = ecdf(quality_and_page_views$weighted_sum)
+    quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
+
+    revisions = merge(revisions, quality_and_page_views, by = "page_title")
+    revisions = revisions[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
+    colnames(revisions) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
+    revisions$quality_difference = revisions$weighted_sum - revisions$expected_quality
+
+
+    all_revisions = rbind(all_revisions, revisions)
+    
+    quality_and_page_views = NULL
     
 }
