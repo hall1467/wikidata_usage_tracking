@@ -55,7 +55,7 @@ for (monthly_distribution_and_edits in list(
 )){
   
      # names(monthly_distribution_and_edits) = c('distribution', 'revisions')
-     print(is.list(monthly_distribution_and_edits))
+     print(monthly_distribution_and_edits)
      # distribution = monthly_distribution_and_edits[['distribution']]
      # revisions = monthly_distribution_and_edits[1]
      # print(distribution)
