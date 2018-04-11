@@ -18,17 +18,15 @@ for (monthly_distribution_and_edits in list(
 )){
   
 
-     distribution = monthly_distribution_and_edits$distribution
-     revisions = monthly_distribution_and_edits$revision
+     distribution_file = monthly_distribution_and_edits$distribution
+     revisions_file = monthly_distribution_and_edits$revision
 
-     print(distribution)
-     print(revisions)
-
-     quality_and_page_views <- read.table(distribution, header=FALSE, sep="\t")
+     revisions <- read.table(revisions_file, header=FALSE, sep="\t")
+     quality_and_page_views <- read.table(distribution_file, header=FALSE, sep="\t")
      colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 
-    print(head(distribution))
-    print(nrow(distribution))
+    print(head(quality_and_page_views))
+    print(nrow(quality_and_page_views))
     print(head(revisions))
     print(nrow(revisions))
 
