@@ -37,7 +37,7 @@
 
 
 
-for (monthly_distribution_and_edits in c(
+for (monthly_distribution_and_edits in list(
                     
                     list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07', revisions = 'test'),
                     list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_08', revisions = 'test1'),
@@ -55,9 +55,10 @@ for (monthly_distribution_and_edits in c(
 )){
   
      # names(monthly_distribution_and_edits) = c('distribution', 'revisions')
-     distribution = monthly_distribution_and_edits['distribution']
-     revisions = monthly_distribution_and_edits[1]
-     print(distribution)
+     print(is.list(monthly_distribution_and_edits))
+     # distribution = monthly_distribution_and_edits[['distribution']]
+     # revisions = monthly_distribution_and_edits[1]
+     # print(distribution)
      # print(revisions)
      # print(monthly_distribution_and_edits)
 
