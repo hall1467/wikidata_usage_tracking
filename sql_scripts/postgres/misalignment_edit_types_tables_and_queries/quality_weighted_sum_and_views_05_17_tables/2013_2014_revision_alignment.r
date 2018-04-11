@@ -34,10 +34,10 @@ for (monthly_distribution_and_edits in list(
     weighted_sum_distribution = ecdf(quality_and_page_views$weighted_sum)
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
-    nrow(revisions)
-    head(revisions)
-    nrow(quality_and_page_views)
-    head(quality_and_page_views)
+    print(nrow(revisions))
+    print(head(revisions))
+    print(nrow(quality_and_page_views))
+    print(head(quality_and_page_views))
 
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
     revisions = revisions[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
