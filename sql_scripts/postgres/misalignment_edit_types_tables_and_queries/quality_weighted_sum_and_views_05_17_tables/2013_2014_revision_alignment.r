@@ -27,7 +27,10 @@ for (monthly_distribution_and_edits in list(
      quality_and_page_views <- read.table(distribution, header=FALSE, sep="\t")
      colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 
-    
+    print(head(distribution))
+    print(nrow(distribution))
+    print(head(revisions))
+    print(nrow(revisions))
 
 
     quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)
