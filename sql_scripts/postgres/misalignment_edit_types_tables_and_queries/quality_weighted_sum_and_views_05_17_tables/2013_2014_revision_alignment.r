@@ -3,25 +3,26 @@ all_revisions = data.frame()
 
 for (monthly_distribution_and_edits in list(
                     
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_08', revisions = 'test1'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_09', revisions = 'test2'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_10', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_11', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_12', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_13', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_14', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_15', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_16', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_17', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_18', revisions = 'test'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_19', revisions = 'test')
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07', revisions = 'monthly_sampled_revisions_june_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_08', revisions = 'monthly_sampled_revisions_july_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_09', revisions = 'monthly_sampled_revisions_august_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_10', revisions = 'monthly_sampled_revisions_september_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_11', revisions = 'monthly_sampled_revisions_october_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_12', revisions = 'monthly_sampled_revisions_november_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2013/input_for_RMSE_sub_13', revisions = 'monthly_sampled_revisions_december_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_14', revisions = 'monthly_sampled_revisions_january_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_15', revisions = 'monthly_sampled_revisions_february_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_16', revisions = 'monthly_sampled_revisions_march_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_17', revisions = 'monthly_sampled_revisions_april_2013.tsv'),
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_rmse_split_directory/2014/input_for_RMSE_sub_18', revisions = 'monthly_sampled_revisions_may_2013.tsv')
 )){
   
 
      distribution = monthly_distribution_and_edits$distribution
      revisions = monthly_distribution_and_edits$revision
 
+     print(distribution)
+     print(revisions)
 
      quality_and_page_views <- read.table(distribution, header=FALSE, sep="\t")
      colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')

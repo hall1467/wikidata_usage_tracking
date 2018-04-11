@@ -3,6 +3,7 @@
 set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/misalignment_edit_types_tables_and_queries
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries
 set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
+set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 #############################################################
@@ -363,14 +364,25 @@ echo "'quality_weighted_sum_and_views_05_17', 'sampled_quality_weighted_sum_and_
 # 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-Rscript $base/quality_weighted_sum_and_views_05_17_tables/2013_2014_revision_alignment.r
 
 
-# python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_weighted_score_extracted.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2013_to_2014_log.txt
+
+python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
+	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2013_to_2014_log.txt
 
 
 # python $base/quality_weighted_sum_and_views_05_17_tables/extract_weighted_score.py \
@@ -394,3 +406,4 @@ Rscript $base/quality_weighted_sum_and_views_05_17_tables/2013_2014_revision_ali
 # 	$results/extract_weighted_score_2016_to_2017_log.txt
 
 
+Rscript $base/quality_weighted_sum_and_views_05_17_tables/2013_2014_revision_alignment.r
