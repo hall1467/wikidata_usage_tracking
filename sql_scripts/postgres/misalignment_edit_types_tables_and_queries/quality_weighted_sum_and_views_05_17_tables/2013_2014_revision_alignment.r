@@ -21,7 +21,7 @@ for (monthly_distribution_and_edits in list(
      distribution_file = monthly_distribution_and_edits$distribution
      revisions_file = monthly_distribution_and_edits$revision
 
-     revisions <- read.table(revisions_file, header=FALSE, sep="\t")
+     revisions <- read.table(revisions_file, header=TRUE, sep="\t")
      quality_and_page_views <- read.table(distribution_file, header=FALSE, sep="\t")
      colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
 
