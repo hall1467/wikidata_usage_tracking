@@ -78,5 +78,8 @@ for (monthly_distribution_and_edits in list(
     all_revisions = rbind(all_revisions, revisions)
     
     quality_and_page_views = NULL
+
+    write.table(all_revisions, '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/all_revisions_quality_differences_2013_2014.tsv', row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
+    
     
 }
