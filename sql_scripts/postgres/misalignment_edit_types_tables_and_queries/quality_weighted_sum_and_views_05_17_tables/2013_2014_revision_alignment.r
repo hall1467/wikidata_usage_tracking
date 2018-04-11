@@ -1,39 +1,3 @@
-
-# library(data.table)
-
-# library(plyr)
-
-# library(ggplot2)
-
-# revisions_weighted_sums_and_page_views_june_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_june_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_july_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_july_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_august_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_august_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_september_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_september_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_october_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_october_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_november_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_november_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_december_2013 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_december_2013.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_january_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_january_2014.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_february_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_february_2014.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_march_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_march_2014.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_april_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_april_2014.tsv", header=TRUE, sep="\t")
-# revisions_weighted_sums_and_page_views_may_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/revisions_with_weighted_score_extracted_may_2014.tsv", header=TRUE, sep="\t")
-
-# quality_and_page_views_june_2014 <- read.table("/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/input_for_RMSE_sub_07", header=FALSE, sep="\t")
-
-# colnames(quality_and_page_views_june_2014) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
-
-
-
-
-
-
-
-
-
-
-
-
-
 all_revisions = data.frame()
 
 
@@ -79,7 +43,7 @@ for (monthly_distribution_and_edits in list(
     
     quality_and_page_views = NULL
 
-    write.table(all_revisions, '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/all_revisions_quality_differences_2013_2014.tsv', row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
-    
-    
 }
+
+write.table(all_revisions, '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/all_revisions_quality_differences_2013_2014.tsv', row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
+
