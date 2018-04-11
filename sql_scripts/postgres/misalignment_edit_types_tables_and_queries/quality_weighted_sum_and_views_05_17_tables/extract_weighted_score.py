@@ -247,7 +247,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
         output_edit_type = None
         output_agent_type = None
 
-        if json_line['misalignment_month'] == '1':
+        if json_line['misalignment_month'] == 1:
             output_first_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -258,7 +258,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '2':
+        elif json_line['misalignment_month'] == 2:
             output_second_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -269,7 +269,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '3':
+        elif json_line['misalignment_month'] == 3:
             output_third_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -280,7 +280,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '4':
+        elif json_line['misalignment_month'] == 4:
             output_fourth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -291,7 +291,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '5':
+        elif json_line['misalignment_month'] == 5:
             output_fifth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -302,7 +302,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '6':
+        elif json_line['misalignment_month'] == 6:
             output_sixth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -313,7 +313,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '7':
+        elif json_line['misalignment_month'] == 7:
             output_seventh_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -324,7 +324,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '8':
+        elif json_line['misalignment_month'] == 8:
             output_eighth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -335,7 +335,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '9':
+        elif json_line['misalignment_month'] == 9:
             output_ninth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -346,7 +346,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '10':
+        elif json_line['misalignment_month'] == 10:
             output_tenth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -357,7 +357,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '11':
+        elif json_line['misalignment_month'] == 11:
             output_eleventh_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
@@ -368,7 +368,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 json_line['page_views'],
                 json_line['rev_id'],
                 weighted_sum])
-        elif json_line['misalignment_month'] == '12':
+        elif json_line['misalignment_month'] == 12:
             output_twelfth_month_file.write([
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
