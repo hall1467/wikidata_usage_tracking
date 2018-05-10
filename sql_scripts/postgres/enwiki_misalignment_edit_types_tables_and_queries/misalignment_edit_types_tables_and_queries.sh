@@ -1,9 +1,11 @@
 set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/enwiki_misalignment_edit_types_tables_and_queries
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalignment_edit_types_tables_and_queries
 
-# First ran this to grab data from Wikimedia dumps
+# First ran these two manually to grab data from Wikimedia dumps
 
 # wget -r -l 1 -A "enwiki-20180420-stub-meta-history*.xml.gz" -nd --reject "enwiki-20180420-stub-meta-history.xml.gz" -nv https://dumps.wikimedia.org/enwiki/20180420/
+
+# wget -r -l 1 -A "enwiki-20180420-pages-articles*.xml*" -nd --reject "enwiki-20180420-pages-articles.xml.bz2","enwiki-20180420-pages-articles-multistream.xml.bz2" -nv https://dumps.wikimedia.org/enwiki/20180420/
 
 # Reusing the next two scripts since it doesn't make sense to create new ones doing essentially the same thing.
 
@@ -20,9 +22,6 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	--verbose \
 # 	--debug > & \
 # 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
-
-
-wget -r -l 1 -A "enwiki-20180420-pages-articles*.xml*" -nd --reject "enwiki-20180420-pages-articles.xml.bz2" -nv https://dumps.wikimedia.org/enwiki/20180420/
 
 
 
@@ -47,11 +46,11 @@ wget -r -l 1 -A "enwiki-20180420-pages-articles*.xml*" -nd --reject "enwiki-2018
 echo "'enwiki_2016_2017_page_views' table creation and querying section"
 ################################################################################################
 
-# tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" > \
-# 	$results/enwiki_page_views_2016_2017.txt
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -p "^en\.wikipedia\tNULL" > \
+	$results/enwiki_page_views_2016_2017.txt
 
-# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
-# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
+psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
 
 
