@@ -46,7 +46,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 echo "'enwiki_2016_2017_page_views' table creation and querying section"
 ################################################################################################
 
-tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -p "^en\.wikipedia\tNULL" > \
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -P "^en\.wikipedia\tNULL" > \
 	$results/enwiki_page_views_2016_2017.txt
 
 psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
