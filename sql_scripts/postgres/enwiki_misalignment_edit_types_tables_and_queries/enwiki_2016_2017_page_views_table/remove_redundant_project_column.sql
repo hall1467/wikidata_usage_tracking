@@ -1,0 +1,1 @@
+ALTER TABLE enwiki_2016_2017_page_views DROP COLUMN project;

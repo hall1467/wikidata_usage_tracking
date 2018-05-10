@@ -1,0 +1,1 @@
+\COPY enwiki_2016_2017_page_views FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalignment_edit_types_tables_and_queries/enwiki_page_views_2016_2017.txt';

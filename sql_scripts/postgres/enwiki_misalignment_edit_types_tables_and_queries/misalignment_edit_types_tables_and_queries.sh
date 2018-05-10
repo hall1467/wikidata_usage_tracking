@@ -22,9 +22,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 
-################################################################################################
-echo "'enwiki_monthly_item_quality' table creation and querying section"
-################################################################################################
+
 
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
@@ -34,12 +32,25 @@ echo "'enwiki_monthly_item_quality' table creation and querying section"
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki20160801.monthly_scores.complete.tsv >> \
 # 	/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-	/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv \
-	--revisions-output=/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header_escaped_backslashes.tsv \
-	--verbose \
-	--debug > & \
-	$results/enwiki.monthly_scores_20170701_no_header_escaped_backslashes_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+# 	/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv \
+# 	--revisions-output=/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header_escaped_backslashes.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/enwiki.monthly_scores_20170701_no_header_escaped_backslashes_error_log.txt
 
-psql wikidata_entities < $base/monthly_item_quality_table/table_creation.sql
-psql wikidata_entities < $base/monthly_item_quality_table/table_import.sql
+# psql wikidata_entities < $base/monthly_item_quality_table/table_creation.sql
+# psql wikidata_entities < $base/monthly_item_quality_table/table_import.sql
+
+################################################################################################
+echo "'enwiki_2016_2017_page_views' table creation and querying section"
+################################################################################################
+
+tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" > \
+	$results/enwiki_page_views_2016_2017.txt
+
+psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
+# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
+
+
