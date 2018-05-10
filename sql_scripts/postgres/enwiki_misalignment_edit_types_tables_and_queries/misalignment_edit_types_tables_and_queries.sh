@@ -35,8 +35,8 @@ echo "'enwiki_monthly_item_quality' table creation and querying section"
 # 	/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv
 
 python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-	$results/enwiki.monthly_scores_20170701_no_header.tsv \
-	--revisions-output=$results/enwiki.monthly_scores_20170701_no_header_escaped_backslashes.tsv \
+	/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv \
+	--revisions-output=/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header_escaped_backslashes.tsv \
 	--verbose \
 	--debug > & \
 	$results/enwiki.monthly_scores_20170701_no_header_escaped_backslashes_error_log.txt
