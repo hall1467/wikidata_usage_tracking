@@ -22,6 +22,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 
+wget -r -l 1 -A "enwiki-20180420-pages-articles*.xml*" -nd --reject "enwiki-20180420-pages-articles.xml.bz2" -nv https://dumps.wikimedia.org/enwiki/20180420/
 
 
 
@@ -46,11 +47,13 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 echo "'enwiki_2016_2017_page_views' table creation and querying section"
 ################################################################################################
 
-tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" > \
-	$results/enwiki_page_views_2016_2017.txt
+# tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" > \
+# 	$results/enwiki_page_views_2016_2017.txt
 
-psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
-psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
+# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
+# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
+
+
 
 
