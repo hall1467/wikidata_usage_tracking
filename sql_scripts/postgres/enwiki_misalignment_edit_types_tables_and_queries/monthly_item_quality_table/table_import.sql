@@ -1,1 +1,1 @@
-\COPY enwiki_monthly_item_quality FROM '/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header.tsv';
+\COPY enwiki_monthly_item_quality FROM '/export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki.monthly_scores_20170701_no_header_escaped_backslashes.tsv';
