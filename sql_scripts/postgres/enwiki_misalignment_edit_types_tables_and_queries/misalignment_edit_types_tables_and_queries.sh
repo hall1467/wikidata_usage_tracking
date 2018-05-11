@@ -62,6 +62,9 @@ echo "'enwiki_2016_2017_page_views' table creation and querying section"
 tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -v -P "^en\.wikipedia\tNULL" > \
 	$results/enwiki_page_views_2016_2017.txt
 
+echo "Dropping old version of 'enwiki_2016_2017_page_views' table (if it exists)."
+psql wikidata_entities -c "drop table enwiki_2016_2017_page_views;"
+
 psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
 psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
