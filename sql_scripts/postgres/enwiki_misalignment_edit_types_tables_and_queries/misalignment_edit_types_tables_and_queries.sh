@@ -23,6 +23,19 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	--debug > & \
 # 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
+################################################################################################
+echo "'randomly_selected_main_namespace_articles' table creation and querying section"
+################################################################################################
+
+python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
+	/export/scratch2/wmf/wbc_entity_usage/enwiki_current_page_info/enwiki-20180420-pages-articles* \
+	--revisions-output=$results/main_namespace_articles_20180420.tsv \
+	--verbose \
+	--debug > & \
+	$results/main_namespace_articles_20180420_error_log.txt
+
+
+# Next need to sample and dump results in a table
 
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
