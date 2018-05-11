@@ -47,8 +47,9 @@ def run(input_files, revisions_output_file, verbose):
 
     def process_pages(stub_file_dump_object, file_url):
         for stub_file_page in stub_file_dump_object:
-            if stub_file_page.namespace == 0:
-                yield stub_file_page.id
+            for stub_file_page_revision in stub_file_page:
+                if stub_file_page.namespace == 0:
+                    yield stub_file_page.id
 
 
     i = 0
