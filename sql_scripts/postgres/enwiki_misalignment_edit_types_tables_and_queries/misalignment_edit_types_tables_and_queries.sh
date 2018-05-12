@@ -29,10 +29,10 @@ echo "'randomly_selected_main_namespace_articles' table creation and querying se
 
 python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
 	/export/scratch2/wmf/wbc_entity_usage/enwiki_current_page_info/enwiki-20180420-pages-articles* \
-	--revisions-output=$results/main_namespace_articles_20180420.tsv \
+	--revisions-output=$results/all_namespace_articles_20180420.tsv \
 	--verbose \
 	--debug > & \
-	$results/main_namespace_articles_20180420_error_log.txt
+	$results/all_namespace_articles_20180420_error_log.txt
 
 
 # Next need to sample and dump results in a table
