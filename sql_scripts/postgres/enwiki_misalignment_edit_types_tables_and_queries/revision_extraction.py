@@ -86,7 +86,7 @@ def run(input_files, revisions_output_file, verbose):
   
 
                 yield stub_file_page_revision.page.title,\
-                      stub_file_page.id
+                      stub_file_page.id,\
                       stub_file_page_revision.id,\
                       revision_user_id,\
                       revision_user_text,\
