@@ -16,12 +16,12 @@ python $base/revision_extraction.py \
 	--debug > & \
 	$results/enwiki_page_revisions_20180420_error_log.txt
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-# 	$results/enwiki_page_revisions_20180420.tsv \
-# 	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
-# 	--verbose \
-# 	--debug > & \
-# 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+	$results/enwiki_page_revisions_20180420.tsv \
+	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
+	--verbose \
+	--debug > & \
+	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 ################################################################################################
 echo "'randomly_selected_main_namespace_articles' table creation and querying section"
