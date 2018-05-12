@@ -48,14 +48,13 @@ def run(input_files, revisions_output_file, verbose):
     def process_pages(stub_file_dump_object, file_url):
         for stub_file_page in stub_file_dump_object:
             for stub_file_page_revision in stub_file_page:
-                if stub_file_page.namespace == 0:
-                    yield stub_file_page.id
+                yield stub_file_page.namespace, stub_file_page.id
 
 
     i = 0
-    for page_id in mwxml.map(process_pages, input_files):
+    for namespace, page_id in mwxml.map(process_pages, input_files):
         i += 1
-        revisions_output_file.write([page_id])
+        revisions_output_file.write([namespace, page_id])
 
         if verbose and i % 10000 == 0:
             sys.stderr.write("Revisions processed: {0}\n".format(i))  
