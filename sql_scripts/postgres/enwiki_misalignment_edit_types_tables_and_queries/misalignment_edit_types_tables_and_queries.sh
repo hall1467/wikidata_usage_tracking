@@ -9,19 +9,19 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 
 # Reusing the next two scripts since it doesn't make sense to create new ones doing essentially the same thing.
 
-python $base/revision_extraction.py \
-	/export/scratch2/wmf/wbc_entity_usage/enwiki_page_revisions/enwiki-20180420-stub-meta-history* \
-	--revisions-output=$results/enwiki_page_revisions_20180420.tsv \
-	--verbose \
-	--debug > & \
-	$results/enwiki_page_revisions_20180420_error_log.txt
+# python $base/revision_extraction.py \
+# 	/export/scratch2/wmf/wbc_entity_usage/enwiki_page_revisions/enwiki-20180420-stub-meta-history* \
+# 	--revisions-output=$results/enwiki_page_revisions_20180420.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/enwiki_page_revisions_20180420_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-	$results/enwiki_page_revisions_20180420.tsv \
-	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
-	--verbose \
-	--debug > & \
-	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+# 	$results/enwiki_page_revisions_20180420.tsv \
+# 	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 ################################################################################################
 echo "'randomly_selected_main_namespace_articles' table creation and querying section"
