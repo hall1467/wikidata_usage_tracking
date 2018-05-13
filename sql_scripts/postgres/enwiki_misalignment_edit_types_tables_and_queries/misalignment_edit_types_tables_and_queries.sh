@@ -5,7 +5,7 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 
 # wget -r -l 1 -A "enwiki-20180420-stub-meta-history*.xml.gz" -nd --reject "enwiki-20180420-stub-meta-history.xml.gz" -nv https://dumps.wikimedia.org/enwiki/20180420/
 
-# wget -r -l 1 -A "enwiki-20180420-pages-articles*.xml*" -nd --reject "enwiki-20180420-pages-articles.xml.bz2","enwiki-20180420-pages-articles-multistream.xml.bz2" -nv https://dumps.wikimedia.org/enwiki/20180420/
+# wget https://dumps.wikimedia.org/enwiki/20180420/enwiki-20180420-pages-articles.xml.bz2
 
 # Reusing the next two scripts since it doesn't make sense to create new ones doing essentially the same thing.
 
