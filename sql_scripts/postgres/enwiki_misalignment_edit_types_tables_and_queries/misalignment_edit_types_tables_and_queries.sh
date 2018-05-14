@@ -24,10 +24,17 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 ################################################################################################
-echo "'randomly_selected_main_namespace_articles' table creation and querying section"
+echo "'enwiki_all_revisions' table creation and querying section"
 ################################################################################################
 
-# python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
+psql wikidata_entities < $base/enwiki_all_revisions_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_all_revisions_table/table_import.sql
+
+################################################################################################
+echo "'enwiki_randomly_selected_main_namespace_articles' table creation and querying section"
+################################################################################################
+
+# python $base/enwiki_randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
 # 	/export/scratch2/wmf/wbc_entity_usage/enwiki_current_page_info/enwiki-20180420-pages-articles* \
 # 	--revisions-output=$results/all_namespace_articles_20180420.tsv \
 # 	--verbose \
@@ -36,11 +43,17 @@ echo "'randomly_selected_main_namespace_articles' table creation and querying se
 
 
 # Next need to sample and dump results in a table
-cat $results/all_namespace_articles_20180420.tsv | grep -P "^0\t" | shuf -n 100000 > \
-	$results/main_namespace_articles_100000_sampled_20180420.tsv
+# cat $results/all_namespace_articles_20180420.tsv | grep -P "^0\t" | shuf -n 100000 > \
+# 	$results/main_namespace_articles_100000_sampled_20180420.tsv
 
-psql wikidata_entities < $base/randomly_selected_main_namespace_articles_table/table_creation.sql
-psql wikidata_entities < $base/randomly_selected_main_namespace_articles_table/table_import.sql
+psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_import.sql
+
+################################################################################################
+echo "'enwiki_randomly_selected_main_namespace_article_revisions' table creation and querying section"
+################################################################################################
+
+
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
 # 	grep -v -P "^[^\t]+\t[^\t]+\t[^\t]+\t20160801000000" > \
