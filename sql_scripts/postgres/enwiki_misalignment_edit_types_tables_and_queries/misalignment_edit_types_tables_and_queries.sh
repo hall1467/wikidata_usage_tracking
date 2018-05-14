@@ -27,16 +27,20 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 echo "'randomly_selected_main_namespace_articles' table creation and querying section"
 ################################################################################################
 
-python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
-	/export/scratch2/wmf/wbc_entity_usage/enwiki_current_page_info/enwiki-20180420-pages-articles* \
-	--revisions-output=$results/all_namespace_articles_20180420.tsv \
-	--verbose \
-	--debug > & \
-	$results/all_namespace_articles_20180420_error_log.txt
+# python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_namespace_article_extraction.py \
+# 	/export/scratch2/wmf/wbc_entity_usage/enwiki_current_page_info/enwiki-20180420-pages-articles* \
+# 	--revisions-output=$results/all_namespace_articles_20180420.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/all_namespace_articles_20180420_error_log.txt
 
 
 # Next need to sample and dump results in a table
+cat $results/all_namespace_articles_20180420.tsv | grep -P "^0\t" | shuf -n 100000 > \
+	$results/main_namespace_articles_100000_sampled_20180420.tsv
 
+psql wikidata_entities < $base/randomly_selected_main_namespace_articles_table/table_creation.sql
+psql wikidata_entities < $base/randomly_selected_main_namespace_articles_table/table_import.sql
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
 # 	grep -v -P "^[^\t]+\t[^\t]+\t[^\t]+\t20160801000000" > \
@@ -59,14 +63,14 @@ python $base/randomly_selected_main_namespace_articles_table/wikipedia_main_name
 echo "'enwiki_2016_2017_page_views' table creation and querying section"
 ################################################################################################
 
-tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -v -P "^en\.wikipedia\tNULL" > \
-	$results/enwiki_page_views_2016_2017.txt
+# tail -n +2 /export/scratch2/wmf/wbc_entity_usage/page_views/pageview_rate.20170607.tsv | grep -P "^en\.wikipedia\t" | grep -v -P "^en\.wikipedia\tNULL" > \
+# 	$results/enwiki_page_views_2016_2017.txt
 
-echo "Dropping old version of 'enwiki_2016_2017_page_views' table (if it exists)."
-psql wikidata_entities -c "drop table enwiki_2016_2017_page_views;"
+# echo "Dropping old version of 'enwiki_2016_2017_page_views' table (if it exists)."
+# psql wikidata_entities -c "drop table enwiki_2016_2017_page_views;"
 
-psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
-psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
+# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_creation.sql
+# psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
 
 
