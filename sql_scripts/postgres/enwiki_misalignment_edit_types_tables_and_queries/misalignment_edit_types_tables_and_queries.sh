@@ -16,12 +16,12 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	--debug > & \
 # 	$results/enwiki_page_revisions_20180420_error_log.txt
 
-# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-# 	$results/enwiki_page_revisions_20180420.tsv \
-# 	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
-# 	--verbose \
-# 	--debug > & \
-# 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+	$results/enwiki_page_revisions_20180420.tsv \
+	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
+	--verbose \
+	--debug > & \
+	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 ################################################################################################
 echo "'enwiki_all_revisions' table creation and querying section"
@@ -53,7 +53,7 @@ psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_
 echo "'enwiki_randomly_selected_main_namespace_article_revisions' table creation and querying section"
 ################################################################################################
 
-
+psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_article_revisions_table/table_creation.sql
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
 # 	grep -v -P "^[^\t]+\t[^\t]+\t[^\t]+\t20160801000000" > \

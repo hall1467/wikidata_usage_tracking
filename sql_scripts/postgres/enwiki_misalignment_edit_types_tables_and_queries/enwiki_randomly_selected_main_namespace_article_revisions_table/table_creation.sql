@@ -1,0 +1,7 @@
+CREATE TABLE enwiki_randomly_selected_main_namespace_article_revisions AS (
+	SELECT enwiki_all_revisions.*
+	FROM enwiki_all_revisions
+	INNER JOIN
+	enwiki_randomly_selected_main_namespace_articles
+	ON enwiki_all_revisions.page_id = enwiki_randomly_selected_main_namespace_articles.page_id
+);
