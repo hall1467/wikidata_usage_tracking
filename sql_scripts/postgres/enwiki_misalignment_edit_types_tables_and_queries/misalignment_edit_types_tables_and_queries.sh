@@ -16,12 +16,12 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 # 	--debug > & \
 # 	$results/enwiki_page_revisions_20180420_error_log.txt
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
-	$results/enwiki_page_revisions_20180420.tsv \
-	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
-	--verbose \
-	--debug > & \
-	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+# 	$results/enwiki_page_revisions_20180420.tsv \
+# 	--revisions-output=$results/enwiki_page_revisions_20180420_escaped_backslashes.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/enwiki_page_revisions_20180420_escaped_backslashes_error_log.txt
 
 ################################################################################################
 echo "'enwiki_all_revisions' table creation and querying section"
