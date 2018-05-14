@@ -1,1 +1,1 @@
-\COPY enwiki_all_revisions FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalignment_edit_types_tables_and_queries/enwiki_page_revisions_20180420_escaped_backslashes_no_header.tsv';
+\COPY enwiki_all_revisions FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalignment_edit_types_tables_and_queries/enwiki_page_revisions_20180420_escaped_backslashes.tsv';
