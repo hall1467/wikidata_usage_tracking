@@ -4,7 +4,7 @@ CREATE TABLE enwiki_all_revisions(
 	revision_id         BIGINT,
 	user_id             VARCHAR(265),
 	user_text           VARCHAR(265),
-	comment             VARCHAR(355),
+	comment             text,
 	namespace           BIGINT,
 	revision_timestamp  BIGINT
 );
