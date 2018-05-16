@@ -1,5 +1,5 @@
 CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
-	SELECT filtered_revisions_with_bots.*, view_count
+	SELECT filtered_revisions_with_bots.*, view_count,
 	(CASE WHEN comment LIKE '%AWB|AWB]]%' OR comment LIKE '%AutoWikiBrowser%' OR comment LIKE '% via awb %' THEN 'awb'
 	 	  WHEN comment LIKE '%WP:AFCH%' THEN 'afch'
 	 	  WHEN comment LIKE '%Scripts|CSDH%' THEN 'csdh'
