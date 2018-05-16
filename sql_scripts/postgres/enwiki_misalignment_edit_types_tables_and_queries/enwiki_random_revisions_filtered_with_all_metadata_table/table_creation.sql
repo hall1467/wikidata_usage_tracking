@@ -15,11 +15,11 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 	 	  ELSE 'human_edit' END
 	) AS agent_type
 	FROM (
-		  SELECT enwiki_all_revisions.*, username AS bot_username
+		  SELECT enwiki_randomly_selected_main_namespace_article_revisions.*, username AS bot_username
 		  FROM enwiki_randomly_selected_main_namespace_article_revisions
 		  LEFT JOIN
 		  enwiki_bots
-		  ON enwiki_all_revisions.user_text = enwiki_bots.username
+		  ON enwiki_randomly_selected_main_namespace_article_revisions.user_text = enwiki_bots.username
 		  WHERE revision_timestamp <= 20170501000000
 		) AS filtered_revisions_with_bots
 	LEFT JOIN
