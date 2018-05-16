@@ -17,10 +17,10 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 	FROM (
 		  SELECT enwiki_all_revisions.*, username AS bot_username
 		  FROM enwiki_randomly_selected_main_namespace_article_revisions
-		  WHERE revision_timestamp <= 20170501000000
 		  LEFT JOIN
 		  enwiki_bots
 		  ON enwiki_all_revisions.user_text = enwiki_bots.username
+		  WHERE revision_timestamp <= 20170501000000
 		) AS filtered_revisions_with_bots
 	LEFT JOIN
 	enwiki_2016_2017_page_views
