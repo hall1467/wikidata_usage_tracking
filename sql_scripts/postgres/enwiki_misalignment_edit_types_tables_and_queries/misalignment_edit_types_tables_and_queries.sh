@@ -90,6 +90,13 @@ echo "'enwiki_2016_2017_page_views' table creation and querying section"
 echo "'enwiki_bots' table creation and querying section"
 ################################################################################################
 
+python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/revisions_postgres_post_process.py \
+	/export/scratch2/wmf/wbc_entity_usage/enwiki_bots/crosswiki_unified_bot_20170328.tsv \
+	--revisions-output=/export/scratch2/wmf/wbc_entity_usage/enwiki_bots/crosswiki_unified_bot_20170328_escaped_backslashes.tsv \
+	--verbose \
+	--debug > & \
+	$results/crosswiki_unified_bot_20170328_escaped_backslashes_error_log.txt
+
 psql wikidata_entities < $base/enwiki_bots_table/table_creation.sql
 psql wikidata_entities < $base/enwiki_bots_table/table_import.sql
 
