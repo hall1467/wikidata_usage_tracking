@@ -27,8 +27,8 @@ set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/enwiki_misalig
 echo "'enwiki_all_revisions' table creation and querying section"
 ################################################################################################
 
-psql wikidata_entities < $base/enwiki_all_revisions_table/table_creation.sql
-psql wikidata_entities < $base/enwiki_all_revisions_table/table_import.sql
+# psql wikidata_entities < $base/enwiki_all_revisions_table/table_creation.sql
+# psql wikidata_entities < $base/enwiki_all_revisions_table/table_import.sql
 
 ################################################################################################
 echo "'enwiki_randomly_selected_main_namespace_articles' table creation and querying section"
@@ -46,14 +46,14 @@ echo "'enwiki_randomly_selected_main_namespace_articles' table creation and quer
 # cat $results/all_namespace_articles_20180420.tsv | grep -P "^0\t" | shuf -n 100000 > \
 # 	$results/main_namespace_articles_100000_sampled_20180420.tsv
 
-psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_creation.sql
-psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_import.sql
+# psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_creation.sql
+# psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_articles_table/table_import.sql
 
 ################################################################################################
 echo "'enwiki_randomly_selected_main_namespace_article_revisions' table creation and querying section"
 ################################################################################################
 
-psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_article_revisions_table/table_creation.sql
+# psql wikidata_entities < $base/enwiki_randomly_selected_main_namespace_article_revisions_table/table_creation.sql
 
 # tail -n +2 /export/scratch2/wmf/wbc_entity_usage/enwiki_monthly_item_quality/enwiki-20160801-20170701.monthly_scores.tsv | \
 # 	grep -v -P "^[^\t]+\t[^\t]+\t[^\t]+\t20160801000000" > \
