@@ -13,7 +13,7 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 	 	  WHEN comment LIKE '%User:Ohconfucius/script|Script%' THEN 'ohconfucius'
 	 	  WHEN comment LIKE '%User:GregU/dashes.js|script%' THEN 'gregu-dashes'
 	 	  ELSE 'human_edit' END
-	) AS agent_type,
+	) AS agent_type
 	FROM (
 		  SELECT enwiki_all_revisions.*, username AS bot_username
 		  FROM enwiki_randomly_selected_main_namespace_article_revisions
@@ -30,5 +30,5 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 
 
 
-## Need to make null page view values be 0 instead
+-- ## Need to make null page view values be 0 instead
 
