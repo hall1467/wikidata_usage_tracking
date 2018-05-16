@@ -86,6 +86,15 @@ echo "'enwiki_2016_2017_page_views' table creation and querying section"
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/table_import.sql
 # psql wikidata_entities < $base/enwiki_2016_2017_page_views_table/remove_redundant_project_column.sql
 
+################################################################################################
+echo "'enwiki_bots' table creation and querying section"
+################################################################################################
 
+psql wikidata_entities < $base/enwiki_bots_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_bots_table/table_import.sql
 
+################################################################################################
+echo "'enwiki_random_revisions_filtered_with_all_metadata' table creation and querying section"
+################################################################################################
 
+psql wikidata_entities < $base/enwiki_random_revisions_filtered_with_all_metadata_table/table_creation.sql

@@ -1,0 +1,1 @@
+\COPY enwiki_bots FROM '/export/scratch2/wmf/wbc_entity_usage/enwiki_bots/crosswiki_unified_bot_20170328.tsv';
