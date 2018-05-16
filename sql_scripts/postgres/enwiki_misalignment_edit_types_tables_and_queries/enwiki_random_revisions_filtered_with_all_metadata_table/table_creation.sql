@@ -1,5 +1,5 @@
 CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
-	SELECT filtered_revisions_with_bots.*,
+	SELECT filtered_revisions_with_bots.*, view_count
 	(CASE WHEN comment LIKE '%AWB|AWB]]%' OR comment LIKE '%AutoWikiBrowser%' OR comment LIKE '% via awb %' THEN 'awb'
 	 	  WHEN comment LIKE '%WP:AFCH%' THEN 'afch'
 	 	  WHEN comment LIKE '%Scripts|CSDH%' THEN 'csdh'
@@ -12,7 +12,7 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 	 	  WHEN comment LIKE '%via CenPop%' THEN 'cenpop'
 	 	  WHEN comment LIKE '%User:Ohconfucius/script|Script%' THEN 'ohconfucius'
 	 	  WHEN comment LIKE '%User:GregU/dashes.js|script%' THEN 'gregu-dashes'
-	 	  ELSE 'human_edit' END
+	 	  ELSE 'other_edit' END
 	) AS agent_type
 	FROM (
 		  SELECT enwiki_randomly_selected_main_namespace_article_revisions.*, username AS bot_username
@@ -26,9 +26,3 @@ CREATE TABLE enwiki_random_revisions_filtered_with_all_metadata AS (
 	enwiki_2016_2017_page_views
 	ON filtered_revisions_with_bots.page_id = enwiki_2016_2017_page_views.page_id
 );
-
-
-
-
--- ## Need to make null page view values be 0 instead
-

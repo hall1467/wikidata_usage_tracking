@@ -105,3 +105,4 @@ echo "'enwiki_random_revisions_filtered_with_all_metadata' table creation and qu
 ################################################################################################
 
 psql wikidata_entities < $base/enwiki_random_revisions_filtered_with_all_metadata_table/table_creation.sql
+psql wikidata_entities < $base/enwiki_random_revisions_filtered_with_all_metadata_table/convert_null_views_to_zero.sql
