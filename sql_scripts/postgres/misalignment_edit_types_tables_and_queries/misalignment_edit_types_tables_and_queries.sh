@@ -244,7 +244,7 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 
 # The next query is for Cristina and her Wikidata work
 
-# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_bot_flagged_and_bot_likelihoods_query.sql
+psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_bot_flagged_and_bot_likelihoods_query.sql
 
 
 
