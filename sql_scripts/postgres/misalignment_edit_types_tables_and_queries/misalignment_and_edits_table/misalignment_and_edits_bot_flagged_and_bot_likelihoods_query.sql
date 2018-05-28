@@ -1,1 +1,1 @@
-\copy (SELECT revision_id, bot_prediction_threshold, edit_type_updated as bot_likelihood FROM misalignment_and_edits) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/misalignment_and_edits_bot_flagged_and_bot_likelihoods_query.tsv';
+\copy (SELECT revision_id, edit_type, edit_type_updated as bot_likelihood FROM misalignment_and_edits) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/misalignment_and_edits_bot_flagged_and_bot_likelihoods_query.tsv';
