@@ -105,7 +105,7 @@ def run(input_building_data_file, input_i1_testing_data_file,
 
 
 
-    for i, line in enumerate(input_R_testing_data_file):
+    for i, line in enumerate(input_r_testing_data_file):
         
         if (line[0] in random_building_sessions and\
             line[1] in random_building_sessions[line[0]]) or\
