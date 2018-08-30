@@ -104,25 +104,25 @@ echo "Removing '$results/registered_human_and_bot_sessions.tsv' to save space."
 echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to save space."
 # rm -f $results/revisions_registered_human_and_bot_sessions.tsv
 
-python $base/user_session_gradient_boosting_bot_pred_thresholds_table/registered_users_predictor_and_inter_edit_construction.py \
-	$results/revisions_registered_human_and_bot_sessions.tsv \
-	$results/REGISTERED_USERS_predictors_data.tsv \
-	$results/REGISTERED_USERS_inter_edit.tsv --verbose --debug > & \
-	$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
+# python $base/user_session_gradient_boosting_bot_pred_thresholds_table/registered_users_predictor_and_inter_edit_construction.py \
+# 	$results/revisions_registered_human_and_bot_sessions.tsv \
+# 	$results/REGISTERED_USERS_predictors_data.tsv \
+# 	$results/REGISTERED_USERS_inter_edit.tsv --verbose --debug > & \
+# 	$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
 
-python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
-	$results/predictors_and_labelled_data.tsv \
-	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
-	$results/REGISTERED_USERS_predictors_data.tsv \
-	$results/random_forest_predictions_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
-	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
-	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
-	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
-	--verbose > & \
-	$results/model_applied_to_registered_users_error_log.txt
+# python $base/user_session_gradient_boosting_bot_pred_thresholds_table/model_applied_to_registered_users.py \
+# 	$results/predictors_and_labelled_data.tsv \
+# 	$results/MODEL_TESTING_I2_FILTERED_predictors_and_labelled_data.tsv \
+# 	$results/REGISTERED_USERS_predictors_data.tsv \
+# 	$results/random_forest_predictions_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_predictions_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_threshold_scores_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_threshold_scores_I2_for_registered_user_sessions.tsv \
+# 	$results/MODEL_TESTING_FILTERED_labelled_and_predicted_data.tsv \
+# 	$results/gradient_boosting_PR_I2_for_registered_user_sessions.tsv \
+# 	$results/gradient_boosting_ROC_I2_for_registered_user_sessions.tsv \
+# 	--verbose > & \
+# 	$results/model_applied_to_registered_users_error_log.txt
 
 python $base/user_session_gradient_boosting_bot_pred_thresholds_table/merge_bot_prediction_files.py \
 	$results/gradient_boosting_threshold_scores_I2_for_anonymous_user_sessions.tsv \
@@ -137,13 +137,13 @@ python $base/user_session_gradient_boosting_bot_pred_thresholds_table/add_end_ti
 	--verbose > & \
 	$results/add_end_timestamp_to_user_session_prediction_data_error_log.txt
 
-# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
+psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_creation.sql
 
-# tail -n +2 $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end.tsv \
-# 	> $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end_no_header.tsv
+tail -n +2 $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end.tsv \
+	> $results/gradient_boosting_threshold_scores_I2_for_user_sessions_with_session_end_no_header.tsv
 
-# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
-# psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start_query.sql
+psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_table_import.sql
+psql wikidata_entities < $base/user_session_gradient_boosting_bot_pred_thresholds_table/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start_query.sql
 
 
 ## For bot prediction work additional analysis: no longer needed
@@ -171,27 +171,27 @@ echo "Removing old version of '$results/entity_revisions_and_types_and_usages_wi
 echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt' (if it exists)."
 # rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
 
-# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
-# 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
-# 	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
-# 	--verbose > & \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
+python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
+	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
+	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+	--verbose > & \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
-# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
-# 	--verbose > & \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_error_log.txt
+python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
+	--verbose > & \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_error_log.txt
 
-# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_additional_columns_based_on_revision_information.py \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols.tsv \
-# 	--verbose > & \
-# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
+python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_additional_columns_based_on_revision_information.py \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols.tsv \
+	--verbose > & \
+	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
 
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
-# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
+psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
+psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
 
 echo "Removing '$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv' to save space."
 # rm -f $results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv
