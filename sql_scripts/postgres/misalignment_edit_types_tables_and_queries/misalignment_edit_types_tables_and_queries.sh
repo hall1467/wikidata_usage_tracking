@@ -81,15 +81,15 @@ echo "Removing old version of '$results/model_applied_to_registered_users_error_
 # rm -f $results/model_applied_to_registered_users_error_log.txt
 
 # Removes retracted and anonymous user names
-tail -n +2 /export/scratch2/wmf/edit_analyses/old_12_12_17/session_data.tsv | grep -v "^NULL" > $results/registered_human_and_bot_sessions.tsv
+# tail -n +2 /export/scratch2/wmf/edit_analyses/old_12_12_17/session_data.tsv | grep -v "^NULL" > $results/registered_human_and_bot_sessions.tsv
 
-python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
-	/export/scratch2/wmf/edit_analyses/old_12_12_17/revision_session_data.tsv \
-	$results/registered_human_and_bot_sessions.tsv \
-	$results/revisions_registered_human_and_bot_sessions.tsv \
-	--verbose \
-	--debug > & \
-	$results/revisions_registered_human_and_bot_sessions_error_log.txt
+# python /export/scratch2/wmf/scripts/wikidata_usage_tracking/python_analysis_scripts/edit_analyses/select_actual_revisions_from_random_sessions.py \
+# 	/export/scratch2/wmf/edit_analyses/old_12_12_17/revision_session_data.tsv \
+# 	$results/registered_human_and_bot_sessions.tsv \
+# 	$results/revisions_registered_human_and_bot_sessions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/revisions_registered_human_and_bot_sessions_error_log.txt
 
 echo "Removing '$results/registered_human_and_bot_sessions.tsv' to save space."
 # rm -f $results/registered_human_and_bot_sessions.tsv
@@ -105,7 +105,7 @@ echo "Removing '$results/revisions_registered_human_and_bot_sessions.tsv' to sav
 # rm -f $results/revisions_registered_human_and_bot_sessions.tsv
 
 python $base/user_session_gradient_boosting_bot_pred_thresholds_table/registered_users_predictor_and_inter_edit_construction.py \
-	$results/REGISTERED_USERS_revisions_from_sessions_containing_item_or_property_edits.tsv \
+	$results/revisions_registered_human_and_bot_sessions.tsv \
 	$results/REGISTERED_USERS_predictors_data.tsv \
 	$results/REGISTERED_USERS_inter_edit.tsv --verbose --debug > & \
 	$results/registered_users_predictor_and_inter_edit_construction_error_log.tsv
