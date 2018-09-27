@@ -91,11 +91,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	$results/extract_edit_and_agent_type_may_2015_to_2016_error_log.txt
 
 
-python $base/longitudinal_misalignment_tables/extract_edit_and_agent_type.py \
-	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
-	--verbose > & \
-	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
+# python $base/longitudinal_misalignment_tables/extract_edit_and_agent_type.py \
+# 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json \
+# 	--verbose > & \
+# 	$results/extract_edit_and_agent_type_may_2016_to_2017_error_log.txt
 
 
 # Run ores
@@ -112,9 +112,9 @@ python $base/longitudinal_misalignment_tables/extract_edit_and_agent_type.py \
 # 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
 # 	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
-cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
+# cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
 # python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
