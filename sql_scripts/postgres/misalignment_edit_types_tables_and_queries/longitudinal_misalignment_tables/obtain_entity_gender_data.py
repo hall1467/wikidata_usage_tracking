@@ -81,7 +81,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
         if i % 50 == 49:
             entity_id_lists.append(inner_list)
 
-        if i == 2000:
+        if i == 200000:
             break
 
     accessed_gender_for_revisions_count = 0
