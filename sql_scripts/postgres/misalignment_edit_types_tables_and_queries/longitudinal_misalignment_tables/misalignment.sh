@@ -227,9 +227,9 @@ shuf -n 100000 $results/all_revisions_quality_differences_2016_2017.tsv > $resul
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
 	$results/all_revisions_quality_differences_2016_2017_sampled.tsv \
-	$results/all_revisions_with_demographic_data_2016_2017_sampled.tsv \
+	$results/all_revisions_with_gender_data_2016_2017_sampled.tsv \
 	--verbose > & \
-	$results/all_revisions_with_demographic_data_2016_2017_sampled_error_log.txt
+	$results/all_revisions_with_gender_data_2016_2017_sampled_error_log.txt
 
 
 # Need a script that produces bot edits of different strata: 
