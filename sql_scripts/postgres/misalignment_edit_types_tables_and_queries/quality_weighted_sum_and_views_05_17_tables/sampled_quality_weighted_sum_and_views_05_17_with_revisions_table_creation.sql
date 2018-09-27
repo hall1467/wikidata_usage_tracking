@@ -1,7 +1,0 @@
-CREATE TABLE sampled_quality_weighted_sum_and_views_05_17_with_revisions AS (
-	SELECT sampled_quality_weighted_sum_and_views_05_17.weighted_sum, misalignment_and_edits.*
-	FROM sampled_quality_weighted_sum_and_views_05_17
-	INNER JOIN
-	misalignment_and_edits
-	ON sampled_quality_weighted_sum_and_views_05_17.page_title = misalignment_and_edits.page_title
-);

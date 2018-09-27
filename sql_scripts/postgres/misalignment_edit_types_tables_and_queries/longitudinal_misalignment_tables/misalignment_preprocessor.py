@@ -85,7 +85,7 @@ def run(input_universe_file, input_monthly_item_quality_file, output_file,
 
 
 
-        universe_of_entities[line[1]] = line[3]
+        universe_of_entities[line[1]] = line[2]
 
 
     prev_month = None

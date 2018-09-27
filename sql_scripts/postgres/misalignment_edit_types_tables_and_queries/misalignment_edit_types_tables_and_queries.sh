@@ -40,7 +40,7 @@ echo "Dropping old version of 'entity_revisions_and_types_and_usages' table (if 
 # psql wikidata_entities -c "drop table entity_revisions_and_types_and_usages;"
 
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_table_creation.sql
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_query.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_semi_automated_100_random_revisions_per_type_query.sql
 # psql wikidata_entities < $base/entity_revisions_and_types_and_usages_table/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp_semi_automated_revision_word_counts_query.sql
 
@@ -171,27 +171,27 @@ echo "Removing old version of '$results/entity_revisions_and_types_and_usages_wi
 echo "Removing old version of '$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt' (if it exists)."
 # rm -f $results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
 
-python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
-	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
-	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
-	--verbose > & \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
+# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_bot_prediction_threshold_to_entity_revisions_and_types_and_usages_data.py \
+# 	$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv \
+# 	$results/user_session_gradient_boosting_bot_pred_thresholds_ordered_by_user_and_session_start.tsv \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+# 	--verbose > & \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_error_log.txt
 
-python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
-	--verbose > & \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_error_log.txt
+# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/revision_misalignment_matcher.py \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds.tsv \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
+# 	--verbose > & \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_error_log.txt
 
-python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_additional_columns_based_on_revision_information.py \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols.tsv \
-	--verbose > & \
-	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
+# python $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/add_additional_columns_based_on_revision_information.py \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month.tsv \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols.tsv \
+# 	--verbose > & \
+# 	$results/entity_revisions_and_types_and_usages_with_bot_prediction_thresholds_and_misalignment_month_and_add_cols_error_log.txt
 
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
-psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_creation.sql
+# psql wikidata_entities < $base/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table/entity_revisions_and_types_and_usages_and_bot_pred_thresholds_table_import.sql
 
 echo "Removing '$results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv' to save space."
 # rm -f $results/entity_revisions_and_types_and_usages_ordered_by_revision_user_and_timestamp.tsv
@@ -207,13 +207,13 @@ echo "Dropping old version of 'misalignment_and_edits' table (if it exists)."
 echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exists)."
 # rm -f $results/wasted_edits_error_log.txt
 
-# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
+psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_table_creation.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_entity_edits_ordered_by_entity_year_month_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_entity_edits_grouped_and_ordered_by_year_month_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_entity_views_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_and_view_class_5_17_query.sql
 # psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_edit_proportions_by_quality_class_5_17_query.sql
-# psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
+psql wikidata_entities < $base/misalignment_and_edits_table/misalignment_and_edits_query.sql
 
 # python $base/misalignment_and_edits_table/attribute_aggregator.py \
 # 	$results/misalignment_and_edits.tsv \
@@ -222,15 +222,15 @@ echo "Removing old version of '$results/wasted_edits_error_log.txt' (if it exist
 # 	$results/attribute_aggregator_error_log.txt
 
 
-## This is just for bot prediction work
-# python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
-# 	$results/misalignment_and_edits.tsv \
-# 	$results/attribute_aggreations_used_and_unused.tsv \
-# 	$results/views_and_quality_class_edits_used_and_unused.tsv \
-# 	$results/views_class_edits_used_and_unused.tsv \
-# 	$results/quality_class_edits_used_and_unused.tsv \
-# 	--verbose > & \
-# 	$results/attribute_aggregator_used_and_unused_error_log.txt
+# This is just for bot prediction work
+python $base/misalignment_and_edits_table/attribute_aggregator_used_and_unused.py \
+	$results/misalignment_and_edits.tsv \
+	$results/attribute_aggreations_used_and_unused.tsv \
+	$results/views_and_quality_class_edits_used_and_unused.tsv \
+	$results/views_class_edits_used_and_unused.tsv \
+	$results/quality_class_edits_used_and_unused.tsv \
+	--verbose > & \
+	$results/attribute_aggregator_used_and_unused_error_log.txt
 
 # python $base/misalignment_and_edits_table/wasted_edit_analysis.py \
 # 	$results/misalignment_and_edits_entity_edits_ordered_by_entity_year_month.tsv \

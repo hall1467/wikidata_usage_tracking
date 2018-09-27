@@ -1,1 +1,0 @@
-\copy (SELECT namespace, page_title, weighted_sum, page_views FROM quality_weighted_sum_and_views_05_17 WHERE page_views IS NOT NULL) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/misalignment_edit_types_tables_and_queries/entity_weighted_sums_and_page_views.tsv';

@@ -41,9 +41,6 @@ import json
 logger = logging.getLogger(__name__)
 
 
-EDIT_KIND_RE = re.compile(r'/\* (wb(set|create|edit|remove)([a-z]+)((-[a-z]+)*))', re.I)
-
-
 def main(argv=None):
     args = docopt.docopt(__doc__)
     logging.basicConfig(

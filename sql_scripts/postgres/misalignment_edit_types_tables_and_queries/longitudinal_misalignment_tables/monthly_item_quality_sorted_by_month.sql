@@ -1,0 +1,1 @@
+\copy (SELECT page_id, title, rev_id, monthly_timestamp, prediction, weighted_sum from monthly_item_quality order by monthly_timestamp) TO '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_item_quality_sorted_by_month.tsv';
