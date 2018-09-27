@@ -31,7 +31,6 @@ Options:
 import docopt
 import logging
 import operator
-from collections import defaultdict
 import mysqltsv
 import sys
 import re
@@ -56,6 +55,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -69,6 +69,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -82,6 +83,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -95,6 +97,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -108,6 +111,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -121,6 +125,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -134,6 +139,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -147,6 +153,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -160,6 +167,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -173,6 +181,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -186,6 +195,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -199,6 +209,7 @@ def main(argv=None):
         headers=[
                  'namespace',
                  'page_title',
+                 'comment',
                  'edit_type',
                  'agent_type',
                  'page_views',
@@ -248,6 +259,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_first_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -259,6 +271,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_second_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -270,6 +283,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_third_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -281,6 +295,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_fourth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -292,6 +307,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_fifth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -303,6 +319,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_sixth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -314,6 +331,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_seventh_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -325,6 +343,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_eighth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -336,6 +355,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_ninth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -347,6 +367,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_tenth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -358,6 +379,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_eleventh_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -369,6 +391,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             output_twelfth_month_file.write([
                 json_line['namespace'],
                 json_line['page_title'],
+                json_line['comment'],
                 json_line['edit_type'],
                 json_line['agent_type'],
                 json_line['page_views'],
@@ -376,13 +399,6 @@ def run(input_file, output_first_month_file, output_second_month_file,
                 weighted_sum,
                 json_line['misalignment_year'],
                 json_line['misalignment_month']])
-
-
-
-
-
-        
-
 
 
 main()
