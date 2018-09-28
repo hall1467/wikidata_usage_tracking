@@ -49,6 +49,17 @@ def main(argv=None):
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
         headers=['page_title',
+                 'namespace',
+                 'comment',
+                 'edit_type',
+                 'agent_type',
+                 'rev_id',
+                 'weighted_sum',
+                 'expected_quality',
+                 'expected_quality_quantile',
+                 'page_views',
+                 'yyyy',
+                 'mm',
                  'gender'])
 
     verbose = args['--verbose']
