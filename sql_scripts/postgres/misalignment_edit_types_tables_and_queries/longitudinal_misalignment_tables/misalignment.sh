@@ -171,28 +171,56 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	$results/extract_weighted_score_2015_to_2016_error_log.txt
 
 
-python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2016_to_2017_error_log.txt
+# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2016_to_2017_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+# 	$results/revision_comment_may_2013_to_2014_million_sampled_with_quality.json \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2013_to_2014_million_sampled_with_quality_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
+# 	$results/revision_comment_may_2014_to_2015_million_sampled_with_quality.json \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2014_to_2015_million_sampled_with_quality_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
+# 	$results/revision_comment_may_2015_to_2016_million_sampled_with_quality.json \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2015_to_2016_million_sampled_with_quality_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
+# 	$results/revision_comment_may_2016_to_2017_million_sampled_with_quality.json \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2016_to_2017_million_sampled_with_quality_error_log.txt
 
 
 # Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2014_2015_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2015_2016_revision_alignment.r
-Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
+# Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
 
 # Do further analyses of the types of revisions bots are doing
 # First, will gather demographic data for subset of the (already sampled) data
@@ -200,30 +228,23 @@ Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
 # to obtain the entity information via that method. However, may consider not
 # sampling and just running over night.
 
+python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+	$results/all_revisions_quality_differences_2013_2014_sampled.tsv \
+	$results/all_revisions_with_gender_data_2013_2014_sampled.tsv \
+	--verbose > & \
+	$results/all_revisions_with_gender_data_2013_2014_sampled_error_log.txt
 
-# shuf -n 50000 $results/all_revisions_quality_differences_2013_2014.tsv > $results/all_revisions_quality_differences_2013_2014_sampled.tsv
-# shuf -n 50000 $results/all_revisions_quality_differences_2014_2015.tsv > $results/all_revisions_quality_differences_2014_2015_sampled.tsv
-# shuf -n 50000 $results/all_revisions_quality_differences_2015_2016.tsv > $results/all_revisions_quality_differences_2015_2016_sampled.tsv
-shuf -n 100000 $results/all_revisions_quality_differences_2016_2017.tsv > $results/all_revisions_quality_differences_2016_2017_sampled.tsv
+python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+	$results/all_revisions_quality_differences_2014_2015_sampled.tsv \
+	$results/all_revisions_with_gender_data_2014_2015_sampled.tsv \
+	--verbose > & \
+	$results/all_revisions_with_gender_data_2014_2015_sampled_error_log.txt
 
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-# 	$results/all_revisions_quality_differences_2013_2014_sampled.tsv \
-# 	$results/all_revisions_with_demographic_data_2013_2014_sampled.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_demographic_data_2013_2014_sampled_error_log.txt
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-# 	$results/all_revisions_quality_differences_2014_2015_sampled.tsv \
-# 	$results/all_revisions_with_demographic_data_2014_2015_sampled.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_demographic_data_2014_2015_sampled_error_log.txt
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-# 	$results/all_revisions_quality_differences_2015_2016_sampled.tsv \
-# 	$results/all_revisions_with_demographic_data_2015_2016_sampled.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_demographic_data_2015_2016_sampled_error_log.txt
+python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+	$results/all_revisions_quality_differences_2015_2016_sampled.tsv \
+	$results/all_revisions_with_gender_data_2015_2016_sampled.tsv \
+	--verbose > & \
+	$results/all_revisions_with_gender_data_2015_2016_sampled_error_log.txt
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
 	$results/all_revisions_quality_differences_2016_2017_sampled.tsv \

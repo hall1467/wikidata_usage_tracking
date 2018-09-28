@@ -37,12 +37,12 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, str, str, str, str, float, float, float, str, str, str, 
+        types=[str, int, str, str, str, float, float, float, str, str, str, 
         str])
 
     input_second_iteration_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, str, str, str, str, float, float, float, str, str, str, 
+        types=[str, int, str, str, str, float, float, float, str, str, str, 
         str])
 
 
@@ -61,7 +61,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
 
     unique_entities = defaultdict(int)
 
-    # We don't want to query use the API to get the same entity info twice
+    # We don't want to use the API to get the same entity info twice
     for i, line in enumerate(input_file):
         unique_entities[line[0]] = 1
 
@@ -81,8 +81,6 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
         if i % 50 == 49:
             entity_id_lists.append(inner_list)
 
-        if i == 200000:
-            break
 
     accessed_gender_for_revisions_count = 0
     gender_dict = defaultdict(str)
@@ -91,6 +89,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
     for in_list in entity_id_lists:
 
         accessed_gender_for_revisions_count += len(in_list)
+
 
         if verbose and accessed_gender_for_revisions_count % 100 == 0 and \
             accessed_gender_for_revisions_count != 0:
@@ -109,7 +108,15 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
 
         for entity in api_claims_result['entities']:
             if 'claims' in api_claims_result['entities'][entity] and \
-                'P21' in api_claims_result['entities'][entity]['claims']:
+                'P21' in api_claims_result['entities'][entity]['claims'] and \
+                'mainsnak' in api_claims_result['entities'][entity]['claims']\
+                    ['P21'][0] and \
+                'datavalue' in api_claims_result['entities'][entity]\
+                    ['claims']['P21'][0]['mainsnak'] and \
+                'value' in api_claims_result['entities'][entity]['claims']\
+                    ['P21'][0]['mainsnak']['datavalue'] and \
+                'id' in api_claims_result['entities'][entity]['claims']['P21']\
+                    [0]['mainsnak']['datavalue']['value']:
                 gender_claim = \
                     api_claims_result['entities'][entity]['claims']['P21'][0]\
                         ['mainsnak']['datavalue']['value']['id']
@@ -136,7 +143,6 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
             line[9],
             line[10],
             line[11],
-            line[12],
             gender_value])
 
 
