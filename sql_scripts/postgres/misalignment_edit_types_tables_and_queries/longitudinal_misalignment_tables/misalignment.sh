@@ -229,28 +229,28 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # sampling and just running over night.
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-	$results/all_revisions_quality_differences_2013_2014_sampled.tsv \
-	$results/all_revisions_with_gender_data_2013_2014_sampled.tsv \
+	$results/all_revisions_quality_differences_2013_2014.tsv \
+	$results/all_revisions_with_gender_data_2013_2014.tsv \
 	--verbose > & \
-	$results/all_revisions_with_gender_data_2013_2014_sampled_error_log.txt
+	$results/all_revisions_with_gender_data_2013_2014_error_log.txt
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-	$results/all_revisions_quality_differences_2014_2015_sampled.tsv \
-	$results/all_revisions_with_gender_data_2014_2015_sampled.tsv \
+	$results/all_revisions_quality_differences_2014_2015.tsv \
+	$results/all_revisions_with_gender_data_2014_2015.tsv \
 	--verbose > & \
-	$results/all_revisions_with_gender_data_2014_2015_sampled_error_log.txt
+	$results/all_revisions_with_gender_data_2014_2015_error_log.txt
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-	$results/all_revisions_quality_differences_2015_2016_sampled.tsv \
-	$results/all_revisions_with_gender_data_2015_2016_sampled.tsv \
+	$results/all_revisions_quality_differences_2015_2016.tsv \
+	$results/all_revisions_with_gender_data_2015_2016.tsv \
 	--verbose > & \
-	$results/all_revisions_with_gender_data_2015_2016_sampled_error_log.txt
+	$results/all_revisions_with_gender_data_2015_2016_error_log.txt
 
 python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
-	$results/all_revisions_quality_differences_2016_2017_sampled.tsv \
-	$results/all_revisions_with_gender_data_2016_2017_sampled.tsv \
+	$results/all_revisions_quality_differences_2016_2017.tsv \
+	$results/all_revisions_with_gender_data_2016_2017.tsv \
 	--verbose > & \
-	$results/all_revisions_with_gender_data_2016_2017_sampled_error_log.txt
+	$results/all_revisions_with_gender_data_2016_2017_error_log.txt
 
 
 # Need a script that produces bot edits of different strata: 
