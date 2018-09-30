@@ -70,32 +70,32 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # shuf -n 1000000 $results/used_misalignment_and_edits_may_2016_to_2017.tsv > $results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv
 
 
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
-# 	$results/revision_comment_may_2013_to_2014_million_sampled.txt \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2013_to_2014_million_sampled_error_log.txt
+python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
+	$results/revision_comment_may_2013_to_2014_million_sampled.txt \
+	--verbose > & \
+	$results/revision_comment_may_2013_to_2014_million_sampled_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
-# 	$results/revision_comment_may_2014_to_2015_million_sampled.txt \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2014_to_2015_million_sampled_error_log.txt
+python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
+	$results/revision_comment_may_2014_to_2015_million_sampled.txt \
+	--verbose > & \
+	$results/revision_comment_may_2014_to_2015_million_sampled_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
-# 	$results/revision_comment_may_2015_to_2016_million_sampled.txt \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2015_to_2016_million_sampled_error_log.txt
+python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
+	$results/revision_comment_may_2015_to_2016_million_sampled.txt \
+	--verbose > & \
+	$results/revision_comment_may_2015_to_2016_million_sampled_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
-# 	$results/revision_comment_may_2016_to_2017_million_sampled.txt \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2016_to_2017_million_sampled_error_log.txt
+python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
+	$results/revision_comment_may_2016_to_2017_million_sampled.txt \
+	--verbose > & \
+	$results/revision_comment_may_2016_to_2017_million_sampled_error_log.txt
 
 
 
@@ -235,11 +235,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	--verbose > & \
 # 	$results/all_revisions_with_api_entity_data_2013_2014_error_log.txt
 
-python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
-	$results/all_revisions_quality_differences_2014_2015.tsv \
-	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
-	--verbose > & \
-	$results/all_revisions_with_api_entity_data_2014_2015_error_log.txt
+# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2014_2015.tsv \
+# 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_entity_data_2014_2015_error_log.txt
 
 # python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
 # 	$results/all_revisions_quality_differences_2015_2016.tsv \
