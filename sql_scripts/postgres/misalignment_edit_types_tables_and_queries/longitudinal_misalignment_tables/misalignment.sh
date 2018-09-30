@@ -70,6 +70,35 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # shuf -n 1000000 $results/used_misalignment_and_edits_may_2016_to_2017.tsv > $results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv
 
 
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
+# 	$results/revision_comment_may_2013_to_2014_million_sampled.txt \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2013_to_2014_million_sampled_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/used_misalignment_and_edits_may_2014_to_2015_million_sampled.tsv \
+# 	$results/revision_comment_may_2014_to_2015_million_sampled.txt \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2014_to_2015_million_sampled_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/used_misalignment_and_edits_may_2015_to_2016_million_sampled.tsv \
+# 	$results/revision_comment_may_2015_to_2016_million_sampled.txt \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2015_to_2016_million_sampled_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
+# 	$results/used_misalignment_and_edits_may_2016_to_2017_million_sampled.tsv \
+# 	$results/revision_comment_may_2016_to_2017_million_sampled.txt \
+# 	--verbose > & \
+# 	$results/revision_comment_may_2016_to_2017_million_sampled_error_log.txt
+
+
+
 # python $base/longitudinal_misalignment_tables/extract_edit_and_agent_type.py \
 # 	$results/used_misalignment_and_edits_may_2013_to_2014_million_sampled.tsv \
 # 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json \
@@ -187,34 +216,6 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
 # 	--verbose > & \
 # 	$results/extract_weighted_score_2016_to_2017_error_log.txt
-
-
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-# 	$results/revision_comment_may_2013_to_2014_million_sampled_with_quality.json \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2013_to_2014_million_sampled_with_quality_error_log.txt
-
-
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-# 	$results/revision_comment_may_2014_to_2015_million_sampled_with_quality.json \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2014_to_2015_million_sampled_with_quality_error_log.txt
-
-
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-# 	$results/revision_comment_may_2015_to_2016_million_sampled_with_quality.json \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2015_to_2016_million_sampled_with_quality_error_log.txt
-
-
-# python $base/longitudinal_misalignment_tables/revision_id_and_comment.py \
-# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-# 	$results/revision_comment_may_2016_to_2017_million_sampled_with_quality.json \
-# 	--verbose > & \
-# 	$results/revision_comment_may_2016_to_2017_million_sampled_with_quality_error_log.txt
 
 
 # Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r

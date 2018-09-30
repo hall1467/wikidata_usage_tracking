@@ -88,8 +88,6 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
     # Make API calls and process results
     for in_list in entity_id_lists:
 
-        if accessed_gender_for_revisions_count > 3000:
-            break
         accessed_gender_for_revisions_count += len(in_list)
 
 
@@ -139,7 +137,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                 instance_of_dict_claim = \
                     api_claims_result['entities'][entity]['claims']['P31'][0]\
                         ['mainsnak']['datavalue']['value']['id']
-                print(entity)
+                        
                 instance_of_dict[entity].append(instance_of_dict_claim)
 
 
@@ -156,6 +154,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                 subclass_of_dict_claim = \
                     api_claims_result['entities'][entity]['claims']['P279'][0]\
                         ['mainsnak']['datavalue']['value']['id']
+
                 subclass_of_dict[entity].append(subclass_of_dict_claim)
 
 

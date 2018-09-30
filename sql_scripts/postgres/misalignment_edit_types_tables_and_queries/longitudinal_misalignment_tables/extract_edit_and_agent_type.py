@@ -145,7 +145,6 @@ def run(input_file, output_file, verbose):
                     'misalignment_month' : misalignment_month,
                     'namespace' : namespace,
                     'page_title': page_title,
-                    'comment': comment,
                     'edit_type': output_edit_type,
                     'agent_type': output_agent_type,
                     'page_views': page_views,

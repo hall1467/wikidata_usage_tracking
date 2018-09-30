@@ -21,8 +21,6 @@ import logging
 import operator
 import mysqltsv
 import sys
-import re
-import json
 
 
 logger = logging.getLogger(__name__)
@@ -37,11 +35,13 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[int, str, str, str, str, int, int, float, int, int])
+        types=[str, int, str, str, str, int, int, int, str, str, 
+        str, str, str, str, str, str, int, int, str, str, str, str, str, 
+        str])
 
 
-    output_first_month_file = mysqltsv.Writer(
-        open(args['<output_first_month>'], "w"), 
+    output_file = mysqltsv.Writer(
+        open(args['<output>'], "w"), 
         headers=['rev_id', 'comment'])
 
     verbose = args['--verbose']
@@ -61,7 +61,7 @@ def run(input_file, output_file, verbose):
 
 
         output_first_month_file.write([
-            json_line['rev_id'], json_line['comment']])
+            line[1], line[3]])
 
 
 main()
