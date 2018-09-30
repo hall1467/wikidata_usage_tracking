@@ -228,13 +228,13 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # to obtain the entity information via that method. However, may consider not
 # sampling and just running over night.
 
-python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
 	$results/all_revisions_quality_differences_2013_2014.tsv \
 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
 	--verbose > & \
 	$results/all_revisions_with_api_entity_data_2013_2014_error_log.txt
 
-# python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
 # 	$results/all_revisions_quality_differences_2014_2015.tsv \
 # 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
 # 	--verbose > & \
@@ -246,7 +246,7 @@ python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
 # 	--verbose > & \
 # 	$results/all_revisions_with_api_entity_data_2015_2016_error_log.txt
 
-# python $base/longitudinal_misalignment_tables/obtain_entity_gender_data.py \
+# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
 # 	$results/all_revisions_quality_differences_2016_2017.tsv \
 # 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
 # 	--verbose > & \
