@@ -60,7 +60,7 @@ def run(input_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        output_first_month_file.write([
+        output_file.write([
             line[1], line[3]])
 
 
