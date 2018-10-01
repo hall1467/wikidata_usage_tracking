@@ -31,7 +31,7 @@ import json
 logger = logging.getLogger(__name__)
 
 
-EDIT_KIND_RE = re.compile(r'/\* [^ ]+(sitelink|alias|label|description|reference|qualifier|claim)[^ ]*', re.I)
+EDIT_KIND_RE = re.compile(r'(reverted edits|undid revision|restored revision|/\* (undo|restore|[^ ]+(sitelink|alias|label|description|reference|qualifier|claim|mergeitems|linktitles)))', re.I)
 
 
 def main(argv=None):
@@ -78,26 +78,33 @@ def run(input_file, output_file, verbose):
         agent_type = line[12]
         agent_bot_pred = line[18]
 
-        # 
+        
         if comment and EDIT_KIND_RE.match(comment):
-            if EDIT_KIND_RE.match(comment).group(1) == 'sitelink':
+            if EDIT_KIND_RE.match(comment).group(3) == 'sitelink':
                 output_edit_type = 'sitelink'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'alias':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'alias':
                 output_edit_type = 'alias'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'label':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'label':
                 output_edit_type = 'label'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'description':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'description':
                 output_edit_type = 'description'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'reference':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'reference':
                 output_edit_type = 'reference'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'qualifier':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'qualifier':
                 output_edit_type = 'qualifier'
-            elif EDIT_KIND_RE.match(comment).group(1) == 'claim':
+            elif EDIT_KIND_RE.match(comment).group(3) == 'claim':
                 output_edit_type = 'claim'
-        else:
-            print(comment)
-
-
+            elif EDIT_KIND_RE.match(comment).group(3) == 'mergeitems':
+                output_edit_type = 'mergeitems'
+            elif EDIT_KIND_RE.match(comment).group(3) == 'linktitles':
+                output_edit_type = 'linktitles'
+            elif EDIT_KIND_RE.match(comment).group(1) == 'undid revision' or \
+                EDIT_KIND_RE.match(comment).group(1) == 'reverted edits' or \
+                EDIT_KIND_RE.match(comment).group(2) == 'undo':
+                output_edit_type = 'undid or reverted revision'
+            elif EDIT_KIND_RE.match(comment).group(1) == 'restored revision' or\
+                EDIT_KIND_RE.match(comment).group(2) == 'restore':
+                output_edit_type = 'restored revision'
 
 
         output_file.write(json.dumps({
