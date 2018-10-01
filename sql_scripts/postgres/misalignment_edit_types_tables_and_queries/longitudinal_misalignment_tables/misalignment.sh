@@ -104,17 +104,17 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # Run ores
 
-# cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
+cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
 
-# cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
+cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
 
-# cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
+cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
 cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
