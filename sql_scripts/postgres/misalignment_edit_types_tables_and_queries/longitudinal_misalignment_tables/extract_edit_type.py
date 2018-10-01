@@ -31,7 +31,7 @@ import json
 logger = logging.getLogger(__name__)
 
 
-EDIT_KIND_RE = re.compile(r'(reverted edits|undid revision|restored revision|/\* (undo|restore|[^ ]+(sitelink|alias|label|description|reference|qualifier|claim|mergeitems|linktitles)))', re.I)
+EDIT_KIND_RE = re.compile(r'(reverted edits|undid revision|restored revision|/\* (undo|restore|[^ ]+(sitelink|alias|label|description|reference|qualifier|claim|mergeitems|linktitles|editentity)))', re.I)
 
 
 def main(argv=None):
@@ -98,6 +98,8 @@ def run(input_file, output_file, verbose):
                 output_edit_type = 'mergeitems'
             elif EDIT_KIND_RE.match(comment).group(3) == 'linktitles':
                 output_edit_type = 'linktitles'
+            elif EDIT_KIND_RE.match(comment).group(3) == 'editentity':
+                output_edit_type = 'editentity'
             elif EDIT_KIND_RE.match(comment).group(1) == 'undid revision' or \
                 EDIT_KIND_RE.match(comment).group(1) == 'reverted edits' or \
                 EDIT_KIND_RE.match(comment).group(2) == 'undo':
