@@ -47,7 +47,24 @@ def main(argv=None):
         types=[str, int, str, str, str, float, float, float, str, str, str, 
         str])
 
-    output_file = open(args['<output>'], "w")
+    output_file = mysqltsv.Writer(
+        open(args['<output>'], "w"), 
+        headers=[
+                 'page_title',
+                 'namespace',
+                 'edit_type',
+                 'agent_type',
+                 'rev_id',
+                 'weighted_sum',
+                 'expected_quality',
+                 'expected_quality_quantile',
+                 'page_views',
+                 'yyyy',
+                 'mm',
+                 'quality_difference',
+                 'gender',
+                 'instance_of',
+                 'subclass_of'])
 
     verbose = args['--verbose']
 
@@ -89,7 +106,8 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
     for in_list in entity_id_lists:
 
         accessed_gender_for_revisions_count += len(in_list)
-
+        if accessed_gender_for_revisions_count > 5000:
+            break
 
         if verbose and accessed_gender_for_revisions_count % 100 == 0 and \
             accessed_gender_for_revisions_count != 0:
@@ -173,29 +191,44 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
         if line[0] in gender_dict:
             gender_value = gender_dict[line[0]]
         if line[0] in instance_of_dict:
-            instance_of_value = instance_of_dict[line[0]]
+            for instances in instance_of_dict[line[0]]:
+                
+                output_file.write([
+                    line[0],
+                    line[1],
+                    line[2],
+                    line[3],
+                    line[4],
+                    line[5],
+                    line[6],
+                    line[7],
+                    line[8],
+                    line[9],
+                    line[10],
+                    line[11],
+                    gender_value,
+                    instances,
+                    None])
+
         if line[0] in subclass_of_dict:
-            subclass_of_value = subclass_of_dict[line[0]]
-            
+            for subclasses in subclass_of_dict[line[0]]:
 
-        output_file.write(json.dumps({
-                    'page_title' : line[0],
-                    'namespace' : line[1],
-                    'edit_type': line[2],
-                    'agent_type': line[3],
-                    'rev_id': line[4],
-                    'weighted_sum': line[5],
-                    'expected_quality': line[6],
-                    'expected_quality_quantile': line[7],
-                    'page_views': line[8],
-                    'yyyy': line[9],
-                    'mm': line[10],
-                    'quality_difference': line[11],
-                    'gender': gender_value,
-                    'instance_of': instance_of_value,
-                    'subclass_of': subclass_of_value
-                }) + "\n")
-
+                output_file.write([
+                    line[0],
+                    line[1],
+                    line[2],
+                    line[3],
+                    line[4],
+                    line[5],
+                    line[6],
+                    line[7],
+                    line[8],
+                    line[9],
+                    line[10],
+                    line[11],
+                    gender_value,
+                    None,
+                    subclasses])
 
 main()
 
