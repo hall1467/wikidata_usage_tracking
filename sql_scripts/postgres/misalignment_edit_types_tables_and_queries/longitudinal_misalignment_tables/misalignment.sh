@@ -121,22 +121,22 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
-python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
-	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
-	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
-	--verbose > & \
-	$results/extract_weighted_score_2013_to_2014_error_log.txt
+# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
+# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
+# 	--verbose > & \
+# 	$results/extract_weighted_score_2013_to_2014_error_log.txt
 
 
 # python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
@@ -193,7 +193,7 @@ python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
 # 	$results/extract_weighted_score_2016_to_2017_error_log.txt
 
 
-Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r
+# Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2014_2015_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2015_2016_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
