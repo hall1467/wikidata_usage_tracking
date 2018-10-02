@@ -106,8 +106,6 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
     for in_list in entity_id_lists:
 
         accessed_gender_for_revisions_count += len(in_list)
-        if accessed_gender_for_revisions_count > 5000:
-            break
 
         if verbose and accessed_gender_for_revisions_count % 100 == 0 and \
             accessed_gender_for_revisions_count != 0:
