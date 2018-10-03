@@ -194,8 +194,8 @@ python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
 
 
 # Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r
-# Rscript $base/longitudinal_misalignment_tables/2014_2015_revision_alignment.r
-# Rscript $base/longitudinal_misalignment_tables/2015_2016_revision_alignment.r
+Rscript $base/longitudinal_misalignment_tables/2014_2015_revision_alignment.r
+Rscript $base/longitudinal_misalignment_tables/2015_2016_revision_alignment.r
 # Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
 
 
