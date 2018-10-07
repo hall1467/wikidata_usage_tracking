@@ -104,17 +104,17 @@ def run(input_file, output_file, verbose):
             if len(api_revisions_result['query']['pages'][revision]
                 ['revisions']) > 1:
                 
-                logger.warn("More revisions returned for entity than expected: {0}"
+                logger.warn("More entity revisions returned than expected: {0}"
                     .format(api_revisions_result['query']['pages'][revision]
                         ['revisions']))
-            
 
-            output_file.write(json.dumps({
-                'rev_id' : api_revisions_result['query']['pages'][revision]
-                    ['revisions'][0]['revid'],
-                'parent_id' : api_revisions_result['query']['pages'][revision]
-                    ['revisions'][0]['parentid']
-                }) + "\n")
+            else:
+                output_file.write(json.dumps({
+                    'next_rev_id' : api_revisions_result['query']['pages'][revision]
+                        ['revisions'][0]['revid'],
+                    'rev_id' : api_revisions_result['query']['pages']
+                        [revision]['revisions'][0]['parentid']
+                    }) + "\n")
 
 
 main()
