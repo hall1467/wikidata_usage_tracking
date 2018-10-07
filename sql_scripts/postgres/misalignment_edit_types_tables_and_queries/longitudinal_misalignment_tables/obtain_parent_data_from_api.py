@@ -108,7 +108,7 @@ def run(input_file, output_file, verbose):
             if len(api_revisions_result['query']['pages'][revision]
                 ['revisions']) > 1:
                 
-                sys.exit("More revisions returned for entity than expected: {0}"
+                logger.warn("More revisions returned for entity than expected: {0}"
                     .format(api_revisions_result['query']['pages'][revision]
                         ['revisions']))
             
