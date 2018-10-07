@@ -243,29 +243,29 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	> $results/revision_parent_data_2016_2017_with_quality.json
 
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
-# 	$results/revision_parent_data_2013_2014_with_quality.json \
-# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
-# 	--verbose > & \
-# 	$results/parent_data_with_extracted_weighted_score_2013_2014_error_log.txt
+python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+	$results/revision_parent_data_2013_2014_with_quality.json \
+	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+	--verbose > & \
+	$results/parent_data_with_extracted_weighted_score_2013_2014_error_log.txt
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
-# 	$results/revision_parent_data_2014_2015.json \
-# 	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
-# 	--verbose > & \
-# 	$results/parent_data_with_extracted_weighted_score_2014_2015_error_log.txt
+python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+	$results/revision_parent_data_2014_2015.json \
+	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
+	--verbose > & \
+	$results/parent_data_with_extracted_weighted_score_2014_2015_error_log.txt
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
-# 	$results/revision_parent_data_2015_2016.json \
-# 	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
-# 	--verbose > & \
-# 	$results/parent_data_with_extracted_weighted_score_2015_2016_error_log.txt
+python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+	$results/revision_parent_data_2015_2016.json \
+	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
+	--verbose > & \
+	$results/parent_data_with_extracted_weighted_score_2015_2016_error_log.txt
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
-# 	$results/revision_parent_data_2016_2017.json \
-# 	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
-# 	--verbose > & \
-# 	$results/parent_data_with_extracted_weighted_score_2016_2017_error_log.txt
+python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+	$results/revision_parent_data_2016_2017.json \
+	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
+	--verbose > & \
+	$results/parent_data_with_extracted_weighted_score_2016_2017_error_log.txt
 
 
 # python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
