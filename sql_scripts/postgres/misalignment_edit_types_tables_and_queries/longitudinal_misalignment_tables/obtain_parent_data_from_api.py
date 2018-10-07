@@ -108,7 +108,8 @@ def run(input_file, output_file, verbose):
                     .format(api_revisions_result['query']['pages'][revision]
                         ['revisions']))
 
-            else:
+            elif: api_revisions_result['query']['pages']
+                        [revision]['revisions'][0]['parentid'] != 0:
                 output_file.write(json.dumps({
                     'next_rev_id' : api_revisions_result['query']['pages'][revision]
                         ['revisions'][0]['revid'],
