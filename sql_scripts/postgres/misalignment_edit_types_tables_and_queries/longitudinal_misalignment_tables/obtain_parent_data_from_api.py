@@ -41,11 +41,7 @@ def main(argv=None):
         types=[str, int, str, str, str, float, float, float, str, str, str, 
         str])
 
-    output_file = mysqltsv.Writer(
-        open(args['<output>'], "w"), 
-        headers=[
-                 'rev_id',
-                 'parent_id'])
+    output_file = open(args['<output>'], "w")
 
     verbose = args['--verbose']
 
@@ -112,11 +108,14 @@ def run(input_file, output_file, verbose):
                     .format(api_revisions_result['query']['pages'][revision]
                         ['revisions']))
             
-            output_file.write([
-                api_revisions_result['query']['pages'][revision]
+
+            output_file.write(json.dumps({
+                'rev_id' : api_revisions_result['query']['pages'][revision]
                     ['revisions'][0]['revid'],
-                api_revisions_result['query']['pages'][revision]
-                    ['revisions'][0]['parentid']])
+                'parent_id' : api_revisions_result['query']['pages'][revision]
+                    ['revisions'][0]['parentid']
+                }) + "\n")
+
 
 main()
 
