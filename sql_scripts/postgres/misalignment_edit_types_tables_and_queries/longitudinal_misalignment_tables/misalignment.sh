@@ -199,48 +199,73 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
 
 
-python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
-	$results/all_revisions_quality_differences_2013_2014.tsv \
-	$results/revision_parent_data_2013_2014.json \
-	--verbose > & \
-	$results/revision_parent_data_2013_2014_error_log.txt
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2013_2014.tsv \
+# 	$results/revision_parent_data_2013_2014.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2013_2014_error_log.txt
 
-python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
-	$results/all_revisions_quality_differences_2014_2015.tsv \
-	$results/revision_parent_data_2014_2015.json \
-	--verbose > & \
-	$results/revision_parent_data_2014_2015_error_log.txt
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2014_2015.tsv \
+# 	$results/revision_parent_data_2014_2015.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2014_2015_error_log.txt
 
-python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
-	$results/all_revisions_quality_differences_2015_2016.tsv \
-	$results/revision_parent_data_2015_2016.json \
-	--verbose > & \
-	$results/revision_parent_data_2015_2016_error_log.txt
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2015_2016.tsv \
+# 	$results/revision_parent_data_2015_2016.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2015_2016_error_log.txt
 
-python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
-	$results/all_revisions_quality_differences_2016_2017.tsv \
-	$results/revision_parent_data_2016_2017.json \
-	--verbose > & \
-	$results/revision_parent_data_2016_2017_error_log.txt
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2016_2017.tsv \
+# 	$results/revision_parent_data_2016_2017.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2016_2017_error_log.txt
 
 
 # Run ores
 
-cat $results/revision_parent_data_2013_2014.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_parent_data_2013_2014_with_quality.json
+# cat $results/revision_parent_data_2013_2014.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2013_2014_with_quality.json
 
-cat $results/revision_parent_data_2014_2015.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_parent_data_2014_2015_with_quality.json
+# cat $results/revision_parent_data_2014_2015.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2014_2015_with_quality.json
 
-cat $results/revision_parent_data_2015_2016.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_parent_data_2015_2016_with_quality.json
+# cat $results/revision_parent_data_2015_2016.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2015_2016_with_quality.json
 
-cat $results/revision_parent_data_2016_2017.json | \
-	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-	> $results/revision_parent_data_2016_2017_with_quality.json
+# cat $results/revision_parent_data_2016_2017.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2016_2017_with_quality.json
+
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2013_2014_with_quality.json \
+# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2013_2014_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2014_2015.json \
+# 	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2014_2015_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2015_2016.json \
+# 	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2015_2016_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2016_2017.json \
+# 	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2016_2017_error_log.txt
 
 
 # python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
