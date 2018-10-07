@@ -99,8 +99,8 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
 
     accessed_gender_for_revisions_count = 0
     gender_dict = defaultdict(str)
-    instance_of_dict = defaultdict(list)
-    subclass_of_dict = defaultdict(list)
+    inst_of_dict = defaultdict(list)
+    subc_of_dict = defaultdict(list)
     
     # Make API calls and process results
     for in_list in entity_id_lists:
@@ -141,38 +141,33 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
 
 
             if 'claims' in api_claims_result['entities'][entity] and \
-                'P31' in api_claims_result['entities'][entity]['claims'] and \
-                'mainsnak' in api_claims_result['entities'][entity]['claims']\
-                    ['P31'][0] and \
-                'datavalue' in api_claims_result['entities'][entity]\
-                    ['claims']['P31'][0]['mainsnak'] and \
-                'value' in api_claims_result['entities'][entity]['claims']\
-                    ['P31'][0]['mainsnak']['datavalue'] and \
-                'id' in api_claims_result['entities'][entity]['claims']['P31']\
-                    [0]['mainsnak']['datavalue']['value']:
-                instance_of_dict_claim = \
-                    api_claims_result['entities'][entity]['claims']['P31'][0]\
-                        ['mainsnak']['datavalue']['value']['id']
-                        
-                instance_of_dict[entity].append(instance_of_dict_claim)
+                'P31' in api_claims_result['entities'][entity]['claims']:
+                p_31 = \
+                    api_claims_result['entities'][entity]['claims']['P31']
+
+                for p_31_cl in p_31:
+                    if 'mainsnak' in p_31_cl and \
+                        'datavalue' in p_31_cl['mainsnak'] and \
+                        'value' in p_31_cl['mainsnak']['datavalue'] and \
+                        'id' in p_31_cl['mainsnak']['datavalue']['value']:
+
+                        inst_of_dict[entity].append(p_31_cl['mainsnak']\
+                            ['datavalue']['value']['id'])
 
 
             if 'claims' in api_claims_result['entities'][entity] and \
-                'P279' in api_claims_result['entities'][entity]['claims'] and \
-                'mainsnak' in api_claims_result['entities'][entity]['claims']\
-                    ['P279'][0] and \
-                'datavalue' in api_claims_result['entities'][entity]\
-                    ['claims']['P279'][0]['mainsnak'] and \
-                'value' in api_claims_result['entities'][entity]['claims']\
-                    ['P279'][0]['mainsnak']['datavalue'] and \
-                'id' in api_claims_result['entities'][entity]['claims']['P279']\
-                    [0]['mainsnak']['datavalue']['value']:
-                subclass_of_dict_claim = \
-                    api_claims_result['entities'][entity]['claims']['P279'][0]\
-                        ['mainsnak']['datavalue']['value']['id']
+                'P279' in api_claims_result['entities'][entity]['claims']:
+                p_279 = \
+                    api_claims_result['entities'][entity]['claims']['P279']
 
-                subclass_of_dict[entity].append(subclass_of_dict_claim)
+                for p_279_cl in p_279:
+                    if 'mainsnak' in p_279_cl and \
+                        'datavalue' in p_279_cl['mainsnak'] and \
+                        'value' in p_279_cl['mainsnak']['datavalue'] and \
+                        'id' in p_279_cl['mainsnak']['datavalue']['value']:
 
+                        inst_of_dict[entity].append(p_279_cl['mainsnak']\
+                            ['datavalue']['value']['id'])
 
 
     for i, line in enumerate(input_second_iteration_file):
@@ -188,8 +183,8 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
 
         if line[0] in gender_dict:
             gender_value = gender_dict[line[0]]
-        if line[0] in instance_of_dict:
-            for instances in instance_of_dict[line[0]]:
+        if line[0] in inst_of_dict:
+            for instances in inst_of_dict[line[0]]:
                 
                 output_file.write([
                     line[0],
@@ -208,8 +203,8 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                     instances,
                     None])
 
-        if line[0] in subclass_of_dict:
-            for subclasses in subclass_of_dict[line[0]]:
+        if line[0] in subc_of_dict:
+            for subclasses in subc_of_dict[line[0]]:
 
                 output_file.write([
                     line[0],
