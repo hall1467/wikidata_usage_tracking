@@ -3,7 +3,7 @@ Merges parent quality information with revision metadata.
 
 Usage:
     merge_parent_data (-h|--help)
-    merge_parent_data <input> <output>
+    merge_parent_data <revision_input> <parent_input> <output>
                       [--debug]
                       [--verbose]
 
