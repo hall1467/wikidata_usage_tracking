@@ -293,9 +293,32 @@ python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent
 # 	$results/all_revisions_with_api_entity_data_2016_2017_error_log.txt
 
 
-# Need a script that produces bot edits of different strata. Can just do this in R.
-# Can also create the coding sample files there. 
-# 	1) edits where bot actual-expect > .1
-# 	2) edits where bot actual-expect <= .1 and >= -.1
-# 	3) edits where bot actual-expect < -.1
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
+# 	$results/revision_parent_data_2013_2014_with_quality.json \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_error_log_2013_2014.tsv
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
+# 	$results/revision_parent_data_2014_2015_with_quality.json \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2014_2015.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_error_log_2014_2015.tsv
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
+# 	$results/revision_parent_data_2015_2016_with_quality.json \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2015_2016.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_error_log_2015_2016.tsv \
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
+# 	$results/revision_parent_data_2016_2017_with_quality.json \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2016_2017.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_error_log_2016_2017.tsv \
+
 
