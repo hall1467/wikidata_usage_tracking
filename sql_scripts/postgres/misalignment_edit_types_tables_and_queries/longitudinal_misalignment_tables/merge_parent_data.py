@@ -71,7 +71,7 @@ def main(argv=None):
 def run(revision_input_file, parent_input_file, output_file, verbose):
 
 
-    parent_revisions = defaultdict(lambda: defaultdict(int))
+    parent_weighted_sum_dict = defaultdict(int)
 
     for i, line in enumerate(parent_input_file):
         
@@ -80,7 +80,7 @@ def run(revision_input_file, parent_input_file, output_file, verbose):
             sys.stderr.write("Processing parent data: {0}\n".format(i))  
             sys.stderr.flush()
 
-        parent_revisions[line['rev_id']][line['parent_id']] = \
+        parent_weighted_sum_dict[line['rev_id']] = \
             line['parent_weighted_sum']
 
     for i, line in enumerate(revision_input_file):
@@ -92,8 +92,8 @@ def run(revision_input_file, parent_input_file, output_file, verbose):
 
         p_weighted_sum = None
         
-        if line['rev_id'] in parent_revisions:
-            p_weighted_sum = parent_revisions[line['rev_id']][line['parent_id']]
+        if line['rev_id'] in parent_weighted_sum_dict:
+            p_weighted_sum = parent_weighted_sum_dict[line['rev_id']]
 
                 
             output_file.write([
