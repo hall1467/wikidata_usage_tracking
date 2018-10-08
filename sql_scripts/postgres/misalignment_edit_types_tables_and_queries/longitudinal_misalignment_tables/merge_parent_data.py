@@ -35,7 +35,7 @@ def main(argv=None):
     )
 
     revision_input_file = mysqltsv.Reader(open(args['<revision_input>'],
-        'rt', encoding='utf-8', errors='replace'), headers=False,
+        'rt', encoding='utf-8', errors='replace'), headers=True,
         types=[str, int, str, str, str, float, float, float, str, str, str, 
         str, str, str, str])
 
@@ -92,26 +92,26 @@ def run(revision_input_file, parent_input_file, output_file, verbose):
 
         p_weighted_sum = None
         
-        if line[4] in parent_revisions:
+        if line['rev_id'] in parent_revisions:
             p_weighted_sum = parent_revisions[line['rev_id']][line['parent_id']]
 
                 
             output_file.write([
-                line[0],
-                line[1],
-                line[2],
-                line[3],
-                line[4],
-                line[5],
-                line[6],
-                line[7],
-                line[8],
-                line[9],
-                line[10],
-                line[11],
-                line[12],
-                line[13],
-                line[14],
+                line['page_title'],
+                line['namespace'],
+                line['edit_type'],
+                line['agent_type'],
+                line['rev_id'],
+                line['weighted_sum'],
+                line['expected_quality'],
+                line['expected_quality_quantile'],
+                line['page_views'],
+                line['yyyy'],
+                line['mm'],
+                line['quality_difference'],
+                line['gender'],
+                line['instance_of'],
+                line['subclass_of'],
                 p_weighted_sum])
 
 
