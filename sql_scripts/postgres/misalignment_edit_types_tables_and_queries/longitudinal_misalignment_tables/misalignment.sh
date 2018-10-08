@@ -298,27 +298,27 @@ python $base/longitudinal_misalignment_tables/merge_parent_data.py \
 	$results/revision_parent_data_2013_2014_with_quality.json \
 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_error_log_2013_2014.tsv
+	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
 
 python $base/longitudinal_misalignment_tables/merge_parent_data.py \
 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
 	$results/revision_parent_data_2014_2015_with_quality.json \
 	$results/all_revisions_with_api_and_parent_entity_data_2014_2015.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_error_log_2014_2015.tsv
+	$results/all_revisions_with_api_and_parent_entity_data_2014_2015_error_log.tsv
 
 python $base/longitudinal_misalignment_tables/merge_parent_data.py \
 	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
 	$results/revision_parent_data_2015_2016_with_quality.json \
 	$results/all_revisions_with_api_and_parent_entity_data_2015_2016.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_error_log_2015_2016.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2015_2016_error_log.tsv
 
 python $base/longitudinal_misalignment_tables/merge_parent_data.py \
 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
 	$results/revision_parent_data_2016_2017_with_quality.json \
 	$results/all_revisions_with_api_and_parent_entity_data_2016_2017.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_error_log_2016_2017.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2016_2017_error_log.tsv
 
 
