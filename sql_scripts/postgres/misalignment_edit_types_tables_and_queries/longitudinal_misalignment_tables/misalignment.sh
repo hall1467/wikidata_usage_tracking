@@ -268,57 +268,57 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	$results/parent_data_with_extracted_weighted_score_2016_2017_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
-# 	$results/all_revisions_quality_differences_2013_2014.tsv \
-# 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_entity_data_2013_2014_error_log.txt
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
-# 	$results/all_revisions_quality_differences_2014_2015.tsv \
-# 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_entity_data_2014_2015_error_log.txt
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
-# 	$results/all_revisions_quality_differences_2015_2016.tsv \
-# 	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_entity_data_2015_2016_error_log.txt
-
-# python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
-# 	$results/all_revisions_quality_differences_2016_2017.tsv \
-# 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_entity_data_2016_2017_error_log.txt
-
-
-python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2013_2014.tsv \
 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
-	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
-	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
+	$results/all_revisions_with_api_entity_data_2013_2014_error_log.txt
 
-python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2014_2015.tsv \
 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
-	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
-	$results/all_revisions_with_api_and_parent_entity_data_2014_2015.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_2014_2015_error_log.tsv
+	$results/all_revisions_with_api_entity_data_2014_2015_error_log.txt
 
-python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2015_2016.tsv \
 	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
-	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
-	$results/all_revisions_with_api_and_parent_entity_data_2015_2016.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_2015_2016_error_log.tsv
+	$results/all_revisions_with_api_entity_data_2015_2016_error_log.txt
 
-python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2016_2017.tsv \
 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
-	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
-	$results/all_revisions_with_api_and_parent_entity_data_2016_2017.tsv \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_2016_2017_error_log.tsv
+	$results/all_revisions_with_api_entity_data_2016_2017_error_log.txt
+
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
+# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
+# 	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2014_2015.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2014_2015_error_log.tsv
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
+# 	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2015_2016.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2015_2016_error_log.tsv
+
+# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# 	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
+# 	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2016_2017.tsv \
+# 	--verbose > & \
+# 	$results/all_revisions_with_api_and_parent_entity_data_2016_2017_error_log.tsv
 
 

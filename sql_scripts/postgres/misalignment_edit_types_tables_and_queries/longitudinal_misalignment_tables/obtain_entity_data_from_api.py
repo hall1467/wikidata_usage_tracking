@@ -64,7 +64,8 @@ def main(argv=None):
                  'quality_difference',
                  'gender',
                  'instance_of',
-                 'subclass_of'])
+                 'subclass_of'
+                 'continent',])
 
     verbose = args['--verbose']
 
@@ -101,6 +102,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
     gender_dict = defaultdict(str)
     inst_of_dict = defaultdict(list)
     subc_of_dict = defaultdict(list)
+    continent_dict = defaultdict(list)
     
     # Make API calls and process results
     for in_list in entity_id_lists:
@@ -144,7 +146,6 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                 'P31' in api_claims_result['entities'][entity]['claims']:
                 p_31 = \
                     api_claims_result['entities'][entity]['claims']['P31']
-
                 for p_31_cl in p_31:
                     if 'mainsnak' in p_31_cl and \
                         'datavalue' in p_31_cl['mainsnak'] and \
@@ -170,6 +171,20 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                             ['datavalue']['value']['id'])
 
 
+            if 'claims' in api_claims_result['entities'][entity] and \
+                'P30' in api_claims_result['entities'][entity]['claims']:
+                p_30 = \
+                    api_claims_result['entities'][entity]['claims']['P30']
+                for p_30_cl in p_30:
+                    if 'mainsnak' in p_30_cl and \
+                        'datavalue' in p_30_cl['mainsnak'] and \
+                        'value' in p_30_cl['mainsnak']['datavalue'] and \
+                        'id' in p_30_cl['mainsnak']['datavalue']['value']:
+
+                        continent_dict[entity].append(p_30_cl['mainsnak']\
+                            ['datavalue']['value']['id'])
+
+
     for i, line in enumerate(input_second_iteration_file):
 
         
@@ -178,11 +193,11 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
             sys.stderr.flush()
 
         gender_value = None
-        instance_of_value = []
-        subclass_of_value = []
+        continent_value = []
 
         if line[0] in gender_dict:
             gender_value = gender_dict[line[0]]
+
         if line[0] in inst_of_dict:
             for instances in inst_of_dict[line[0]]:
                 
@@ -201,6 +216,7 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                     line[11],
                     gender_value,
                     instances,
+                    None,
                     None])
 
         if line[0] in subc_of_dict:
@@ -221,7 +237,29 @@ def run(input_file, input_second_iteration_file, output_file, verbose):
                     line[11],
                     gender_value,
                     None,
-                    subclasses])
+                    subclasses,
+                    None])
+
+        if line[0] in continent_dict:
+            for continents in continent_dict[line[0]]:
+
+                output_file.write([
+                    line[0],
+                    line[1],
+                    line[2],
+                    line[3],
+                    line[4],
+                    line[5],
+                    line[6],
+                    line[7],
+                    line[8],
+                    line[9],
+                    line[10],
+                    line[11],
+                    gender_value,
+                    None,
+                    None,
+                    continents])
 
 main()
 
