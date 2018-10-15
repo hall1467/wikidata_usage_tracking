@@ -1,7 +1,7 @@
 entity_weighted_sums_and_page_views <- read.table(commandArgs(trailingOnly = TRUE)[1], header=FALSE, sep="\t");
 human_gender_items <- read.table(read.table(commandArgs(trailingOnly = TRUE)[2], header=TRUE, sep="\t");
-human_gender_items$page_title = substr(human_gender_items$human,32,100)
-human_gender_items <- human_gender_items$[c("page_title")]
+human_gender_items$page_title = substr(human_gender_items$human,32,100);
+human_gender_items <- human_gender_items$[c("page_title")];
 output_file <- commandArgs(trailingOnly = TRUE)[3];
 
 
