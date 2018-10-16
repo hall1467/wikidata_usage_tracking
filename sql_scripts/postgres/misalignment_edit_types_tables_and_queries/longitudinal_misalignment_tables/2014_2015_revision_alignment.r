@@ -37,7 +37,7 @@ for (monthly_distribution_and_edits in list(
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
 
-    entity_weighted_sums_and_page_views = entity_weighted_sums_and_page_views[entity_weighted_sums_and_page_views$weighted_sum >= 1,];
+    quality_and_page_views = quality_and_page_views[quality_and_page_views$weighted_sum >= 1,];
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
     revisions = revisions[c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
     colnames(revisions) <- c("page_title", "namespace", "edit_type", "agent_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
