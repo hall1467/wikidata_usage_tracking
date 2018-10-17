@@ -84,6 +84,9 @@ def run(input_file, output_file, verbose):
 
         accessed_gender_for_revisions_count += len(in_list)
 
+        if accessed_gender_for_revisions_count > 100000:
+            break
+
         if verbose and accessed_gender_for_revisions_count % 100 == 0 and \
             accessed_gender_for_revisions_count != 0:
             sys.stderr.write("Getting API info for revision: {0}\n"

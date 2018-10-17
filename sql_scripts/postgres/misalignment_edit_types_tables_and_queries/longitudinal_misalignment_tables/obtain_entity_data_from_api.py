@@ -64,7 +64,7 @@ def main(argv=None):
                  'quality_difference',
                  'gender',
                  'instance_of',
-                 'subclass_of'
+                 'subclass_of',
                  'continent',])
 
     verbose = args['--verbose']
