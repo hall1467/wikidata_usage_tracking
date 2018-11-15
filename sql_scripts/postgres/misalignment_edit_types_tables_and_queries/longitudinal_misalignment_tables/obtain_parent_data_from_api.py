@@ -90,7 +90,7 @@ def run(input_file, output_file, verbose):
             attempts_left -= 1
 
             try:
-                set_up_connection_and_return_results(in_list)
+                api_revisions_result = set_up_conn_and_return_results(in_list)
 
             except mwapi.errors.ConnectionError:
                 if attempts_left > 0:
@@ -120,7 +120,7 @@ def run(input_file, output_file, verbose):
 
 
 
-def set_up_connection_and_return_results(in_list):
+def set_up_conn_and_return_results(in_list):
     wikidata_api_session = mwapi.Session(
         "https://www.wikidata.org", 
         user_agent="User-Agent")
