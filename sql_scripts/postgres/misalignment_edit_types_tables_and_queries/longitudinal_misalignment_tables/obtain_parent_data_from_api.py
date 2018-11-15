@@ -25,6 +25,7 @@ import mysqltsv
 import sys
 import mwapi
 import json
+import time
 
 
 logger = logging.getLogger(__name__)
@@ -74,6 +75,7 @@ def run(input_file, output_file, verbose):
 
         accessed_API_for_revisions_count += len(in_list)
 
+
         if verbose and accessed_API_for_revisions_count % 100 == 0 and \
             accessed_API_for_revisions_count != 0:
             sys.stderr.write("Getting API info for revision: {0}\n"
@@ -81,14 +83,23 @@ def run(input_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        wikidata_api_session = mwapi.Session(
-            "https://www.wikidata.org", 
-            user_agent="User-Agent")
+        attempts_left = 10
 
-        api_revisions_result = wikidata_api_session.get(
-            action='query',
-            prop='revisions',
-            revids=in_list)
+        while attempts_left > 0:
+
+            attempts_left -= 1
+
+            try:
+                set_up_connection_and_return_results(in_list)
+
+            except mwapi.errors.ConnectionError:
+                if attempts_left > 0:
+                    sys.stderr.write("Can't connect. {0} attempts left.\n"
+                        .format(attempts_left))  
+                    sys.stderr.flush()
+                    time.sleep(60)
+
+
 
         for revision in api_revisions_result['query']['pages']:
             if len(api_revisions_result['query']['pages'][revision]
@@ -101,11 +112,26 @@ def run(input_file, output_file, verbose):
             elif api_revisions_result['query']['pages']\
                         [revision]['revisions'][0]['parentid'] != 0:
                 output_file.write(json.dumps({
-                    'next_rev_id' : api_revisions_result['query']['pages'][revision]
-                        ['revisions'][0]['revid'],
+                    'next_rev_id' : api_revisions_result['query']['pages']
+                        [revision]['revisions'][0]['revid'],
                     'rev_id' : api_revisions_result['query']['pages']
                         [revision]['revisions'][0]['parentid']
                     }) + "\n")
+
+
+
+def set_up_connection_and_return_results(in_list):
+    wikidata_api_session = mwapi.Session(
+        "https://www.wikidata.org", 
+        user_agent="User-Agent")
+
+    api_revisions_data = wikidata_api_session.get(
+        action='query',
+        prop='revisions',
+        revids=in_list)
+
+    return api_revisions_data
+
 
 
 main()
