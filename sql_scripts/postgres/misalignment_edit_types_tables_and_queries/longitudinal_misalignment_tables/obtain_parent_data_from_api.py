@@ -60,9 +60,9 @@ def run(input_file, output_file, verbose):
 
         if i % 50 == 0:
             inner_list = []
-            inner_list.append(line[3])
+            inner_list.append(line[6])
         else:
-            inner_list.append(line[3])
+            inner_list.append(line[6])
         if i % 50 == 49:
             entity_id_lists.append(inner_list)
 
