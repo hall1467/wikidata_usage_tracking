@@ -38,8 +38,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, str, str, str, float, float, float, str, str, str, 
-        str])
+        types=[int, int, int, str, str, int, int, int])
 
     output_file = open(args['<output>'], "w")
 
@@ -51,15 +50,9 @@ def main(argv=None):
 def run(input_file, output_file, verbose):
 
 
-    unique_entities = defaultdict(int)
-
-    # We don't want to use the API to get the same entity info twice
-    for i, line in enumerate(input_file):
-        unique_entities[line[4]] = 1
-
     # Create lists of 50 entities (max allowed by API) for API call
     entity_id_lists = []
-    for i, entity in enumerate(unique_entities):
+    for i, line in enumerate(input_file):
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Adding revision to nested list: {0}\n".format(i))  
@@ -67,27 +60,24 @@ def run(input_file, output_file, verbose):
 
         if i % 50 == 0:
             inner_list = []
-            inner_list.append(entity)
+            inner_list.append(line[3])
         else:
-            inner_list.append(entity)
+            inner_list.append(line[3])
         if i % 50 == 49:
             entity_id_lists.append(inner_list)
 
 
-    accessed_gender_for_revisions_count = 0
-    gender_dict = defaultdict(str)
-    inst_of_dict = defaultdict(list)
-    subc_of_dict = defaultdict(list)
+    accessed_API_for_revisions_count = 0
     
     # Make API calls and process results
     for in_list in entity_id_lists:
 
-        accessed_gender_for_revisions_count += len(in_list)
+        accessed_API_for_revisions_count += len(in_list)
 
-        if verbose and accessed_gender_for_revisions_count % 100 == 0 and \
-            accessed_gender_for_revisions_count != 0:
+        if verbose and accessed_API_for_revisions_count % 100 == 0 and \
+            accessed_API_for_revisions_count != 0:
             sys.stderr.write("Getting API info for revision: {0}\n"
-                    .format(accessed_gender_for_revisions_count))  
+                    .format(accessed_API_for_revisions_count))  
             sys.stderr.flush()
 
 
