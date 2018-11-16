@@ -51,8 +51,8 @@ def main(argv=None):
 def run(input_file, output_file, verbose):
 
 
-    # Create lists of 50 entities (max allowed by API) for API call
-    entity_id_lists = []
+    # Create lists of 50 revisions (max allowed by API) for API call
+    revision_id_lists = []
     for i, line in enumerate(input_file):
 
         if verbose and i % 10000 == 0 and i != 0:
@@ -65,13 +65,13 @@ def run(input_file, output_file, verbose):
         else:
             inner_list.append(line[6])
         if i % 50 == 49:
-            entity_id_lists.append(inner_list)
+            revision_id_lists.append(inner_list)
 
 
     accessed_API_for_revisions_count = 0
     
     # Make API calls and process results
-    for in_list in entity_id_lists:
+    for in_list in revision_id_lists:
 
         accessed_API_for_revisions_count += len(in_list)
 
@@ -83,21 +83,23 @@ def run(input_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        attempts_left = 10
+        attempts = 10
 
-        while attempts_left > 0:
+        while attempts > 0:
 
-            attempts_left -= 1
+            attempts -= 1
 
             try:
                 api_revisions_result = set_up_conn_and_return_results(in_list)
 
             except mwapi.errors.ConnectionError:
-                if attempts_left > 0:
-                    sys.stderr.write("Can't connect. {0} attempts left.\n"
-                        .format(attempts_left))  
+                if attempts > 0:
+                    sys.stderr.write("Can't connect. {0} attempt(s) left.\n"
+                        .format(attempts))
                     sys.stderr.flush()
                     time.sleep(60)
+                else:
+                    sys.exit("Unable to connect. Exiting.")
 
 
 
