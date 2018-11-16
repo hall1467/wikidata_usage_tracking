@@ -46,7 +46,11 @@ def main(argv=None):
                  'comment', 
                  'namespace', 
                  'timestamp', 
-                 'parent_id'])
+                 'parent_id', 
+                 'year', 
+                 'month', 
+                 'misalignment_matching_year', 
+                 'misalignment_matching_month'])
 
     verbose = args['--verbose']
 
@@ -109,8 +113,8 @@ def run(input_files, revisions_output_file, verbose):
         
         i += 1
 
-        year = tstamp[0:4]
-        month = tstamp[4:6]
+        year = int(tstamp[0:4])
+        month = int(tstamp[4:6])
 
 
         if month == 12:
