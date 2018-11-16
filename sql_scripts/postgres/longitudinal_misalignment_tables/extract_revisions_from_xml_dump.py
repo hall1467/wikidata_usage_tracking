@@ -4,9 +4,9 @@ created the revision.
 
 Usage:
     wikidata_revision_extraction (-h|--help)
-    wikidata_revision_extraction <input>... --revisions-output=<location>
-                                       [--debug]
-                                       [--verbose]
+    wikidata_revision_extraction <input>... <output>
+                                 [--debug]
+                                 [--verbose]
 
 Options:
     -h, --help  This help message is printed
