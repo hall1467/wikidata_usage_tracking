@@ -83,7 +83,7 @@ def run(input_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        attempts = 10
+        attempts = 30
 
         while attempts > 0:
 
@@ -100,6 +100,15 @@ def run(input_file, output_file, verbose):
                     time.sleep(60)
                 else:
                     sys.exit("Unable to connect. Exiting.")
+
+            except Exception as e:
+                if attempts > 0:
+                    sys.stderr.write("{0} attempt(s) left. Exception: {1}. \n"
+                        .format(attempts, e))
+                    sys.stderr.flush()
+                    time.sleep(60)
+                else:
+                    sys.exit("Exiting due to exception: {0}".format(e))
 
 
 
