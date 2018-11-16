@@ -36,7 +36,7 @@ def main(argv=None):
 
     input_files = args['<input>']
 
-    output_file = mysqltsv.Writer(
+    revisions_output_file = mysqltsv.Writer(
         open(args['--revisions-output'], "w"), 
         headers=[
                  'page_title',
