@@ -1,12 +1,12 @@
 # Have been running python scripts in the virtual environment on flagon here: /export/scratch2/wmf/scripts/
 
-set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/misalignment_edit_types_tables_and_queries
+set base = /export/scratch2/wmf/scripts/wikidata_usage_tracking/sql_scripts/postgres/longitudinal_misalignment_tables
 set results = /export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment
 set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
-python $base/longitudinal_misalignment_tables/extract_revisions_from_xml_dump \
+python $base/extract_revisions_from_xml_dump \
 	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
 	--revisions-output=$results/extracted_revisions.tsv \
 	--verbose \
@@ -14,7 +14,7 @@ python $base/longitudinal_misalignment_tables/extract_revisions_from_xml_dump \
 	$results/extract_revisions_from_xml_dump_error_log.txt
 
 
-python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
+python $base/revisions_postgres_post_process.py
 	$results/extracted_revisions.tsv
 	--revisions-output=$results/extracted_revisions_escaped.tsv
 	--verbose \
@@ -41,7 +41,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/monthly_item_quality_sorted_by_month.sql
 
 
-# python $base/longitudinal_misalignment_tables/misalignment_preprocessor.py \
+# python $base/misalignment_preprocessor.py \
 # 		$results/used_entity_page_views.tsv \
 # 		$results/monthly_item_quality_sorted_by_month.tsv \
 # 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
@@ -64,30 +64,30 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # Otherwise takes 18 hours for the below loop
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
 
-# psql wikidata_entities < $base/longitudinal_misalignment_tables/yearly_revision_samples.sql
+# psql wikidata_entities < $base/yearly_revision_samples.sql
 
 # shuf -n 250000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
 # shuf -n 250000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
@@ -138,7 +138,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 
 
 # Convert to json so we can get ORES predictions for these edits
-# python $base/longitudinal_misalignment_tables/convert_to_json.py \
+# python $base/convert_to_json.py \
 # 	$results/all_used_edits_sampled.tsv \
 # 	$results/all_used_edits_sampled.json \
 # 	--verbose > & \
@@ -153,7 +153,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
 
 
-# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+# python $base/merge_parent_data.py \
 # 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
 # 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
 # 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
@@ -166,7 +166,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 
 
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# python $base/extract_weighted_score.py \
 # 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
@@ -184,7 +184,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # 	$results/extract_weighted_score_2013_to_2014_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# python $base/extract_weighted_score.py \
 # 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
@@ -202,7 +202,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # 	$results/extract_weighted_score_2014_to_2015_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# python $base/extract_weighted_score.py \
 # 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
@@ -220,7 +220,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # 	$results/extract_weighted_score_2015_to_2016_error_log.txt
 
 
-# python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
+# python $base/extract_weighted_score.py \
 # 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
@@ -238,61 +238,61 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # 	$results/extract_weighted_score_2016_to_2017_error_log.txt
 
 
-# Rscript $base/longitudinal_misalignment_tables/2013_2014_revision_alignment.r
-# Rscript $base/longitudinal_misalignment_tables/2014_2015_revision_alignment.r
-# Rscript $base/longitudinal_misalignment_tables/2015_2016_revision_alignment.r
-# Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
+# Rscript $base/2013_2014_revision_alignment.r
+# Rscript $base/2014_2015_revision_alignment.r
+# Rscript $base/2015_2016_revision_alignment.r
+# Rscript $base/2016_2017_revision_alignment.r
 
 
 
 # Male alignment
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2012_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2012_human_male_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2013_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2013_human_male_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2014_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2014_human_male_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2015_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2015_human_male_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2016_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2016_human_male_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2017_human_male_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2017_human_male_error_metrics.tsv
 # end
 
 
 
 # Female alignment
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2012_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2012_human_female_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2013_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2013_human_female_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2014_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2014_human_female_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2015_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2015_human_female_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2016_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2016_human_female_error_metrics.tsv
 # end
 
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-# 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2017_human_female_error_metrics.tsv
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2017_human_female_error_metrics.tsv
 # end
