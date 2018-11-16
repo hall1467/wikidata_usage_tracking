@@ -6,33 +6,8 @@ set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
-python $base/longitudinal_misalignment_tables/extract_revisions_from_xml_dump \
-	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
-	--revisions-output=$results/extracted_revisions.tsv \
-	--verbose \
-	--debug > & \
-	$results/extract_revisions_from_xml_dump_error_log.txt
-
-
-python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
-	$results/extracted_revisions.tsv
-	--revisions-output=$results/extracted_revisions_escaped.tsv
-	--verbose \
-	--debug > & \
-	$results/revisions_postgres_post_process_error_log.txt
-
-
-# Import basic revision data into Postgres
-# psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
-# psql wikidata_entities < $base/revisions_table/revisions_table_import.sql
-# psql wikidata_entities < $base/revisions_table/revisions_table_index_creation.sql	
-
-# Merge with various automation flags
-# psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_creation.sql
-# psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_import.sql
-
-# Perform additional checks for different types of edits
-# psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_all_automation_flags_and_usages_table_creation.sql
+## It appears the quality_weighted_sum_and_views table was already created
+## manually so maybe could recreate
 
 
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/used_entity_page_views.sql
@@ -89,81 +64,80 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/yearly_revision_samples.sql
 
-# shuf -n 250000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 250000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 250000 $results/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 250000 $results/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 250000 $results/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 250000 $results/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 250000 $results/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 250000 $results/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 250000 $results/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 250000 $results/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 250000 $results/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 250000 $results/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 250000 $results/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 250000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 250000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 250000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 250000 $results/misalignment_edit_types_tables_and_queries/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
 
 
 # Period 1: 2013 to 2014
-# cat $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat used_bot_edits_may_2013_to_2014_sampled.tsv > all_used_edits_sampled.tsv
+tail -n +2 used_human_edits_may_2013_to_2014_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_anon_edits_may_2013_to_2014_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_tool_edits_may_2013_to_2014_sampled.tsv >> all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-# cat $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat used_bot_edits_may_2014_to_2015_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_human_edits_may_2014_to_2015_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_anon_edits_may_2014_to_2015_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_tool_edits_may_2014_to_2015_sampled.tsv >> all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-# cat $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat used_bot_edits_may_2015_to_2016_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_human_edits_may_2015_to_2016_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_anon_edits_may_2015_to_2016_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_tool_edits_may_2015_to_2016_sampled.tsv >> all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-# cat $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat used_bot_edits_may_2016_to_2017_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_human_edits_may_2016_to_2017_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_anon_edits_may_2016_to_2017_sampled.tsv >> all_used_edits_sampled.tsv
+tail -n +2 used_tool_edits_may_2016_to_2017_sampled.tsv >> all_used_edits_sampled.tsv
+
+
+
+python $base/longitudinal_misalignment_tables/convert_to_json.py \
+	$results/all_used_edits_sampled.tsv \
+	$results/all_used_edits_sampled.json \
+	--verbose > & \
+	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 
 
-# Convert to json so we can get ORES predictions for these edits
-# python $base/longitudinal_misalignment_tables/convert_to_json.py \
-# 	$results/all_used_edits_sampled.tsv \
-# 	$results/all_used_edits_sampled.json \
-# 	--verbose > & \
-# 	$results/all_used_edits_sampled_converted_error_log.txt
 
-# Combine two json files so that we can run ORES once.
+# Run ores
 
-# Run ORES
+cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
 
-# cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
+cat $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json
 
+cat $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json
 
-# python $base/longitudinal_misalignment_tables/merge_parent_data.py \
-# 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
-# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
-# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
-
-# Split up files based on period.
-
-# Extract weighted scores from both revision and parent
-
+cat $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+	> $results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json
 
 
 # python $base/longitudinal_misalignment_tables/extract_weighted_score.py \
@@ -244,8 +218,130 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 # Rscript $base/longitudinal_misalignment_tables/2016_2017_revision_alignment.r
 
 
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2013_2014.tsv \
+# 	$results/revision_parent_data_2013_2014.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2013_2014_error_log.txt
 
-# Male alignment
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2014_2015.tsv \
+# 	$results/revision_parent_data_2014_2015.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2014_2015_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2015_2016.tsv \
+# 	$results/revision_parent_data_2015_2016.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2015_2016_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/obtain_parent_data_from_api.py \
+# 	$results/all_revisions_quality_differences_2016_2017.tsv \
+# 	$results/revision_parent_data_2016_2017.json \
+# 	--verbose > & \
+# 	$results/revision_parent_data_2016_2017_error_log.txt
+
+
+# Run ores
+
+# cat $results/revision_parent_data_2013_2014.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2013_2014_with_quality.json
+
+# cat $results/revision_parent_data_2014_2015.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2014_2015_with_quality.json
+
+# cat $results/revision_parent_data_2015_2016.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2015_2016_with_quality.json
+
+# cat $results/revision_parent_data_2016_2017.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	> $results/revision_parent_data_2016_2017_with_quality.json
+
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2013_2014_with_quality.json \
+# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2013_2014_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2014_2015_with_quality.json \
+# 	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2014_2015_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2015_2016_with_quality.json \
+# 	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2015_2016_error_log.txt
+
+# python $base/longitudinal_misalignment_tables/extract_weighted_score_from_parent.py \
+# 	$results/revision_parent_data_2016_2017_with_quality.json \
+# 	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
+# 	--verbose > & \
+# 	$results/parent_data_with_extracted_weighted_score_2016_2017_error_log.txt
+
+
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2013_2014.tsv \
+	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_entity_data_2013_2014_error_log.txt
+
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2014_2015.tsv \
+	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_entity_data_2014_2015_error_log.txt
+
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2015_2016.tsv \
+	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_entity_data_2015_2016_error_log.txt
+
+python $base/longitudinal_misalignment_tables/obtain_entity_data_from_api.py \
+	$results/all_revisions_quality_differences_2016_2017.tsv \
+	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_entity_data_2016_2017_error_log.txt
+
+
+python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
+	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
+
+python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+	$results/all_revisions_with_api_entity_data_2014_2015.tsv \
+	$results/parent_data_with_extracted_weighted_score_2014_2015.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2014_2015.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_and_parent_entity_data_2014_2015_error_log.tsv
+
+python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+	$results/all_revisions_with_api_entity_data_2015_2016.tsv \
+	$results/parent_data_with_extracted_weighted_score_2015_2016.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2015_2016.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_and_parent_entity_data_2015_2016_error_log.tsv
+
+python $base/longitudinal_misalignment_tables/merge_parent_data.py \
+	$results/all_revisions_with_api_entity_data_2016_2017.tsv \
+	$results/parent_data_with_extracted_weighted_score_2016_2017.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2016_2017.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_and_parent_entity_data_2016_2017_error_log.tsv
+
+
+
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
 # 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_male_items_10_11_18.tsv $results/2012_human_male_error_metrics.tsv
 # end
@@ -272,7 +368,7 @@ python $base/longitudinal_misalignment_tables/revisions_postgres_post_process.py
 
 
 
-# Female alignment
+
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
 # 	Rscript $base/longitudinal_misalignment_tables/expected_quality_versus_actual_quality_RMSE_humans.r $input_RMSE_file $results/human_female_items_10_11_18.tsv $results/2012_human_female_error_metrics.tsv
 # end
