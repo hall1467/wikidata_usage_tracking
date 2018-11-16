@@ -6,7 +6,7 @@ set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
-python $base/extract_revisions_from_xml_dump \
+python $base/extract_revisions_from_xml_dump.py \
 	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
 	--revisions-output=$results/extracted_revisions.tsv \
 	--verbose \
@@ -14,12 +14,12 @@ python $base/extract_revisions_from_xml_dump \
 	$results/extract_revisions_from_xml_dump_error_log.txt
 
 
-python $base/revisions_postgres_post_process.py
-	$results/extracted_revisions.tsv
-	--revisions-output=$results/extracted_revisions_escaped.tsv
-	--verbose \
-	--debug > & \
-	$results/revisions_postgres_post_process_error_log.txt
+# python $base/revisions_postgres_post_process.py
+# 	$results/extracted_revisions.tsv
+# 	--revisions-output=$results/extracted_revisions_escaped.tsv
+# 	--verbose \
+# 	--debug > & \
+# 	$results/revisions_postgres_post_process_error_log.txt
 
 
 # Import basic revision data into Postgres
