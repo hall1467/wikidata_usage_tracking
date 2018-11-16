@@ -4,17 +4,17 @@ created the revision.
 
 Usage:
     wikidata_revision_extraction (-h|--help)
-    wikidata_revision_extraction <input>... <output>
+    wikidata_revision_extraction <input>... --revisions-output=<location>
                                  [--debug]
                                  [--verbose]
 
 Options:
-    -h, --help  This help message is printed
-    <input>     Path to file(s) to process.
-    <output>     Where revisions results
-                will be written
-    --debug     Print debug logging to stderr
-    --verbose   Print dots and stuff to stderr  
+    -h, --help                     This help message is printed
+    <input>                        Path to file(s) to process.
+    --revisions-output=<location>  Where revisions results
+                                   will be written
+    --debug                        Print debug logging to stderr
+    --verbose                      Print dots and stuff to stderr  
 """
 
 
@@ -37,7 +37,7 @@ def main(argv=None):
     input_files = args['<input>']
 
     output_file = mysqltsv.Writer(
-        open(args['<output>'], "w"), 
+        open(args['--revisions-output'], "w"), 
         headers=[
                  'page_title',
                  'revision_id',
