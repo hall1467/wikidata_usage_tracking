@@ -6,30 +6,29 @@ set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
-python $base/extract_revisions_from_xml_dump.py \
-	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
-	--revisions-output=$results/extracted_revisions.tsv \
-	--verbose \
-	--debug > & \
-	$results/extract_revisions_from_xml_dump_error_log.txt
+# python $base/extract_revisions_from_xml_dump.py \
+# 	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
+# 	--revisions-output=$results/extracted_revisions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/extract_revisions_from_xml_dump_error_log.txt
 
 
-# python $base/revisions_postgres_post_process.py
-# 	$results/extracted_revisions.tsv
-# 	--revisions-output=$results/extracted_revisions_escaped.tsv
+# python $base/revisions_postgres_post_process.py \
+# 	$results/extracted_revisions.tsv \
+# 	--revisions-output=$results/extracted_revisions_escaped.tsv \
 # 	--verbose \
 # 	--debug > & \
 # 	$results/revisions_postgres_post_process_error_log.txt
 
 
 # Import basic revision data into Postgres
-# psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
-# psql wikidata_entities < $base/revisions_table/revisions_table_import.sql
-# psql wikidata_entities < $base/revisions_table/revisions_table_index_creation.sql	
+psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
+psql wikidata_entities < $base/revisions_table/revisions_table_import.sql	
 
 # Merge with various automation flags
-# psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_creation.sql
-# psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_import.sql
+psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_creation.sql
+psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_index_creation.sql
 
 # Perform additional checks for different types of edits
 # psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_all_automation_flags_and_usages_table_creation.sql

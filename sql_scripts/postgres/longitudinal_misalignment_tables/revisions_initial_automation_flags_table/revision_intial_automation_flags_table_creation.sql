@@ -3,7 +3,7 @@ CREATE TABLE revision_intial_automation_flags AS (
 	FROM
 	(
 		SELECT entity_revisions.*, user_id AS bot_user_id
-		FROM entity_revisions
+		FROM revisions
 		LEFT JOIN
 		wikidata_bots
 		ON user_id = revision_user_id
