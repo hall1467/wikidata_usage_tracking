@@ -24,8 +24,8 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # tail -n +2 $results/extracted_revisions_escaped.tsv > $results/extracted_revisions_escaped_no_header.tsv
 
 # Import basic revision data into Postgres
-psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
-psql wikidata_entities < $base/revisions_table/revisions_table_import.sql	
+# psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
+# psql wikidata_entities < $base/revisions_table/revisions_table_import.sql	
 
 # Merge with various automation flags
 psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_creation.sql
@@ -87,7 +87,7 @@ psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidat
 # 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
 
-# psql wikidata_entities < $base/yearly_revision_samples.sql
+psql wikidata_entities < $base/yearly_revision_samples.sql
 
 # shuf -n 250000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
 # shuf -n 250000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv

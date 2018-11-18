@@ -1,4 +1,4 @@
-CREATE TABLE revision_intial_automation_flags AS (
+CREATE TABLE revisions_intial_automation_flags AS (
 	SELECT revisions_and_bot_flags.*, tools_based_on_change_tag.revision_id AS change_tag_revision_id
 	FROM
 	(

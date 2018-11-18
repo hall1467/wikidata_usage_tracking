@@ -30,7 +30,7 @@ CREATE TABLE revisions_all_automation_flags_and_usages AS (
 		  WHEN revision_user_text LIKE '%.%' OR revision_user_text LIKE '%:%' THEN 'anon_edit'
 		  ELSE 'human_edit' END) AS edit_type,
 	concat(year,'-',month,'-',page_title) AS year_month_page_title
-	FROM revision_initial_automation_flags
+	FROM revisions_initial_automation_flags
 	LEFT JOIN
 	entity_views_and_aggregated_revisions
 	ON entity_id = page_title
