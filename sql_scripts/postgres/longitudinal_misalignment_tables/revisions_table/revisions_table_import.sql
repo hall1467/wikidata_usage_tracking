@@ -1,1 +1,1 @@
-\COPY revisions FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/extracted_revisions_escaped.tsv';
+\COPY revisions FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/extracted_revisions_escaped_no_header.tsv';

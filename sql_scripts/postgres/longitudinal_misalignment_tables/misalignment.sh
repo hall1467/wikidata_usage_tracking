@@ -21,6 +21,7 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	--debug > & \
 # 	$results/revisions_postgres_post_process_error_log.txt
 
+# tail -n +2 $results/extracted_revisions_escaped.tsv > $results/extracted_revisions_escaped_no_header.tsv
 
 # Import basic revision data into Postgres
 psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
@@ -31,7 +32,7 @@ psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision
 psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_index_creation.sql
 
 # Perform additional checks for different types of edits
-# psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_all_automation_flags_and_usages_table_creation.sql
+psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/used_entity_page_views.sql
