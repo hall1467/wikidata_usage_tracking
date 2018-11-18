@@ -29,10 +29,9 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # Merge with various automation flags
 psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_creation.sql
-psql wikidata_entities < $base/revisions_initial_automation_flags_table/revision_intial_automation_flags_table_index_creation.sql
 
 # Perform additional checks for different types of edits
-psql wikidata_entities < $base/revisions_all_automation_flags_table/psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_all_automation_flags_and_usages_table_creation.sql
+psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/used_entity_page_views.sql

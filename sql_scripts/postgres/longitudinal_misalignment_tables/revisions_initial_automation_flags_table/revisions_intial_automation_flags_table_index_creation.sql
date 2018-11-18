@@ -1,1 +1,0 @@
-CREATE INDEX revisions_intial_automation_flags_index_page_title ON revisions_intial_automation_flags(page_title);
