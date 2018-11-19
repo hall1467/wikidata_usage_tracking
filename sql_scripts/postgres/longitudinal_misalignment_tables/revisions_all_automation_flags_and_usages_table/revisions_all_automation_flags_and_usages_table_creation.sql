@@ -1,5 +1,5 @@
 CREATE TABLE revisions_all_automation_flags_and_usages AS (
-	SELECT revision_initial_automation_flags.*, entity_views_and_aggregated_revisions.number_of_revisions, entity_views_and_aggregated_revisions.page_views,
+	SELECT revisions_initial_automation_flags.*, entity_views_and_aggregated_revisions.number_of_revisions, entity_views_and_aggregated_revisions.page_views,
 	(CASE WHEN bot_user_id IS NOT NULL OR revision_user_text LIKE '10.86.%' THEN 'bot_edit'
 		  WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#quickstatements%' THEN 'quickstatements'
 		  WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#petscan%' THEN 'petscan'
