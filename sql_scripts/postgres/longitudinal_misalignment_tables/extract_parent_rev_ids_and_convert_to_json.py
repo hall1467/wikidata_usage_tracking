@@ -2,10 +2,10 @@
 Extract out parent ORES scores and convert to json.
 
 Usage:
-    convert_to_json (-h|--help)
-    convert_to_json <input> <revision_output> <parent_revision_output>
-                    [--debug]
-                    [--verbose]
+    extract_parent_rev_ids_and_convert_to_json (-h|--help)
+    extract_parent_rev_ids_and_convert_to_json <input> <revision_output> <parent_revision_output>
+                                               [--debug]
+                                               [--verbose]
 
 Options:
     -h, --help                This help message is printed
