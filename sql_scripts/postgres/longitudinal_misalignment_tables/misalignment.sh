@@ -151,7 +151,7 @@ cat $results/all_used_edits_parent_rev_ids_sampled.json >> $results/sampled_rev_
 # Run ORES
 
 # cat $results/sampled_rev_ids_for_ores.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_with_ores_predictions.json
 
 
