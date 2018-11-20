@@ -78,7 +78,7 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
                         'rev_id' : p_rev_id
                     }) + "\n")
         else:
-            sys.stderr.write("No parent since None ID: {0}\n".format(line))  
+            sys.stderr.write("No parent for rev id: {0}\n".format(line[6]))  
             sys.stderr.flush()
 
 
