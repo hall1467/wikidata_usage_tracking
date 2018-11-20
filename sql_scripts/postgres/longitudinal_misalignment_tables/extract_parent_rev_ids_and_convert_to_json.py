@@ -75,7 +75,9 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
 
         if p_rev_id:
             parent_revision_output_file.write(json.dumps({
-                        'rev_id' : p_rev_id
+                    'rev_id' : p_rev_id,
+                    'child_rev_id': line[6],
+                    'period': line[9]
                     }) + "\n")
         else:
             sys.stderr.write("No parent for rev id: {0}\n".format(line[6]))  
