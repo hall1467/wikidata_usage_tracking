@@ -150,9 +150,9 @@ cat $results/all_used_edits_parent_rev_ids_sampled.json >> $results/sampled_rev_
 
 # Run ORES
 
-# cat $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled.json | \
+# cat $results/sampled_rev_ids_for_ores.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidatawiki itemquality --verbose \
-# 	> $results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json
+# 	> $results/sampled_rev_ids_with_ores_predictions.json
 
 
 # python $base/merge_parent_data.py \
