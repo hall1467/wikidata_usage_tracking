@@ -38,7 +38,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[int, int, int, str, str, int, int, int, str, int])
+        types=[int, int, int, str, str, int, int, str, int, int])
 
 
     revision_output_file = open(args['<revision_output>'], "w")
