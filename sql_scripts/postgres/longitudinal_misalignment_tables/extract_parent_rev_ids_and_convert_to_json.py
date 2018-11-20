@@ -71,9 +71,15 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
                     'period': line[9]
                 }) + "\n")
 
-        parent_revision_output_file.write(json.dumps({
-                    'rev_id' : line[8]
-                }) + "\n")
+        p_rev_id = line[8]
+
+        if p_rev_id:
+            parent_revision_output_file.write(json.dumps({
+                        'rev_id' : p_rev_id
+                    }) + "\n")
+        else:
+            sys.stderr.write("No parent since None ID: {0}\n".format(line))  
+            sys.stderr.flush()
 
 
 main()
