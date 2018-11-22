@@ -184,21 +184,21 @@ cat $results/sampled_rev_ids_for_ores_split06 | \
 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 	> $results/sampled_rev_ids_for_ores_split06_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split07 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split07_predictions.json
+cat $results/sampled_rev_ids_for_ores_split07 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split07_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split08 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split08_predictions.json
+cat $results/sampled_rev_ids_for_ores_split08 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split08_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split09 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split09_predictions.json
+cat $results/sampled_rev_ids_for_ores_split09 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split09_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split10 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split10_predictions.json
+cat $results/sampled_rev_ids_for_ores_split10 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split10_predictions.json
 
 # cat $results/sampled_rev_ids_for_ores_split11 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
