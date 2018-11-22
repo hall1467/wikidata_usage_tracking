@@ -135,24 +135,154 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-python $base/extract_parent_rev_ids_and_convert_to_json.py \
-	$results/all_used_edits_sampled.tsv \
-	$results/all_used_edits_sampled.json \
-	$results/all_used_edits_parent_rev_ids_sampled.json \
-	--verbose > & \
-	$results/all_used_edits_sampled_converted_error_log.txt
+# python $base/extract_parent_rev_ids_and_convert_to_json.py \
+# 	$results/all_used_edits_sampled.tsv \
+# 	$results/all_used_edits_sampled.json \
+# 	$results/all_used_edits_parent_rev_ids_sampled.json \
+# 	--verbose > & \
+# 	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Combine two json files so that we can run ORES once.
-cat $results/all_used_edits_sampled.json > $results/sampled_rev_ids_for_ores.json
-cat $results/all_used_edits_parent_rev_ids_sampled.json >> $results/sampled_rev_ids_for_ores.json
+# cat $results/all_used_edits_sampled.json > $results/sampled_rev_ids_for_ores.json
+# cat $results/all_used_edits_parent_rev_ids_sampled.json >> $results/sampled_rev_ids_for_ores.json
 
 
 # Run ORES
 
-# cat $results/sampled_rev_ids_for_ores.json | \
+# Since ORES is having some issues hanging, the following is a temporary solution:
+
+# split $results/sampled_rev_ids_for_ores.json $results/sampled_rev_ids_for_ores_split -l 250000 -d
+
+
+
+cat $results/sampled_rev_ids_for_ores_split_00 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split_00_predictions.json
+
+cat $results/sampled_rev_ids_for_ores_split_01 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split_01_predictions.json
+
+cat $results/sampled_rev_ids_for_ores_split_02 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split_02_predictions.json
+
+cat $results/sampled_rev_ids_for_ores_split_03 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split_03_predictions.json
+
+cat $results/sampled_rev_ids_for_ores_split_04 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split_04_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_05 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_with_ores_predictions.json
+# 	> $results/sampled_rev_ids_for_ores_split_05_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_06 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_06_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_07 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_07_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_08 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_08_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_09 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_09_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_10 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_10_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_11 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_11_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_12 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_12_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_13 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_13_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_14 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_14_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_15 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_15_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_16 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_16_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_17 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_17_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_18 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_18_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_19 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_19_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_20 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_20_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_21 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_21_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_22 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_22_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_23 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_23_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_24 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_24_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_25 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_25_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_26 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_26_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_27 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_27_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_28 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_28_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_29 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_29_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_30 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_30_predictions.json
+
+# cat $results/sampled_rev_ids_for_ores_split_31 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split_31_predictions.json
 
 
 # python $base/merge_parent_data.py \
