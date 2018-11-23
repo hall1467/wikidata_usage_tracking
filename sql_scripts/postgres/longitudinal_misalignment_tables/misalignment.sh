@@ -172,9 +172,9 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_for_ores_split03_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split04 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split04_predictions.json
+cat $results/sampled_rev_ids_for_ores_split04 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split04_predictions.json
 
 cat $results/sampled_rev_ids_for_ores_split05 | \
 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
