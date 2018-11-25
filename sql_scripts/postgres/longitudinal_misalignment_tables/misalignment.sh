@@ -205,48 +205,48 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	> $results/sampled_rev_ids_for_ores_split11_predictions.json
 
 
-head -n 100000 $results/sampled_rev_ids_for_ores_split12 > $results/sampled_rev_ids_for_ores_split12_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split13 > $results/sampled_rev_ids_for_ores_split13_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split14 > $results/sampled_rev_ids_for_ores_split14_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split15 > $results/sampled_rev_ids_for_ores_split15_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split16 > $results/sampled_rev_ids_for_ores_split16_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split17 > $results/sampled_rev_ids_for_ores_split17_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split18 > $results/sampled_rev_ids_for_ores_split18_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split19 > $results/sampled_rev_ids_for_ores_split19_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split20 > $results/sampled_rev_ids_for_ores_split20_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split21 > $results/sampled_rev_ids_for_ores_split21_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split22 > $results/sampled_rev_ids_for_ores_split22_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split23 > $results/sampled_rev_ids_for_ores_split23_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split24 > $results/sampled_rev_ids_for_ores_split24_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split25 > $results/sampled_rev_ids_for_ores_split25_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split26 > $results/sampled_rev_ids_for_ores_split26_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split27 > $results/sampled_rev_ids_for_ores_split27_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split28 > $results/sampled_rev_ids_for_ores_split28_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split29 > $results/sampled_rev_ids_for_ores_split29_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split30 > $results/sampled_rev_ids_for_ores_split30_100000
-head -n 100000 $results/sampled_rev_ids_for_ores_split31 > $results/sampled_rev_ids_for_ores_split31_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split12 > $results/sampled_rev_ids_for_ores_split12_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split13 > $results/sampled_rev_ids_for_ores_split13_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split14 > $results/sampled_rev_ids_for_ores_split14_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split15 > $results/sampled_rev_ids_for_ores_split15_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split16 > $results/sampled_rev_ids_for_ores_split16_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split17 > $results/sampled_rev_ids_for_ores_split17_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split18 > $results/sampled_rev_ids_for_ores_split18_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split19 > $results/sampled_rev_ids_for_ores_split19_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split20 > $results/sampled_rev_ids_for_ores_split20_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split21 > $results/sampled_rev_ids_for_ores_split21_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split22 > $results/sampled_rev_ids_for_ores_split22_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split23 > $results/sampled_rev_ids_for_ores_split23_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split24 > $results/sampled_rev_ids_for_ores_split24_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split25 > $results/sampled_rev_ids_for_ores_split25_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split26 > $results/sampled_rev_ids_for_ores_split26_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split27 > $results/sampled_rev_ids_for_ores_split27_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split28 > $results/sampled_rev_ids_for_ores_split28_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split29 > $results/sampled_rev_ids_for_ores_split29_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split30 > $results/sampled_rev_ids_for_ores_split30_100000
+# head -n 100000 $results/sampled_rev_ids_for_ores_split31 > $results/sampled_rev_ids_for_ores_split31_100000
 
 
 
-cat $results/sampled_rev_ids_for_ores_split12_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split12_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split12_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split12_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split13_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split13_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split13_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split13_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split14_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split14_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split14_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split14_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split15_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split15_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split15_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split15_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split16_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split16_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split16_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split16_predictions.json
 
 cat $results/sampled_rev_ids_for_ores_split17_100000 | \
 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
