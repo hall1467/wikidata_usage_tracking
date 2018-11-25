@@ -192,17 +192,17 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_for_ores_split08_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split09 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split09_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split09 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split09_predictions.json
 
 # cat $results/sampled_rev_ids_for_ores_split10 | \
 	# ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 	# > $results/sampled_rev_ids_for_ores_split10_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split11 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split11_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split11 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split11_predictions.json
 
 cat $results/sampled_rev_ids_for_ores_split12 | \
 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
