@@ -122,7 +122,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
             sys.stderr.flush()
 
 
-        extracted_score = extract_score(line)
+        extracted_score = extract_score(json_line)
 
         if extracted_score:
             parent_weighted_sum_dict[line['child_rev_id']] = \
@@ -135,8 +135,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
             sys.stderr.write("Merging revision metadata: {0}\n".format(i))  
             sys.stderr.flush()
 
-
-        extracted_score = extract_score(line)
+        json_line = json.loads(line)
+        extracted_score = extract_score(json_line)
 
         if extracted_score:
             parent_weighted_sum_dict[line['child_rev_id']] = \
