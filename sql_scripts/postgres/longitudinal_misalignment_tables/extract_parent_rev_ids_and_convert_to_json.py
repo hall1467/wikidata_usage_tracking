@@ -65,7 +65,7 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
                     'misalignment_month' : line[1],
                     'namespace' : line[2],
                     'page_title': line[3],
-                    'agent_type': line[4],
+                    'edit_type': line[4],
                     'page_views': line[5],
                     'rev_id': line[6],
                     'period': line[9]

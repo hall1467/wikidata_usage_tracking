@@ -2,18 +2,18 @@
 Merges parent quality information with revision metadata.
 
 Usage:
-    merge_parent_data (-h|--help)
-    merge_parent_data <revision_input> <parent_input> <output>
-                      [--debug]
-                      [--verbose]
+    extract_and_merge_data.py (-h|--help)
+    extract_and_merge_data.py <child_input> <parent_input> <output>
+                              [--debug]
+                              [--verbose]
 
 Options:
-    -h, --help        This help message is printed
-    <revision_input>  Path to revision edit file to process.
-    <parent_input>    Path to parent edit file to process.
-    <output>          Where output will be written
-    --debug           Print debug logging to stderr
-    --verbose         Print dots and stuff to stderr  
+    -h, --help      This help message is printed
+    <child_input>   Path to revision edit file to process.
+    <parent_input>  Path to parent edit file to process.
+    <output>        Where output will be written
+    --debug         Print debug logging to stderr
+    --verbose       Print dots and stuff to stderr  
 """
 
 
@@ -23,6 +23,7 @@ import operator
 from collections import defaultdict
 import mysqltsv
 import sys
+import json
 
 
 logger = logging.getLogger(__name__)
@@ -34,85 +35,99 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    revision_input_file = mysqltsv.Reader(open(args['<revision_input>'],
-        'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[str, int, str, str, int, float, float, float, str, str, str, 
-        str, str, str, str, str])
+    child_input_file = open(args['<child_input>'])
 
-    parent_input_file = mysqltsv.Reader(open(args['<parent_input>'],
-        'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, int, float])
+    parent_input_file = open(args['<parent_input>'])
 
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
         headers=[
-                 'page_title',
                  'namespace',
+                 'page_title',
                  'edit_type',
-                 'agent_type',
+                 'page_views',
                  'rev_id',
                  'weighted_sum',
-                 'expected_quality',
-                 'expected_quality_quantile',
-                 'page_views',
-                 'yyyy',
-                 'mm',
-                 'quality_difference',
-                 'gender',
-                 'instance_of',
-                 'subclass_of',
+                 'misalignment_year',
+                 'misalignment_month',
+                 'period',
                  'parent_weighted_sum'])
 
     verbose = args['--verbose']
 
-    run(revision_input_file, parent_input_file, output_file, verbose)
+    run(child_input_file, parent_input_file, output_file, verbose)
 
 
-def run(revision_input_file, parent_input_file, output_file, verbose):
+def run(child_input_file, parent_input_file, output_file, verbose):
 
 
     parent_weighted_sum_dict = defaultdict(int)
 
     for i, line in enumerate(parent_input_file):
         
+        json_line = json.loads(line)
+
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Processing parent data: {0}\n".format(i))  
             sys.stderr.flush()
 
-        parent_weighted_sum_dict[line['rev_id']] = \
-            line['parent_weighted_sum']
 
-    for i, line in enumerate(revision_input_file):
+        extracted_score = extract_score(line)
+
+        if extracted_score:
+            parent_weighted_sum_dict[line['child_rev_id']] = \
+                extracted_score
+
+    for i, line in enumerate(child_input_file):
 
         
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Merging revision metadata: {0}\n".format(i))  
             sys.stderr.flush()
 
+
+        extracted_score = extract_score(line)
+
+        if extracted_score:
+            parent_weighted_sum_dict[line['child_rev_id']] = \
+                extracted_score
+        else:
+            # We don't want this revision if it does not produce a score
+            continue
+
         p_weighted_sum = None
         
         if line['rev_id'] in parent_weighted_sum_dict:
             p_weighted_sum = parent_weighted_sum_dict[line['rev_id']]
-
                 
-            output_file.write([
-                line['page_title'],
-                line['namespace'],
-                line['edit_type'],
-                line['agent_type'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['expected_quality'],
-                line['expected_quality_quantile'],
-                line['page_views'],
-                line['yyyy'],
-                line['mm'],
-                line['quality_difference'],
-                line['gender'],
-                line['instance_of'],
-                line['subclass_of'],
-                p_weighted_sum])
+        
+        output_file.write([
+            line['namespace'],
+            line['page_title'],
+            line['edit_type'],
+            line['page_views'],
+            line['rev_id'],
+            line['weighted_sum'],
+            line['misalignment_year'],
+            line['misalignment_month'],
+            line['period'],
+            p_weighted_sum])
+
+
+
+def extract_score(json_line):
+    if 'error' in json_line['score']['itemquality']:
+        return None
+
+    probabilities = \
+        json_line['score']['itemquality']['score']['probability']
+    p_weighted_sum = (probabilities['E'] * 0 + probabilities['D'] * 1 + \
+        probabilities['C'] * 2 + probabilities['B'] * 3 + \
+        probabilities['A'] * 4) + 1
+
+    return p_weighted_sum
+
 
 
 main()

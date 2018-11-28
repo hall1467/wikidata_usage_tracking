@@ -50,7 +50,6 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # input_for_rmse_split_directory
 
-
 # tail -n +2 input_for_RMSE.tsv > input_for_RMSE_no_header.tsv
 
 
@@ -304,17 +303,53 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_for_ores_split30_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split31_100000 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split31_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split31_100000 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split31_predictions.json
 
+# Naming inconsistency above that is being fixed here
+# mv $results/sampled_rev_ids_for_ores_split_01_predictions.json $results/sampled_rev_ids_for_ores_split01_predictions.json
 
-# python $base/merge_parent_data.py \
-# 	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
-# 	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
-# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
-# 	--verbose > & \
-# 	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
+cat $results/sampled_rev_ids_for_ores_split00_predictions.json > $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split01_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split02_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split03_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split04_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split05_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split06_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split07_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split08_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split09_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split10_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split11_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split12_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split13_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split14_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+cat $results/sampled_rev_ids_for_ores_split15_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
+
+cat $results/sampled_rev_ids_for_ores_split16_predictions.json > $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split17_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split18_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split19_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split20_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split21_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split22_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split23_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split24_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split25_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split26_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split27_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split28_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split29_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
+
+python $base/extract_and_merge_data.py \
+	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
+	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
+	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
+	--verbose > & \
+	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
 
 # Split up files based on period.
 
