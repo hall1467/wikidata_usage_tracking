@@ -139,7 +139,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
         extracted_score = extract_score(json_line)
 
         if extracted_score:
-            parent_weighted_sum_dict[json_line['child_rev_id']] = \
+            parent_weighted_sum_dict[json_line['rev_id']] = \
                 extracted_score
         else:
             # We don't want this revision if it does not produce a score
