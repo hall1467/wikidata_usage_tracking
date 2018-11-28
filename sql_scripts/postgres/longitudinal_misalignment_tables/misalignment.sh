@@ -345,13 +345,15 @@ cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampl
 cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 
 python $base/extract_and_merge_data.py \
-	$results/all_revisions_with_api_entity_data_2013_2014.tsv \
-	$results/parent_data_with_extracted_weighted_score_2013_2014.tsv \
-	$results/all_revisions_with_api_and_parent_entity_data_2013_2014.tsv \
+	$results/sampled_rev_ids_for_ores_child_predictions.json \
+	$results/sampled_rev_ids_for_ores_parent_predictions.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
 	--verbose > & \
-	$results/all_revisions_with_api_and_parent_entity_data_2013_2014_error_log.tsv
+	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
 
-# Split up files based on period.
 
 # Extract weighted scores from both revision and parent
 
