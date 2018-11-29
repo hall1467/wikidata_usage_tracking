@@ -31,7 +31,7 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
 
 # Perform additional checks for different types of edits
-psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
+# psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
 # psql wikidata_entities < $base/longitudinal_misalignment_tables/used_item_page_views.sql
@@ -85,27 +85,27 @@ psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/r
 # 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
 
-psql wikidata_entities < $base/yearly_revision_samples.sql
+# psql wikidata_entities < $base/yearly_revision_samples.sql
 
-shuf -n 100000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
-shuf -n 100000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
-shuf -n 100000 $results/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
-shuf -n 100000 $results/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 100000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 100000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 100000 $results/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 100000 $results/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
 
-shuf -n 100000 $results/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
-shuf -n 100000 $results/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
-shuf -n 100000 $results/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
-shuf -n 100000 $results/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 100000 $results/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 100000 $results/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 100000 $results/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 100000 $results/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
 
-shuf -n 100000 $results/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
-shuf -n 100000 $results/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
-shuf -n 100000 $results/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
-shuf -n 100000 $results/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 100000 $results/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 100000 $results/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 100000 $results/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 100000 $results/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
 
-shuf -n 100000 $results/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
-shuf -n 100000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
-shuf -n 100000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
-shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
+# shuf -n 100000 $results/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
+# shuf -n 100000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
+# shuf -n 100000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
+# shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
 
 
 # Period 1: 2013 to 2014
@@ -201,21 +201,21 @@ shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_too
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_for_ores_split11_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split12 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split12_predictions.json
+cat $results/sampled_rev_ids_for_ores_split12 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split12_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split13| \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split13_predictions.json
+cat $results/sampled_rev_ids_for_ores_split13| \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split13_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split14 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split14_predictions.json
+cat $results/sampled_rev_ids_for_ores_split14 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split14_predictions.json
 
-# cat $results/sampled_rev_ids_for_ores_split15 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split15_predictions.json
+cat $results/sampled_rev_ids_for_ores_split15 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/sampled_rev_ids_for_ores_split15_predictions.json
 
 # cat $results/sampled_rev_ids_for_ores_split16_100000 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
@@ -328,8 +328,6 @@ shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_too
 # 	--verbose > & \
 # 	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
 
-
-# Extract weighted scores from both revision and parent
 
 
 
