@@ -138,10 +138,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
         json_line = json.loads(line)
         extracted_score = extract_score(json_line)
 
-        if extracted_score:
-            parent_weighted_sum_dict[json_line['rev_id']] = \
-                extracted_score
-        else:
+        if not extracted_score:
             # We don't want this revision if it does not produce a score
             continue
 
@@ -157,7 +154,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['agent_type'],
                 json_line['page_views'],
                 json_line['rev_id'],
-                json_line['weighted_sum'],
+                extracted_score,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
@@ -169,7 +166,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['agent_type'],
                 json_line['page_views'],
                 json_line['rev_id'],
-                json_line['weighted_sum'],
+                extracted_score,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
@@ -181,7 +178,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['agent_type'],
                 json_line['page_views'],
                 json_line['rev_id'],
-                json_line['weighted_sum'],
+                extracted_score,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
@@ -193,7 +190,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['agent_type'],
                 json_line['page_views'],
                 json_line['rev_id'],
-                json_line['weighted_sum'],
+                extracted_score,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
