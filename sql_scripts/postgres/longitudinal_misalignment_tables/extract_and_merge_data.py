@@ -145,6 +145,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
         p_weighted_sum = None
         
         if json_line['rev_id'] in parent_weighted_sum_dict:
+            
             p_weighted_sum = parent_weighted_sum_dict[json_line['rev_id']]
                 
         if json_line['period'] == 1:
