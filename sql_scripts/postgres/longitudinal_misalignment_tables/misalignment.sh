@@ -145,11 +145,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Run ORES
 
 cat $results/all_used_edits_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=10 --verbose \
 	> $results/all_used_edits_sampled_predictions.json
 
 cat $results/all_used_edits_parent_rev_ids_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=10 --verbose \
 	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
 
