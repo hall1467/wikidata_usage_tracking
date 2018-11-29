@@ -201,21 +201,21 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
 # 	> $results/sampled_rev_ids_for_ores_split11_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split12 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split12_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split12 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split12_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split13| \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split13_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split13| \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split13_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split14 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split14_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split14 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split14_predictions.json
 
-cat $results/sampled_rev_ids_for_ores_split15 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	> $results/sampled_rev_ids_for_ores_split15_predictions.json
+# cat $results/sampled_rev_ids_for_ores_split15 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+# 	> $results/sampled_rev_ids_for_ores_split15_predictions.json
 
 # cat $results/sampled_rev_ids_for_ores_split16_100000 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
@@ -318,20 +318,20 @@ cat $results/sampled_rev_ids_for_ores_split15 | \
 # cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 # cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 
-# python $base/extract_and_merge_data.py \
-# 	$results/sampled_rev_ids_for_ores_child_predictions.json \
-# 	$results/sampled_rev_ids_for_ores_parent_predictions.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
-# 	--verbose > & \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
+python $base/extract_and_merge_data.py \
+	$results/sampled_rev_ids_for_ores_child_predictions.json \
+	$results/sampled_rev_ids_for_ores_parent_predictions.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
+	--verbose > & \
+	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
 
 
 
 
-# python $base/extract_weighted_score.py \
+# python $base/split_into_months.py \
 # 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
@@ -349,7 +349,7 @@ cat $results/sampled_rev_ids_for_ores_split15 | \
 # 	$results/extract_weighted_score_2013_to_2014_error_log.txt
 
 
-# python $base/extract_weighted_score.py \
+# python $base/split_into_months.py \
 # 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
@@ -367,7 +367,7 @@ cat $results/sampled_rev_ids_for_ores_split15 | \
 # 	$results/extract_weighted_score_2014_to_2015_error_log.txt
 
 
-# python $base/extract_weighted_score.py \
+# python $base/split_into_months.py \
 # 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
@@ -385,7 +385,7 @@ cat $results/sampled_rev_ids_for_ores_split15 | \
 # 	$results/extract_weighted_score_2015_to_2016_error_log.txt
 
 
-# python $base/extract_weighted_score.py \
+# python $base/split_into_months.py \
 # 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
 # 	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \

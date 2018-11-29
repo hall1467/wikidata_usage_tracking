@@ -3,10 +3,10 @@ Extracts weighted_score from json returned from ores.
 Returns in tsv format.
 
 Usage:
-    extract_weighted_score (-h|--help)
-    extract_weighted_score <input> <output_first_month> <output_second_month> <output_third_month> <output_fourth_month> <output_fifth_month> <output_sixth_month> <output_seventh_month> <output_eighth_month> <output_ninth_month> <output_tenth_month> <output_eleventh_month> <output_twelfth_month>
-                           [--debug]
-                           [--verbose]
+    split_into_months (-h|--help)
+    split_into_months <input> <output_first_month> <output_second_month> <output_third_month> <output_fourth_month> <output_fifth_month> <output_sixth_month> <output_seventh_month> <output_eighth_month> <output_ninth_month> <output_tenth_month> <output_eleventh_month> <output_twelfth_month>
+                      [--debug]
+                      [--verbose]
 
 Options:
     -h, --help               This help message is printed
@@ -47,7 +47,9 @@ def main(argv=None):
         format='%(asctime)s %(levelname)s:%(name)s -- %(message)s'
     )
 
-    input_file = open(args['<input>'])
+    input_file = mysqltsv.Reader(open(args['<input>'],
+        'rt', encoding='utf-8', errors='replace'), headers=False,
+        types=[int, str, str, int, int, str, int, int, int, str])
 
 
     output_first_month_file = mysqltsv.Writer(
@@ -56,12 +58,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_second_month_file = mysqltsv.Writer(
         open(args['<output_second_month>'], "w"), 
@@ -69,12 +72,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_third_month_file = mysqltsv.Writer(
         open(args['<output_third_month>'], "w"), 
@@ -82,12 +86,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_fourth_month_file = mysqltsv.Writer(
         open(args['<output_fourth_month>'], "w"), 
@@ -95,12 +100,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_fifth_month_file = mysqltsv.Writer(
         open(args['<output_fifth_month>'], "w"), 
@@ -108,12 +114,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_sixth_month_file = mysqltsv.Writer(
         open(args['<output_sixth_month>'], "w"), 
@@ -121,12 +128,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_seventh_month_file = mysqltsv.Writer(
         open(args['<output_seventh_month>'], "w"), 
@@ -134,12 +142,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_eighth_month_file = mysqltsv.Writer(
         open(args['<output_eighth_month>'], "w"), 
@@ -147,12 +156,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_ninth_month_file = mysqltsv.Writer(
         open(args['<output_ninth_month>'], "w"), 
@@ -160,12 +170,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_tenth_month_file = mysqltsv.Writer(
         open(args['<output_tenth_month>'], "w"), 
@@ -173,12 +184,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_eleventh_month_file = mysqltsv.Writer(
         open(args['<output_eleventh_month>'], "w"), 
@@ -186,12 +198,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     output_twelfth_month_file = mysqltsv.Writer(
         open(args['<output_twelfth_month>'], "w"), 
@@ -199,12 +212,13 @@ def main(argv=None):
                  'namespace',
                  'page_title',
                  'edit_type',
-                 'agent_type',
                  'page_views',
                  'rev_id',
                  'weighted_sum',
                  'misalignment_year',
-                 'misalignment_month'])
+                 'misalignment_month',
+                 'period',
+                 'parent_weighted_sum'])
 
     verbose = args['--verbose']
 
@@ -232,149 +246,152 @@ def run(input_file, output_first_month_file, output_second_month_file,
             sys.stderr.flush()
 
 
-        json_line = json.loads(line)
-        if 'error' in json_line['score']['itemquality']:
-            continue
-        probabilities = \
-            json_line['score']['itemquality']['score']['probability']
-        weighted_sum = (probabilities['E'] * 0 + probabilities['D'] * 1 + \
-            probabilities['C'] * 2 + probabilities['B'] * 3 + \
-            probabilities['A'] * 4) + 1 
-        output_edit_type = None
-        output_agent_type = None
+        edit_month = line[7]
 
-        if json_line['misalignment_month'] == 6:
+        if edit_month == 6:
             output_first_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 7:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 7:
             output_second_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 8:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 8:
             output_third_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 9:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 9:
             output_fourth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 10:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 10:
             output_fifth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 11:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 11:
             output_sixth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 12:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 12:
             output_seventh_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 1:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 1:
             output_eighth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 2:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 2:
             output_ninth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 3:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 3:
             output_tenth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 4:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 4:
             output_eleventh_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
-        elif json_line['misalignment_month'] == 5:
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
+        elif edit_month == 5:
             output_twelfth_month_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['agent_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                weighted_sum,
-                json_line['misalignment_year'],
-                json_line['misalignment_month']])
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9]])
 
 
 main()
