@@ -128,7 +128,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
             parent_weighted_sum_dict[json_line['child_rev_id']] = \
                 extracted_score
 
-    len(parent_weighted_sum_dict)
+    print(len(parent_weighted_sum_dict))
     for i, line in enumerate(child_input_file):
 
         
