@@ -109,49 +109,49 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 # Period 1: 2013 to 2014
-# cat $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-# cat $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-# cat $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-# cat $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-# python $base/extract_parent_rev_ids_and_convert_to_json.py \
-# 	$results/all_used_edits_sampled.tsv \
-# 	$results/all_used_edits_sampled.json \
-# 	$results/all_used_edits_parent_rev_ids_sampled.json \
-# 	--verbose > & \
-# 	$results/all_used_edits_sampled_converted_error_log.txt
-
-
-# Combine two json files so that we can run ORES once.
-# cat $results/all_used_edits_sampled.json > $results/sampled_rev_ids_for_ores.json
-# cat $results/all_used_edits_parent_rev_ids_sampled.json >> $results/sampled_rev_ids_for_ores.json
+python $base/extract_parent_rev_ids_and_convert_to_json.py \
+	$results/all_used_edits_sampled.tsv \
+	$results/all_used_edits_sampled.json \
+	$results/all_used_edits_parent_rev_ids_sampled.json \
+	--verbose > & \
+	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Run ORES
 
-# Since ORES is having some issues hanging, the following is a temporary solution:
+cat $results/all_used_edits_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/all_used_edits_sampled_predictions.json
 
-# split $results/sampled_rev_ids_for_ores.json $results/sampled_rev_ids_for_ores_split -l 100000 -d
+cat $results/all_used_edits_parent_rev_ids_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
+	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
+
 
 # cat $results/sampled_rev_ids_for_ores_split00 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
@@ -318,15 +318,15 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 # cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 
-python $base/extract_and_merge_data.py \
-	$results/sampled_rev_ids_for_ores_child_predictions.json \
-	$results/sampled_rev_ids_for_ores_parent_predictions.json \
-	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
-	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
-	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
-	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
-	--verbose > & \
-	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
+# python $base/extract_and_merge_data.py \
+# 	$results/sampled_rev_ids_for_ores_child_predictions.json \
+# 	$results/sampled_rev_ids_for_ores_parent_predictions.json \
+# 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
+# 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
+# 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
+# 	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
+# 	--verbose > & \
+# 	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
 
 
 
