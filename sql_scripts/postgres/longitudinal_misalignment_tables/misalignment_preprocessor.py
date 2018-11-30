@@ -46,7 +46,7 @@ def main(argv=None):
 
     input_universe_file = mysqltsv.Reader(open(args['<input_universe>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[int, str, int])
+        types=[str, int])
 
     input_monthly_item_quality_file = mysqltsv.Reader(
         open(args['<input_monthly_item_quality>'],
@@ -85,7 +85,7 @@ def run(input_universe_file, input_monthly_item_quality_file, output_file,
 
 
 
-        universe_of_entities[line[1]] = line[2]
+        universe_of_entities[line[0]] = line[1]
 
 
     prev_month = None

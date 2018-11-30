@@ -37,11 +37,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 psql wikidata_entities < $base/used_item_page_views.sql
 
 
-psql wikidata_entities < $base/monthly_item_quality_sorted_by_month.sql
+# psql wikidata_entities < $base/monthly_item_quality_sorted_by_month.sql
 
 
 python $base/misalignment_preprocessor.py \
-		$results/used_entity_page_views.tsv \
+		$results/used_item_page_views.tsv \
 		$results/monthly_item_quality_sorted_by_month.tsv \
 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
 		--verbose > & \
@@ -50,7 +50,7 @@ python $base/misalignment_preprocessor.py \
 
 # input_for_rmse_split_directory
 
-tail -n +2 input_for_RMSE.tsv > input_for_RMSE_no_header.tsv
+tail -n +2 $results/input_for_RMSE.tsv > $results/input_for_RMSE_no_header.tsv
 
 
 # length of May 2017 Wikidata entity "universe"
@@ -144,12 +144,12 @@ tail -n +2 input_for_RMSE.tsv > input_for_RMSE_no_header.tsv
 
 # Run ORES
 
-# cat $results/all_used_edits_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=10 --verbose \
-# 	> $results/all_used_edits_sampled_predictions.json
+cat $results/all_used_edits_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+	> $results/all_used_edits_sampled_predictions.json
 
 # cat $results/all_used_edits_parent_rev_ids_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=10 --verbose \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
 # 	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
 
