@@ -50,7 +50,7 @@ python $base/misalignment_preprocessor.py \
 
 # input_for_rmse_split_directory
 
-tail -n +2 $results/input_for_RMSE.tsv > $results/input_for_RMSE_no_header.tsv
+# tail -n +2 $results/input_for_RMSE.tsv > $results/input_for_RMSE_no_header.tsv
 
 
 # length of May 2017 Wikidata entity "universe"
@@ -144,9 +144,9 @@ tail -n +2 $results/input_for_RMSE.tsv > $results/input_for_RMSE_no_header.tsv
 
 # Run ORES
 
-cat $results/all_used_edits_sampled.json | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
-	> $results/all_used_edits_sampled_predictions.json
+# cat $results/all_used_edits_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_sampled_predictions.json
 
 # cat $results/all_used_edits_parent_rev_ids_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
