@@ -34,18 +34,18 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
-# psql wikidata_entities < $base/used_item_page_views.sql
+psql wikidata_entities < $base/used_item_page_views.sql
 
 
 # psql wikidata_entities < $base/monthly_item_quality_sorted_by_month.sql
 
 
-# python $base/misalignment_preprocessor.py \
-# 		$results/used_item_page_views.tsv \
-# 		$results/monthly_item_quality_sorted_by_month.tsv \
-# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-# 		--verbose > & \
-# 		$results/misalignment_preprocessor_error_log.txt
+python $base/misalignment_preprocessor.py \
+		$results/used_item_page_views.tsv \
+		$results/monthly_item_quality_sorted_by_month.tsv \
+		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+		--verbose > & \
+		$results/misalignment_preprocessor_error_log.txt
 
 
 # input_for_rmse_split_directory
