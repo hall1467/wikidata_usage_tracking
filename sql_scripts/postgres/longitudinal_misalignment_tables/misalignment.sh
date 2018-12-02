@@ -34,18 +34,18 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
-psql wikidata_entities < $base/used_item_page_views.sql
+# psql wikidata_entities < $base/used_item_page_views.sql
 
 
 # psql wikidata_entities < $base/monthly_item_quality_sorted_by_month.sql
 
 
-python $base/misalignment_preprocessor.py \
-		$results/used_item_page_views.tsv \
-		$results/monthly_item_quality_sorted_by_month.tsv \
-		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-		--verbose > & \
-		$results/misalignment_preprocessor_error_log.txt
+# python $base/misalignment_preprocessor.py \
+# 		$results/used_item_page_views.tsv \
+# 		$results/monthly_item_quality_sorted_by_month.tsv \
+# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+# 		--verbose > & \
+# 		$results/misalignment_preprocessor_error_log.txt
 
 
 # input_for_rmse_split_directory
@@ -318,89 +318,89 @@ python $base/misalignment_preprocessor.py \
 # cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 # cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 
-# python $base/extract_and_merge_data.py \
-# 	$results/sampled_rev_ids_for_ores_child_predictions.json \
-# 	$results/sampled_rev_ids_for_ores_parent_predictions.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_4.json \
-# 	--verbose > & \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_error_log.tsv
+python $base/extract_and_merge_data.py \
+	$results/sampled_rev_ids_for_ores_child_predictions.json \
+	$results/sampled_rev_ids_for_ores_parent_predictions.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
+	--verbose > & \
+	$results/sampled_rev_ids_for_ores_all_predictions_error_log.txt
 
 
 
 
-# python $base/split_into_months.py \
-# 	$results/revision_edit_and_agent_type_may_2013_to_2014_million_sampled_with_quality.json \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2013_to_2014_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2013_to_2014_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/revision_edit_and_agent_type_may_2014_to_2015_million_sampled_with_quality.json \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2015.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2014_to_2015_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2015.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2014_to_2015_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/revision_edit_and_agent_type_may_2015_to_2016_million_sampled_with_quality.json \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2016.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2015_to_2016_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2016.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2015_to_2016_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/revision_edit_and_agent_type_may_2016_to_2017_million_sampled_with_quality.json \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2016_to_2017_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2016_to_2017_error_log.txt
 
 
 # Rscript $base/2013_2014_revision_alignment.r
