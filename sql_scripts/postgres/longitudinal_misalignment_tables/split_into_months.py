@@ -1,6 +1,7 @@
 """
 Extracts weighted_score from json returned from ores.
-Returns in tsv format.
+Returns in tsv format. Also checks that revisions are from
+namespace 0. Note, already filtered upstream in recent changes.
 
 Usage:
     split_into_months (-h|--help)
@@ -247,151 +248,153 @@ def run(input_file, output_first_month_file, output_second_month_file,
 
 
         edit_month = line[7]
+        
+        if line['namespace'] == 0:
 
-        if edit_month == 6:
-            output_first_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 7:
-            output_second_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 8:
-            output_third_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 9:
-            output_fourth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 10:
-            output_fifth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 11:
-            output_sixth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 12:
-            output_seventh_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 1:
-            output_eighth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 2:
-            output_ninth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 3:
-            output_tenth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 4:
-            output_eleventh_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
-        elif edit_month == 5:
-            output_twelfth_month_file.write([
-                line['namespace'],
-                line['page_title'],
-                line['edit_type'],
-                line['page_views'],
-                line['rev_id'],
-                line['weighted_sum'],
-                line['misalignment_year'],
-                line['misalignment_month'],
-                line['period'],
-                line['parent_weighted_sum']])
+            if edit_month == 6:
+                output_first_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 7:
+                output_second_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 8:
+                output_third_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 9:
+                output_fourth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 10:
+                output_fifth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 11:
+                output_sixth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 12:
+                output_seventh_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 1:
+                output_eighth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 2:
+                output_ninth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 3:
+                output_tenth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 4:
+                output_eleventh_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
+            elif edit_month == 5:
+                output_twelfth_month_file.write([
+                    line['namespace'],
+                    line['page_title'],
+                    line['edit_type'],
+                    line['page_views'],
+                    line['rev_id'],
+                    line['weighted_sum'],
+                    line['misalignment_year'],
+                    line['misalignment_month'],
+                    line['period'],
+                    line['parent_weighted_sum']])
 
 
 main()
