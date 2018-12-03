@@ -50,11 +50,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # input_for_rmse_split_directory
 
-# tail -n +2 $results/input_for_RMSE.tsv > $results/input_for_RMSE_no_header.tsv
+# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
 
 
 # length of May 2017 Wikidata entity "universe"
-# split -d  -l 22149770 input_for_RMSE_no_header.tsv input_for_RMSE_sub_
+# split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
 
 # Should delete output file before for loop
 
@@ -403,10 +403,10 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	$results/extract_weighted_score_2016_to_2017_error_log.txt
 
 
-Rscript $base/2013_2014_revision_alignment.r
-Rscript $base/2014_2015_revision_alignment.r
-Rscript $base/2015_2016_revision_alignment.r
-Rscript $base/2016_2017_revision_alignment.r
+# Rscript $base/2013_2014_revision_alignment.r
+# Rscript $base/2014_2015_revision_alignment.r
+# Rscript $base/2015_2016_revision_alignment.r
+# Rscript $base/2016_2017_revision_alignment.r
 
 
 

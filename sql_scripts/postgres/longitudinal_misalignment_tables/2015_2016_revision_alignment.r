@@ -39,8 +39,8 @@ for (monthly_distribution_and_edits in list(
 
     quality_and_page_views = quality_and_page_views[quality_and_page_views$weighted_sum >= 1,];
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
-    revisions = revisions[c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm")]
-    colnames(revisions) <- c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm")
+    revisions = revisions[c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum")]
+    colnames(revisions) <- c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum")
     revisions$quality_difference = revisions$weighted_sum - revisions$expected_quality
 
 
