@@ -31,7 +31,7 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
 
 # Perform additional checks for different types of edits
-# psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
+psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 
 # psql wikidata_entities < $base/used_item_page_views.sql
@@ -85,238 +85,73 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
 
-# psql wikidata_entities < $base/yearly_revision_samples.sql
+psql wikidata_entities < $base/yearly_revision_samples.sql
 
-# shuf -n 100000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 100000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 100000 $results/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 100000 $results/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
+shuf -n 100000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
+shuf -n 100000 $results/used_bot_edits_may_2014_to_2015.tsv > $results/used_bot_edits_may_2014_to_2015_sampled.tsv
+shuf -n 100000 $results/used_bot_edits_may_2015_to_2016.tsv > $results/used_bot_edits_may_2015_to_2016_sampled.tsv
+shuf -n 100000 $results/used_bot_edits_may_2016_to_2017.tsv > $results/used_bot_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 100000 $results/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 100000 $results/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 100000 $results/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 100000 $results/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
+shuf -n 100000 $results/used_human_edits_may_2013_to_2014.tsv > $results/used_human_edits_may_2013_to_2014_sampled.tsv
+shuf -n 100000 $results/used_human_edits_may_2014_to_2015.tsv > $results/used_human_edits_may_2014_to_2015_sampled.tsv
+shuf -n 100000 $results/used_human_edits_may_2015_to_2016.tsv > $results/used_human_edits_may_2015_to_2016_sampled.tsv
+shuf -n 100000 $results/used_human_edits_may_2016_to_2017.tsv > $results/used_human_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 100000 $results/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 100000 $results/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 100000 $results/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 100000 $results/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
+shuf -n 100000 $results/used_anon_edits_may_2013_to_2014.tsv > $results/used_anon_edits_may_2013_to_2014_sampled.tsv
+shuf -n 100000 $results/used_anon_edits_may_2014_to_2015.tsv > $results/used_anon_edits_may_2014_to_2015_sampled.tsv
+shuf -n 100000 $results/used_anon_edits_may_2015_to_2016.tsv > $results/used_anon_edits_may_2015_to_2016_sampled.tsv
+shuf -n 100000 $results/used_anon_edits_may_2016_to_2017.tsv > $results/used_anon_edits_may_2016_to_2017_sampled.tsv
 
-# shuf -n 100000 $results/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
-# shuf -n 100000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
-# shuf -n 100000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
-# shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
+shuf -n 100000 $results/used_tool_edits_may_2013_to_2014.tsv > $results/used_tool_edits_may_2013_to_2014_sampled.tsv
+shuf -n 100000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_tool_edits_may_2014_to_2015_sampled.tsv
+shuf -n 100000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
+shuf -n 100000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
 
 
 # Period 1: 2013 to 2014
-# cat $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-# cat $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-# cat $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-# cat $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-# cat $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+cat $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-# python $base/extract_parent_rev_ids_and_convert_to_json.py \
-# 	$results/all_used_edits_sampled.tsv \
-# 	$results/all_used_edits_sampled.json \
-# 	$results/all_used_edits_parent_rev_ids_sampled.json \
-# 	--verbose > & \
-# 	$results/all_used_edits_sampled_converted_error_log.txt
+python $base/extract_parent_rev_ids_and_convert_to_json.py \
+	$results/all_used_edits_sampled.tsv \
+	$results/all_used_edits_sampled.json \
+	$results/all_used_edits_parent_rev_ids_sampled.json \
+	--verbose > & \
+	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Run ORES
 
-# cat $results/all_used_edits_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
-# 	> $results/all_used_edits_sampled_predictions.json
+cat $results/all_used_edits_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+	> $results/all_used_edits_sampled_predictions.json
 
 # cat $results/all_used_edits_parent_rev_ids_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
 # 	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
-
-# cat $results/sampled_rev_ids_for_ores_split00 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split00_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split01 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split01_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split02 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split02_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split03 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split03_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split04 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split04_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split05 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split05_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split06 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split06_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split07 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split07_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split08 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split08_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split09 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split09_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split10 | \
-	# ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-	# > $results/sampled_rev_ids_for_ores_split10_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split11 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split11_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split12 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split12_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split13| \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split13_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split14 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split14_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split15 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split15_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split16_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split16_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split17_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split17_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split18_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split18_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split19_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split19_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split20_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split20_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split21_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split21_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split22_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split22_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split23_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split23_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split24_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split24_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split25_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split25_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split26_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split26_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split27_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split27_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split28_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split28_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split29_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split29_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split30_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split30_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split31_100000 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --verbose \
-# 	> $results/sampled_rev_ids_for_ores_split31_predictions.json
-
-
-
-
-# cat $results/sampled_rev_ids_for_ores_split00_predictions.json > $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split01_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split02_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split03_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split04_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split05_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split06_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split07_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split08_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split09_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split10_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split11_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split12_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split13_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split14_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split15_predictions.json >> $results/sampled_rev_ids_for_ores_child_predictions.json
-
-# cat $results/sampled_rev_ids_for_ores_split16_predictions.json > $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split17_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split18_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split19_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split20_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split21_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split22_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split23_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split24_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split25_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split26_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split27_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split28_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split29_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split30_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
-# cat $results/sampled_rev_ids_for_ores_split31_predictions.json >> $results/sampled_rev_ids_for_ores_parent_predictions.json
 
 # python $base/extract_and_merge_data.py \
 # 	$results/sampled_rev_ids_for_ores_child_predictions.json \

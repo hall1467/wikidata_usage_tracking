@@ -27,7 +27,8 @@ CREATE TABLE revisions_all_automation_flags_and_usages AS (
 		  WHEN regexp_replace(comment, '\.|,|\(|\)|-|:','','g') LIKE '%rgCh%' THEN 'rgCh'
 		  WHEN revision_user_id = '2769139' THEN 'not_flagged_elsewhere_quickstatments_bot_account'
 		  WHEN change_tag_revision_id IS NOT NULL THEN 'other_semi_automated_edit_since_change_tag'
-		  WHEN revision_user_text LIKE '%.%' OR revision_user_text LIKE '%:%' THEN 'anon_edit'
+		  WHEN revision_user_id = 'NULL' AND (revision_user_text LIKE '%.%' OR revision_user_text LIKE '%:%') THEN 'anon_edit'
+		  WHEN (revision_user_id = 'NULL' AND revision_user_text = 'NULL') THEN 'identity_blocked_edit'
 		  ELSE 'human_edit' END) AS edit_type,
 	concat(year,'-',month,'-',page_title) AS year_month_page_title
 	FROM revisions_initial_automation_flags
