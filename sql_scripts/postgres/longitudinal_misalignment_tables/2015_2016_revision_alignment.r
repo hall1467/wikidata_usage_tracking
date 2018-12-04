@@ -42,7 +42,7 @@ for (monthly_distribution_and_edits in list(
     revisions = revisions[c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum")]
     colnames(revisions) <- c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum")
     revisions$quality_difference = revisions$weighted_sum - revisions$expected_quality
-
+    revisions[revisions$parent_weighted_sum == "NULL",]$parent_weighted_sum = NA
 
     all_revisions = rbind(all_revisions, revisions)
     
