@@ -182,8 +182,8 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 python $base/extract_and_merge_data.py \
-	$results/sampled_rev_ids_for_ores_child_predictions.json \
-	$results/sampled_rev_ids_for_ores_parent_predictions.json \
+	$results/all_used_edits_sampled_predictions.json \
+	$results/all_used_edits_parent_rev_ids_sampled_predictions.json \
 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
