@@ -108,30 +108,57 @@ shuf -n 500000 $results/used_tool_edits_may_2014_to_2015.tsv > $results/used_too
 shuf -n 500000 $results/used_tool_edits_may_2015_to_2016.tsv > $results/used_tool_edits_may_2015_to_2016_sampled.tsv
 shuf -n 500000 $results/used_tool_edits_may_2016_to_2017.tsv > $results/used_tool_edits_may_2016_to_2017_sampled.tsv
 
+# Order is important for interpretation.
+wc -l $results/used_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+
+wc -l $results/used_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+
+
+wc -l $results/used_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+
+wc -l $results/used_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+
 
 # Period 1: 2013 to 2014
-head -n 100000 $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+# Setting sample size down here since we don't use all of original sample.
+
+set revision_sample_size = 100000
+echo $revision_sample_size > $results/sample_size_file.tsv
+
+head -n $sample_size $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-head -n 100000 $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-head -n 100000 $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-head -n 100000 $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
-head -n 100000 $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_bot_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
+head -n $sample_size $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
@@ -149,9 +176,9 @@ cat $results/all_used_edits_sampled.json | \
 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
 	> $results/all_used_edits_sampled_predictions.json
 
-# cat $results/all_used_edits_parent_rev_ids_sampled.json | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
-# 	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
+cat $results/all_used_edits_parent_rev_ids_sampled.json | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
 
 # python $base/extract_and_merge_data.py \

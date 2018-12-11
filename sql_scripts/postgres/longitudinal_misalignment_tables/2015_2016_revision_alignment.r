@@ -32,7 +32,7 @@ for (monthly_distribution_and_edits in list(
     print(nrow(revisions))
 
 
-    quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_view)
+    quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_views)
     weighted_sum_distribution = ecdf(quality_and_page_views$weighted_sum)
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
