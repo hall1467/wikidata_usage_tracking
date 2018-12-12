@@ -56,7 +56,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
-                 'parent_weighted_sum'])
+                 'parent_weighted_sum',
+                 'parent_id'])
 
     output_period_2_file = mysqltsv.Writer(
         open(args['<output_period_2>'], "w"), 
@@ -70,7 +71,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
-                 'parent_weighted_sum'])
+                 'parent_weighted_sum',
+                 'parent_id'])
 
     output_period_3_file = mysqltsv.Writer(
         open(args['<output_period_3>'], "w"), 
@@ -84,7 +86,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
-                 'parent_weighted_sum'])
+                 'parent_weighted_sum',
+                 'parent_id'])
 
     output_period_4_file = mysqltsv.Writer(
         open(args['<output_period_4>'], "w"), 
@@ -98,7 +101,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
-                 'parent_weighted_sum'])
+                 'parent_weighted_sum',
+                 'parent_id'])
 
     verbose = args['--verbose']
 
