@@ -110,7 +110,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
     output_period_2_file, output_period_3_file, output_period_4_file, verbose):
 
 
-    parent_weighted_sum_dict = defaultdict(int)
+    parent_weighted_sum_dict = defaultdict(float)
+    parent_child_dict = defaultdict(int)
 
     for i, line in enumerate(parent_input_file):
         
@@ -127,6 +128,7 @@ def run(child_input_file, parent_input_file, output_period_1_file,
         if extracted_score:
             parent_weighted_sum_dict[json_line['child_rev_id']] = \
                 extracted_score
+            parent_child_dict[json_line['child_rev_id']] = json_line['rev_id']
 
     print(len(parent_weighted_sum_dict))
     for i, line in enumerate(child_input_file):
@@ -144,10 +146,12 @@ def run(child_input_file, parent_input_file, output_period_1_file,
             continue
 
         p_weighted_sum = None
+        p_id = None
         
         if json_line['rev_id'] in parent_weighted_sum_dict:
             
             p_weighted_sum = parent_weighted_sum_dict[json_line['rev_id']]
+            p_id = parent_child_dict[json_line['rev_id']]
                 
         if json_line['period'] == 1:
             output_period_1_file.write([
@@ -160,7 +164,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
-                p_weighted_sum])
+                p_weighted_sum,
+                p_id])
         elif json_line['period'] == 2:
             output_period_2_file.write([
                 json_line['namespace'],
@@ -172,7 +177,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
-                p_weighted_sum])
+                p_weighted_sum,
+                p_id])
         elif json_line['period'] == 3:
             output_period_3_file.write([
                 json_line['namespace'],
@@ -184,7 +190,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
-                p_weighted_sum])
+                p_weighted_sum,
+                p_id])
         else:
             output_period_4_file.write([
                 json_line['namespace'],
@@ -196,7 +203,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                 json_line['misalignment_year'],
                 json_line['misalignment_month'],
                 json_line['period'],
-                p_weighted_sum])
+                p_weighted_sum,
+                p_id])
 
 
 
