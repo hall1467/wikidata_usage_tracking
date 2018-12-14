@@ -216,6 +216,9 @@ def extract_score(json_line):
     if 'error' in json_line['score']['itemquality']:
         return None
 
+    if json_line['score'] == '':
+        return None
+
     probabilities = \
         json_line['score']['itemquality']['score']['probability']
     p_weighted_sum = (probabilities['E'] * 0 + probabilities['D'] * 1 + \
