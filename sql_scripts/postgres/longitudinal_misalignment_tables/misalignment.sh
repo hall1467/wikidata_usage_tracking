@@ -180,6 +180,12 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # $results/all_used_edits_sampled_sub00
 # $results/all_used_edits_sampled_sub01
 
+# cat $results/all_used_edits_sampled_sub00 > $results/all_used_edits_sampled_predictions.json
+# cat $results/all_used_edits_sampled_sub01 >> $results/all_used_edits_sampled_predictions.json
+
+
+# cat $results/all_used_edits_parent_rev_ids_sampled_sub00 > $results/all_used_edits_parent_rev_ids_sampled_predictions.json
+# cat $results/all_used_edits_parent_rev_ids_sampled_sub01 >> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
 # $results/all_used_edits_parent_rev_ids_sampled_sub00
 # $results/all_used_edits_parent_rev_ids_sampled_sub01
