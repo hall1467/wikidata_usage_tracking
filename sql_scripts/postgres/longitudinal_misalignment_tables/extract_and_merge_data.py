@@ -213,10 +213,11 @@ def run(child_input_file, parent_input_file, output_period_1_file,
 
 
 def extract_score(json_line):
-    if 'error' in json_line['score']['itemquality']:
-        return None
 
     if json_line['score'] == '':
+        return None
+
+    if 'error' in json_line['score']['itemquality']:
         return None
 
     probabilities = \
