@@ -172,9 +172,50 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # Run ORES
 
+# Temporary to speed things up
+
+# split -d -l 800000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+# split -d -l 800000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
+
+# $results/all_used_edits_sampled_sub00
+# $results/all_used_edits_sampled_sub01
+
+
+# $results/all_used_edits_parent_rev_ids_sampled_sub00
+# $results/all_used_edits_parent_rev_ids_sampled_sub01
+
+# cat $results/all_used_edits_sampled_sub00 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_sampled_sub00_predictions.json
+
+# cat $results/all_used_edits_sampled_sub01 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_sampled_sub01_predictions.json
+
+# cat $results/all_used_edits_parent_rev_ids_sampled_sub00 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_parent_rev_ids_sampled_sub00_predictions.json
+
+# cat $results/all_used_edits_parent_rev_ids_sampled_sub01 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_parent_rev_ids_sampled_sub01_predictions.json
+
+
+
+# End temporary
+
 # cat $results/all_used_edits_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
 # 	> $results/all_used_edits_sampled_predictions.json
+
+# cat $results/all_used_edits_sampled.json | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+# 	> $results/all_used_edits_sampled_predictions.json
+
+
+
+
+
 
 # cat $results/all_used_edits_parent_rev_ids_sampled.json | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
