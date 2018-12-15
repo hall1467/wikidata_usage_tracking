@@ -4,18 +4,7 @@ options(scipen=999)
 
 for (monthly_distribution_and_edits in list(
                     
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_08', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_09', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_10', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_11', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_12', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_13', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2014/input_for_RMSE_sub_14', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2014/input_for_RMSE_sub_15', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2014/input_for_RMSE_sub_16', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2014/input_for_RMSE_sub_17', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv'),
-                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2014/input_for_RMSE_sub_18', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv')
+                    list(distribution = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/input_for_rmse_split_directory/2013/input_for_RMSE_sub_07', revisions = '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv')
 )){
   
 
@@ -42,7 +31,6 @@ for (monthly_distribution_and_edits in list(
     revisions = revisions[c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum","parent_id")]
     colnames(revisions) <- c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum","parent_id")
     revisions$quality_difference = revisions$weighted_sum - revisions$expected_quality
-    revisions[revisions$parent_weighted_sum == "NULL",]$parent_weighted_sum = NA
 
     all_revisions = rbind(all_revisions, revisions)
     

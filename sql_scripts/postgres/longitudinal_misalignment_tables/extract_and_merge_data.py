@@ -157,58 +157,58 @@ def run(child_input_file, parent_input_file, output_period_1_file,
             p_weighted_sum = parent_weighted_sum_dict[json_line['rev_id']]
             p_id = parent_child_dict[json_line['rev_id']]
                 
-        if json_line['period'] == 1:
-            output_period_1_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                extracted_score,
-                json_line['misalignment_year'],
-                json_line['misalignment_month'],
-                json_line['period'],
-                p_weighted_sum,
-                p_id])
-        elif json_line['period'] == 2:
-            output_period_2_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                extracted_score,
-                json_line['misalignment_year'],
-                json_line['misalignment_month'],
-                json_line['period'],
-                p_weighted_sum,
-                p_id])
-        elif json_line['period'] == 3:
-            output_period_3_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                extracted_score,
-                json_line['misalignment_year'],
-                json_line['misalignment_month'],
-                json_line['period'],
-                p_weighted_sum,
-                p_id])
-        else:
-            output_period_4_file.write([
-                json_line['namespace'],
-                json_line['page_title'],
-                json_line['edit_type'],
-                json_line['page_views'],
-                json_line['rev_id'],
-                extracted_score,
-                json_line['misalignment_year'],
-                json_line['misalignment_month'],
-                json_line['period'],
-                p_weighted_sum,
-                p_id])
+            if json_line['period'] == 1:
+                output_period_1_file.write([
+                    json_line['namespace'],
+                    json_line['page_title'],
+                    json_line['edit_type'],
+                    json_line['page_views'],
+                    json_line['rev_id'],
+                    extracted_score,
+                    json_line['misalignment_year'],
+                    json_line['misalignment_month'],
+                    json_line['period'],
+                    p_weighted_sum,
+                    p_id])
+            elif json_line['period'] == 2:
+                output_period_2_file.write([
+                    json_line['namespace'],
+                    json_line['page_title'],
+                    json_line['edit_type'],
+                    json_line['page_views'],
+                    json_line['rev_id'],
+                    extracted_score,
+                    json_line['misalignment_year'],
+                    json_line['misalignment_month'],
+                    json_line['period'],
+                    p_weighted_sum,
+                    p_id])
+            elif json_line['period'] == 3:
+                output_period_3_file.write([
+                    json_line['namespace'],
+                    json_line['page_title'],
+                    json_line['edit_type'],
+                    json_line['page_views'],
+                    json_line['rev_id'],
+                    extracted_score,
+                    json_line['misalignment_year'],
+                    json_line['misalignment_month'],
+                    json_line['period'],
+                    p_weighted_sum,
+                    p_id])
+            else:
+                output_period_4_file.write([
+                    json_line['namespace'],
+                    json_line['page_title'],
+                    json_line['edit_type'],
+                    json_line['page_views'],
+                    json_line['rev_id'],
+                    extracted_score,
+                    json_line['misalignment_year'],
+                    json_line['misalignment_month'],
+                    json_line['period'],
+                    p_weighted_sum,
+                    p_id])
 
 
 
