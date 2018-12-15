@@ -19,12 +19,13 @@ for (monthly_distribution_and_edits in list(
 )){
   
 
-     distribution_file = monthly_distribution_and_edits$distribution
-     revisions_file = monthly_distribution_and_edits$revision
+    distribution_file = monthly_distribution_and_edits$distribution
+    revisions_file = monthly_distribution_and_edits$revision
 
-     revisions <- read.table(revisions_file, header=TRUE, sep="\t")
-     quality_and_page_views <- read.table(distribution_file, header=FALSE, sep="\t")
-     colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
+    revisions <- read.table(revisions_file, header=TRUE, sep="\t")
+    quality_and_page_views <- read.table(distribution_file, header=FALSE, sep="\t")
+    colnames(quality_and_page_views) <- c('page_title','yyyy','mm', 'weighted_sum', 'page_views')
+    quality_and_page_views = quality_and_page_views[quality_and_page_views$weighted_sum >= 1,];
 
     print(head(quality_and_page_views))
     print(nrow(quality_and_page_views))
@@ -37,7 +38,7 @@ for (monthly_distribution_and_edits in list(
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
 
 
-    quality_and_page_views = quality_and_page_views[quality_and_page_views$weighted_sum >= 1,];
+    
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
     revisions = revisions[c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum","parent_id")]
     colnames(revisions) <- c("page_title", "namespace", "period", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum","parent_id")
