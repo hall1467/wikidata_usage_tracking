@@ -2,6 +2,10 @@
 Takes a data file of pages views and weighted sums for the "universe" of used 
 Wikidata and the weighted sums for all items longitudinally.
 
+Worth noting that this loop structure will not return for the last month of 
+item quality data which is fine in our case. In fact we don't need the second 
+to last month either (June 1, 2017).
+
 For each month:
 
 1. Adds missing weighted_sums for non-existent items
