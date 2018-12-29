@@ -335,3 +335,11 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Import female data into Postgres
 # psql wikidata_entities < $base/gender_tables/human_female_items_12_29_18_table_creation.sql
 # psql wikidata_entities < $base/gender_tables/human_female_items_12_29_18_table_import.sql
+
+
+# Join male item data with revision data
+psql wikidata_entities < $base/gender_revisions_tables/human_male_item_revisions_table_creation.sql
+
+# Join female item data with revision data
+psql wikidata_entities < $base/gender_revisions_tables/human_female_item_revisions_table_creation.sql
+
