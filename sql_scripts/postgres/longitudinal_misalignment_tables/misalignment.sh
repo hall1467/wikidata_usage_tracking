@@ -324,8 +324,8 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # First need to import male and female item data into a table 
 # so that we can then join with the revision data. 
 
-tail -n +2 $results/human_males_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_males_12_29_18_url_removed.tsv
-tail -n +2 $results/human_females_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_females_12_29_18_url_removed.tsv
+tail -n +2 $results/human_male_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_male_items_12_29_18_url_removed.tsv
+tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_female_items_12_29_18_url_removed.tsv
 
 
 # Import male data into Postgres
