@@ -329,9 +329,9 @@ tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikid
 
 
 # Import male data into Postgres
-psql wikidata_entities < $base/gender_tables/human_males_12_29_18_table_creation.sql
-psql wikidata_entities < $base/gender_tables/human_males_12_29_18_table_import.sql
+psql wikidata_entities < $base/gender_tables/human_male_items_12_29_18_table_creation.sql
+psql wikidata_entities < $base/gender_tables/human_male_items_12_29_18_table_import.sql
 
 # Import female data into Postgres
-psql wikidata_entities < $base/gender_tables/human_females_12_29_18_table_creation.sql
-psql wikidata_entities < $base/gender_tables/human_females_12_29_18_table_import.sql
+psql wikidata_entities < $base/gender_tables/human_female_items_12_29_18_table_creation.sql
+psql wikidata_entities < $base/gender_tables/human_female_items_12_29_18_table_import.sql
