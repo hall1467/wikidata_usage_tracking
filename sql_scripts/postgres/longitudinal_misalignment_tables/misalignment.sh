@@ -198,9 +198,9 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
 # 	> $results/all_used_edits_sampled_sub01_predictions.json
 
-# cat all_used_edits_parent_rev_ids_sampled_sub00 | \
+# cat $results/all_used_edits_parent_rev_ids_sampled_sub00 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
-# 	> all_used_edits_parent_rev_ids_sampled_sub00_predictions.json
+# 	> $results/all_used_edits_parent_rev_ids_sampled_sub00_predictions.json
 
 # cat $results/all_used_edits_parent_rev_ids_sampled_sub01 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
@@ -337,9 +337,6 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/gender_tables/human_female_items_12_29_18_table_import.sql
 
 
-# Join male item data with revision data
-psql wikidata_entities < $base/gender_revisions_tables/human_male_item_revisions_table_creation.sql
-
-# Join female item data with revision data
-psql wikidata_entities < $base/gender_revisions_tables/human_female_item_revisions_table_creation.sql
+# Join male and female item data with revision data
+psql wikidata_entities < $base/gender_revisions_tables/revisions_with_gender_table_creation.sql
 
