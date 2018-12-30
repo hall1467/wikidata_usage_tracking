@@ -342,5 +342,5 @@ psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_ite
 psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
 
 # Join male and female item data with revision data
-# psql wikidata_entities < $base/interesting_subset_revisions_tables/revisions_with_gender_table_creation.sql
+# psql wikidata_entities < $base/interesting_subset_revisions_tables/revisions_with_interesting_subset_info_table_creation.sql
 
