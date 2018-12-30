@@ -1,4 +1,4 @@
-CREATE TABLE revisions_with_gender AS (
+CREATE TABLE interesting_subset_revisions AS (
 	SELECT revisions_with_human_male_gender.*, human_female_items_12_29_18.page_title AS female_item
 	FROM 
 	(
