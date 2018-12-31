@@ -33,6 +33,32 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Perform additional checks for different types of edits
 # psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
+# Interesting subset tables
+
+# First need to import male and female item data into a table 
+# so that we can then join with the revision data. 
+
+# tail -n +2 $results/human_male_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_male_items_12_29_18_url_removed.tsv
+# tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_female_items_12_29_18_url_removed.tsv
+# tail -n +2 $results/coordinate_location_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/coordinate_location_items_12_29_18_url_removed.tsv
+
+
+# Import male data into Postgres
+# psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
+# psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
+
+# Import female data into Postgres
+# psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
+# psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
+
+# Import coordinate location data into Postgres
+# psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
+# psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
+
+# Join location data and male and female item data with revision data
+# Filters out item locations that have more than one location
+psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
+psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
 
 # psql wikidata_entities < $base/used_item_page_views.sql
 
@@ -84,6 +110,7 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
 # 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
 # end
+
 
 # psql wikidata_entities < $base/yearly_revision_samples.sql
 
@@ -319,28 +346,4 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Rscript $base/2016_2017_revision_alignment.r
 
 
-# Interesting subset tables
-
-# First need to import male and female item data into a table 
-# so that we can then join with the revision data. 
-
-# tail -n +2 $results/human_male_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_male_items_12_29_18_url_removed.tsv
-# tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_female_items_12_29_18_url_removed.tsv
-# tail -n +2 $results/coordinate_location_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/coordinate_location_items_12_29_18_url_removed.tsv
-
-
-# Import male data into Postgres
-# psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
-# psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
-
-# Import female data into Postgres
-# psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
-# psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
-
-# Import coordinate location data into Postgres
-# psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
-# psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
-
-# Join male and female item data with revision data
-psql wikidata_entities < $base/interesting_subset_revisions_tables/revisions_with_interesting_subset_info_table_creation.sql
 
