@@ -112,7 +112,7 @@ psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_on
 # end
 
 
-# psql wikidata_entities < $base/yearly_revision_samples.sql
+psql wikidata_entities < $base/yearly_revision_samples.sql
 
 
 # shuf -n 400000 $results/used_bot_edits_may_2013_to_2014.tsv > $results/used_bot_edits_may_2013_to_2014_sampled.tsv
