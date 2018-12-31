@@ -1,5 +1,6 @@
 CREATE TABLE items_with_male_or_female_gender_revisions AS (
 	SELECT revisions_all_automation_flags_and_usages.*, male_item, female_item
+	FROM
 	(
 		SELECT (CASE WHEN human_male_items_12_29_18.page_title IS NOT NULL THEN human_male_items_12_29_18.page_title 
 		ELSE human_female_items_12_29_18.page_title END) as page_title, 
