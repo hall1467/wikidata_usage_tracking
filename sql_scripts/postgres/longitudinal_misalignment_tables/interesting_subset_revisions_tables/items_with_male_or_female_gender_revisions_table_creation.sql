@@ -14,6 +14,7 @@ CREATE TABLE items_with_male_or_female_gender_revisions AS (
 	INNER JOIN
 	revisions_all_automation_flags_and_usages
 	ON revisions_all_automation_flags_and_usages.page_title = pages_with_male_or_female_gender.page_title
-	WHERE revisions_all_automation_flags_and_usages.namespace = 0
+	WHERE revisions_all_automation_flags_and_usages.namespace = 0 AND 
+	(pages_with_male_or_female_gender.male_item IS NULL OR pages_with_male_or_female_gender.female_item IS NULL)
 );
 
