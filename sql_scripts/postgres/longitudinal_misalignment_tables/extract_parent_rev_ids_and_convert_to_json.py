@@ -38,7 +38,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[int, int, int, str, str, int, int, str, int, int])
+        types=[int, int, int, str, str, int, int, str, int, int, str, str])
 
 
     revision_output_file = open(args['<revision_output>'], "w")
@@ -68,7 +68,9 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
                     'edit_type': line[4],
                     'page_views': line[5],
                     'rev_id': line[6],
-                    'period': line[9]
+                    'period': line[9],
+                    'gender': line[10],
+                    'coordinate_location': line[11]
                 }) + "\n")
 
         p_rev_id = line[8]
