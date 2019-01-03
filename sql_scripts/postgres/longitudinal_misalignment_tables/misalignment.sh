@@ -160,25 +160,25 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 # Counts for coordinate location revisions
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
 
 # All revisions
@@ -247,7 +247,7 @@ set coordinate_location_revision_sample_size = 35000
 echo $coordinate_location_revision_sample_size > $results/coordinate_location_sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
