@@ -50,7 +50,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, str, int, int, int, str, str])
+        types=[int, str, str, int, int, str, int, int, int, str, str, str, str])
 
 
     output_first_month_file = mysqltsv.Writer(
@@ -65,6 +65,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -80,6 +82,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -95,6 +99,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -110,6 +116,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -125,6 +133,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -140,6 +150,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -155,6 +167,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -170,6 +184,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -185,6 +201,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -200,6 +218,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -215,6 +235,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -230,6 +252,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -274,6 +298,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 7:
@@ -287,6 +313,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 8:
@@ -300,6 +328,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 9:
@@ -313,6 +343,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 10:
@@ -326,6 +358,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 11:
@@ -339,6 +373,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 12:
@@ -352,6 +388,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 1:
@@ -365,6 +403,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 2:
@@ -378,6 +418,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 3:
@@ -391,6 +433,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 4:
@@ -404,6 +448,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
             elif edit_month == 5:
@@ -417,6 +463,8 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['misalignment_year'],
                     line['misalignment_month'],
                     line['period'],
+                    line['gender'],
+                    line['coordinate_location'],
                     line['parent_weighted_sum'],
                     line['parent_id']])
 

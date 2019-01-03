@@ -56,6 +56,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -71,6 +73,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -86,6 +90,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -101,6 +107,8 @@ def main(argv=None):
                  'misalignment_year',
                  'misalignment_month',
                  'period',
+                 'gender',
+                 'coordinate_location',
                  'parent_weighted_sum',
                  'parent_id'])
 
@@ -168,6 +176,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                     json_line['misalignment_year'],
                     json_line['misalignment_month'],
                     json_line['period'],
+                    json_line['gender'],
+                    json_line['coordinate_location'],
                     p_weighted_sum,
                     p_id])
             elif json_line['period'] == 2:
@@ -181,6 +191,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                     json_line['misalignment_year'],
                     json_line['misalignment_month'],
                     json_line['period'],
+                    json_line['gender'],
+                    json_line['coordinate_location'],
                     p_weighted_sum,
                     p_id])
             elif json_line['period'] == 3:
@@ -194,6 +206,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                     json_line['misalignment_year'],
                     json_line['misalignment_month'],
                     json_line['period'],
+                    json_line['gender'],
+                    json_line['coordinate_location'],
                     p_weighted_sum,
                     p_id])
             else:
@@ -207,6 +221,8 @@ def run(child_input_file, parent_input_file, output_period_1_file,
                     json_line['misalignment_year'],
                     json_line['misalignment_month'],
                     json_line['period'],
+                    json_line['gender'],
+                    json_line['coordinate_location'],
                     p_weighted_sum,
                     p_id])
 
