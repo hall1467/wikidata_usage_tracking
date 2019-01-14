@@ -112,29 +112,29 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # end
 
 
-psql wikidata_entities < $base/yearly_revision_samples.sql
+# psql wikidata_entities < $base/yearly_revision_samples.sql
 
 # Order is important for interpretation.
 # Counts for all revisions
-wc -l $results/used_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts.tsv
+# wc -l $results/used_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts.tsv
+# wc -l $results/used_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+# wc -l $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
 
 
 # Counts for gender revisions
@@ -160,55 +160,55 @@ wc -l $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts
 
 
 # Counts for coordinate location revisions
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
 
 # All revisions
 
-set revision_sample_size = 50000
-echo $revision_sample_size > $results/sample_size_file.tsv
+# set revision_sample_size = 50000
+# echo $revision_sample_size > $results/sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-shuf -n $revision_sample_size $results/used_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-shuf -n $revision_sample_size $results/used_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-shuf -n $revision_sample_size $results/used_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Gender Revisions
@@ -272,20 +272,20 @@ shuf -n $revision_sample_size $results/used_tool_edits_may_2016_to_2017.tsv >> $
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-python $base/extract_parent_rev_ids_and_convert_to_json.py \
-	$results/all_used_edits_sampled.tsv \
-	$results/all_used_edits_sampled.json \
-	$results/all_used_edits_parent_rev_ids_sampled.json \
-	--verbose > & \
-	$results/all_used_edits_sampled_converted_error_log.txt
+# python $base/extract_parent_rev_ids_and_convert_to_json.py \
+# 	$results/all_used_edits_sampled.tsv \
+# 	$results/all_used_edits_sampled.json \
+# 	$results/all_used_edits_parent_rev_ids_sampled.json \
+# 	--verbose > & \
+# 	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Run ORES
 
 # Temporary to speed things up
 
-# split -d -l 900000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
-# split -d -l 900000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
+# split -d -l 700000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+# split -d -l 700000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
 
 # cat $results/all_used_edits_sampled_sub00_predictions.json > $results/all_used_edits_sampled_predictions.json
 # cat $results/all_used_edits_sampled_sub01_predictions.json >> $results/all_used_edits_sampled_predictions.json
@@ -332,89 +332,89 @@ python $base/extract_parent_rev_ids_and_convert_to_json.py \
 # 	> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
 
-# python $base/extract_and_merge_data.py \
-# 	$results/all_used_edits_sampled_predictions.json \
-# 	$results/all_used_edits_parent_rev_ids_sampled_predictions.json \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
-# 	--verbose > & \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_error_log.txt
+python $base/extract_and_merge_data.py \
+	$results/all_used_edits_sampled_predictions.json \
+	$results/all_used_edits_parent_rev_ids_sampled_predictions.json \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
+	--verbose > & \
+	$results/sampled_rev_ids_for_ores_all_predictions_error_log.txt
 
 
 
 
-# python $base/split_into_months.py \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2013_to_2014_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_1.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2013.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2014.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2013_to_2014_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2014.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2015.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2014_to_2015_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_2.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2014.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2015.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2014_to_2015_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2015.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2016.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2015_to_2016_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_3.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2015.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2016.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2015_to_2016_error_log.txt
 
 
-# python $base/split_into_months.py \
-# 	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
-# 	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
-# 	--verbose > & \
-# 	$results/extract_weighted_score_2016_to_2017_error_log.txt
+python $base/split_into_months.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
+	--verbose > & \
+	$results/extract_weighted_score_2016_to_2017_error_log.txt
 
 
 # Rscript $base/2013_2014_revision_alignment.r
