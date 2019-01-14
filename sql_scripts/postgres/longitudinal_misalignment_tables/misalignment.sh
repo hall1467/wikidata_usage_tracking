@@ -187,7 +187,7 @@ set revision_sample_size = 100000
 echo $revision_sample_size > $results/sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
 shuf -n $revision_sample_size $results/used_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $revision_sample_size $results/used_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $revision_sample_size $results/used_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
@@ -217,7 +217,7 @@ set gender_revision_sample_size = 85000
 echo $gender_revision_sample_size > $results/gender_sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
+shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
@@ -247,7 +247,7 @@ set coordinate_location_revision_sample_size = 35000
 echo $coordinate_location_revision_sample_size > $results/coordinate_location_sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
+shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
