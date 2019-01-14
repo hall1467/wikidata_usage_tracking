@@ -271,13 +271,13 @@ shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coord
 shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
 
 
-# Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-# python $base/extract_parent_rev_ids_and_convert_to_json.py \
-# 	$results/all_used_edits_sampled.tsv \
-# 	$results/all_used_edits_sampled.json \
-# 	$results/all_used_edits_parent_rev_ids_sampled.json \
-# 	--verbose > & \
-# 	$results/all_used_edits_sampled_converted_error_log.txt
+Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
+python $base/extract_parent_rev_ids_and_convert_to_json.py \
+	$results/all_used_edits_sampled.tsv \
+	$results/all_used_edits_sampled.json \
+	$results/all_used_edits_parent_rev_ids_sampled.json \
+	--verbose > & \
+	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Run ORES
