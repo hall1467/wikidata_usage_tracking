@@ -57,8 +57,8 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # Items with only one location point
 # psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18_table_creation.sql
 
-psql wikidata_entities < $base/items_with_male_or_female_gender_12_29_18.sql
-psql wikidata_entities < $base/items_with_one_coordinate_location_12_29_18.sql
+psql wikidata_entities < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
+psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
 
 # Import coordinate location data into Postgres
 # psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
