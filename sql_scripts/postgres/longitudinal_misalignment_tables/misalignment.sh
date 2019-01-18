@@ -51,6 +51,12 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
 # psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
 
+# Combine male and female item datasets
+psql wikidata_entities < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
+
+# Items with only one location point
+psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location.sql
+
 # Import coordinate location data into Postgres
 # psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
 # psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
@@ -183,109 +189,109 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # All revisions
 
-set revision_sample_size = 100000
-echo $revision_sample_size > $results/sample_size_file.tsv
+# set revision_sample_size = 100000
+# echo $revision_sample_size > $results/sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2013_to_2014.tsv > $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-shuf -n $revision_sample_size $results/used_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-shuf -n $revision_sample_size $results/used_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-shuf -n $revision_sample_size $results/used_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $revision_sample_size $results/used_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $revision_sample_size $results/used_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Gender Revisions
 
-set gender_revision_sample_size = 85000
-echo $gender_revision_sample_size > $results/gender_sample_size_file.tsv
+# set gender_revision_sample_size = 85000
+# echo $gender_revision_sample_size > $results/gender_sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $gender_revision_sample_size $results/used_items_with_gender_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
 
 
 # Coordinate Location Revisions
 
-set coordinate_location_revision_sample_size = 35000
-echo $coordinate_location_revision_sample_size > $results/coordinate_location_sample_size_file.tsv
+# set coordinate_location_revision_sample_size = 35000
+# echo $coordinate_location_revision_sample_size > $results/coordinate_location_sample_size_file.tsv
 
 # Period 1: 2013 to 2014
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 2: 2014 to 2015
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 3: 2015 to 2016
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/all_used_edits_sampled.tsv
 
 # Period 4: 2016 to 2017
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
-shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
+# shuf -n $coordinate_location_revision_sample_size $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/all_used_edits_sampled.tsv
 
 
-Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-python $base/extract_parent_rev_ids_and_convert_to_json.py \
-	$results/all_used_edits_sampled.tsv \
-	$results/all_used_edits_sampled.json \
-	$results/all_used_edits_parent_rev_ids_sampled.json \
-	--verbose > & \
-	$results/all_used_edits_sampled_converted_error_log.txt
+# Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
+# python $base/extract_parent_rev_ids_and_convert_to_json.py \
+# 	$results/all_used_edits_sampled.tsv \
+# 	$results/all_used_edits_sampled.json \
+# 	$results/all_used_edits_parent_rev_ids_sampled.json \
+# 	--verbose > & \
+# 	$results/all_used_edits_sampled_converted_error_log.txt
 
 
 # Run ORES
 
 # Temporary to speed things up
 
-# split -d -l 700000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
-# split -d -l 700000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
+split -d -l 1800000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+split -d -l 1800000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
 
 # cat $results/all_used_edits_sampled_sub00_predictions.json > $results/all_used_edits_sampled_predictions.json
 # cat $results/all_used_edits_sampled_sub01_predictions.json >> $results/all_used_edits_sampled_predictions.json
@@ -294,9 +300,9 @@ python $base/extract_parent_rev_ids_and_convert_to_json.py \
 # cat $results/all_used_edits_parent_rev_ids_sampled_sub00_predictions.json > $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 # cat $results/all_used_edits_parent_rev_ids_sampled_sub01_predictions.json >> $results/all_used_edits_parent_rev_ids_sampled_predictions.json
 
-# cat $results/all_used_edits_sampled_sub00 | \
-# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
-# 	> $results/all_used_edits_sampled_sub00_predictions.json
+cat $results/all_used_edits_sampled_sub00 | \
+	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
+	> $results/all_used_edits_sampled_sub00_predictions.json
 
 # cat $results/all_used_edits_sampled_sub01 | \
 # 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research wikidatawiki itemquality --batch-size=30 --verbose \
