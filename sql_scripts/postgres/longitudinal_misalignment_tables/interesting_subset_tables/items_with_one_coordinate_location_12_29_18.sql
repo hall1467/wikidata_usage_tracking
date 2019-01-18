@@ -1,5 +1,5 @@
 CREATE TABLE items_with_one_coordinate_location_12_29_18 AS (
-	SELECT revisions_all_automation_flags_and_usages.*, coordinate_location
+	SELECT *
 	FROM
 	(
 		SELECT page_title_counts.page_title, coord_location_items_2.coordinate_location 
