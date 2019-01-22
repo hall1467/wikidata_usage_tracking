@@ -280,69 +280,69 @@ shuf -n $revision_sample_size $results/used_items_with_coordinate_location_tool_
 
 # Order is important for interpretation.
 # Counts for all revisions
-wc -l $results/used_bot_edits_may_2013_to_2014_sample.tsv > $results/sample_edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts.tsv
+wc -l $results/used_bot_edits_may_2013_to_2014_sampled.tsv > $results/sampled_edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts.tsv
+wc -l $results/used_bot_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts.tsv
+wc -l $results/used_bot_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts.tsv
 
-wc -l $results/used_bot_edits_may_2016_to_2017_sample.tsv  >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_human_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_anon_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts.tsv
-wc -l $results/used_tool_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts.tsv
+wc -l $results/used_bot_edits_may_2016_to_2017_sampled.tsv  >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_human_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_anon_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts.tsv
+wc -l $results/used_tool_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts.tsv
 
 
 # Counts for gender revisions
-wc -l $results/used_items_with_gender_bot_edits_may_2013_to_2014_sample.tsv > $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_human_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_anon_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_tool_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_bot_edits_may_2013_to_2014_sampled.tsv > $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_human_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_anon_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_tool_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
 
-wc -l $results/used_items_with_gender_bot_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_human_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_anon_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_tool_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_bot_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_human_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_anon_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_tool_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
 
-wc -l $results/used_items_with_gender_bot_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_human_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_anon_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_tool_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_bot_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_human_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_anon_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_tool_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
 
-wc -l $results/used_items_with_gender_bot_edits_may_2016_to_2017_sample.tsv  >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_human_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_anon_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
-wc -l $results/used_items_with_gender_tool_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_bot_edits_may_2016_to_2017_sampled.tsv  >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_human_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_anon_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
+wc -l $results/used_items_with_gender_tool_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_gender.tsv
 
 
 # Counts for coordinate location revisions
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014_sample.tsv > $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014_sampled.tsv > $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
 
-wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017_sample.tsv  >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
-wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017_sample.tsv >> $results/sample_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017_sampled.tsv  >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
+wc -l $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017_sampled.tsv >> $results/sampled_edit_type_counts_items_with_coordinate_location.tsv
 
 
 
