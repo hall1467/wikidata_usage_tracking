@@ -50,7 +50,8 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, str, int, int, int, str, str, str, str])
+        types=[int, str, str, int, int, str, int, int, int, str, str, str, 
+            str, str, str, str, str])
 
 
     output_first_month_file = mysqltsv.Writer(
@@ -68,7 +69,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_second_month_file = mysqltsv.Writer(
         open(args['<output_second_month>'], "w"), 
@@ -85,7 +90,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_third_month_file = mysqltsv.Writer(
         open(args['<output_third_month>'], "w"), 
@@ -102,7 +111,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_fourth_month_file = mysqltsv.Writer(
         open(args['<output_fourth_month>'], "w"), 
@@ -119,7 +132,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_fifth_month_file = mysqltsv.Writer(
         open(args['<output_fifth_month>'], "w"), 
@@ -136,7 +153,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_sixth_month_file = mysqltsv.Writer(
         open(args['<output_sixth_month>'], "w"), 
@@ -153,7 +174,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_seventh_month_file = mysqltsv.Writer(
         open(args['<output_seventh_month>'], "w"), 
@@ -170,7 +195,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_eighth_month_file = mysqltsv.Writer(
         open(args['<output_eighth_month>'], "w"), 
@@ -187,7 +216,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_ninth_month_file = mysqltsv.Writer(
         open(args['<output_ninth_month>'], "w"), 
@@ -204,7 +237,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_tenth_month_file = mysqltsv.Writer(
         open(args['<output_tenth_month>'], "w"), 
@@ -221,7 +258,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_eleventh_month_file = mysqltsv.Writer(
         open(args['<output_eleventh_month>'], "w"), 
@@ -238,7 +279,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     output_twelfth_month_file = mysqltsv.Writer(
         open(args['<output_twelfth_month>'], "w"), 
@@ -255,7 +300,11 @@ def main(argv=None):
                  'gender',
                  'coordinate_location',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'latitude',
+                 'longitude',
+                 'iso_country_code',
+                 'fip'])
 
     verbose = args['--verbose']
 
@@ -283,7 +332,7 @@ def run(input_file, output_first_month_file, output_second_month_file,
             sys.stderr.flush()
 
 
-        edit_month = line[7]
+        edit_month = line['misalignment_month']
         
         if line['namespace'] == 0:
 
@@ -301,7 +350,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 7:
                 output_second_month_file.write([
                     line['namespace'],
@@ -316,7 +369,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 8:
                 output_third_month_file.write([
                     line['namespace'],
@@ -331,7 +388,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 9:
                 output_fourth_month_file.write([
                     line['namespace'],
@@ -346,7 +407,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 10:
                 output_fifth_month_file.write([
                     line['namespace'],
@@ -361,7 +426,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 11:
                 output_sixth_month_file.write([
                     line['namespace'],
@@ -376,7 +445,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 12:
                 output_seventh_month_file.write([
                     line['namespace'],
@@ -391,7 +464,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 1:
                 output_eighth_month_file.write([
                     line['namespace'],
@@ -406,7 +483,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 2:
                 output_ninth_month_file.write([
                     line['namespace'],
@@ -421,7 +502,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 3:
                 output_tenth_month_file.write([
                     line['namespace'],
@@ -436,7 +521,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 4:
                 output_eleventh_month_file.write([
                     line['namespace'],
@@ -451,7 +540,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
             elif edit_month == 5:
                 output_twelfth_month_file.write([
                     line['namespace'],
@@ -466,7 +559,11 @@ def run(input_file, output_first_month_file, output_second_month_file,
                     line['gender'],
                     line['coordinate_location'],
                     line['parent_weighted_sum'],
-                    line['parent_id']])
+                    line['parent_id'],
+                    line['latitude'],
+                    line['longitude'],
+                    line['iso_country_code'],
+                    line['fip']])
 
 
 main()

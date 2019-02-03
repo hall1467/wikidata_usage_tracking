@@ -40,8 +40,8 @@ for (monthly_distribution_and_edits in list(
 
     
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
-    revisions = revisions[c("page_title", "namespace", "period", "gender", "coordinate_location", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum","parent_id")]
-    colnames(revisions) <- c("page_title", "namespace", "period", "gender", "coordinate_location", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum","parent_id")
+    revisions = revisions[c("page_title", "namespace", "period", "gender", "coordinate_location", "edit_type", "rev_id", "weighted_sum.x","expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","parent_weighted_sum","parent_id","latitude","longitude","iso_country_code","fip")]
+    colnames(revisions) <- c("page_title", "namespace", "period", "gender", "coordinate_location", "edit_type", "rev_id", "weighted_sum","expected_quality","expected_quality_quantile","page_views","yyyy","mm","parent_weighted_sum","parent_id","latitude","longitude","iso_country_code","fip")
     revisions$quality_difference = revisions$weighted_sum - revisions$expected_quality
 
     all_revisions = rbind(all_revisions, revisions)
