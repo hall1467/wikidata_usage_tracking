@@ -1,5 +1,5 @@
 """
-Takes coordinate location data and determines country code in new column.
+Takes coordinate location item data and determines country code in new column.
 
 
 Usage:
@@ -36,29 +36,18 @@ def main(argv=None):
     )
 
     input_file = mysqltsv.Reader(open(args['<input>'],
-        'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, str, int, int, int, str, str, str, str])
+        'rt', encoding='utf-8', errors='replace'), headers=False,
+        types=[str, str])
 
     input_file_second_iteration = mysqltsv.Reader(open(args['<input>'],
-        'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, str, int, int, int, str, str, str, str])
+        'rt', encoding='utf-8', errors='replace'), headers=False,
+        types=[str, str])
 
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
         headers=[
-                 'namespace',
                  'page_title',
-                 'edit_type',
-                 'page_views',
-                 'rev_id',
-                 'weighted_sum',
-                 'misalignment_year',
-                 'misalignment_month',
-                 'period',
-                 'gender',
                  'coordinate_location',
-                 'parent_weighted_sum',
-                 'parent_id',
                  'latitude',
                  'longitude',
                  'iso_country_code'])
@@ -77,7 +66,7 @@ def run(input_file, input_file_second_iteration, output_file, verbose):
 
     for i, line in enumerate(input_file):
 
-        proper_pt = re.match("Point\((.+) (.+)\)", line['coordinate_location'])
+        proper_pt = re.match("Point\((.+) (.+)\)", line[1])
 
         if proper_pt:
 
@@ -100,7 +89,7 @@ def run(input_file, input_file_second_iteration, output_file, verbose):
 
 
         if verbose and i % 100000 == 0 and i != 0:
-            sys.stderr.write("Iteration 1 Processing revision: {0}\n".format(i))  
+            sys.stderr.write("Iteration 1 Processing items: {0}\n".format(i))  
             sys.stderr.flush()
 
 
@@ -115,26 +104,15 @@ def run(input_file, input_file_second_iteration, output_file, verbose):
 
 
         output_file.write([
-            line['namespace'],
-            line['page_title'],
-            line['edit_type'],
-            line['page_views'],
-            line['rev_id'],
-            line['weighted_sum'],
-            line['misalignment_year'],
-            line['misalignment_month'],
-            line['period'],
-            line['gender'],
-            line['coordinate_location'],
-            line['parent_weighted_sum'],
-            line['parent_id'],
+            line[0],
+            line[1],
             lat_lon_data_store[i]['latitude'],
             lat_lon_data_store[i]['longitude'],
             country_code])
 
 
         if verbose and i % 100000 == 0 and i != 0:
-            sys.stderr.write("Iteration 2 Processing revision: {0}\n".format(i))  
+            sys.stderr.write("Iteration 2 Processing items: {0}\n".format(i))  
             sys.stderr.flush()
 
 

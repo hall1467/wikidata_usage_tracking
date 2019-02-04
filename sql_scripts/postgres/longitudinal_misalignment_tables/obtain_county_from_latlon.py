@@ -1,5 +1,5 @@
 """
-Takes revision lat lon data and obtain US county FIP if it it's in the US.
+Takes lat lon item data and obtain US county FIP if it's in the US.
 
 
 Usage:
@@ -43,8 +43,7 @@ def main(argv=None):
 
     input_file = mysqltsv.Reader(open(args['<input>'],
         'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, str, int, int, int, str, str, str, str, 
-            str, str, str])
+        types=[str, str, str, str, str])
 
 
     states_gj = json.load(open(args['<state>'], 'r'))
@@ -54,19 +53,8 @@ def main(argv=None):
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
         headers=[
-                 'namespace',
                  'page_title',
-                 'edit_type',
-                 'page_views',
-                 'rev_id',
-                 'weighted_sum',
-                 'misalignment_year',
-                 'misalignment_month',
-                 'period',
-                 'gender',
                  'coordinate_location',
-                 'parent_weighted_sum',
-                 'parent_id',
                  'latitude',
                  'longitude',
                  'iso_country_code',
@@ -124,22 +112,11 @@ def run(input_file, states_gj, counties_gj, output_file, verbose):
 
         except Exception as e:
             print(e)
-            print(line['rev_id'], lat, lon)
+            print(line['page_title'], lat, lon)
 
         output_file.write([
-            line['namespace'],
             line['page_title'],
-            line['edit_type'],
-            line['page_views'],
-            line['rev_id'],
-            line['weighted_sum'],
-            line['misalignment_year'],
-            line['misalignment_month'],
-            line['period'],
-            line['gender'],
             line['coordinate_location'],
-            line['parent_weighted_sum'],
-            line['parent_id'],
             line['latitude'],
             line['longitude'],
             line['iso_country_code'],
