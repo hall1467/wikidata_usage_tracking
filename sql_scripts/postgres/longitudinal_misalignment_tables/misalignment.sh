@@ -98,8 +98,8 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # Join location data and male and female item data with revision data
 # Filters out item locations that have more than one location
-# psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
-# psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
+psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
+psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
 psql wikidata_entities < $base/interesting_subset_revisions_tables/us_items_12_29_18_revisions_table_creation.sql
 
 
