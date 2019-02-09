@@ -1,9 +1,9 @@
 CREATE TABLE us_items_12_29_18_revisions AS (
-	SELECT revisions_final.*
+	SELECT revisions_all_automation_flags_and_usages.*
 	FROM
 	items_with_one_coordinate_location_processed_12_29_18
 	INNER JOIN
-	revisions_final
-	ON revisions_final.page_title = items_with_one_coordinate_location_processed_12_29_18.page_title
-	WHERE fip = 'NULL'
+	revisions_all_automation_flags_and_usages
+	ON revisions_all_automation_flags_and_usages.page_title = items_with_one_coordinate_location_processed_12_29_18.page_title
+	WHERE fip != 'NULL'
 );
