@@ -1,0 +1,1 @@
+\COPY items_with_one_coordinate_location_processed_12_29_18 FROM '/export/scratch2/wmf/wbc_entity_usage/usage_results/wikidata_longitudinal_misalignment/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes_without_header.tsv';

@@ -1,4 +1,4 @@
-CREATE TABLE us_items_12_29_18 (
+CREATE TABLE items_with_one_coordinate_location_processed_12_29_18 (
 	page_title           VARCHAR(255),
 	coordinate_location  VARCHAR(400),
 	latitude             VARCHAR(400),
