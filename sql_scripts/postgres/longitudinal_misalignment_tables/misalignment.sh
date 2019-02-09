@@ -92,8 +92,8 @@ tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and
 
 
 # Import US items data into Postgres
-psql wikidata_entities < $base/interesting_subset_tables/us_items_12_29_18_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_tables/us_items_12_29_18_table_import.sql
+psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
+psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
 
 
 # Join location data and male and female item data with revision data
