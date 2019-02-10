@@ -57,6 +57,17 @@ def run(input_file, revision_output_file, verbose):
             sys.stderr.write("Processing revision: {0}\n".format(i))  
             sys.stderr.flush()
             
+        parent_rev_id = line[8]
+
+        # Indicate that parent revision does not exist. Arbitrary 
+        # rev id is assigned for sake of ORES
+        if parent_rev_id:
+            parent_rev_id_for_ores = line[8]
+            parent_exists_variable = True
+        else:
+            parent_rev_id_for_ores = 1
+            parent_exists_variable = False
+
         # Temporarily renames parent rev_id to be rev_id
         revision_output_file.write(json.dumps({
                     'misalignment_year' : line[0],
@@ -66,7 +77,8 @@ def run(input_file, revision_output_file, verbose):
                     'edit_type': line[4],
                     'page_views': line[5],
                     'child_rev_id': line[6],
-                    'rev_id': line[8],
+                    'rev_id': parent_rev_id_for_ores,
+                    'does_parent_exist': parent_exists_variable,
                     'period': line[9],
                     'gender': line[10],
                     'coordinate_location': line[11],

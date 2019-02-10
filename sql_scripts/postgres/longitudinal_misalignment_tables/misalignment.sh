@@ -375,8 +375,7 @@ python $base/convert_to_json.py \
 
 # Temporary to speed things up
 
-# split -d -l 2300000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
-# split -d -l 2300000 $results/all_used_edits_parent_rev_ids_sampled.json $results/all_used_edits_parent_rev_ids_sampled_sub
+# split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
 
 # cat $results/all_used_edits_sampled_sub00_predictions.json > $results/all_used_edits_sampled_predictions.json
 # cat $results/all_used_edits_sampled_sub01_predictions.json >> $results/all_used_edits_sampled_predictions.json
