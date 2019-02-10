@@ -2,17 +2,16 @@
 Extract out parent ORES scores and convert to json.
 
 Usage:
-    extract_parent_rev_ids_and_convert_to_json (-h|--help)
-    extract_parent_rev_ids_and_convert_to_json <input> <revision_output> <parent_revision_output>
-                                               [--debug]
-                                               [--verbose]
+    convert_to_json (-h|--help)
+    convert_to_json <input> <revision_output>
+                    [--debug]
+                    [--verbose]
 
 Options:
     -h, --help                This help message is printed
     <input>                   Path to misalignment/edit
                               breakdown file to process.
     <revision_output>         Where revision output will be written
-    <parent_revision_output>  Where parent revision output will be written
     --debug                   Print debug logging to stderr
     --verbose                 Print dots and stuff to stderr  
 """
@@ -42,15 +41,14 @@ def main(argv=None):
 
 
     revision_output_file = open(args['<revision_output>'], "w")
-    parent_revision_output_file = open(args['<parent_revision_output>'], "w")
 
 
     verbose = args['--verbose']
 
-    run(input_file, revision_output_file, parent_revision_output_file, verbose)
+    run(input_file, revision_output_file, verbose)
 
 
-def run(input_file, revision_output_file, parent_revision_output_file, verbose):
+def run(input_file, revision_output_file, verbose):
 
 
     for i, line in enumerate(input_file):
@@ -59,7 +57,7 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
             sys.stderr.write("Processing revision: {0}\n".format(i))  
             sys.stderr.flush()
             
-
+        # Temporarily renames parent rev_id to be rev_id
         revision_output_file.write(json.dumps({
                     'misalignment_year' : line[0],
                     'misalignment_month' : line[1],
@@ -67,23 +65,13 @@ def run(input_file, revision_output_file, parent_revision_output_file, verbose):
                     'page_title': line[3],
                     'edit_type': line[4],
                     'page_views': line[5],
-                    'rev_id': line[6],
+                    'child_rev_id': line[6],
+                    'rev_id' = line[8],
                     'period': line[9],
                     'gender': line[10],
-                    'coordinate_location': line[11]
+                    'coordinate_location': line[11],
+                    'us_location': line[12],
                 }) + "\n")
-
-        p_rev_id = line[8]
-
-        if p_rev_id:
-            parent_revision_output_file.write(json.dumps({
-                    'rev_id' : p_rev_id,
-                    'child_rev_id': line[6],
-                    'period': line[9]
-                    }) + "\n")
-        else:
-            sys.stderr.write("No parent for rev id: {0}\n".format(line[6]))  
-            sys.stderr.flush()
 
 
 main()
