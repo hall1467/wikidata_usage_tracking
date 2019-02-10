@@ -65,7 +65,7 @@ def run(input_file, revision_output_file, verbose):
             revision_with_parent_id_count += 1
 
 
-    revision_output_file.write(str(revision_with_parent_id_count))
+    revision_output_file.write(str(revision_with_parent_id_count) + "\n")
 
 
 main()
