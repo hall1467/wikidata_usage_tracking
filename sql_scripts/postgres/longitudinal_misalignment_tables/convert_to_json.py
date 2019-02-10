@@ -66,7 +66,7 @@ def run(input_file, revision_output_file, verbose):
                     'edit_type': line[4],
                     'page_views': line[5],
                     'child_rev_id': line[6],
-                    'rev_id' = line[8],
+                    'rev_id': line[8],
                     'period': line[9],
                     'gender': line[10],
                     'coordinate_location': line[11],

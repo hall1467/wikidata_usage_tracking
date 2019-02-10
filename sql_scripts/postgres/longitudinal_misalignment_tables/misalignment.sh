@@ -364,12 +364,11 @@ shuf -n $revision_sample_size $results/used_items_with_us_location_tool_edits_ma
 
 
 # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-# python $base/convert_to_json.py \
-# 	$results/all_used_edits_sampled.tsv \
-# 	$results/all_used_edits_sampled.json \
-# 	$results/all_used_edits_parent_rev_ids_sampled.json \
-# 	--verbose > & \
-# 	$results/all_used_edits_sampled_converted_error_log.txt
+python $base/convert_to_json.py \
+	$results/all_used_edits_sampled.tsv \
+	$results/all_used_edits_sampled.json \
+	--verbose > & \
+	$results/convert_to_json_error_log.txt
 
 
 # Run ORES
