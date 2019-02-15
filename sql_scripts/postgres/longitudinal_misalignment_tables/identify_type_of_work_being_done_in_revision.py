@@ -45,26 +45,28 @@ def main(argv=None):
 
     input_sample_file = mysqltsv.Reader(open(args['<input_sample>'],
         'rt', encoding='utf-8', errors='replace'), headers=True,
-        types=[int, str, str, int, int, int, int, int, str, str, str, str, str, 
-            str])
+        types=[str, int, int, str, str, str, str, int, str, str, int, int, int, str, str, str, str])
 
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
         headers=[
-                 'namespace',
                  'page_title',
-                 'edit_type',
-                 'page_views',
-                 'rev_id',
-                 'misalignment_year',
-                 'misalignment_month',
+                 'namespace',
                  'period',
                  'gender',
                  'coordinate_location',
                  'us_location',
+                 'edit_type',
+                 'rev_id',
+                 'expected_quality',
+                 'expected_quality_quantile',
+                 'page_views',
+                 'yyyy',
+                 'mm',
                  'does_parent_exist',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'quality_difference'])
 
     verbose = args['--verbose']
 
