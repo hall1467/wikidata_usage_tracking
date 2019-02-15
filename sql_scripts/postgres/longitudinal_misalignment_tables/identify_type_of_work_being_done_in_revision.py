@@ -4,17 +4,17 @@ namespace 0. Note, already filtered upstream in recent changes.
 
 Usage:
     identify_type_of_work_being_done_in_revision (-h|--help)
-    identify_type_of_work_being_done_in_revision <input_original> <input_file_with_predictions> <output>
+    identify_type_of_work_being_done_in_revision <input_original> <input_preds> <output>
                                                  [--debug]
                                                  [--verbose]
 
 Options:
-    -h, --help                     This help message is printed
-    <input_original>               Path to original editted file with comments
-    <input_file_with_predictions>  Path to sampled file
-    <output>                       Where month output will be written
-    --debug                        Print debug logging to stderr
-    --verbose                      Print dots and stuff to stderr  
+    -h, --help        This help message is printed
+    <input_original>  Path to original editted file with comments
+    <input_preds>     Path to file with ORES and alignment info
+    <output>          Where month output will be written
+    --debug           Print debug logging to stderr
+    --verbose         Print dots and stuff to stderr  
 """
 
 
@@ -44,9 +44,10 @@ def main(argv=None):
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[int, int, int, str, str, int, int, str, int, int, str, str, str])
 
-    input_sample_file = mysqltsv.Reader(open(args['<input_file_with_predictions>'],
+    input_preds_file = mysqltsv.Reader(open(args['<input_preds>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
-        types=[str, int, int, str, str, str, str, int, str, str, int, int, int, str, str, str])
+        types=[str, int, int, str, str, str, str, int, str, str, int, int, int, 
+            str, str, str])
 
     output_file = mysqltsv.Writer(
         open(args['<output>'], "w"), 
@@ -71,10 +72,10 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(input_original_file, input_file_with_predictions, output_file, verbose)
+    run(input_original_file, input_preds_file, output_file, verbose)
 
 
-def run(input_original_file, input_file_with_predictions, output_file, verbose):
+def run(input_original_file, input_preds_file, output_file, verbose):
 
     revision_comments = defaultdict(str)
 
@@ -87,7 +88,7 @@ def run(input_original_file, input_file_with_predictions, output_file, verbose):
 
         revision_comments[line[6]] = line[7]
 
-    for i, line in enumerate(input_sample_file):
+    for i, line in enumerate(input_preds_file):
 
         if verbose and i % 10000 == 0 and i != 0:
             sys.stderr.write("Processing processed revisions: {0}\n".format(i))  
