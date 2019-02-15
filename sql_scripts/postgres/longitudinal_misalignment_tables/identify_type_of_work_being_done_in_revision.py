@@ -44,7 +44,7 @@ def main(argv=None):
         types=[int, int, int, str, str, int, int, str, int, int, str, str, str])
 
     input_sample_file = mysqltsv.Reader(open(args['<input_sample>'],
-        'rt', encoding='utf-8', errors='replace'), headers=True,
+        'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[str, int, int, str, str, str, str, int, str, str, int, int, int, str, str, str])
 
     output_file = mysqltsv.Writer(
