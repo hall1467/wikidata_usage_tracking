@@ -512,6 +512,22 @@ python $base/split_into_months.py \
 # Rscript $base/2015_2016_revision_alignment.r
 # Rscript $base/2016_2017_revision_alignment.r
 
+python $base/identify_type_of_work_being_done_in_revision.py \
+	$results/sampled_rev_ids_for_ores_all_predictions_period_4.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_june_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_july_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_august_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_september_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_october_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_november_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_december_2016.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_january_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_february_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_march_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_april_2017.tsv \
+	$monthly_revisions_directory/monthly_sampled_revisions_may_2017.tsv \
+	--verbose > & \
+	$results/split_into_months_period_4_error_log.txt
 
 
 
