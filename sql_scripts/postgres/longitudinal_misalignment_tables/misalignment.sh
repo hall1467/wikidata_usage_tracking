@@ -512,12 +512,19 @@ python $base/split_into_months.py \
 # Rscript $base/2015_2016_revision_alignment.r
 # Rscript $base/2016_2017_revision_alignment.r
 
+
+cat $results/all_revisions_quality_differences_2013_2014.tsv > $results/all_revisions_quality_differences.tsv
+cat $results/all_revisions_quality_differences_2014_2015.tsv >> $results/all_revisions_quality_differences.tsv
+cat $results/all_revisions_quality_differences_2015_2016.tsv >> $results/all_revisions_quality_differences.tsv
+cat $results/all_revisions_quality_differences_2016_2017.tsv >> $results/all_revisions_quality_differences.tsv
+
+
 python $base/identify_type_of_work_being_done_in_revision.py \
 	$results/all_used_edits_sampled.tsv \
-	$results/all_revisions_quality_differences_2013_2014.tsv \
-	$results/period_1_processed_revisions.tsv \
+	$results/all_revisions_quality_differences.tsv \
+	$results/processed_revisions.tsv \
 	--verbose > & \
-	$results/identify_type_of_work_being_done_in_revision_period_1_error_log.txt
+	$results/identify_type_of_work_being_done_in_revision_error_log.txt
 
 
 

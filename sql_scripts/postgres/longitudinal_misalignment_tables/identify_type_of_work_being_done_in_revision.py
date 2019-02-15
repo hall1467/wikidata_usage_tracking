@@ -92,31 +92,32 @@ def run(input_original_file, input_sample_file, output_file, verbose):
             sys.stderr.write("Processing sample revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
+        
         comment = None
         if line[7] in revision_comments:
             comment = revision_comments[line[7]]
         else:
-            sys.exit("Rev comment not found: {0} not found\n".format(line[7]))
+            sys.exit("Rev comment not found in rev: {0}\n".format(line[7]))
 
             
-        output_file.write([
-            line[0],
-            line[1],
-            line[2],
-            line[3],
-            line[4],
-            line[5],
-            line[6],
-            line[7],
-            line[8],
-            line[9],
-            line[10],
-            line[11],
-            line[12],
-            line[13],
-            line[14],
-            line[15],
-            line[16]])
+        # output_file.write([
+        #     line[0],
+        #     line[1],
+        #     line[2],
+        #     line[3],
+        #     line[4],
+        #     line[5],
+        #     line[6],
+        #     line[7],
+        #     line[8],
+        #     line[9],
+        #     line[10],
+        #     line[11],
+        #     line[12],
+        #     line[13],
+        #     line[14],
+        #     line[15],
+        #     line[16]])
 
 
 main()
