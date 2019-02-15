@@ -66,7 +66,8 @@ def main(argv=None):
                  'mm',
                  'does_parent_exist',
                  'parent_weighted_sum',
-                 'parent_id'])
+                 'parent_id',
+                 'attribute_modified'])
 
     verbose = args['--verbose']
 
@@ -84,7 +85,6 @@ def run(input_original_file, input_sample_file, output_file, verbose):
             sys.stderr.write("Processing original revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
-
         revision_comments[line[6]] = line[7]
 
     for i, line in enumerate(input_sample_file):
@@ -93,32 +93,47 @@ def run(input_original_file, input_sample_file, output_file, verbose):
             sys.stderr.write("Processing sample revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
-        
+
+        rev_id = line[7]
         comment = None
-        if line[7] in revision_comments:
+
+        if comment_input in revision_comments:
             comment = revision_comments[line[7]]
         else:
             sys.exit("Rev comment not found in rev: {0}\n".format(line[7]))
 
+
+        client_match = re.match(r'/\*\s\S*client', comment, re.I)
+        merge_match = re.match(r'/\*\s\S*merge', comment, re.I)
+        sitelink_match = re.match(r'/\*\s\S*sitelink', comment, re.I)
+
+        attribute_modified = 'other'
+        if client_match:
+            attribute_modified = 'client'
+        if merge_match:
+            attribute_modified = 'merge'
+        if sitelink_match:
+            attribute_modified = 'sitelink'
+
             
-        # output_file.write([
-        #     line[0],
-        #     line[1],
-        #     line[2],
-        #     line[3],
-        #     line[4],
-        #     line[5],
-        #     line[6],
-        #     line[7],
-        #     line[8],
-        #     line[9],
-        #     line[10],
-        #     line[11],
-        #     line[12],
-        #     line[13],
-        #     line[14],
-        #     line[15],
-        #     line[16]])
+        output_file.write([
+            line[0],
+            line[1],
+            line[2],
+            line[3],
+            line[4],
+            line[5],
+            line[6],
+            line[7],
+            line[8],
+            line[9],
+            line[10],
+            line[11],
+            line[12],
+            line[13],
+            line[14],
+            line[15],
+            attribute_modified])
 
 
 main()
