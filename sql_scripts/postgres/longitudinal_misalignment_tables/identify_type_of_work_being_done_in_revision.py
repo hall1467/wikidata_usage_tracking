@@ -65,231 +65,58 @@ def main(argv=None):
                  'mm',
                  'does_parent_exist',
                  'parent_weighted_sum',
-                 'parent_id',
-                 'quality_difference'])
+                 'parent_id'])
 
     verbose = args['--verbose']
 
-    run(input_file, output_first_month_file, output_second_month_file,
-        output_third_month_file, output_fourth_month_file,
-        output_fifth_month_file, output_sixth_month_file,
-        output_seventh_month_file, output_eighth_month_file,
-        output_ninth_month_file, output_tenth_month_file,
-        output_eleventh_month_file, output_twelfth_month_file, verbose)
+    run(input_original_file, input_sample_file, output_file, verbose)
 
 
-def run(input_file, output_first_month_file, output_second_month_file,
-        output_third_month_file, output_fourth_month_file,
-        output_fifth_month_file, output_sixth_month_file,
-        output_seventh_month_file, output_eighth_month_file,
-        output_ninth_month_file, output_tenth_month_file,
-        output_eleventh_month_file, output_twelfth_month_file, verbose):
+def run(input_original_file, input_sample_file, output_file, verbose):
 
+    revision_comments = defaultdict(str)
 
-    for i, line in enumerate(input_file):
+    for i, line in enumerate(input_original_file):
 
 
         if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Processing revision: {0}\n".format(i))  
+            sys.stderr.write("Processing original revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
 
-        edit_month = line['misalignment_month']
-        
-        if line['namespace'] == 0:
+        revision_comments[line[6]] = line[7]
 
-            if edit_month == 6:
-                output_first_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 7:
-                output_second_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 8:
-                output_third_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 9:
-                output_fourth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 10:
-                output_fifth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 11:
-                output_sixth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 12:
-                output_seventh_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 1:
-                output_eighth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 2:
-                output_ninth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 3:
-                output_tenth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 4:
-                output_eleventh_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
-            elif edit_month == 5:
-                output_twelfth_month_file.write([
-                    line['namespace'],
-                    line['page_title'],
-                    line['edit_type'],
-                    line['page_views'],
-                    line['rev_id'],
-                    line['misalignment_year'],
-                    line['misalignment_month'],
-                    line['period'],
-                    line['gender'],
-                    line['coordinate_location'],
-                    line['us_location'],
-                    line['does_parent_exist'],
-                    line['parent_weighted_sum'],
-                    line['parent_id']])
+    for i, line in enumerate(input_sample_file):
+
+        if verbose and i % 10000 == 0 and i != 0:
+            sys.stderr.write("Processing sample revisions: {0}\n".format(i))  
+            sys.stderr.flush()
+
+        comment = None
+        if line[7] in revision_comments:
+            comment = revision_comments[line[7]]
+        else:
+            sys.exit("Rev comment not found: {0} not found\n".format(line[7]))
+
+            
+        output_file.write([
+            line[0],
+            line[1],
+            line[2],
+            line[3],
+            line[4],
+            line[5],
+            line[6],
+            line[7],
+            line[8],
+            line[9],
+            line[10],
+            line[11],
+            line[12],
+            line[13],
+            line[14],
+            line[15],
+            line[16]])
 
 
 main()
