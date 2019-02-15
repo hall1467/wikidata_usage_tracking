@@ -4,17 +4,17 @@ namespace 0. Note, already filtered upstream in recent changes.
 
 Usage:
     identify_type_of_work_being_done_in_revision (-h|--help)
-    identify_type_of_work_being_done_in_revision <input_original> <input_sample> <output>
+    identify_type_of_work_being_done_in_revision <input_original> <input_file_with_predictions> <output>
                                                  [--debug]
                                                  [--verbose]
 
 Options:
-    -h, --help        This help message is printed
-    <input_original>  Path to original editted file with comments
-    <input_sample>    Path to sampled file
-    <output>          Where month output will be written
-    --debug           Print debug logging to stderr
-    --verbose         Print dots and stuff to stderr  
+    -h, --help                     This help message is printed
+    <input_original>               Path to original editted file with comments
+    <input_file_with_predictions>  Path to sampled file
+    <output>                       Where month output will be written
+    --debug                        Print debug logging to stderr
+    --verbose                      Print dots and stuff to stderr  
 """
 
 
@@ -44,7 +44,7 @@ def main(argv=None):
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[int, int, int, str, str, int, int, str, int, int, str, str, str])
 
-    input_sample_file = mysqltsv.Reader(open(args['<input_sample>'],
+    input_sample_file = mysqltsv.Reader(open(args['<input_file_with_predictions>'],
         'rt', encoding='utf-8', errors='replace'), headers=False,
         types=[str, int, int, str, str, str, str, int, str, str, int, int, int, str, str, str])
 
@@ -71,10 +71,10 @@ def main(argv=None):
 
     verbose = args['--verbose']
 
-    run(input_original_file, input_sample_file, output_file, verbose)
+    run(input_original_file, input_file_with_predictions, output_file, verbose)
 
 
-def run(input_original_file, input_sample_file, output_file, verbose):
+def run(input_original_file, input_file_with_predictions, output_file, verbose):
 
     revision_comments = defaultdict(str)
 
@@ -90,15 +90,15 @@ def run(input_original_file, input_sample_file, output_file, verbose):
     for i, line in enumerate(input_sample_file):
 
         if verbose and i % 10000 == 0 and i != 0:
-            sys.stderr.write("Processing sample revisions: {0}\n".format(i))  
+            sys.stderr.write("Processing processed revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
 
         rev_id = line[7]
         comment = None
 
-        if comment_input in revision_comments:
-            comment = revision_comments[line[7]]
+        if rev_id in revision_comments:
+            comment = revision_comments[rev_id]
         else:
             sys.exit("Rev comment not found in rev: {0}\n".format(line[7]))
 
@@ -108,6 +108,7 @@ def run(input_original_file, input_sample_file, output_file, verbose):
         sitelink_match = re.match(r'/\*\s\S*sitelink', comment, re.I)
 
         attribute_modified = 'other'
+
         if client_match:
             attribute_modified = 'client'
         if merge_match:
