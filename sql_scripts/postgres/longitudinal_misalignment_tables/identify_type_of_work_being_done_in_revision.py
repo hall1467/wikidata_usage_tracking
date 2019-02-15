@@ -25,6 +25,7 @@ import mysqltsv
 import sys
 import re
 import json
+from collections import defaultdict
 
 
 logger = logging.getLogger(__name__)
