@@ -127,10 +127,7 @@ def run(input_original_file, input_preds_file, output_file, verbose):
 
         # Compute actual minus expected quality
         quality_difference = None
-        print(line[13])
         if line[13] == 'True' and line[14]:
-            print(line[14])
-            print(line[8])
             quality_difference = float(line[14]) - float(line[8])
 
             
