@@ -87,7 +87,7 @@ def run(input_original_file, input_preds_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        if line[7] and re.match(r'/\*\s\S*sitelink', line[7], re.I):
+        if line[7] and re.match(r'/\*\s\S*client', comment, re.I):
             print(line[7])
         revision_comments[line[6]] = line[7]
 
