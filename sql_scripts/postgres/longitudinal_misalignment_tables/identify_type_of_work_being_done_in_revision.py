@@ -87,8 +87,8 @@ def run(input_original_file, input_preds_file, output_file, verbose):
             sys.stderr.flush()
 
 
-        if line[7] and re.match(r'/\*\s\S*sitelink', comment, re.I):
-            print(re.match(r'/\*\s\S*sitelink', comment, re.I))
+        if line[7] and re.match(r'/\*\s\S*sitelink', line[7], re.I):
+            print(re.match(r'/\*\s\S*sitelink', line[7], re.I))
         revision_comments[line[6]] = line[7]
 
     for i, line in enumerate(input_preds_file):
