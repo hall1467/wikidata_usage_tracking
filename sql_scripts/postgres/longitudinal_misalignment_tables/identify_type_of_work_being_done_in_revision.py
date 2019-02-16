@@ -130,26 +130,46 @@ def run(input_original_file, input_preds_file, output_file, verbose):
         if line[13] == 'True' and line[14]:
             quality_difference = float(line[14]) - float(line[8])
 
-            
-        output_file.write([
-            line[0],
-            line[1],
-            line[2],
-            line[3],
-            line[4],
-            line[5],
-            line[6],
-            line[7],
-            line[8],
-            line[9],
-            line[10],
-            line[11],
-            line[12],
-            line[13],
-            line[14],
-            line[15],
-            quality_difference,
-            attribute_modified])
+        if line[14]:
+            output_file.write([
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9],
+                line[10],
+                line[11],
+                line[12],
+                line[13],
+                line[14],
+                line[15],
+                quality_difference,
+                attribute_modified])
+        else:
+            # Don't return anything for parent weighted sum for R
+            output_file.write([
+                line[0],
+                line[1],
+                line[2],
+                line[3],
+                line[4],
+                line[5],
+                line[6],
+                line[7],
+                line[8],
+                line[9],
+                line[10],
+                line[11],
+                line[12],
+                line[13],,
+                line[15],
+                quality_difference,
+                attribute_modified])
 
 
 main()
