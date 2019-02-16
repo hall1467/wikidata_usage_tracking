@@ -101,12 +101,16 @@ def run(input_original_file, input_preds_file, output_file, verbose):
         if rev_id in revision_comments:
             comment = revision_comments[rev_id]
         else:
-            sys.exit("Rev comment not found in rev: {0}\n".format(line[7]))
+            sys.exit("Rev comment not found in rev: {0}\n".format(rev_id))
 
-
-        client_match = re.match(r'/\*\s\S*client', comment, re.I)
-        merge_match = re.match(r'/\*\s\S*merge', comment, re.I)
-        sitelink_match = re.match(r'/\*\s\S*sitelink', comment, re.I)
+        client_match = None
+        merge_match = None
+        sitelink_match = None
+        
+        if comment:
+            client_match = re.match(r'/\*\s\S*client', comment, re.I)
+            merge_match = re.match(r'/\*\s\S*merge', comment, re.I)
+            sitelink_match = re.match(r'/\*\s\S*sitelink', comment, re.I)
 
         attribute_modified = 'other'
 
