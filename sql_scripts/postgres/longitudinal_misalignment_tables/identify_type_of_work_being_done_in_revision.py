@@ -1,6 +1,7 @@
 """
 Splits into months. Also checks that revisions are from
 namespace 0. Note, already filtered upstream in recent changes.
+Also computes actual minus expected quality.
 
 Usage:
     identify_type_of_work_being_done_in_revision (-h|--help)
@@ -68,6 +69,7 @@ def main(argv=None):
                  'does_parent_exist',
                  'parent_weighted_sum',
                  'parent_id',
+                 'quality_difference',
                  'attribute_modified'])
 
     verbose = args['--verbose']
@@ -86,9 +88,7 @@ def run(input_original_file, input_preds_file, output_file, verbose):
             sys.stderr.write("Processing original revisions: {0}\n".format(i))  
             sys.stderr.flush()
 
-
-        if line[7] and re.match(r'/\*\s\S*client', line[7], re.I):
-            print(line[7])
+            
         revision_comments[line[6]] = line[7]
 
     for i, line in enumerate(input_preds_file):
@@ -123,6 +123,13 @@ def run(input_original_file, input_preds_file, output_file, verbose):
             attribute_modified = 'merge'
         if sitelink_match:
             attribute_modified = 'sitelink'
+
+
+        # Compute actual minus expected quality
+        quality_difference = None
+        print(line[13])
+        if line[13]:
+            quality_difference = line[14] - line[8]
 
             
         output_file.write([
