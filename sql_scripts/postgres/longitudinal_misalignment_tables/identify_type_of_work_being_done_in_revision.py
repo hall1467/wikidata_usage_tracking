@@ -63,7 +63,7 @@ def main(argv=None):
                  'rev_id',
                  'expected_quality',
                  'expected_quality_quantile',
-                 'quality_quantile'
+                 'quality_quantile',
                  'page_views',
                  'yyyy',
                  'mm',
