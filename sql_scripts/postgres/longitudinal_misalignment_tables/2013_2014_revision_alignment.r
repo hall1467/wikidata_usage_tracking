@@ -36,12 +36,12 @@ for (monthly_distribution_and_edits in list(
     quality_and_page_views$expected_quality_quantile = ecdf(quality_and_page_views$page_views)(quality_and_page_views$page_views)
     weighted_sum_distribution = ecdf(quality_and_page_views$weighted_sum)
     quality_and_page_views$expected_quality = quantile(weighted_sum_distribution, probs=quality_and_page_views$expected_quality_quantile)
-
+    quality_and_page_views$quality_quantile = ecdf(quality_and_page_views$weighted_sum)(quality_and_page_views$weighted_sum)
 
     
     revisions = merge(revisions, quality_and_page_views, by = "page_title")
-    revisions = revisions[c("page_title", "namespace", "period", "gender", "coordinate_location", "us_location", "edit_type", "rev_id", "expected_quality","expected_quality_quantile","page_views.y","yyyy","mm","does_parent_exist","parent_weighted_sum","parent_id")]
-    colnames(revisions) <- c("page_title", "namespace", "period", "gender", "coordinate_location", "us_location", "edit_type", "rev_id", "expected_quality","expected_quality_quantile","page_views","yyyy","mm","does_parent_exist","parent_weighted_sum","parent_id")
+    revisions = revisions[c("page_title", "namespace", "period", "gender", "coordinate_location", "us_location", "edit_type", "rev_id", "expected_quality","expected_quality_quantile","quality_quantile","page_views.y","yyyy","mm","does_parent_exist","parent_weighted_sum","parent_id")]
+    colnames(revisions) <- c("page_title", "namespace", "period", "gender", "coordinate_location", "us_location", "edit_type", "rev_id", "expected_quality","expected_quality_quantile","quality_quantile","page_views","yyyy","mm","does_parent_exist","parent_weighted_sum","parent_id")
     
     all_revisions = rbind(all_revisions, revisions)
     
