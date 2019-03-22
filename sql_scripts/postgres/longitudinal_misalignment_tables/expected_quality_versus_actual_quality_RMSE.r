@@ -17,10 +17,8 @@ mae_quantile = mean(abs(entity_weighted_sums_and_page_views$quality_quantile - e
 mae = mean(abs(entity_weighted_sums_and_page_views$quality_difference))
 
 weighted_sums_sorted = sort(entity_weighted_sums_and_page_views$weighted_sum)
-print(weighted_sums_sorted[1:2])
 n = length(weighted_sums_sorted)
-typeof(weighted_sums_sorted)
-print(n)
+
 
 below_median = NULL
 above_median = NULL
@@ -28,13 +26,8 @@ above_median = NULL
 if ((n %% 2) == 0){
 
 	below_median = weighted_sums_sorted[1:(n/2)]
-	print("below")
-
-	print(weighted_sums_sorted[1:(n/2)])
 
 	above_median = weighted_sums_sorted[((n/2)+1):n]
-
-	print(above_median)
 	
 } else {
 
