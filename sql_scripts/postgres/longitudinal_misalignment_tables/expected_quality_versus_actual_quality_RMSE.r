@@ -26,15 +26,15 @@ above_median = NULL
 
 if ((n %% 2) == 0){
 
-	below_median = weighted_sums_sorted[1:(n/2),]
-	above_median = weighted_sums_sorted[((n/2)+1):n,]
+	below_median = weighted_sums_sorted[1:(n/2)]
+	above_median = weighted_sums_sorted[((n/2)+1):n]
 	
 } else {
 
-	below_median = weighted_sums_sorted[1:floor(n/2),]
+	below_median = weighted_sums_sorted[1:floor(n/2)]
 
 	# Skip over median
-	above_median = weighted_sums_sorted[(floor(n/2)+2):n,]
+	above_median = weighted_sums_sorted[(floor(n/2)+2):n]
 }
 
 potential_variability = 2(sum(above_median - below_median))
