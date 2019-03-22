@@ -130,29 +130,29 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # More recently have been moving into directories by year and manually running each to speed up this process. 
 # Otherwise takes 18 hours for the below loop
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
+end
 
 
 # psql wikidata_entities < $base/yearly_revision_samples.sql
