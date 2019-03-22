@@ -31,8 +31,10 @@ if ((n %% 2) == 0){
 	print("below")
 
 	print(weighted_sums_sorted[1:(n/2)])
-	
+
 	above_median = weighted_sums_sorted[((n/2)+1):n]
+
+	print(above_median)
 	
 } else {
 
