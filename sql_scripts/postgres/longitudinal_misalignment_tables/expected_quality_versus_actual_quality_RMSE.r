@@ -17,7 +17,7 @@ mae_quantile = mean(abs(entity_weighted_sums_and_page_views$quality_quantile - e
 mae = mean(abs(entity_weighted_sums_and_page_views$quality_difference))
 
 weighted_sums_sorted = sort(entity_weighted_sums_and_page_views$weighted_sum)
-head(weighted_sums_sorted)
+print(weighted_sums_sorted[1:2])
 n = length(weighted_sums_sorted)
 typeof(weighted_sums_sorted)
 print(n)
