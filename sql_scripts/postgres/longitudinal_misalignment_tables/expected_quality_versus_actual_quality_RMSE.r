@@ -30,13 +30,14 @@ if ((n %% 2) == 0){
 	above_median = weighted_sums_sorted[((n/2)+1):n]
 	
 }
-else{
+else {
 
 	below_median = weighted_sums_sorted[1:floor(n/2)]
 
 	# Skip over median
 	above_median = weighted_sums_sorted[(floor(n/2)+2):n]
 }
+
 potential_variability = 2(sum(above_median - below_median))
 
 
