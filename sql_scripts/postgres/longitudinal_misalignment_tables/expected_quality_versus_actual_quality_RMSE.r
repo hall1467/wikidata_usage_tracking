@@ -29,8 +29,7 @@ if ((n %% 2) == 0){
 	below_median = weighted_sums_sorted[1:(n/2)]
 	above_median = weighted_sums_sorted[((n/2)+1):n]
 	
-}
-else {
+} else {
 
 	below_median = weighted_sums_sorted[1:floor(n/2)]
 
