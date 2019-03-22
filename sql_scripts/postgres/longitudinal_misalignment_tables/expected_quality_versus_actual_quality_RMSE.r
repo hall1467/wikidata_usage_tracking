@@ -16,11 +16,35 @@ entity_weighted_sums_and_page_views$quality_difference_sign = sign(entity_weight
 mae_quantile = mean(abs(entity_weighted_sums_and_page_views$quality_quantile - entity_weighted_sums_and_page_views$expected_quality_quantile))
 mae = mean(abs(entity_weighted_sums_and_page_views$quality_difference))
 
+weighted_sums_sorted = sort(entity_weighted_sums_and_page_views$weighted_sum)
+n = nrow(weighted_sums_sorted)
+
+below_median = NULL
+above_median = NULL
+
+if (n %% 2) == 0){
+
+	below_median = weighted_sums_sorted[1:(n/2)]
+	above_median = weighted_sums_sorted[((n/2)+1):n]
+	
+}
+else{
+
+	below_median = weighted_sums_sorted[1:floor(n/2)]
+
+	# Skip over median
+	above_median = weighted_sums_sorted[(floor(n/2)+2):n]
+}
+potential_variability = 2(sum(above_median - below_median))
+
+
+
 output = data.frame()
 output = rbind(output, c(entity_weighted_sums_and_page_views[1,2], 
                          entity_weighted_sums_and_page_views[1,3], 
                          mae_quantile,
-                         mae))
+                         mae,
+                         potential_variability))
 
 write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
 
