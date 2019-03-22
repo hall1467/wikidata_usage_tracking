@@ -18,6 +18,8 @@ mae = mean(abs(entity_weighted_sums_and_page_views$quality_difference))
 
 weighted_sums_sorted = sort(entity_weighted_sums_and_page_views$weighted_sum)
 n = nrow(weighted_sums_sorted)
+typeof(weighted_sums_sorted)
+print(n)
 
 below_median = NULL
 above_median = NULL
