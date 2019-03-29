@@ -1,5 +1,5 @@
 CREATE TABLE revisions_all_automation_flags_and_usages AS (
-	SELECT revisions_initial_automation_flags.*, entity_views_and_aggregated_revisions.number_of_revisions, entity_views_and_aggregated_revisions.page_views,
+	SELECT revisions_initial_automation_flags.*, revisions_with_page_views.page_views,
 	(CASE WHEN bot_user_id IS NOT NULL OR revision_user_text LIKE '10.68.%' THEN 'bot_edit'
 		  WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#quickstatements%' THEN 'quickstatements'
 		  WHEN lower(regexp_replace(comment, '\.|,|\(|\)|-|:','','g')) LIKE '%#petscan%' THEN 'petscan'
@@ -33,6 +33,22 @@ CREATE TABLE revisions_all_automation_flags_and_usages AS (
 	concat(year,'-',month,'-',page_title) AS year_month_page_title
 	FROM revisions_initial_automation_flags
 	LEFT JOIN
-	entity_views_and_aggregated_revisions
-	ON entity_id = page_title
+	(
+		SELECT revision_id, page_views
+		FROM
+		(
+			SELECT entity_id, SUM(page_views) as page_views
+			FROM
+	    	(
+				SELECT DISTINCT project, entity_id, page_id, page_views 
+			    FROM proj_aspect_entity_page_views
+			)   AS entity_project_page_views 
+			GROUP BY entity_id
+		)	AS entity_page_views
+		INNER JOIN
+		revisions_initial_automation_flags
+		ON entity_id = page_title
+		WHERE revisions_initial_automation_flags.namespace = 0 OR revisions_initial_automation_flags.namespace = 120
+	)	AS revisions_with_page_views
+	ON revisions_initial_automation_flags.revision_id = revisions_with_page_views.revision_id
 );
