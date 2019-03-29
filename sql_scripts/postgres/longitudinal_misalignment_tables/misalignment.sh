@@ -24,14 +24,14 @@ python $base/revisions_postgres_post_process.py \
 tail -n +2 $results/extracted_revisions_escaped.tsv > $results/extracted_revisions_escaped_no_header.tsv
 
 # Import basic revision data into Postgres
-psql wikidata_entities < $base/revisions_table/revisions_table_creation.sql
-psql wikidata_entities < $base/revisions_table/revisions_table_import.sql	
+psql wikidata_entities -U hall < $base/revisions_table/revisions_table_creation.sql
+psql wikidata_entities -U hall < $base/revisions_table/revisions_table_import.sql	
 
 # Merge with various automation flags
-psql wikidata_entities < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
+psql wikidata_entities -U hall < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
 
 # Perform additional checks for different types of edits
-psql wikidata_entities < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
+psql wikidata_entities -U hall < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
 # Filter out revisions without parent and keep only edits that aren't from a client, merging, or to sitelinks
 # Removed
@@ -47,27 +47,27 @@ tail -n +2 $results/coordinate_location_items_12_29_18.tsv | sed s'/http:\/\/www
 
 
 # Import male data into Postgres
-psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
 
 # Import female data into Postgres
-psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
 
 # Combine male and female item datasets
-psql wikidata_entities < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18_table_creation.sql
 
 
 # Import coordinate location data into Postgres
-psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
 
 # Items with only one location point
-psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18_table_creation.sql
 
 # Create tsvs from filtered tables
-psql wikidata_entities < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
-psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
 
 
 
@@ -92,21 +92,21 @@ tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and
 
 
 # Import US items data into Postgres
-psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
 
 
 # Join location data and male and female item data with revision data
 # Filters out item locations that have more than one location
-psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
-psql wikidata_entities < $base/interesting_subset_revisions_tables/us_items_12_29_18_revisions_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_12_29_18_revisions_table_creation.sql
 
 
-psql wikidata_entities < $base/used_item_page_views.sql
+psql wikidata_entities -U hall < $base/used_item_page_views.sql
 
 
-psql wikidata_entities < $base/monthly_item_quality_sorted_by_month.sql
+psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
 
 
 # python $base/misalignment_preprocessor.py \
