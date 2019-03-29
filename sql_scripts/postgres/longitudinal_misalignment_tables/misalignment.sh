@@ -108,14 +108,16 @@ psql wikidata_entities -U hall < $base/used_item_page_views.sql
 
 psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
 
+# Stopped here on first iteration, commented everything above out
 
-# python $base/misalignment_preprocessor.py \
-# 		$results/used_item_page_views.tsv \
-# 		$results/monthly_item_quality_sorted_by_month.tsv \
-# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-# 		--verbose > & \
-# 		$results/misalignment_preprocessor_error_log.txt
+python $base/misalignment_preprocessor.py \
+		$results/used_item_page_views.tsv \
+		$results/monthly_item_quality_sorted_by_month.tsv \
+		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+		--verbose > & \
+		$results/misalignment_preprocessor_error_log.txt
 
+# End of second iteration, which is now combined with the first.
 
 # input_for_rmse_split_directory
 
