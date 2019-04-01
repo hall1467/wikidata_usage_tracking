@@ -6,156 +6,133 @@ set input_for_rmse_split_directory = $results/input_for_rmse_split_directory
 set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
-python $base/extract_revisions_from_xml_dump.py \
-	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
-	--revisions-output=$results/extracted_revisions.tsv \
-	--verbose \
-	--debug > & \
-	$results/extract_revisions_from_xml_dump_error_log.txt
+# python $base/extract_revisions_from_xml_dump.py \
+# 	/export/scratch2/wmf/wbc_entity_usage/wikidata_page_revisions/wikidatawiki-20170501-stub-meta-history* \
+# 	--revisions-output=$results/extracted_revisions.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/extract_revisions_from_xml_dump_error_log.txt
 
 
-python $base/revisions_postgres_post_process.py \
-	$results/extracted_revisions.tsv \
-	--revisions-output=$results/extracted_revisions_escaped.tsv \
-	--verbose \
-	--debug > & \
-	$results/revisions_postgres_post_process_error_log.txt
+# python $base/revisions_postgres_post_process.py \
+# 	$results/extracted_revisions.tsv \
+# 	--revisions-output=$results/extracted_revisions_escaped.tsv \
+# 	--verbose \
+# 	--debug > & \
+# 	$results/revisions_postgres_post_process_error_log.txt
 
-tail -n +2 $results/extracted_revisions_escaped.tsv > $results/extracted_revisions_escaped_no_header.tsv
+# tail -n +2 $results/extracted_revisions_escaped.tsv > $results/extracted_revisions_escaped_no_header.tsv
 
-# Import basic revision data into Postgres
-psql wikidata_entities -U hall < $base/revisions_table/revisions_table_creation.sql
-psql wikidata_entities -U hall < $base/revisions_table/revisions_table_import.sql	
+# # Import basic revision data into Postgres
+# psql wikidata_entities -U hall < $base/revisions_table/revisions_table_creation.sql
+# psql wikidata_entities -U hall < $base/revisions_table/revisions_table_import.sql	
 
-# Merge with various automation flags
-psql wikidata_entities -U hall < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
+# # Merge with various automation flags
+# psql wikidata_entities -U hall < $base/revisions_initial_automation_flags_table/revisions_initial_automation_flags_table_creation.sql
 
-# Perform additional checks for different types of edits
-psql wikidata_entities -U hall < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
+# # Perform additional checks for different types of edits
+# psql wikidata_entities -U hall < $base/revisions_all_automation_flags_and_usages_table/revisions_all_automation_flags_and_usages_table_creation.sql
 
-# Filter out revisions without parent and keep only edits that aren't from a client, merging, or to sitelinks
-# Removed
+# # Filter out revisions without parent and keep only edits that aren't from a client, merging, or to sitelinks
+# # Removed
 
-# Interesting subset tables
+# # Interesting subset tables
 
-# First need to import male and female item data into a table 
-# so that we can then join with the revision data. 
+# # First need to import male and female item data into a table 
+# # so that we can then join with the revision data. 
 
-tail -n +2 $results/human_male_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_male_items_12_29_18_url_removed.tsv
-tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_female_items_12_29_18_url_removed.tsv
-tail -n +2 $results/coordinate_location_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/coordinate_location_items_12_29_18_url_removed.tsv
-
-
-# Import male data into Postgres
-psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
-
-# Import female data into Postgres
-psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
-
-# Combine male and female item datasets
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18_table_creation.sql
+# tail -n +2 $results/human_male_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_male_items_12_29_18_url_removed.tsv
+# tail -n +2 $results/human_female_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/human_female_items_12_29_18_url_removed.tsv
+# tail -n +2 $results/coordinate_location_items_12_29_18.tsv | sed s'/http:\/\/www\.wikidata\.org\/entity\///' > $results/coordinate_location_items_12_29_18_url_removed.tsv
 
 
-# Import coordinate location data into Postgres
-psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
+# # Import male data into Postgres
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/human_male_items_12_29_18_table_import.sql
 
-# Items with only one location point
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18_table_creation.sql
+# # Import female data into Postgres
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/human_female_items_12_29_18_table_import.sql
 
-# Create tsvs from filtered tables
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
-
-
-
-# Obtain country code for all periods
-python $base/obtain_country_code.py \
-	$results/items_with_one_coordinate_location_12_29_18.tsv \
-	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
-	--verbose > & \
-	$results/obtain_country_code_error_log.txt
+# # Combine male and female item datasets
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18_table_creation.sql
 
 
-# Obtain county information
-python $base/obtain_county_from_latlon.py \
-	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
-	$results/US_States_from_counties.geojson \
-	$results/USCounties_bare.geojson \
-	$results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv \
-	--verbose > & \
-	$results/obtain_county_from_latlon_error_log.txt
+# # Import coordinate location data into Postgres
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/coordinate_location_items_12_29_18_table_import.sql
 
-tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv > $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes_without_header.tsv
+# # Items with only one location point
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18_table_creation.sql
 
-
-# Import US items data into Postgres
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
+# # Create tsvs from filtered tables
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
 
 
-# Join location data and male and female item data with revision data
-# Filters out item locations that have more than one location
-psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
-psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_12_29_18_revisions_table_creation.sql
+
+# # Obtain country code for all periods
+# python $base/obtain_country_code.py \
+# 	$results/items_with_one_coordinate_location_12_29_18.tsv \
+# 	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
+# 	--verbose > & \
+# 	$results/obtain_country_code_error_log.txt
 
 
-psql wikidata_entities -U hall < $base/used_item_page_views.sql
+# # Obtain county information
+# python $base/obtain_county_from_latlon.py \
+# 	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
+# 	$results/US_States_from_counties.geojson \
+# 	$results/USCounties_bare.geojson \
+# 	$results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv \
+# 	--verbose > & \
+# 	$results/obtain_county_from_latlon_error_log.txt
+
+# tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv > $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes_without_header.tsv
 
 
-psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
+# # Import US items data into Postgres
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
 
-# Stopped here on first iteration, commented everything above out
 
-python $base/misalignment_preprocessor.py \
-		$results/used_item_page_views.tsv \
-		$results/monthly_item_quality_sorted_by_month.tsv \
-		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-		--verbose > & \
-		$results/misalignment_preprocessor_error_log.txt
+# # Join location data and male and female item data with revision data
+# # Filters out item locations that have more than one location
+# psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
+# psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_12_29_18_revisions_table_creation.sql
 
-# End of second iteration, which is now combined with the first.
+
+# psql wikidata_entities -U hall < $base/used_item_page_views.sql
+
+
+# psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
+
+# # Stopped here on first iteration, commented everything above out
+
+# python $base/misalignment_preprocessor.py \
+# 		$results/used_item_page_views.tsv \
+# 		$results/monthly_item_quality_sorted_by_month.tsv \
+# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+# 		--verbose > & \
+# 		$results/misalignment_preprocessor_error_log.txt
+
+# # End of second iteration, which is now combined with the first.
 
 # input_for_rmse_split_directory
 
-# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
+tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
 
 
 # length of May 2017 Wikidata entity "universe"
-# split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
 
-# Should delete output file before for loop
 
-# More recently have been moving into directories by year and manually running each to speed up this process. 
-# Otherwise takes 18 hours for the below loop
+foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
+end
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2012/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2012_error_metrics.tsv
-# end
-
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2013/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2013_error_metrics.tsv
-# end
-
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2014/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2014_error_metrics.tsv
-# end
-
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2015/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2015_error_metrics.tsv
-# end
-
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2016/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2016_error_metrics.tsv
-# end
-
-# foreach input_RMSE_file ($input_for_rmse_split_directory/2017/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/2017_error_metrics.tsv
-# end
-
+# End of third iteration part 1
 
 # psql wikidata_entities < $base/yearly_revision_samples.sql
 

@@ -65,7 +65,7 @@ def run(input_file, revision_output_file, verbose):
             parent_rev_id_for_ores = line[8]
             parent_exists_variable = True
         else:
-            parent_rev_id_for_ores = 1
+            parent_rev_id_for_ores = 10000
             parent_exists_variable = False
 
         # Temporarily renames parent rev_id to be rev_id
