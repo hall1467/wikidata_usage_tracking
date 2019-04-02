@@ -121,18 +121,18 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # input_for_rmse_split_directory
 
-# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
+tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
 
 
-# # length of May 2017 Wikidata entity "universe"
-# split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+# length of May 2017 Wikidata entity "universe"
+split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
 
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
+end
 
-# # End of third iteration part 1
+# End of third iteration part 1
 
 # psql wikidata_entities -U hall < $base/yearly_revision_samples.sql
 
@@ -354,15 +354,15 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # Temporary to speed things up
 
-split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+# split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
 
-# Current running on seperate machines to cut down time. flagon, chork, spork, and stockholm.
-# On the three latter machines, simply running the following.
+# # Current running on seperate machines to cut down time. flagon, chork, spork, and stockholm.
+# # On the three latter machines, simply running the following.
 
 
-cat $results/all_used_edits_sampled_sub00 | \
-	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research_0 wikidatawiki itemquality \
-	> $results/all_used_edits_sampled_sub00_predictions.json
+# cat $results/all_used_edits_sampled_sub00 | \
+# 	ores score_revisions https://ores.wikimedia.org wikidata_alignment_research_0 wikidatawiki itemquality \
+# 	> $results/all_used_edits_sampled_sub00_predictions.json
 
 # End of fifth iteration
 # # For chork
