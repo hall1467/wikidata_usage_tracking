@@ -1,5 +1,6 @@
 """
 Takes coordinate location item data and determines country code in new column.
+Filters out locations without proper point.
 
 
 Usage:
@@ -97,18 +98,13 @@ def run(input_file, input_file_second_iteration, output_file, verbose):
 
     for i, line in enumerate(input_file_second_iteration):
         
-        if i in list_of_non_proper_points:
-            country_code = 'improper_point'
-        else:
-            country_code = lat_lon_results[i]['cc']
-
-
-        output_file.write([
-            line[0],
-            line[1],
-            lat_lon_data_store[i]['latitude'],
-            lat_lon_data_store[i]['longitude'],
-            country_code])
+        if i not in list_of_non_proper_points:
+            output_file.write([
+                line[0],
+                line[1],
+                lat_lon_data_store[i]['latitude'],
+                lat_lon_data_store[i]['longitude'],
+                lat_lon_results[i]['cc']])
 
 
         if verbose and i % 100000 == 0 and i != 0:

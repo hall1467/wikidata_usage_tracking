@@ -67,70 +67,70 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 # # Create tsvs from filtered tables
 # psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_male_or_female_gender_12_29_18.sql
-# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_12_29_18.sql
 
 
 
-# # Obtain country code for all periods
-# python $base/obtain_country_code.py \
-# 	$results/items_with_one_coordinate_location_12_29_18.tsv \
-# 	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
-# 	--verbose > & \
-# 	$results/obtain_country_code_error_log.txt
+# Obtain country code for all periods
+python $base/obtain_country_code.py \
+	$results/items_with_one_coordinate_location_12_29_18.tsv \
+	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
+	--verbose > & \
+	$results/obtain_country_code_error_log.txt
 
 
-# # Obtain county information
-# python $base/obtain_county_from_latlon.py \
-# 	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
-# 	$results/US_States_from_counties.geojson \
-# 	$results/USCounties_bare.geojson \
-# 	$results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv \
-# 	--verbose > & \
-# 	$results/obtain_county_from_latlon_error_log.txt
+# Obtain county information
+python $base/obtain_county_from_latlon.py \
+	$results/items_with_one_coordinate_location_12_29_18_with_country_code.tsv \
+	$results/US_States_from_counties.geojson \
+	$results/USCounties_bare.geojson \
+	$results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv \
+	--verbose > & \
+	$results/obtain_county_from_latlon_error_log.txt
 
-# tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv > $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes_without_header.tsv
-
-
-# # Import US items data into Postgres
-# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
-# psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
+tail -n +2 $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes.tsv > $results/items_with_one_coordinate_location_12_29_18_with_country_and_county_codes_without_header.tsv
 
 
-# # Join location data and male and female item data with revision data
-# # Filters out item locations that have more than one location
+# Import US items data into Postgres
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_creation.sql
+psql wikidata_entities -U hall < $base/interesting_subset_tables/items_with_one_coordinate_location_processed_12_29_18_table_import.sql
+
+
+# Join location data and male and female item data with revision data
+# Filters out item locations that have more than one location
 psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_male_or_female_gender_revisions_table_creation.sql
 psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/items_with_one_coordinate_location_revisions_table_creation.sql
 psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_revisions_table_creation.sql
 
 
-psql wikidata_entities -U hall < $base/used_item_page_views.sql
+# psql wikidata_entities -U hall < $base/used_item_page_views.sql
 
 
-psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
+# psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
 
-# Stopped here on first iteration, commented everything above out
+# # Stopped here on first iteration, commented everything above out
 
-python $base/misalignment_preprocessor.py \
-		$results/used_item_page_views.tsv \
-		$results/monthly_item_quality_sorted_by_month.tsv \
-		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-		--verbose > & \
-		$results/misalignment_preprocessor_error_log.txt
+# python $base/misalignment_preprocessor.py \
+# 		$results/used_item_page_views.tsv \
+# 		$results/monthly_item_quality_sorted_by_month.tsv \
+# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+# 		--verbose > & \
+# 		$results/misalignment_preprocessor_error_log.txt
 
-# End of second iteration, which is now combined with the first.
+# # End of second iteration, which is now combined with the first.
 
-# input_for_rmse_split_directory
+# # input_for_rmse_split_directory
 
-tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
-
-
-# length of May 2017 Wikidata entity "universe"
-split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
 
 
-foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
-	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
-end
+# # length of May 2017 Wikidata entity "universe"
+# split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+
+
+# foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
+# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
+# end
 
 # End of third iteration part 1
 
@@ -354,7 +354,7 @@ python $base/convert_to_json.py \
 
 # Temporary to speed things up
 
-# split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
 
 # # Current running on seperate machines to cut down time. flagon, chork, spork, and stockholm.
 # # On the three latter machines, simply running the following.
