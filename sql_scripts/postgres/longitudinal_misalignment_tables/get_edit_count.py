@@ -1,5 +1,5 @@
 """
-Returns an integer that is the number of rows with a parent id from a 
+Returns an integer that is the number of rows from a 
 revision dataset for a given period.
 
 Usage:
@@ -59,10 +59,7 @@ def run(input_file, revision_output_file, verbose):
             sys.stderr.write("Processing revision: {0}\n".format(i))  
             sys.stderr.flush()
             
-        parent_rev_id = line[8]
-
-        if parent_rev_id:
-            revision_with_parent_id_count += 1
+        revision_with_parent_id_count += 1
 
 
     revision_output_file.write(str(revision_with_parent_id_count) + "\n")
