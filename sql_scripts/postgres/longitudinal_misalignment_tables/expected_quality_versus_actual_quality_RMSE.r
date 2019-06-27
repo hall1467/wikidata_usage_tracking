@@ -13,6 +13,7 @@ entity_weighted_sums_and_page_views$quality_quantile = ecdf(entity_weighted_sums
 
 mae_quantile = mean(abs(entity_weighted_sums_and_page_views$quality_quantile - entity_weighted_sums_and_page_views$expected_quality_quantile))
 mae = mean(abs(entity_weighted_sums_and_page_views$quality_difference))
+se_of_mean = sd(abs(entity_weighted_sums_and_page_views$quality_difference))/sqrt(nrow(entity_weighted_sums_and_page_views))
 
 
 
@@ -20,7 +21,8 @@ output = data.frame()
 output = rbind(output, c(entity_weighted_sums_and_page_views[1,2], 
                          entity_weighted_sums_and_page_views[1,3], 
                          mae_quantile,
-                         mae))
+                         mae,
+                         se_of_mean))
 
 write.table(output[1,], output_file, row.names=FALSE, col.names=FALSE, quote=FALSE, sep='\t', append = TRUE);
 

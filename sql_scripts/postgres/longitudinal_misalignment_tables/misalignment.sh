@@ -128,9 +128,9 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
 
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
-# end
+foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
+end
 
 # End of third iteration part 1
 
@@ -139,91 +139,91 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # # Order is important for interpretation.
 # Counts for all revisions
 
-python $base/get_edit_count.py $results/used_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts.tsv
 
-python $base/get_edit_count.py $results/used_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts.tsv
 
-python $base/get_edit_count.py $results/used_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts.tsv
 
-python $base/get_edit_count.py $results/used_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
-python $base/get_edit_count.py $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
-
-
-# # Counts for gender revisions
-python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
-
-python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
-
-python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
-
-python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
-python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
+# python $base/get_edit_count.py $results/used_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts.tsv
 
 
-# # Counts for coordinate location revisions
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# # # Counts for gender revisions
+# python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_gender.tsv
 
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_gender.tsv
 
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_gender.tsv
 
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
-python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
+# python $base/get_edit_count.py $results/used_items_with_gender_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_gender.tsv
 
 
-# # Counts for US location revisions
-python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# # # Counts for coordinate location revisions
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
 
-python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
-python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_coordinate_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_coordinate_location.tsv
+
+
+# # # Counts for US location revisions
+# python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2013_to_2014.tsv > $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2013_to_2014.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+
+# python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2014_to_2015.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+
+# python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2015_to_2016.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+
+# python $base/get_edit_count.py $results/used_items_with_us_location_bot_edits_may_2016_to_2017.tsv  >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_human_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_anon_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
+# python $base/get_edit_count.py $results/used_items_with_us_location_tool_edits_may_2016_to_2017.tsv >> $results/edit_type_counts_items_with_us_location.tsv
 
 # # All revisions
 
