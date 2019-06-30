@@ -103,34 +103,34 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_revisions_table_creation.sql
 
 
-# psql wikidata_entities -U hall < $base/used_item_page_views.sql
+psql wikidata_entities -U hall < $base/used_item_page_views.sql
 
 
-# psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
+psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
 
-# # Stopped here on first iteration, commented everything above out
+# Stopped here on first iteration, commented everything above out
 
-# python $base/misalignment_preprocessor.py \
-# 		$results/used_item_page_views.tsv \
-# 		$results/monthly_item_quality_sorted_by_month.tsv \
-# 		$input_for_rmse_split_directory/input_for_RMSE.tsv \
-# 		--verbose > & \
-# 		$results/misalignment_preprocessor_error_log.txt
+python $base/misalignment_preprocessor.py \
+		$results/used_item_page_views.tsv \
+		$results/monthly_item_quality_sorted_by_month.tsv \
+		$input_for_rmse_split_directory/input_for_RMSE.tsv \
+		--verbose > & \
+		$results/misalignment_preprocessor_error_log.txt
 
-# # End of second iteration, which is now combined with the first.
+# End of second iteration, which is now combined with the first.
 
-# # input_for_rmse_split_directory
+# input_for_rmse_split_directory
 
-# tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
-
-
-# # length of May 2017 Wikidata entity "universe"
-# split -d  -l 22149770 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+tail -n +2 $input_for_rmse_split_directory/input_for_RMSE.tsv > $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv
 
 
-# foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
-# 	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
-# end
+# length of May 2017 Wikidata entity "universe"
+split -d  -l 25863598 $input_for_rmse_split_directory/input_for_RMSE_no_header.tsv $input_for_rmse_split_directory/input_for_RMSE_sub_
+
+
+foreach input_RMSE_file ($input_for_rmse_split_directory/input_for_RMSE_sub*)
+	Rscript $base/expected_quality_versus_actual_quality_RMSE.r $input_RMSE_file $results/error_metrics.tsv
+end
 
 # # End of third iteration part 1
 
@@ -343,18 +343,18 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 
 
 # # Extract out parent rev ids. Convert to json so we can get ORES predictions for these edits
-python $base/convert_to_json.py \
-	$results/all_used_edits_sampled.tsv \
-	$results/all_used_edits_sampled.json \
-	--verbose > & \
-	$results/convert_to_json_error_log.txt
+# python $base/convert_to_json.py \
+# 	$results/all_used_edits_sampled.tsv \
+# 	$results/all_used_edits_sampled.json \
+# 	--verbose > & \
+# 	$results/convert_to_json_error_log.txt
 
-# # # End of iteration 4
-# # Run ORES
+# # # # End of iteration 4
+# # # Run ORES
 
-# # Temporary to speed things up
+# # # Temporary to speed things up
 
-split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
+# split -d -l 1500000 $results/all_used_edits_sampled.json $results/all_used_edits_sampled_sub
 
 # # Current running on seperate machines to cut down time. flagon, chork, spork, and stockholm.
 # # On the three latter machines, simply running the following.
