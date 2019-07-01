@@ -103,10 +103,10 @@ set monthly_revisions_directory = $results/monthly_revisions_directory
 # psql wikidata_entities -U hall < $base/interesting_subset_revisions_tables/us_items_revisions_table_creation.sql
 
 
-psql wikidata_entities -U hall < $base/used_item_page_views.sql
+# psql wikidata_entities -U hall < $base/used_item_page_views.sql
 
 
-psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
+# psql wikidata_entities -U hall < $base/monthly_item_quality_sorted_by_month.sql
 
 # Stopped here on first iteration, commented everything above out
 
